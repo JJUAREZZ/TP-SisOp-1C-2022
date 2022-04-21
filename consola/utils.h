@@ -5,9 +5,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/socket.h>
+#include <netdb.h>
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
+#include <commons/config.h>
 
 typedef struct {
 	char* id;
@@ -56,5 +59,50 @@ t_list * crear_lista_de_instrucciones(char *path) {
 
 }
 
+typedef struct {
+	char* ip_kernel;
+	char* puerto_kernel;
+} kernel_config;
+kernel_config config_valores;
+
+void cargar_configuracion(void){
+	t_config* config = config_create("../consola.config");
+
+	if(config == NULL){
+		perror("Archivo de configuracion no encontrado");
+		return 1;
+	}
+
+	config_valores.ip_kernel = 		config_get_string_value(config, "IP_KERNEL");
+	config_valores.puerto_kernel = 	config_get_string_value(config, "PUERTO_KERNEL");
+}
+
+//VER PORQUE NO FUNCIONA (MARTIN SPAGNOL)
+int crear_conexion(char *ip, char* puerto){
+	struct addrinfo hints;
+	struct addrinfo *server_info;
+
+	memset(&hints,0, sizeof(hints));
+	hints.ai_family = AF_UNSPEC;
+	hints.ai_socktype = SOCK_STREAM;
+
+	getaddrinfo(ip, puerto, &hints, &server_info);
+
+	int socket_cliente = socket(server_info->ai_family,
+								server_info->ai_socktype,
+								server_info->ai_protocol);
+
+	connect(socket_cliente, server_info->ai_addr, server_info->ai_addrlen);
+	
+	freeaddrinfo(server_info);
+}
+
+//FALTA ENVIAR INSTRUCCIONES Y EL TAMANO A KERNEL.
+
+
+
+
+
 #endif /* UTIL_H_ */
+
 

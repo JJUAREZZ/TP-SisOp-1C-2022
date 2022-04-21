@@ -18,6 +18,10 @@ int main(int argc, char** argv) {
 
 	}
 
+	cargar_configuracion();
+	crear_conexion(config_valores.ip_kernel, config_valores.puerto_kernel);
+	
+
 	return 0;
 
 }
