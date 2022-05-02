@@ -17,8 +17,8 @@
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
+#include <shared-messirve/src/connect.h>
 #include <commons/config.h>
-#include <connect.h>
 #include <pthread.h>
 
 int kernel_socket;

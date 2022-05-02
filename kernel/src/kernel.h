@@ -9,6 +9,7 @@
 #define SRC_KERNEL_H_
 
 #include "utils.h"
+#include "./shared-messirve/src/connect.h"
 
 int create_kernel_logger(){
 	int response = kernel_logger_create("kernel_logger.log");

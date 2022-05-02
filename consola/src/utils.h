@@ -56,5 +56,25 @@ t_list * crear_lista_de_instrucciones(char *path) {
 
 }
 
+typedef struct {
+	char* ip_kernel;
+	char* puerto_kernel;
+} kernel_config;
+
+kernel_config config_valores;
+
+void cargar_configuracion(void){
+	t_config* config = config_create("../consola.config");
+
+	if(config == NULL){
+		perror("Archivo de configuracion no encontrado");
+	}
+
+	config_valores.ip_kernel = 		config_get_string_value(config, "IP_KERNEL");
+	config_valores.puerto_kernel = 	config_get_string_value(config, "PUERTO_KERNEL");
+}
+
+
+
 #endif /* UTIL_H_ */
 
