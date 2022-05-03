@@ -1,10 +1,3 @@
-/*
- * connect.h
- *
- *  Created on: 23 abr. 2022
- *      Author: utnso
- */
-
 #ifndef SRC_CONNECT_H_
 #define SRC_CONNECT_H_
 
@@ -26,8 +19,8 @@
 
 #define BACKLOG 10
 
-int socket_create_listener(char* ip, int port);
-int socket_connect_to_server(char* ip, int port);
+int socket_create_listener(char* ip, char* port);
+int socket_connect_to_server(char* ip, char* port);
 
 
 #endif /* SRC_CONNECT_H_ */

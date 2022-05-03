@@ -1,10 +1,3 @@
-/*
- * utils.h
- *
- *  Created on: 25 abr. 2022
- *      Author: utnso
- */
-
 #ifndef SRC_UTILS_H_
 #define SRC_UTILS_H_
 
@@ -17,7 +10,7 @@
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
-#include <shared-messirve/src/connect.h>
+#include "../shared/sockets.h"
 #include <commons/config.h>
 #include <pthread.h>
 
@@ -25,7 +18,7 @@ int kernel_socket;
 
 typedef struct {
 	char* ip_kernel;
-	int puerto_kernel;
+	char* puerto_kernel;
 } kernel_config;
 
 kernel_config* config_valores;

@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <commons/log.h>
 #include <commons/string.h>
+#include <commons/config.h>
 #include <commons/collections/list.h>
 
 typedef struct {
@@ -77,4 +78,3 @@ void cargar_configuracion(void){
 
 
 #endif /* UTIL_H_ */
-

@@ -1,5 +1,5 @@
+#include "../shared/sockets.h"
 #include "utils.h"
-#include "shared-messirve/src/connect.h"
 
 int main(int argc, char** argv) {
 
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	}
 
 	cargar_configuracion();
-	socket_connect_to_server(config_valores->ip_kernel, config_valores->puerto_kernel);
+	socket_connect_to_server(config_valores.ip_kernel, config_valores.puerto_kernel);
 
 	return 0;
 

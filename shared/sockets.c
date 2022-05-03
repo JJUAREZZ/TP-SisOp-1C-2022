@@ -1,13 +1,6 @@
-/*
- * conexion.c
- *
- *  Created on: 23 abr. 2022
- *      Author: utnso
- */
+#include "sockets.h"
 
-#include "connect.h"
-
-int socket_create_listener(char* ip, int port)
+int socket_create_listener(char* ip, char* port)
 {
 	if(ip == NULL)
 		return -1;
@@ -43,7 +36,7 @@ int socket_create_listener(char* ip, int port)
 }
 
 
-int socket_connect_to_server(char* ip, int port)
+int socket_connect_to_server(char* ip, char* port)
 {
 	if(ip == NULL)
 		return -1;

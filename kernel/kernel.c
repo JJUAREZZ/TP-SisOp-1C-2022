@@ -1,4 +1,3 @@
-
 #include "kernel.h"
 
 int main(){
@@ -9,6 +8,3 @@ int main(){
 	kernel_server_init();
 	return 0;
 }
-
-
-
