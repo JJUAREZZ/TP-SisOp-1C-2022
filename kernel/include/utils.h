@@ -10,7 +10,7 @@
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
-#include "../shared/sockets.h"
+#include "../../shared/include/sockets.h"
 #include <commons/config.h>
 #include <pthread.h>
 
@@ -25,7 +25,7 @@ kernel_config* config_valores;
 
 void load_configuration(){
 
-	t_config* config = config_create("../kernel/kernel.config");
+	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/kernel/cfg/kernel.config");
 
 
 	if(config == NULL){
@@ -37,8 +37,8 @@ void load_configuration(){
 	config_valores->ip_kernel = string_duplicate(config_get_string_value(config, "IP_KERNEL"));
 	config_valores->puerto_kernel = config_get_int_value(config, "PUERTO_KERNEL");
 
-	kernel_logger_info("IP_KERNEL: %s", config_valores->ip_kernel);
-	kernel_logger_info("PUERTO_KERNEL: %d", config_valores->puerto_kernel);
+	//kernel_logger_info("IP_KERNEL: %s", config_valores->ip_kernel);
+	//kernel_logger_info("PUERTO_KERNEL: %d", config_valores->puerto_kernel);
 }
 
 #endif /* SRC_UTILS_H_ */
