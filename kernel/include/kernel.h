@@ -10,7 +10,6 @@
 /*
 int create_kernel_logger(){
 	int response = kernel_logger_create("kernel_logger.log");
-
 	if(response<0){
 		free(config_valores->ip_kernel);
 		free(config_valores->puerto_kernel);

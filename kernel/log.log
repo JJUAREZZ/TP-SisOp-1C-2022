@@ -12,3 +12,39 @@
 [INFO] 17:55:44:868 Servidor/(18445:18445): Creando un hilo para atender una conexión en el socket 15
 [INFO] 17:55:44:869 Servidor/(18445:18445): Me llegaron las siguientes instrucciones:
 [INFO] 17:55:44:869 Servidor/(18445:18445): el cliente se desconecto. Terminando servidor
+[INFO] 17:58:29:738 Servidor/(18856:18856): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 17:58:56:343 Servidor/(18856:18856): Creando un hilo para atender una conexión en el socket 15
+[INFO] 17:59:15:993 Servidor/(18981:18981): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 17:59:18:350 Servidor/(18981:18981): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:08:04:198 Servidor/(20194:20194): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:08:22:749 Servidor/(20194:20194): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:08:48:296 Servidor/(20305:20305): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:08:52:027 Servidor/(20305:20305): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:09:09:561 Servidor/(20376:20376): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:09:11:925 Servidor/(20376:20376): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:09:11:925 Servidor/(20376:20376): Me llegaron las siguientes instrucciones:
+[INFO] 18:09:11:926 Servidor/(20376:20376): el cliente se desconecto. Terminando servidor
+[INFO] 18:10:06:779 Servidor/(20512:20512): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:10:09:235 Servidor/(20512:20512): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:25:02:264 Servidor/(22383:22383): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:25:09:207 Servidor/(22383:22383): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:25:38:520 Servidor/(22482:22482): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:25:49:607 Servidor/(22482:22482): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:26:24:670 Servidor/(22616:22616): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:26:27:876 Servidor/(22616:22616): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:26:27:877 Servidor/(22616:22616): Me llegaron las siguientes instrucciones:
+[INFO] 18:26:27:877 Servidor/(22616:22616): el cliente se desconecto. Terminando servidor
+[INFO] 18:26:38:524 Servidor/(22669:22669): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 18:26:52:800 Servidor/(22669:22669): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:26:52:800 Servidor/(22669:22669): Me llegaron las siguientes instrucciones:
+[INFO] 18:26:52:801 Servidor/(22669:22669): el cliente se desconecto. Terminando servidor
