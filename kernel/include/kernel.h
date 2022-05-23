@@ -29,7 +29,7 @@ void kernel_server_init(){
 	t_log* logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 	printf("Creando socket y escuchando \n");
 
-	kernel_socket = socket_create_listener(config_valores->ip_kernel, config_valores->puerto_kernel);
+	kernel_socket = socket_create_listener(config_valores_kernel->ip, config_valores_kernel->puerto);
 
 	if(kernel_socket < 0){
 		//kernel_logger_error("Error al crear server");
@@ -97,7 +97,7 @@ typedef struct{
 	float estimacion_rafaga;
 } pcb;
 
-
+}
 
 
 
