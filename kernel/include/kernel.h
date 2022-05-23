@@ -87,7 +87,18 @@ void kernel_server_init(){
 
 
 	}
-}
+	
+typedef struct{
+	char id;
+	int tamanioProceso;
+	t_list* instr;
+	int programCounter;
+	int tablaDePaginas;
+	float estimacion_rafaga;
+} pcb;
+
+
+
 
 
 #endif /* SRC_KERNEL_H_ */
