@@ -48,16 +48,14 @@ int socket_connect_to_server(char* ip, char* port)
 
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_flags = AI_PASSIVE;
 
-	char* port_char = string_itoa(port);
-	getaddrinfo(ip, port_char, &hints, &server_info);
-	free(port_char);
-
+	getaddrinfo(ip, port, &hints, &server_info);
 	int server_socket = socket(server_info->ai_family, server_info->ai_socktype, server_info->ai_protocol);
 
 	int result = connect(server_socket, server_info->ai_addr, server_info->ai_addrlen);
 
 	freeaddrinfo(server_info);
 
-	return (result < 0 || server_socket == -1) ? -1 : server_socket;
+	return server_socket;
 }
