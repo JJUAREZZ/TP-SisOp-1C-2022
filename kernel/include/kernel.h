@@ -60,12 +60,15 @@ void kernel_server_init(){
 			log_info(logger,"Error al conectar con un cliente");
 		}
 	t_list* lista;
+	int nroProceso = 0;
+
 	while (1) {
 		int cod_op = recibir_operacion(accepted_fd);
 		switch (cod_op) {
 		case PAQUETE:
 			lista = recibir_paquete(accepted_fd);
 			log_info(logger,"Me llegaron las siguientes instrucciones:");
+
 			void mostrarInstrucciones(instr_t* element)
 			{
 				printf("\n%s ",element->id);
@@ -74,6 +77,22 @@ void kernel_server_init(){
 				}
 			}
 			list_iterate(lista, mostrarInstrucciones);
+
+			pcb crearPcb(lista){
+
+				pcb procesoN = malloc(sizeof(pcb));
+				procesoN->id = nroProceso;
+				//procesoN->tamanioProceso = TAMANO DE PROCESO INGRESADO EN CONSOLA. 
+				procesoN->instr = lista;
+				procesoN->tablaDePaginas = 0; //INICIALIZO EN CERO PERO VA A SER MODIFICADO EN MEMORIA.
+				procesoN->estimacion_rafaga = valores_generales->est_inicial;
+
+				nroProceso++;
+				
+				return procesoN;
+				log_info(logger, "Pcb del proceso creado");
+			}
+
 			break;
 		case -1:
 			log_info(logger,"el cliente se desconecto. Terminando servidor");
@@ -89,7 +108,7 @@ void kernel_server_init(){
 	}
 	
 typedef struct{
-	char id;
+	int id;
 	int tamanioProceso;
 	t_list* instr;
 	int programCounter;
