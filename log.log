@@ -11,3 +11,6 @@
 
 [INFO] 20:43:15:303 Servidor/(11926:11926): Kernel Server created !!! Waiting Connections ...
 
+[INFO] 15:30:03:083 Servidor/(9748:9748): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:30:18:042 Servidor/(9748:9748): Creando un hilo para atender una conexión en el socket 15

@@ -42,17 +42,20 @@ t_paquete* crear_paquete(void) //Nos crea un paquete con un buffer listo para us
 }
 
 
-void agregar_a_paquete(t_paquete* paquete, t_list *lista){
+void agregar_a_paquete(t_paquete* paquete, t_proceso *proceso){
 
 	void calcularTamanio(instr_t *instruccion){
 		paquete->buffer->size+= (sizeof(int) *2 )  //nroDeParam y tamanio del id
 								+ (sizeof(int)* instruccion->nroDeParam) //parametros
-								+instruccion->idLength +1;    //id						
+								+instruccion->idLength +1;   //id						
 	}
-	list_iterate(lista,calcularTamanio); //calculo el tamanio del buffer
+	paquete->buffer->size+= sizeof(uint32_t);
+	list_iterate(proceso->instrucciones,calcularTamanio); //calculo el tamanio del buffer
 	void* stream= malloc(paquete->buffer->size); //reservo memoria para el buffer
 	int offset=0; //desplazamiento
 
+	memcpy(stream +offset, &proceso->tamanio,sizeof(uint32_t));
+	offset+= sizeof(uint32_t);
 	void copiarElementos(instr_t *instruccion){
 		memcpy(stream + offset, &instruccion->idLength, sizeof(int));
 		offset += sizeof(int);
@@ -65,7 +68,7 @@ void agregar_a_paquete(t_paquete* paquete, t_list *lista){
 			offset+=sizeof(int);
 		}
 	}
-	list_iterate(lista,copiarElementos);
+	list_iterate(proceso->instrucciones,copiarElementos);
 	paquete->buffer->stream= stream;
 	//mem_hexdump(stream,paquete->buffer->size);
 
@@ -126,12 +129,17 @@ void* recibir_buffer(int* size, int socket_cliente)
 	return buffer;
 }
 
-t_list* recibir_paquete(int socket_cliente)
+t_proceso* recibir_paquete(int socket_cliente)
 {
-	int desplazamiento = 0;
-	t_list* valores = list_create();
 	int tamanio;
+	int desplazamiento = 0;
 	void *buffer = recibir_buffer(&tamanio, socket_cliente);
+	t_proceso *proceso= malloc(sizeof(t_proceso));
+	t_list* valores = list_create();
+	
+	
+	memcpy(&proceso->tamanio, buffer+desplazamiento, sizeof(uint32_t));
+	desplazamiento+=sizeof(uint32_t);
 
 	 while(desplazamiento < tamanio)
 	{
@@ -151,8 +159,9 @@ t_list* recibir_paquete(int socket_cliente)
 	
 		list_add(valores, instruccion);
 	}
+	proceso->instrucciones= valores;
 	free(buffer);
-	return valores;
+	return proceso;
 }
 
 

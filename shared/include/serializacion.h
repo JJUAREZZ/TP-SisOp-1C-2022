@@ -33,17 +33,23 @@ typedef struct
 	t_buffer* buffer;
 } t_paquete;
 
+typedef struct
+{
+	uint32_t tamanio;
+	t_list *instrucciones;
+}t_proceso;
+
 //Esta estructura contiene un codigo de operacion -contiene info sobre lo que vamos a enviar- y al buffer.
 
 void crear_buffer(t_paquete* paquete);
 t_paquete* crear_paquete(void);
-void agregar_a_paquete(t_paquete* paquete, t_list *lista);
+void agregar_a_paquete(t_paquete* paquete, t_proceso *proceso);
 void* serializar_paquete(t_paquete* paquete, int bytes);
 void enviar_paquete(t_paquete* paquete, int socket_cliente);
 void eliminar_paquete(t_paquete* paquete);
 void enviar_mensaje(char* mensaje, int socket_cliente);
 
 void* recibir_buffer(int*, int);
-t_list* recibir_paquete(int);
+t_proceso* recibir_paquete(int);
 int recibir_operacion(int);
 #endif

@@ -59,21 +59,24 @@ void kernel_server_init(){
 		else{
 			log_info(logger,"Error al conectar con un cliente");
 		}
-	t_list* lista;
+	t_proceso* proceso;
 	while (1) {
 		int cod_op = recibir_operacion(accepted_fd);
 		switch (cod_op) {
 		case PAQUETE:
-			lista = recibir_paquete(accepted_fd);
-			log_info(logger,"Me llegaron las siguientes instrucciones:");
+			proceso = recibir_paquete(accepted_fd);
+			log_info(logger,"Me llego el siguiente proceso:\n");
+			printf("Tamanio del Proceso en bytes: %d", proceso->tamanio);
+			printf("\nInstrucciones : \n");
 			void mostrarInstrucciones(instr_t* element)
 			{
-				printf("\n%s ",element->id);
+				printf("%s ",element->id);
 				for(int i=0; i<element->nroDeParam;i++){
 					printf(" %d",(int) element->param[i]);
 				}
+				printf("\n");
 			}
-			list_iterate(lista, mostrarInstrucciones);
+			list_iterate(proceso->instrucciones, mostrarInstrucciones);
 			break;
 		case -1:
 			log_info(logger,"el cliente se desconecto. Terminando servidor");

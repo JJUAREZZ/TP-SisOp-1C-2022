@@ -5,10 +5,12 @@
     "version": "0.2.0",
     "configurations": [
 
+    
 
 
 
 
+/*
         {
             "name": "(gdb) Iniciar",
             "type": "cppdbg",
@@ -25,8 +27,8 @@
                     "description": "Habilitar la impresión con sangría para gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
-                },
-          /*  
+                },*/
+           
         {
             "name": "(gdb) consola",
             "type": "cppdbg",
@@ -46,7 +48,7 @@
                 }
                 
             ]
-        }*/
+        }
         
         
     ]

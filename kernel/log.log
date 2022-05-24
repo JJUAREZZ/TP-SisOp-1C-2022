@@ -103,3 +103,55 @@
 [INFO] 20:58:30:892 Servidor/(14367:14367): Creando un hilo para atender una conexión en el socket 15
 [INFO] 20:58:30:893 Servidor/(14367:14367): Me llegaron las siguientes instrucciones:
 [INFO] 20:58:30:893 Servidor/(14367:14367): el cliente se desconecto. Terminando servidor
+[INFO] 15:29:12:873 Servidor/(9594:9594): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:29:16:096 Servidor/(9594:9594): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:41:51:340 Servidor/(11324:11324): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:42:03:960 Servidor/(11324:11324): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:42:56:116 Servidor/(11470:11470): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:45:20:736 Servidor/(11470:11470): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:46:47:844 Servidor/(12138:12138): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:46:51:462 Servidor/(12138:12138): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:46:51:463 Servidor/(12138:12138): Me llegaron las siguientes instrucciones:
+[INFO] 15:46:51:464 Servidor/(12138:12138): el cliente se desconecto. Terminando servidor
+[INFO] 15:48:02:033 Servidor/(12333:12333): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:48:05:679 Servidor/(12333:12333): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:48:05:680 Servidor/(12333:12333): Me llego el siguiente proceso:
+
+[INFO] 15:48:05:680 Servidor/(12333:12333): el cliente se desconecto. Terminando servidor
+[INFO] 15:49:02:933 Servidor/(12493:12493): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:49:06:092 Servidor/(12493:12493): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:49:06:093 Servidor/(12493:12493): Me llego el siguiente proceso:
+
+[INFO] 15:49:06:094 Servidor/(12493:12493): el cliente se desconecto. Terminando servidor
+[INFO] 15:49:37:995 Servidor/(12586:12586): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:49:40:693 Servidor/(12586:12586): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:49:40:694 Servidor/(12586:12586): Me llego el siguiente proceso:
+
+[INFO] 15:49:40:694 Servidor/(12586:12586): el cliente se desconecto. Terminando servidor
+[INFO] 15:50:33:690 Servidor/(12710:12710): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:50:35:750 Servidor/(12710:12710): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:50:35:750 Servidor/(12710:12710): Me llego el siguiente proceso:
+
+[INFO] 15:50:35:751 Servidor/(12710:12710): el cliente se desconecto. Terminando servidor
+[INFO] 15:51:16:915 Servidor/(12810:12810): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:51:25:404 Servidor/(12844:12844): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:51:27:509 Servidor/(12844:12844): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:51:27:510 Servidor/(12844:12844): Me llego el siguiente proceso:
+
+[INFO] 15:51:27:511 Servidor/(12844:12844): el cliente se desconecto. Terminando servidor
+[INFO] 15:51:52:222 Servidor/(12926:12926): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:51:53:839 Servidor/(12926:12926): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:51:53:840 Servidor/(12926:12926): Me llego el siguiente proceso:
+
+[INFO] 15:51:53:841 Servidor/(12926:12926): el cliente se desconecto. Terminando servidor
