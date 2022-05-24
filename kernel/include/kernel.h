@@ -22,8 +22,6 @@ int create_kernel_logger(){
 }
 */
 
-
-
 void kernel_server_init(){
 
 	t_log* logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
@@ -60,6 +58,8 @@ void kernel_server_init(){
 			log_info(logger,"Error al conectar con un cliente");
 		}
 	t_proceso* proceso;
+	int nroProceso = 0;
+
 	while (1) {
 		int cod_op = recibir_operacion(accepted_fd);
 		switch (cod_op) {
@@ -77,6 +77,25 @@ void kernel_server_init(){
 				printf("\n");
 			}
 			list_iterate(proceso->instrucciones, mostrarInstrucciones);
+
+			pcb crearPcb(t_list* unaLista){
+
+				pcb pcbProceso;
+
+				//pcbProceso = malloc(sizeof(pcb));
+				pcbProceso.id = nroProceso;
+				//pcbProceso->tamanioProceso = TAMANO DE PROCESO INGRESADO EN CONSOLA. 
+				pcbProceso.instr = proceso->instrucciones;
+				pcbProceso.tablaDePaginas = 0; //INICIALIZO EN CERO PERO VA A SER MODIFICADO EN MEMORIA.
+				pcbProceso.estimacion_rafaga = valores_generales->est_inicial;
+
+				nroProceso++;
+				
+				return pcbProceso;
+
+				log_info(logger, "Pcb del proceso creado");
+			}
+
 			break;
 		case -1:
 			log_info(logger,"el cliente se desconecto. Terminando servidor");
@@ -91,15 +110,6 @@ void kernel_server_init(){
 
 	}
 	
-typedef struct{
-	char id;
-	int tamanioProceso;
-	t_list* instr;
-	int programCounter;
-	int tablaDePaginas;
-	float estimacion_rafaga;
-} pcb;
-
 }
 
 

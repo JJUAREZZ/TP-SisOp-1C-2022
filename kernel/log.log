@@ -155,3 +155,9 @@
 [INFO] 15:51:53:840 Servidor/(12926:12926): Me llego el siguiente proceso:
 
 [INFO] 15:51:53:841 Servidor/(12926:12926): el cliente se desconecto. Terminando servidor
+[INFO] 15:57:27:321 Servidor/(13683:13683): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 15:57:53:666 Servidor/(13683:13683): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:57:53:667 Servidor/(13683:13683): Me llego el siguiente proceso:
+
+[INFO] 15:57:53:668 Servidor/(13683:13683): el cliente se desconecto. Terminando servidor
