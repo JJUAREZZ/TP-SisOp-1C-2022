@@ -22,6 +22,16 @@ typedef struct {
 	char* puerto;
 } config_conex;
 
+//Estructura del pcb
+typedef struct{
+	int id;
+	int tamanioProceso;
+	t_list* instr;
+	int programCounter;
+	int tablaDePaginas;
+	float estimacion_rafaga;
+} pcb;
+
 //Estructura para poder realizar PCB.
 typedef struct {
 	char* alg_planif;

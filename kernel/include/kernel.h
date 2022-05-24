@@ -22,8 +22,6 @@ int create_kernel_logger(){
 }
 */
 
-
-
 void kernel_server_init(){
 
 	t_log* logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
@@ -78,18 +76,21 @@ void kernel_server_init(){
 			}
 			list_iterate(lista, mostrarInstrucciones);
 
-			pcb crearPcb(lista){
+			pcb crearPcb(t_list* unaLista){
 
-				pcb procesoN = malloc(sizeof(pcb));
-				procesoN->id = nroProceso;
-				//procesoN->tamanioProceso = TAMANO DE PROCESO INGRESADO EN CONSOLA. 
-				procesoN->instr = lista;
-				procesoN->tablaDePaginas = 0; //INICIALIZO EN CERO PERO VA A SER MODIFICADO EN MEMORIA.
-				procesoN->estimacion_rafaga = valores_generales->est_inicial;
+				pcb pcbProceso;
+
+				//pcbProceso = malloc(sizeof(pcb));
+				pcbProceso.id = nroProceso;
+				//pcbProceso->tamanioProceso = TAMANO DE PROCESO INGRESADO EN CONSOLA. 
+				pcbProceso.instr = lista;
+				pcbProceso.tablaDePaginas = 0; //INICIALIZO EN CERO PERO VA A SER MODIFICADO EN MEMORIA.
+				pcbProceso.estimacion_rafaga = valores_generales->est_inicial;
 
 				nroProceso++;
 				
-				return procesoN;
+				return pcbProceso;
+
 				log_info(logger, "Pcb del proceso creado");
 			}
 
@@ -107,15 +108,6 @@ void kernel_server_init(){
 
 	}
 	
-typedef struct{
-	int id;
-	int tamanioProceso;
-	t_list* instr;
-	int programCounter;
-	int tablaDePaginas;
-	float estimacion_rafaga;
-} pcb;
-
 }
 
 
