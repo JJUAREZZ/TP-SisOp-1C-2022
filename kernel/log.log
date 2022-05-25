@@ -161,3 +161,19 @@
 [INFO] 15:57:53:667 Servidor/(13683:13683): Me llego el siguiente proceso:
 
 [INFO] 15:57:53:668 Servidor/(13683:13683): el cliente se desconecto. Terminando servidor
+[INFO] 16:05:30:474 Servidor/(11415:11415): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 16:06:08:555 Servidor/(11466:11466): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 16:06:50:275 Servidor/(11466:11466): Creando un hilo para atender una conexión en el socket 5
+[INFO] 16:06:50:281 Servidor/(11466:11466): Me llego el siguiente proceso:
+
+[INFO] 16:06:50:284 Servidor/(11466:11466): el cliente se desconecto. Terminando servidor
+[INFO] 16:09:18:529 Servidor/(11632:11632): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 16:09:25:881 Servidor/(11632:11632): Creando un hilo para atender una conexión en el socket 5
+[INFO] 16:09:25:884 Servidor/(11632:11632): Me llego el siguiente proceso:
+
+[INFO] 16:09:25:887 Servidor/(11632:11632): el cliente se desconecto. Terminando servidor
+[INFO] 16:18:14:361 Servidor/(11765:11765): Kernel Server created !!! Waiting Connections ...
+

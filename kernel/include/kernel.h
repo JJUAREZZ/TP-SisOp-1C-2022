@@ -2,6 +2,7 @@
 #define SRC_KERNEL_H_
 
 #include "utils.h"
+#include <pthread.h>
 #include "../../shared/include/sockets.h"
 #include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
@@ -60,7 +61,6 @@ void kernel_server_init(){
 			log_info(logger,"Error al conectar con un cliente");
 		}
 	t_proceso* proceso;
-	int nroProceso = 0;
 
 	while (1) {
 		int cod_op = recibir_operacion(accepted_fd);
@@ -79,24 +79,18 @@ void kernel_server_init(){
 				printf("\n");
 			}
 			list_iterate(proceso->instrucciones, mostrarInstrucciones);
+			
+			//Crear Hilo para crear PCB
+			pthread_t hiloCreaPcb;
+			pcb* pcbNuevo; 
+			pthread_create(hiloCreaPcb, NULL, crearPcb(&proceso, &pcbNuevo), NULL);
 
-			pcb crearPcb(t_proceso* proceso){
-				t_proceso* auxiliar = proceso;
-				pcb pcbProceso;
+			r//hablarlo return pcbNuevo;
+			//Crear Hilo para enviar pbc a estado New o retornar de la funcion pcb.
 
-				pcbProceso.id 			   = nroProceso;
-				pcbProceso.tamanioProceso  = auxiliar->tamanio;
-				pcbProceso.instr 		   = auxiliar->instrucciones;
-				pcbProceso.programCounter = 0; //PRIMERA INSTRUCCION A EJECUTAR.
-				pcbProceso.tablaDePaginas = 0; //VA A SER MODIFICADA EN MEMORIA.
-				pcbProceso.estimacion_rafaga = valores_generales->est_inicial;
-
-				nroProceso++;
-				
-				return pcbProceso;
-
-				log_info(logger, "Pcb del proceso creado");
-			}
+			//QUE SE EJECUTE UN HILO A LA VEZ
+			pthread_join(hiloCreaPcb, NULL);
+			//pthread_join(hiloPcbANew, NULL);
 
 			break;
 		case -1:

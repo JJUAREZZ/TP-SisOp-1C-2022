@@ -11,6 +11,8 @@
 #include <commons/string.h>
 #include <commons/collections/list.h>
 #include "../../shared/include/sockets.h"
+#include "../../shared/include/serializacion.h"
+#include "../../shared/include/estructuras.h"
 #include <commons/config.h>
 #include <pthread.h>
 
@@ -78,6 +80,30 @@ void load_configuration(){
 
 	//kernel_logger_info("IP_KERNEL: %s", config_valores->ip_kernel);
 	//kernel_logger_info("PUERTO_KERNEL: %d", config_valores->puerto_kernel);
+}
+
+int nro_proceso = 0;
+
+//MUTEX PARA QUE UNO A LA VEZ CREEN EL PCB
+
+pthread_mutex_t mutexPcb;
+pthread_mutex_init(mutexPcb);
+
+void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a){
+	
+	pthread_mutex_lock(&mutexPcb);
+	pcbProceso_a->id = nro_proceso;
+	pcbProceso_a->tamanioProceso = procesoA->tamanio;
+	pcbProceso_a->instr = procesoA->instrucciones;
+	pcbProceso_a->programCounter = 0;
+	pcbProceso_a->tablaDePaginas = 0;
+	pcbProceso_a->estimacion_rafaga = valores_generales->est_inicial;
+
+	nro_proceso++ ;
+
+	printf("\n PCB del proceso creado id: %d", pcbProceso_a->id);
+
+	pthread_mutex_unlock(&mutexPcb);
 }
 
 #endif /* SRC_UTILS_H_ */
