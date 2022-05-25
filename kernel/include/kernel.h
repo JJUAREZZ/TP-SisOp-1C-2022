@@ -6,6 +6,8 @@
 #include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
 #include <commons/log.h>
+#include <commons/config.h>
+#include <commons/collections/list.h>
 
 /*
 int create_kernel_logger(){
@@ -78,15 +80,15 @@ void kernel_server_init(){
 			}
 			list_iterate(proceso->instrucciones, mostrarInstrucciones);
 
-			pcb crearPcb(t_list* unaLista){
-
+			pcb crearPcb(t_proceso* proceso){
+				t_proceso* auxiliar = proceso;
 				pcb pcbProceso;
 
-				//pcbProceso = malloc(sizeof(pcb));
-				pcbProceso.id = nroProceso;
-				//pcbProceso->tamanioProceso = TAMANO DE PROCESO INGRESADO EN CONSOLA. 
-				pcbProceso.instr = proceso->instrucciones;
-				pcbProceso.tablaDePaginas = 0; //INICIALIZO EN CERO PERO VA A SER MODIFICADO EN MEMORIA.
+				pcbProceso.id 			   = nroProceso;
+				pcbProceso.tamanioProceso  = auxiliar->tamanio;
+				pcbProceso.instr 		   = auxiliar->instrucciones;
+				pcbProceso.programCounter = 0; //PRIMERA INSTRUCCION A EJECUTAR.
+				pcbProceso.tablaDePaginas = 0; //VA A SER MODIFICADA EN MEMORIA.
 				pcbProceso.estimacion_rafaga = valores_generales->est_inicial;
 
 				nroProceso++;

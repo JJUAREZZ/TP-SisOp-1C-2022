@@ -1,5 +1,6 @@
-#include "kernel.h"
-//#include <commons>
+#include "../include/kernel.h"
+#include <commons/config.h>
+#include <commons/log.h>
 
 int main(){
 
