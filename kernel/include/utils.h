@@ -33,6 +33,15 @@ typedef struct {
 	int max_block;
 } gralStruct;
 
+
+t_list* estadoNew;
+t_list* estadoReady;
+t_list* estadoBlock;
+t_list* estadoBlockSusp;
+t_list* estadoReadySusp;
+t_list* estadoExec;
+t_list* estadoExit;
+
 config_conex* config_valores_kernel;
 config_conex* config_valores_memoria;
 config_conex* config_valores_cpu_dispatch;
@@ -89,7 +98,7 @@ int nro_proceso = 0;
 pthread_mutex_t mutexPcb;
 pthread_mutex_init(mutexPcb);
 
-void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a){
+void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a, t_log* unLogger){
 	
 	pthread_mutex_lock(&mutexPcb);
 	pcbProceso_a->id = nro_proceso;
@@ -101,9 +110,30 @@ void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a){
 
 	nro_proceso++ ;
 
-	printf("\n PCB del proceso creado id: %d", pcbProceso_a->id);
+	log_info(unLogger, "PCB del proceso arrivado creado");
 
 	pthread_mutex_unlock(&mutexPcb);
+}
+
+//En primer lugar va a enviar de estado new a ready siempre que la multiprogramacion lo permita
+void enviarAReady(t_list* estado, t_log* unLogger){
+
+    int	tamanioReady = list_size(estadoReady);
+	int gradoMutlriprogramacion = valores_generales->grad_multiprog;
+
+	if(tamanioReady <= gradoMutlriprogramacion){ 
+		//SACA ELEMENTO DE NEW 
+		pcb* elemEnviar = list_get(estado, 1);		
+
+		//ENVIAR Y RECIBIR MENSAJE A MEMORIA PARA MODIFICAR LA TLB DEL PCB EXTRAIDO
+
+		//AGREGA ELEMENTO A READY
+		list_add(estadoReady, elemEnviar);
+		log_info(unLogger, "Proceso enviado a ready");
+	}else{
+		log_info(unLogger, "El grado de multiprogramacion no permite enviar otro proceso a READY.");
+	}
+
 }
 
 #endif /* SRC_UTILS_H_ */

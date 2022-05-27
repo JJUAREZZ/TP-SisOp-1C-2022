@@ -61,6 +61,15 @@ void kernel_server_init(){
 			log_info(logger,"Error al conectar con un cliente");
 		}
 	t_proceso* proceso;
+	pcb* pcbNuevo; 
+
+	estadoNew 	= list_create();
+	estadoReady = list_create();
+	estadoBlock = list_create();
+	estadoBlockSusp = list_create();
+	estadoReadySusp = list_create();
+	estadoExec = list_create();
+	estadoExit = list_create();	
 
 	while (1) {
 		int cod_op = recibir_operacion(accepted_fd);
@@ -79,18 +88,23 @@ void kernel_server_init(){
 				printf("\n");
 			}
 			list_iterate(proceso->instrucciones, mostrarInstrucciones);
-			
+
 			//Crear Hilo para crear PCB
 			pthread_t hiloCreaPcb;
-			pcb* pcbNuevo; 
-			pthread_create(hiloCreaPcb, NULL, crearPcb(&proceso, &pcbNuevo), NULL);
+			pthread_create(hiloCreaPcb, NULL, crearPcb(proceso, pcbNuevo, logger), NULL);
 
-			r//hablarlo return pcbNuevo;
-			//Crear Hilo para enviar pbc a estado New o retornar de la funcion pcb.
+			pthread_t hiloPcbANew;
+			pthread_create(hiloPcbANew, NULL, list_add(estadoNew, pcbNuevo), NULL);
+
+			//Extrae elemento de New y envia a READY
+			//****FALTA MODIFICAR EL CAMPO TABLA DE PAGINAS****
+			//thread_t hiloEnviarAReady;
+			//pthread_create(hiloEnviarAReady, NULL, enviarAReady(estadoNew, logger), NULL);
 
 			//QUE SE EJECUTE UN HILO A LA VEZ
 			pthread_join(hiloCreaPcb, NULL);
-			//pthread_join(hiloPcbANew, NULL);
+			pthread_join(hiloPcbANew, NULL);
+			//pthread_join(hiloEnviarAReady, NULL);
 
 			break;
 		case -1:
