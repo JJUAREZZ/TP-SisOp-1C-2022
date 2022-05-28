@@ -90,8 +90,11 @@ void kernel_server_init(){
 			//Crear Hilo para crear PCB
 			pthread_t hiloCreaPcb;
 			pthread_t hiloPcbANew;
+			pthread_t hiloEnviarAReady;
+
 			pthread_create(&hiloCreaPcb, NULL, crearPcb(proceso, pcbNuevo, logger), NULL);
-			pthread_create(&hiloPcbANew, NULL, enviarAReady(estadoNew, pcbNuevo), NULL);
+			pthread_create(&hiloPcbANew, NULL, list_add(estadoNew, pcbNuevo), NULL);
+			pthread_create(&hiloEnviarAReady, NULL, enviarAReady(estadoNew, logger), NULL);
 
 			//Extrae elemento de New y envia a READY
 			//****FALTA MODIFICAR EL CAMPO TABLA DE PAGINAS****
@@ -101,7 +104,7 @@ void kernel_server_init(){
 			//QUE SE EJECUTE UN HILO A LA VEZ
 			pthread_join(hiloCreaPcb, NULL);
 			pthread_join(hiloPcbANew, NULL);
-			//pthread_join(hiloEnviarAReady, NULL);
+			pthread_join(hiloEnviarAReady, NULL);
 
 			break;
 		case -1:
