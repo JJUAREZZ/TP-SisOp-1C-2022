@@ -79,3 +79,140 @@
 [INFO] 09:50:05:278 Servidor/(5860:5860): Me llego el siguiente proceso:
 
 [INFO] 09:50:43:769 Servidor/(5860:5860): PCB del proceso arrivado creado
+[INFO] 10:10:59:010 Servidor/(19070:19070): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:11:10:235 Servidor/(19070:19070): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:11:19:283 Servidor/(19070:19070): Me llego el siguiente proceso:
+
+[INFO] 10:11:44:014 Servidor/(19070:19070): PCB del proceso arrivado creado
+[INFO] 10:12:29:874 Servidor/(19252:19252): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:12:40:321 Servidor/(19252:19252): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:12:40:321 Servidor/(19252:19252): Me llego el siguiente proceso:
+
+[INFO] 10:13:06:772 Servidor/(19252:19252): PCB del proceso arrivado creado
+[INFO] 10:14:59:046 Servidor/(19585:19585): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:15:06:111 Servidor/(19585:19585): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:15:06:112 Servidor/(19585:19585): Me llego el siguiente proceso:
+
+[INFO] 10:15:20:189 Servidor/(19585:19585): PCB del proceso arrivado creado
+[INFO] 10:16:50:160 Servidor/(19849:19849): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:16:56:583 Servidor/(19849:19849): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:16:56:584 Servidor/(19849:19849): Me llego el siguiente proceso:
+
+[INFO] 10:19:50:827 Servidor/(20172:20172): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:19:57:166 Servidor/(20172:20172): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:19:57:166 Servidor/(20172:20172): Me llego el siguiente proceso:
+
+[INFO] 10:20:15:847 Servidor/(20262:20262): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:20:20:333 Servidor/(20262:20262): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:20:20:333 Servidor/(20262:20262): Me llego el siguiente proceso:
+
+[INFO] 10:22:59:047 Servidor/(20604:20604): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:23:04:319 Servidor/(20604:20604): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:23:04:320 Servidor/(20604:20604): Me llego el siguiente proceso:
+
+[INFO] 10:23:15:579 Servidor/(20604:20604): PCB del proceso arrivado creado
+[INFO] 10:44:14:459 Servidor/(22711:22711): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:44:21:632 Servidor/(22711:22711): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:44:21:632 Servidor/(22711:22711): Me llego el siguiente proceso:
+
+[INFO] 10:45:51:741 Servidor/(22918:22918): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:46:02:300 Servidor/(22918:22918): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:46:02:300 Servidor/(22918:22918): Me llego el siguiente proceso:
+
+[INFO] 10:47:56:053 Servidor/(23161:23161): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:48:03:120 Servidor/(23161:23161): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:48:03:121 Servidor/(23161:23161): Me llego el siguiente proceso:
+
+[INFO] 10:52:33:688 Servidor/(23564:23564): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:52:39:038 Servidor/(23564:23564): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:52:39:039 Servidor/(23564:23564): Me llego el siguiente proceso:
+
+[INFO] 10:53:08:545 Servidor/(23670:23670): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:53:14:027 Servidor/(23670:23670): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:53:14:028 Servidor/(23670:23670): Me llego el siguiente proceso:
+
+[INFO] 10:57:29:686 Servidor/(24058:24058): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 10:57:40:929 Servidor/(24058:24058): Creando un hilo para atender una conexión en el socket 15
+[INFO] 10:57:40:929 Servidor/(24058:24058): Me llego el siguiente proceso:
+
+[INFO] 10:58:32:407 Servidor/(24058:24196): PCB del proceso arrivado creado
+[INFO] 11:09:23:303 Servidor/(25205:25205): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:09:32:195 Servidor/(25205:25205): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:09:32:196 Servidor/(25205:25205): Me llego el siguiente proceso:
+
+[INFO] 11:09:56:581 Servidor/(25205:25272): PCB del proceso arrivado creado
+[INFO] 11:13:15:796 Servidor/(25646:25646): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:13:34:560 Servidor/(25646:25646): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:13:34:561 Servidor/(25646:25646): Me llego el siguiente proceso:
+
+[INFO] 11:13:47:477 Servidor/(25646:25707): PCB del proceso arrivado creado
+[INFO] 11:15:36:451 Servidor/(25930:25930): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:16:01:895 Servidor/(25930:25930): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:16:01:897 Servidor/(25930:25930): Me llego el siguiente proceso:
+
+[INFO] 11:16:18:921 Servidor/(25930:26014): PCB del proceso arrivado creado
+[INFO] 11:20:52:408 Servidor/(26434:26434): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:20:59:873 Servidor/(26434:26434): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:20:59:874 Servidor/(26434:26434): Me llego el siguiente proceso:
+
+[INFO] 11:21:11:710 Servidor/(26434:26526): PCB del proceso arrivado creado
+[INFO] 11:21:15:530 Servidor/(26434:26530): Proceso enviado a ready
+[INFO] 11:21:46:129 Servidor/(26434:26434): el cliente se desconecto. Terminando servidor
+[INFO] 11:23:41:226 Servidor/(26797:26797): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:23:48:718 Servidor/(26797:26797): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:23:48:719 Servidor/(26797:26797): Me llego el siguiente proceso:
+
+[INFO] 11:24:24:055 Servidor/(26797:26876): PCB del proceso arrivado creado
+[INFO] 11:24:56:019 Servidor/(26797:26929): Proceso enviado a ready
+[INFO] 11:29:26:590 Servidor/(27299:27299): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:29:32:669 Servidor/(27299:27299): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:29:32:670 Servidor/(27299:27299): Me llego el siguiente proceso:
+
+[INFO] 11:29:52:665 Servidor/(27299:27398): PCB del proceso arrivado creado
+[INFO] 11:33:28:978 Servidor/(27771:27771): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:33:33:543 Servidor/(27771:27771): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:33:33:544 Servidor/(27771:27771): Me llego el siguiente proceso:
+
+[INFO] 11:37:11:207 Servidor/(27771:27771): PCB del proceso arrivado creado
+[INFO] 11:37:56:209 Servidor/(27771:27771): Proceso enviado a ready
+[INFO] 11:38:17:249 Servidor/(28227:28227): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:38:30:996 Servidor/(28227:28227): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:38:30:997 Servidor/(28227:28227): Me llego el siguiente proceso:
+
+[INFO] 11:38:38:020 Servidor/(28227:28227): PCB del proceso arrivado creado
+[INFO] 11:38:42:459 Servidor/(28227:28227): Proceso enviado a ready
+[INFO] 11:39:56:223 Servidor/(28428:28428): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 11:40:02:449 Servidor/(28428:28428): Creando un hilo para atender una conexión en el socket 15
+[INFO] 11:40:02:450 Servidor/(28428:28428): Me llego el siguiente proceso:
+
+[INFO] 11:40:20:738 Servidor/(28428:28428): PCB del proceso arrivado creado
+[INFO] 12:12:53:053 Servidor/(31363:31363): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 12:13:02:543 Servidor/(31363:31363): Creando un hilo para atender una conexión en el socket 15
+[INFO] 12:13:02:545 Servidor/(31363:31363): Me llego el siguiente proceso:
+
+[INFO] 12:13:13:839 Servidor/(31363:31363): PCB del proceso arrivado creado
+[INFO] 12:13:15:399 Servidor/(31363:31363): Proceso enviado a ready
+[INFO] 12:17:04:996 Servidor/(31363:31363): el cliente se desconecto. Terminando servidor

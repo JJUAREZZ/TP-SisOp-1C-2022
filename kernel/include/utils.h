@@ -98,8 +98,12 @@ int nro_proceso = 0;
 pthread_mutex_t mutexPcb;
 pthread_mutex_init(mutexPcb);
 
-void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a, t_log* unLogger){
-	
+//void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a, t_log* unLogger){
+	void* crearPcb (t_list *arg){
+	t_proceso* procesoA= list_get(arg,0);
+	pcb* pcbProceso_a= list_get(arg,1);
+	t_log* unLogger= list_get(arg,2);
+
 	pthread_mutex_lock(&mutexPcb);
 	pcbProceso_a->id = nro_proceso;
 	pcbProceso_a->tamanioProceso = procesoA->tamanio;
@@ -109,18 +113,23 @@ void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a, t_log* unLogger){
 	pcbProceso_a->estimacion_rafaga = valores_generales->est_inicial;
 	nro_proceso++ ;
 	log_info(unLogger, "PCB del proceso arrivado creado");
+	list_add(estadoNew,pcbProceso_a);
 	pthread_mutex_unlock(&mutexPcb);
+	
 }
 
 //En primer lugar va a enviar de estado new a ready siempre que la multiprogramacion lo permita
-void *enviarAReady(t_list* estado, t_log* unLogger){
+//void *enviarAReady(t_list* estado, t_log* unLogger){
+void *enviarAReady(t_list * arg){
 
+	t_list * estado= list_get(arg,0);
+	t_log* unLogger= list_get(arg,1);
     int	tamanioReady = list_size(estadoReady);
 	int gradoMutlriprogramacion = valores_generales->grad_multiprog;
 
 	if(tamanioReady <= gradoMutlriprogramacion){ 
 		//SACA ELEMENTO DE NEW 
-		pcb* elemEnviar = list_get(estado, 1);		
+		pcb* elemEnviar = list_get(estado, 0);		
 
 		//ENVIAR Y RECIBIR MENSAJE A MEMORIA PARA MODIFICAR LA TLB DEL PCB EXTRAIDO
 
