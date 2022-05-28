@@ -4,15 +4,28 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
-    
-
-
-
-
-/*
         {
-            "name": "(gdb) Iniciar",
+                "name": "(gdb) consola",
+                "type": "cppdbg",
+                "request": "launch",
+                "program": "${workspaceFolder}/consola/consola",
+                "args": ["4", "${workspaceFolder}/consola/cfg/instrucciones.txt"],
+                "stopAtEntry": false,
+                "cwd": "${workspaceFolder}",
+                "environment": [],
+                "externalConsole": false,
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Habilitar la impresión con sangría para gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+            ]
+        },
+
+        {
+            "name": "(gdb) kernel",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/kernel/kernel",
@@ -27,26 +40,7 @@
                     "description": "Habilitar la impresión con sangría para gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
-                },*/
-           
-        {
-            "name": "(gdb) consola",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/consola/consola",
-            "args": ["4", "${workspaceFolder}/consola/cfg/instrucciones.txt"],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Habilitar la impresión con sangría para gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-                
+                },
             ]
         }
         

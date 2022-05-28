@@ -107,16 +107,13 @@ void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a, t_log* unLogger){
 	pcbProceso_a->programCounter = 0;
 	pcbProceso_a->tablaDePaginas = 0;
 	pcbProceso_a->estimacion_rafaga = valores_generales->est_inicial;
-
 	nro_proceso++ ;
-
 	log_info(unLogger, "PCB del proceso arrivado creado");
-
 	pthread_mutex_unlock(&mutexPcb);
 }
 
 //En primer lugar va a enviar de estado new a ready siempre que la multiprogramacion lo permita
-void enviarAReady(t_list* estado, t_log* unLogger){
+void *enviarAReady(t_list* estado, t_log* unLogger){
 
     int	tamanioReady = list_size(estadoReady);
 	int gradoMutlriprogramacion = valores_generales->grad_multiprog;

@@ -177,3 +177,40 @@
 [INFO] 16:09:25:887 Servidor/(11632:11632): el cliente se desconecto. Terminando servidor
 [INFO] 16:18:14:361 Servidor/(11765:11765): Kernel Server created !!! Waiting Connections ...
 
+[INFO] 08:22:08:476 Servidor/(5294:5294): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 08:22:46:199 Servidor/(5294:5294): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:22:46:199 Servidor/(5294:5294): Me llego el siguiente proceso:
+
+[INFO] 08:22:46:199 Servidor/(5294:5294): PCB del proceso arrivado creado
+[INFO] 08:51:56:915 Servidor/(9273:9273): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 08:52:00:903 Servidor/(9273:9273): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:52:00:903 Servidor/(9273:9273): Me llego el siguiente proceso:
+
+[INFO] 08:52:00:904 Servidor/(9273:9273): PCB del proceso arrivado creado
+[INFO] 09:12:26:297 Servidor/(12309:12309): Error al crear server
+[INFO] 09:12:53:617 Servidor/(12370:12370): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:12:56:904 Servidor/(12370:12370): Creando un hilo para atender una conexión en el socket 15
+[INFO] 09:12:56:906 Servidor/(12370:12370): Me llego el siguiente proceso:
+
+[INFO] 09:12:56:906 Servidor/(12370:12370): PCB del proceso arrivado creado
+[INFO] 09:15:30:514 Servidor/(12802:12802): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:15:35:103 Servidor/(12802:12802): Creando un hilo para atender una conexión en el socket 15
+[INFO] 09:15:35:104 Servidor/(12802:12802): Me llego el siguiente proceso:
+
+[INFO] 09:15:35:104 Servidor/(12802:12802): PCB del proceso arrivado creado
+[INFO] 09:15:47:496 Servidor/(12869:12869): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:15:57:020 Servidor/(12869:12869): Creando un hilo para atender una conexión en el socket 15
+[INFO] 09:15:57:021 Servidor/(12869:12869): Me llego el siguiente proceso:
+
+[INFO] 09:15:57:021 Servidor/(12869:12869): PCB del proceso arrivado creado
+[INFO] 09:19:52:566 Servidor/(13443:13443): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:19:55:671 Servidor/(13443:13443): Creando un hilo para atender una conexión en el socket 15
+[INFO] 09:19:55:672 Servidor/(13443:13443): Me llego el siguiente proceso:
+
+[INFO] 09:19:55:672 Servidor/(13443:13443): PCB del proceso arrivado creado

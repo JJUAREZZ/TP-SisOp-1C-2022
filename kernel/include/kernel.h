@@ -2,7 +2,6 @@
 #define SRC_KERNEL_H_
 
 #include "utils.h"
-#include <pthread.h>
 #include "../../shared/include/sockets.h"
 #include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
@@ -63,13 +62,13 @@ void kernel_server_init(){
 	t_proceso* proceso;
 	pcb* pcbNuevo; 
 
-	estadoNew 	= list_create();
-	estadoReady = list_create();
-	estadoBlock = list_create();
-	estadoBlockSusp = list_create();
-	estadoReadySusp = list_create();
-	estadoExec = list_create();
-	estadoExit = list_create();	
+	t_list *estadoNew 	= list_create();
+	t_list *estadoReady = list_create();
+	t_list *estadoBlock = list_create();
+	t_list *estadoBlockSusp = list_create();
+	t_list *estadoReadySusp = list_create();
+	t_list *estadoExec = list_create();
+	t_list *estadoExit = list_create();	
 
 	while (1) {
 		int cod_op = recibir_operacion(accepted_fd);
@@ -82,19 +81,17 @@ void kernel_server_init(){
 			void mostrarInstrucciones(instr_t* element)
 			{
 				printf("%s ",element->id);
-				for(int i=0; i<element->nroDeParam;i++){
+				for(int i=0; i<element->nroDeParam;i++)
 					printf(" %d",(int) element->param[i]);
-				}
 				printf("\n");
 			}
 			list_iterate(proceso->instrucciones, mostrarInstrucciones);
 
 			//Crear Hilo para crear PCB
 			pthread_t hiloCreaPcb;
-			pthread_create(hiloCreaPcb, NULL, crearPcb(proceso, pcbNuevo, logger), NULL);
-
 			pthread_t hiloPcbANew;
-			pthread_create(hiloPcbANew, NULL, list_add(estadoNew, pcbNuevo), NULL);
+			pthread_create(&hiloCreaPcb, NULL, crearPcb(proceso, pcbNuevo, logger), NULL);
+			pthread_create(&hiloPcbANew, NULL, enviarAReady(estadoNew, pcbNuevo), NULL);
 
 			//Extrae elemento de New y envia a READY
 			//****FALTA MODIFICAR EL CAMPO TABLA DE PAGINAS****
