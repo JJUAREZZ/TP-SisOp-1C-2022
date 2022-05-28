@@ -65,3 +65,17 @@
 [INFO] 09:21:30:402 Servidor/(13724:13724): PCB del proceso arrivado creado
 [INFO] 09:27:38:755 Servidor/(14599:14599): Kernel Server created !!! Waiting Connections ...
 
+[INFO] 09:43:57:532 Servidor/(5453:5453): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:44:47:034 Servidor/(5453:5453): Creando un hilo para atender una conexión en el socket 5
+[INFO] 09:44:47:034 Servidor/(5453:5453): Me llego el siguiente proceso:
+
+[INFO] 09:44:47:034 Servidor/(5453:5453): PCB del proceso arrivado creado
+[INFO] 09:46:44:495 Servidor/(5702:5702): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:49:38:170 Servidor/(5860:5860): Kernel Server created !!! Waiting Connections ...
+
+[INFO] 09:49:54:027 Servidor/(5860:5860): Creando un hilo para atender una conexión en el socket 5
+[INFO] 09:50:05:278 Servidor/(5860:5860): Me llego el siguiente proceso:
+
+[INFO] 09:50:43:769 Servidor/(5860:5860): PCB del proceso arrivado creado
