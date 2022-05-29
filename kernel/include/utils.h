@@ -16,6 +16,7 @@
 #include <commons/config.h>
 #include <pthread.h>
 
+
 int kernel_socket;
 
 //Estructura para poder escuchar y conectarnos a todos los puertos
@@ -118,28 +119,63 @@ pthread_mutex_init(mutexPcb);
 	
 }
 
-//En primer lugar va a enviar de estado new a ready siempre que la multiprogramacion lo permita
-//void *enviarAReady(t_list* estado, t_log* unLogger){
-void *enviarAReady(t_list * arg){
+void *planificadorCorto(t_list* arg){
 
-	t_list * estado= list_get(arg,0);
-	t_log* unLogger= list_get(arg,1);
-    int	tamanioReady = list_size(estadoReady);
-	int gradoMutlriprogramacion = valores_generales->grad_multiprog;
+	t_list* listaNew = list_get(arg,0);
+	t_log* unLogger  = list_get(arg,1);	
 
-	if(tamanioReady <= gradoMutlriprogramacion){ 
-		//SACA ELEMENTO DE NEW 
-		pcb* elemEnviar = list_get(estado, 0);		
+	int	tamanioReady = list_size(estadoReady);
+	int gradoMultiprogramacion = valores_generales->grad_multiprog;
 
-		//ENVIAR Y RECIBIR MENSAJE A MEMORIA PARA MODIFICAR LA TLB DEL PCB EXTRAIDO
+	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
+	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
 
-		//AGREGA ELEMENTO A READY
-		list_add(estadoReady, elemEnviar);
-		log_info(unLogger, "Proceso enviado a ready");
-	}else{
-		log_info(unLogger, "El grado de multiprogramacion no permite enviar otro proceso a READY.");
+	if(tamanioReady <= gradoMultiprogramacion){
+		pcb* elemEnviar = list_remove(listaNew, 0);
+		if(utilizarFifo == 0){
+			//Ejecutar FIFO.
+			//Esta linea no va a ser falta
+			log_info(unLogger, "Planificador por FIFO.");
+			planificadorFifo(elemEnviar, unLogger);
+		}	
+	if(utilizarSrt == 0){
+			//hilo que ejecuta SRT.
+			log_info(unLogger, "Planificador por SRT.");
+			planificadorSrt(elemEnviar, unLogger);
+		}
+	} else {
+		log_info(unLogger, "El grado de multiprogramacion no permite mas elementos");
 	}
-
 }
+
+
+void planificadorSrt(t_list listaReadt, t_log unLogger){
+/*	int tamanioReady = list_size(listaReady);
+	while(tamanioReady > 0){
+		
+	}*/
+}
+
+//ver si tiene que agarrar un proceso o una lista de ready.
+void planificadorFifo(pcb* unProceso, t_log* unLogger){
+
+	int tamanioReady = list_size(estadoReady);
+	list_add(estadoReady, unProceso);
+	log_info(unLogger, "Proceso arriba en ready");
+
+	while(tamanioReady > 0){
+	pcb* elemEjecutar = list_remove(estadoReady, 0);
+	//Enviar Primer elemento de la lista a Cpu Dispatch
+	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
+	log_info(unLogger, "Proceso enviado a CPU");
+
+	//Recibir de blocked los Procesos.
+	pcb* elemRecib; 
+
+	}
+}
+
+
 
 #endif /* SRC_UTILS_H_ */

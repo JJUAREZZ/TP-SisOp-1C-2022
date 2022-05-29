@@ -25,6 +25,7 @@ int create_kernel_logger(){
 */
 void *conectarse_con_consola();
 void *recibir_proceso(int);
+void *planificadorACortoPlazo();
 
 t_log *logger;
 
@@ -35,9 +36,11 @@ void kernel_server_init(){
 	pthread_attr_setdetachstate(&attrs, PTHREAD_CREATE_JOINABLE);
 */
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
+
 	pthread_t conexion_con_consola;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
 	pthread_join(conexion_con_consola, NULL);
+
 /*
 	int accepted_fd;
 	for (;;) {
@@ -143,11 +146,31 @@ void *conectarse_con_consola()
 	for (;;) {
 		int accepted_fd;
 		if ((accepted_fd = accept(kernel_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+
 			pthread_t hilo;
 			pthread_create(&hilo,NULL,recibir_proceso,accepted_fd);
+
+			//FUNCIONA DESINCRONIZADO;
+			//pthread_t planificador_corto;
+			//pthread_create(&planificador_corto, NULL, planificadorACortoPlazo, NULL);
+
+
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
+
+			
 		}
 	}
+}
+
+//Ver Donde Colocarlo.
+void* planificadorACortoPlazo(){
+		
+	t_list *argumentosPlanificadorCorto= list_create();
+	list_add(argumentosPlanificadorCorto,estadoReady);
+	list_add(argumentosPlanificadorCorto,logger);
+
+	planificadorCorto(argumentosPlanificadorCorto);
+
 }
 
 void *recibir_proceso(int accepted_fd){
@@ -185,10 +208,11 @@ void *recibir_proceso(int accepted_fd){
 			t_list *argumentosEnviarAReady= list_create();
 			list_add(argumentosEnviarAReady,estadoNew);
 			list_add(argumentosEnviarAReady,logger);
+			
 		//Creamos listas con los parametros de las funciones para cuando usemos hilos. Ya que 
 		//pthread_create sólo recibe la funcion y 1 parametro.
 			crearPcb(argumentosCrearPcb);
-			enviarAReady(argumentosEnviarAReady);
+			planificadorCorto(argumentosEnviarAReady);
 
 			return;
 		case -1:
@@ -200,5 +224,7 @@ void *recibir_proceso(int accepted_fd){
 		}
 	}
 }
+
+
 
 #endif /* SRC_KERNEL_H_ */
