@@ -10,20 +10,6 @@
 #include <commons/config.h>
 #include <commons/collections/list.h>
 
-/*
-int create_kernel_logger(){
-	int response = kernel_logger_create("kernel_logger.log");
-	if(response<0){
-		free(config_valores->ip_kernel);
-		free(config_valores->puerto_kernel);
-		free(config_valores);
-	
-	}
-	else{
-		kernel_logger_info("Kernel Logger creado");
-	}
-}
-*/
 void *conectarse_con_consola();
 void *recibir_proceso(int);
 void *planificadorACortoPlazo();
@@ -31,16 +17,13 @@ void *planificadorACortoPlazo();
 t_log *logger;
 
 void kernel_server_init(){
-/*
-	pthread_attr_t attrs;
-	pthread_attr_init(&attrs);
-	pthread_attr_setdetachstate(&attrs, PTHREAD_CREATE_JOINABLE);
-*/
+
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 
 	pthread_t conexion_con_consola;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
 	pthread_join(conexion_con_consola, NULL);
+<<<<<<< HEAD
 
 	//HILO PLANIFICADOR CORTO PLAZO
 /*	pthread_t planificador_corto_plazo;
@@ -125,6 +108,8 @@ void kernel_server_init(){
 		}
 	}
 	*/
+=======
+>>>>>>> be1db108d4601041ab03e9af8d6fd1dd430673d2
 	
 }
 
