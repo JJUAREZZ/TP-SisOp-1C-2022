@@ -111,13 +111,16 @@ pthread_mutex_init(mutexPcb);
 	pcbProceso_a->instr = procesoA->instrucciones;
 	pcbProceso_a->programCounter = 0;
 	pcbProceso_a->tablaDePaginas = 0;
-	pcbProceso_a->estimacion_rafaga = valores_generales->est_inicial;
+	pcbProceso_a->estimacion_rafaga_actual = valores_generales->est_inicial;
 	nro_proceso++ ;
 	log_info(unLogger, "PCB del proceso arrivado creado");
 	list_add(estadoNew,pcbProceso_a);
 	pthread_mutex_unlock(&mutexPcb);
 	
 }
+
+pthread_mutex_t mutex_ready;
+pthread_mutex_init(mutex_ready);
 
 void* enviarAReady(t_list *arg2){
 	t_list* listaNew = list_get(arg2,0);
@@ -126,7 +129,9 @@ void* enviarAReady(t_list *arg2){
 	int	tamanioReady = list_size(estadoReady);
 	int gradoMultiprogramacion = valores_generales->grad_multiprog;
 
+	pthread_mutex_lock(&mutex_ready);
 	if(tamanioReady <= gradoMultiprogramacion){
+		//FALTA ENVIAR MENSAJE A MEMORIA PARA QUE REALICE ESTRUCTURAS Y DEVUELVA EL VALOR DE LA TLB DEL PCB
 
 		pcb* unProceso = list_remove(listaNew, 0);
 
@@ -136,6 +141,7 @@ void* enviarAReady(t_list *arg2){
 	} else{
 		log_info(unLogger, "El grado de multiprogramacion no lo permite");
 	}
+	pthread_mutex_unlock(&mutex_ready);
 
 }
 

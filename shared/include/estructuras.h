@@ -15,7 +15,9 @@ typedef struct{
 	t_list* instr;
 	int programCounter;
 	int tablaDePaginas;
-	float estimacion_rafaga;
+	float estimacion_rafaga_actual;
+	float estimacion_rafaga_anterior;
+	float cpu_anterior;
 } pcb;
 
 void paquete_pcb(pcb *proceso, int conexion){

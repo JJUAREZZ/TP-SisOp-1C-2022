@@ -42,6 +42,11 @@ void kernel_server_init(){
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
 	pthread_join(conexion_con_consola, NULL);
 
+	//HILO PLANIFICADOR CORTO PLAZO
+/*	pthread_t planificador_corto_plazo;
+	pthread_create(&planificador_corto_plazo, NULL, planificadorACortoPlazo, NULL);
+	pthread_join(planificador_corto_plazo, NULL);
+*/
 /*
 	int accepted_fd;
 	for (;;) {
@@ -123,14 +128,17 @@ void kernel_server_init(){
 	
 }
 
-//Ver Donde Colocarlo.
-void* planificadorACortoPlazo(){
-		
-	t_list *argumentosPlanificadorCorto = list_create();
-	list_add(argumentosPlanificadorCorto,estadoReady);
-	list_add(argumentosPlanificadorCorto,logger);
 
-	planificadorCorto(argumentosPlanificadorCorto);
+
+pthread_mutex_t mutexPlan_corto;
+pthread_mutex_init(mutexPlan_corto); 
+
+//Ver si utilizar
+void* planificadorACortoPlazo(){
+
+	pthread_mutex_lock(&mutexPlan_corto);
+	planificadorCorto(estadoReady, logger);
+	pthread_mutex_unlock(&mutexPlan_corto);
 
 }
 
@@ -161,11 +169,6 @@ void *conectarse_con_consola()
 
 			pthread_t hilo;
 			pthread_create(&hilo,NULL,recibir_proceso,accepted_fd);
-
-			//FUNCIONA DESINCRONIZADO;
-			//pthread_t planificador_corto;
-			//pthread_create(&planificador_corto, NULL, planificadorACortoPlazo, NULL);
-
 
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
 
@@ -214,9 +217,9 @@ void *recibir_proceso(int accepted_fd){
 		//pthread_create sólo recibe la funcion y 1 parametro.
 			crearPcb(argumentosCrearPcb);
 			enviarAReady(argumentosEnviarAReady);
-
-
-
+			//Ver
+			planificadorACortoPlazo();
+						
 			return;
 		case -1:
 			log_info(logger,"el cliente se desconecto. Terminando servidor");
