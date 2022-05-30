@@ -17619,3 +17619,10 @@
 [INFO] 20:53:45:753 Servidor/(10863:10875): PCB del proceso arrivado creado
 [INFO] 20:53:45:763 Servidor/(10863:10875): Planificador por FIFO.
 [INFO] 20:53:45:764 Servidor/(10863:10875): Proceso arriba en ready
+[INFO] 13:57:41:820 Servidor/(4792:4793): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:58:04:133 Servidor/(4792:4793): Creando un hilo para atender una conexión en el socket 5
+[INFO] 13:58:04:151 Servidor/(4792:4845): Me llego el siguiente proceso:
+
+[INFO] 13:58:04:154 Servidor/(4792:4845): PCB del proceso arrivado creado
+[INFO] 13:58:04:155 Servidor/(4792:4845): Proceso enviado a ready

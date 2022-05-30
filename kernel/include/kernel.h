@@ -2,6 +2,7 @@
 #define SRC_KERNEL_H_
 
 #include "utils.h"
+#include "planificadores.h"
 #include "../../shared/include/sockets.h"
 #include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
@@ -122,6 +123,17 @@ void kernel_server_init(){
 	
 }
 
+//Ver Donde Colocarlo.
+void* planificadorACortoPlazo(){
+		
+	t_list *argumentosPlanificadorCorto = list_create();
+	list_add(argumentosPlanificadorCorto,estadoReady);
+	list_add(argumentosPlanificadorCorto,logger);
+
+	planificadorCorto(argumentosPlanificadorCorto);
+
+}
+
 void *conectarse_con_consola()
 {
 	struct sockaddr_in client_info;
@@ -160,17 +172,6 @@ void *conectarse_con_consola()
 			
 		}
 	}
-}
-
-//Ver Donde Colocarlo.
-void* planificadorACortoPlazo(){
-		
-	t_list *argumentosPlanificadorCorto= list_create();
-	list_add(argumentosPlanificadorCorto,estadoReady);
-	list_add(argumentosPlanificadorCorto,logger);
-
-	planificadorCorto(argumentosPlanificadorCorto);
-
 }
 
 void *recibir_proceso(int accepted_fd){
@@ -212,7 +213,9 @@ void *recibir_proceso(int accepted_fd){
 		//Creamos listas con los parametros de las funciones para cuando usemos hilos. Ya que 
 		//pthread_create sólo recibe la funcion y 1 parametro.
 			crearPcb(argumentosCrearPcb);
-			planificadorCorto(argumentosEnviarAReady);
+			enviarAReady(argumentosEnviarAReady);
+
+
 
 			return;
 		case -1:

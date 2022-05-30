@@ -119,63 +119,24 @@ pthread_mutex_init(mutexPcb);
 	
 }
 
-void *planificadorCorto(t_list* arg){
-
-	t_list* listaNew = list_get(arg,0);
-	t_log* unLogger  = list_get(arg,1);	
+void* enviarAReady(t_list *arg2){
+	t_list* listaNew = list_get(arg2,0);
+	t_log* unLogger  = list_get(arg2,1);	
 
 	int	tamanioReady = list_size(estadoReady);
 	int gradoMultiprogramacion = valores_generales->grad_multiprog;
 
-	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
-	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
-
 	if(tamanioReady <= gradoMultiprogramacion){
-		pcb* elemEnviar = list_remove(listaNew, 0);
-		if(utilizarFifo == 0){
-			//Ejecutar FIFO.
-			//Esta linea no va a ser falta
-			log_info(unLogger, "Planificador por FIFO.");
-			planificadorFifo(elemEnviar, unLogger);
-		}	
-	if(utilizarSrt == 0){
-			//hilo que ejecuta SRT.
-			log_info(unLogger, "Planificador por SRT.");
-			planificadorSrt(elemEnviar, unLogger);
-		}
-	} else {
-		log_info(unLogger, "El grado de multiprogramacion no permite mas elementos");
+
+		pcb* unProceso = list_remove(listaNew, 0);
+
+		list_add(estadoReady, unProceso);
+		log_info(unLogger, "Proceso enviado a ready");
+
+	} else{
+		log_info(unLogger, "El grado de multiprogramacion no lo permite");
 	}
+
 }
-
-
-void planificadorSrt(t_list listaReadt, t_log unLogger){
-/*	int tamanioReady = list_size(listaReady);
-	while(tamanioReady > 0){
-		
-	}*/
-}
-
-//ver si tiene que agarrar un proceso o una lista de ready.
-void planificadorFifo(pcb* unProceso, t_log* unLogger){
-
-	int tamanioReady = list_size(estadoReady);
-	list_add(estadoReady, unProceso);
-	log_info(unLogger, "Proceso arriba en ready");
-
-	while(tamanioReady > 0){
-	pcb* elemEjecutar = list_remove(estadoReady, 0);
-	//Enviar Primer elemento de la lista a Cpu Dispatch
-	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
-	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
-	log_info(unLogger, "Proceso enviado a CPU");
-
-	//Recibir de blocked los Procesos.
-	pcb* elemRecib; 
-
-	}
-}
-
-
 
 #endif /* SRC_UTILS_H_ */
