@@ -17465,3 +17465,164 @@
 
 [INFO] 13:44:42:293 Servidor/(4384:4428): PCB del proceso arrivado creado
 [INFO] 13:44:42:293 Servidor/(4384:4428): Proceso enviado a ready
+[INFO] 16:31:22:002 Servidor/(4111:4112): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:31:53:885 Servidor/(4111:4112): Creando un hilo para atender una conexión en el socket 5
+[INFO] 16:31:53:896 Servidor/(4111:4149): Me llego el siguiente proceso:
+
+[INFO] 16:31:53:905 Servidor/(4111:4149): PCB del proceso arrivado creado
+[INFO] 16:31:53:905 Servidor/(4111:4149): Proceso enviado a ready
+[INFO] 16:42:50:764 Servidor/(4111:4112): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:42:50:772 Servidor/(4111:4291): Me llego el siguiente proceso:
+
+[INFO] 16:42:50:777 Servidor/(4111:4291): PCB del proceso arrivado creado
+[INFO] 16:42:50:777 Servidor/(4111:4291): Proceso enviado a ready
+[INFO] 17:35:56:882 Servidor/(5353:5354): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:36:00:255 Servidor/(5353:5354): Creando un hilo para atender una conexión en el socket 5
+[INFO] 17:36:00:261 Servidor/(5353:5364): Me llego el siguiente proceso:
+
+[INFO] 17:36:00:264 Servidor/(5353:5364): PCB del proceso arrivado creado
+[INFO] 17:36:00:266 Servidor/(5353:5364): Proceso enviado a ready
+[INFO] 19:08:18:909 Servidor/(7955:7956): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:09:01:226 Servidor/(7955:7956): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:09:01:237 Servidor/(7955:7996): Me llego el siguiente proceso:
+
+[INFO] 19:09:01:243 Servidor/(7955:7996): PCB del proceso arrivado creado
+[INFO] 19:09:01:244 Servidor/(7955:7996): Proceso enviado a ready
+[INFO] 19:10:45:577 Servidor/(8060:8061): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:10:51:088 Servidor/(8060:8072): Planificador por FIFO.
+[INFO] 19:10:51:094 Servidor/(8060:8061): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:10:51:095 Servidor/(8060:8071): Me llego el siguiente proceso:
+
+[INFO] 19:10:51:098 Servidor/(8060:8071): PCB del proceso arrivado creado
+[INFO] 19:10:51:098 Servidor/(8060:8071): Proceso enviado a ready
+[INFO] 19:12:47:808 Servidor/(8104:8105): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:12:52:997 Servidor/(8104:8115): Planificador por FIFO.
+[INFO] 19:12:53:000 Servidor/(8104:8105): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:12:53:002 Servidor/(8104:8114): Me llego el siguiente proceso:
+
+[INFO] 19:12:53:006 Servidor/(8104:8114): PCB del proceso arrivado creado
+[INFO] 19:12:53:006 Servidor/(8104:8114): Proceso enviado a ready
+[INFO] 19:14:08:121 Servidor/(8104:8137): Planificador por FIFO.
+[INFO] 19:14:41:682 Servidor/(8158:8159): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:15:02:301 Servidor/(8191:8192): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:15:05:898 Servidor/(8191:8202): Planificador por FIFO.
+[INFO] 19:15:05:901 Servidor/(8191:8201): Me llego el siguiente proceso:
+
+[INFO] 19:15:05:904 Servidor/(8191:8201): PCB del proceso arrivado creado
+[INFO] 19:15:05:905 Servidor/(8191:8201): Proceso enviado a ready
+[INFO] 19:15:05:906 Servidor/(8191:8192): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:15:50:401 Servidor/(8191:8220): Planificador por FIFO.
+[INFO] 19:35:01:038 Servidor/(8469:8470): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:35:05:976 Servidor/(8469:8470): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:35:05:984 Servidor/(8469:8479): Me llego el siguiente proceso:
+
+[INFO] 19:35:05:987 Servidor/(8469:8479): PCB del proceso arrivado creado
+[INFO] 19:35:05:990 Servidor/(8469:8479): Proceso enviado a ready
+[INFO] 19:35:15:991 Servidor/(8469:8470): Creando un hilo para atender una conexión en el socket 6
+[INFO] 19:35:16:001 Servidor/(8469:8488): Me llego el siguiente proceso:
+
+[INFO] 19:35:16:006 Servidor/(8469:8488): PCB del proceso arrivado creado
+[INFO] 19:35:16:008 Servidor/(8469:8488): Proceso enviado a ready
+[INFO] 19:35:31:364 Servidor/(8469:8470): Creando un hilo para atender una conexión en el socket 7
+[INFO] 19:35:31:371 Servidor/(8469:8502): Me llego el siguiente proceso:
+
+[INFO] 19:35:31:373 Servidor/(8469:8502): PCB del proceso arrivado creado
+[INFO] 19:35:31:374 Servidor/(8469:8502): Proceso enviado a ready
+[INFO] 19:45:46:318 Servidor/(8601:8602): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:45:52:371 Servidor/(8601:8602): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:45:52:377 Servidor/(8601:8615): Me llego el siguiente proceso:
+
+[INFO] 19:45:52:379 Servidor/(8601:8615): PCB del proceso arrivado creado
+[INFO] 19:45:52:380 Servidor/(8601:8615): Proceso enviado a ready
+[INFO] 19:46:02:380 Servidor/(8601:8602): Creando un hilo para atender una conexión en el socket 6
+[INFO] 19:46:02:389 Servidor/(8601:8625): Me llego el siguiente proceso:
+
+[INFO] 19:46:02:393 Servidor/(8601:8625): PCB del proceso arrivado creado
+[INFO] 19:46:02:395 Servidor/(8601:8625): Proceso enviado a ready
+[INFO] 19:46:39:648 Servidor/(8675:8676): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:48:12:406 Servidor/(8735:8736): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:48:17:104 Servidor/(8735:8736): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:48:17:113 Servidor/(8735:8746): Planificador por FIFO.
+[INFO] 19:48:17:116 Servidor/(8735:8745): Me llego el siguiente proceso:
+
+[INFO] 19:48:17:118 Servidor/(8735:8745): PCB del proceso arrivado creado
+[INFO] 19:48:17:119 Servidor/(8735:8745): Proceso enviado a ready
+[INFO] 19:48:30:948 Servidor/(8735:8736): Creando un hilo para atender una conexión en el socket 6
+[INFO] 19:48:30:953 Servidor/(8735:8761): Planificador por FIFO.
+[INFO] 19:50:51:738 Servidor/(8836:8837): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:50:57:322 Servidor/(8836:8837): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:52:26:974 Servidor/(8895:8896): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:52:31:219 Servidor/(8895:8896): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:53:05:782 Servidor/(8932:8933): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:53:09:103 Servidor/(8932:8933): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:53:47:250 Servidor/(8987:8988): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:53:50:155 Servidor/(8987:8988): Creando un hilo para atender una conexión en el socket 5
+[INFO] 19:53:50:162 Servidor/(8987:8990): Me llego el siguiente proceso:
+
+[INFO] 19:53:50:168 Servidor/(8987:8990): PCB del proceso arrivado creado
+[INFO] 19:53:50:169 Servidor/(8987:8990): Proceso enviado a ready
+[INFO] 20:08:14:870 Servidor/(9269:9270): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:08:18:578 Servidor/(9269:9270): Creando un hilo para atender una conexión en el socket 5
+[INFO] 20:08:18:585 Servidor/(9269:9279): Me llego el siguiente proceso:
+
+[INFO] 20:08:18:589 Servidor/(9269:9279): PCB del proceso arrivado creado
+[INFO] 20:08:18:592 Servidor/(9269:9279): Planificador por FIFO.
+[INFO] 20:09:27:621 Servidor/(9316:9317): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:09:30:888 Servidor/(9316:9317): Creando un hilo para atender una conexión en el socket 5
+[INFO] 20:09:30:894 Servidor/(9316:9319): Me llego el siguiente proceso:
+
+[INFO] 20:09:30:900 Servidor/(9316:9319): PCB del proceso arrivado creado
+[INFO] 20:09:30:901 Servidor/(9316:9319): Planificador por FIFO.
+[INFO] 20:09:30:901 Servidor/(9316:9319): Proceso arriba en ready
+[INFO] 20:14:05:730 Servidor/(9316:9317): Creando un hilo para atender una conexión en el socket 6
+[INFO] 20:14:05:737 Servidor/(9316:9365): Me llego el siguiente proceso:
+
+[INFO] 20:14:05:740 Servidor/(9316:9365): PCB del proceso arrivado creado
+[INFO] 20:14:05:741 Servidor/(9316:9365): Planificador por FIFO.
+[INFO] 20:14:05:743 Servidor/(9316:9365): Proceso arriba en ready
+[INFO] 20:17:27:024 Servidor/(9492:9493): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:17:48:835 Servidor/(9492:9493): Creando un hilo para atender una conexión en el socket 5
+[INFO] 20:17:48:843 Servidor/(9492:9497): Me llego el siguiente proceso:
+
+[INFO] 20:17:48:846 Servidor/(9492:9497): PCB del proceso arrivado creado
+[INFO] 20:17:48:846 Servidor/(9492:9497): Planificador por FIFO.
+[INFO] 20:17:48:846 Servidor/(9492:9497): Proceso arriba en ready
+[INFO] 20:18:01:320 Servidor/(9492:9493): Creando un hilo para atender una conexión en el socket 6
+[INFO] 20:18:01:324 Servidor/(9492:9499): Me llego el siguiente proceso:
+
+[INFO] 20:18:01:326 Servidor/(9492:9499): PCB del proceso arrivado creado
+[INFO] 20:18:01:337 Servidor/(9492:9499): Planificador por FIFO.
+[INFO] 20:18:01:338 Servidor/(9492:9499): Proceso arriba en ready
+[INFO] 20:53:34:982 Servidor/(10863:10864): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:53:45:741 Servidor/(10863:10864): Creando un hilo para atender una conexión en el socket 5
+[INFO] 20:53:45:749 Servidor/(10863:10875): Me llego el siguiente proceso:
+
+[INFO] 20:53:45:753 Servidor/(10863:10875): PCB del proceso arrivado creado
+[INFO] 20:53:45:763 Servidor/(10863:10875): Planificador por FIFO.
+[INFO] 20:53:45:764 Servidor/(10863:10875): Proceso arriba en ready
+[INFO] 13:57:41:820 Servidor/(4792:4793): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:58:04:133 Servidor/(4792:4793): Creando un hilo para atender una conexión en el socket 5
+[INFO] 13:58:04:151 Servidor/(4792:4845): Me llego el siguiente proceso:
+
+[INFO] 13:58:04:154 Servidor/(4792:4845): PCB del proceso arrivado creado
+[INFO] 13:58:04:155 Servidor/(4792:4845): Proceso enviado a ready

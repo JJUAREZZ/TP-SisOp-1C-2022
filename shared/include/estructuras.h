@@ -18,4 +18,11 @@ typedef struct{
 	float estimacion_rafaga;
 } pcb;
 
+void paquete_pcb(pcb *proceso, int conexion){
+	t_paquete *paquete= crear_paquete();
+	agregar_a_paquete(paquete,proceso);
+	enviar_paquete(paquete, conexion);
+	eliminar_paquete(paquete);
+}
+
 #endif

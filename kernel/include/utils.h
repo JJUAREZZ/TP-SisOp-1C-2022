@@ -16,6 +16,7 @@
 #include <commons/config.h>
 #include <pthread.h>
 
+
 int kernel_socket;
 
 //Estructura para poder escuchar y conectarnos a todos los puertos
@@ -118,26 +119,22 @@ pthread_mutex_init(mutexPcb);
 	
 }
 
-//En primer lugar va a enviar de estado new a ready siempre que la multiprogramacion lo permita
-//void *enviarAReady(t_list* estado, t_log* unLogger){
-void *enviarAReady(t_list * arg){
+void* enviarAReady(t_list *arg2){
+	t_list* listaNew = list_get(arg2,0);
+	t_log* unLogger  = list_get(arg2,1);	
 
-	t_list * estado= list_get(arg,0);
-	t_log* unLogger= list_get(arg,1);
-    int	tamanioReady = list_size(estadoReady);
-	int gradoMutlriprogramacion = valores_generales->grad_multiprog;
+	int	tamanioReady = list_size(estadoReady);
+	int gradoMultiprogramacion = valores_generales->grad_multiprog;
 
-	if(tamanioReady <= gradoMutlriprogramacion){ 
-		//SACA ELEMENTO DE NEW 
-		pcb* elemEnviar = list_get(estado, 0);		
+	if(tamanioReady <= gradoMultiprogramacion){
 
-		//ENVIAR Y RECIBIR MENSAJE A MEMORIA PARA MODIFICAR LA TLB DEL PCB EXTRAIDO
+		pcb* unProceso = list_remove(listaNew, 0);
 
-		//AGREGA ELEMENTO A READY
-		list_add(estadoReady, elemEnviar);
+		list_add(estadoReady, unProceso);
 		log_info(unLogger, "Proceso enviado a ready");
-	}else{
-		log_info(unLogger, "El grado de multiprogramacion no permite enviar otro proceso a READY.");
+
+	} else{
+		log_info(unLogger, "El grado de multiprogramacion no lo permite");
 	}
 
 }
