@@ -29,6 +29,6 @@ void planificadorFifo(t_list* listaReady, t_log* unLogger);
 
 void planificadorALargoPlazo();
 pcb *crearPcb(t_proceso *);
-t_proceso* recibir_proceso(uint32_t
+t_proceso* recibir_proceso(uint32_t);
 void *atenderProceso(uint32_t );
 #endif /* SRC_PLANIFICADORES_H_ */

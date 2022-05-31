@@ -13,6 +13,7 @@
 
 t_log *logger;
 void* planificadorACortoPlazo();
+void *conectarse_con_consola();
 
 void kernel_server_init(){
 

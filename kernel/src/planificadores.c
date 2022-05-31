@@ -82,7 +82,7 @@ t_proceso* recibir_proceso(uint32_t accepted_fd){
 		{
 		case PAQUETE:
 			proceso = recibir_paquete(accepted_fd);
-			log_info(logger,"Me llego el siguiente proceso:\n");
+			printf("Me llego el siguiente proceso:\n");
 			printf("Tamanio del Proceso en bytes: %d", proceso->tamanio);
 			printf("\nInstrucciones : \n");
 			void mostrarInstrucciones(instr_t* element)
@@ -110,7 +110,7 @@ pcb *crearPcb(t_proceso *proceso)
 	//fin mutex
 	pcbDelProceso->tamanioProceso= proceso->tamanio;
 	pcbDelProceso->instr= proceso->instrucciones;
-	pcbProceso->programCounter = 0;
+	pcbDelProceso->programCounter = 0;
 	pcbDelProceso->tablaDePaginas = 0;
 	pcbDelProceso->estimacion_rafaga_actual = valores_generales->est_inicial;
 	free(proceso);
