@@ -71,4 +71,12 @@ void planificadorFifo(t_list* listaReady, t_log* unLogger){
 	}
 }
 
+
+void planificadorALargoPlazo()
+{
+	
+
+
+
+}
 #endif /* SRC_PLANIFICADORES_H_ */

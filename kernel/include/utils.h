@@ -10,6 +10,7 @@
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
+#include <commons/collections/queue.h>
 #include "../../shared/include/sockets.h"
 #include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
@@ -17,7 +18,7 @@
 #include <pthread.h>
 
 
-int kernel_socket;
+uint32_t kernel_socket;
 
 //Estructura para poder escuchar y conectarnos a todos los puertos
 typedef struct {
@@ -28,20 +29,24 @@ typedef struct {
 //Estructura para poder realizar PCB.
 typedef struct {
 	char* alg_planif;
-	int est_inicial;
+	uint32_t est_inicial;
 	double alfa;
-	int grad_multiprog;
-	int max_block;
+	uint32_t grad_multiprog;
+	uint32_t max_block;
 } gralStruct;
 
 
-t_list* estadoNew;
-t_list* estadoReady;
+t_queue* estadoNew;
+t_queue* estadoReady;
 t_list* estadoBlock;
 t_list* estadoBlockSusp;
 t_list* estadoReadySusp;
 t_list* estadoExec;
 t_list* estadoExit;
+
+uint32_t nro_proceso;
+uint32_t gradoDeMultiprogramacionActual;
+
 
 config_conex* config_valores_kernel;
 config_conex* config_valores_memoria;
@@ -62,8 +67,6 @@ void load_configuration(){
 	}
 
 	//Lleno los struct con los valores de IP y PUERTO de cada uno que necesitamos.
-
-
 	config_valores_kernel = malloc(sizeof(config_conex));
 	config_valores_kernel->ip = config_get_string_value(config, "IP_KERNEL");
 	config_valores_kernel->puerto = config_get_int_value(config, "PUERTO_KERNEL");
@@ -92,35 +95,6 @@ void load_configuration(){
 	//kernel_logger_info("PUERTO_KERNEL: %d", config_valores->puerto_kernel);
 }
 
-int nro_proceso = 0;
-
-//MUTEX PARA QUE UNO A LA VEZ CREEN EL PCB
-
-pthread_mutex_t mutexPcb;
-pthread_mutex_init(mutexPcb);
-
-//void* crearPcb(t_proceso* procesoA, pcb* pcbProceso_a, t_log* unLogger){
-	void* crearPcb (t_list *arg){
-	t_proceso* procesoA= list_get(arg,0);
-	pcb* pcbProceso_a= list_get(arg,1);
-	t_log* unLogger= list_get(arg,2);
-
-	pthread_mutex_lock(&mutexPcb);
-	pcbProceso_a->id = nro_proceso;
-	pcbProceso_a->tamanioProceso = procesoA->tamanio;
-	pcbProceso_a->instr = procesoA->instrucciones;
-	pcbProceso_a->programCounter = 0;
-	pcbProceso_a->tablaDePaginas = 0;
-	pcbProceso_a->estimacion_rafaga_actual = valores_generales->est_inicial;
-	nro_proceso++ ;
-	log_info(unLogger, "PCB del proceso arrivado creado");
-	list_add(estadoNew,pcbProceso_a);
-	pthread_mutex_unlock(&mutexPcb);
-	
-}
-
-pthread_mutex_t mutex_ready;
-pthread_mutex_init(mutex_ready);
 
 void* enviarAReady(t_list *arg2){
 	t_list* listaNew = list_get(arg2,0);

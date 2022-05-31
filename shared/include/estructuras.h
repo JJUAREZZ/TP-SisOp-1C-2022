@@ -10,11 +10,11 @@ typedef struct {
 
 //Estructura del pcb
 typedef struct{
-	int id;
+	uint32_t id;
 	uint32_t tamanioProceso;
 	t_list* instr;
-	int programCounter;
-	int tablaDePaginas;
+	uint32_t programCounter;
+	uint32_t tablaDePaginas;
 	float estimacion_rafaga_actual;
 	float estimacion_rafaga_anterior;
 	float cpu_anterior;
