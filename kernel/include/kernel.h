@@ -13,9 +13,11 @@
 
 void *conectarse_con_consola();
 t_proceso *recibir_proceso(uint32_t);
+pcb *crearPcb(t_proceso *proceso);
 void *atenderProceso(uint32_t);
 void *planificadorACortoPlazo();
 void *planificadorALargoPlazo();
+
 
 t_log *logger;
 
@@ -29,7 +31,6 @@ void kernel_server_init(){
 	estadoReadySusp = list_create();
 	estadoExec = list_create();
 	estadoExit = list_create();	
-	gradoDeMultiprogramacionActual= 0;
 	pthread_t conexion_con_consola;
 	pthread_t planiALargoPlazo;
 	pthread_t planiACortoPlazo;
@@ -72,7 +73,6 @@ void *conectarse_con_consola()
 			pthread_t atenderProcesoNuevo;
 			pthread_create(&atenderProcesoNuevo,NULL,atenderProceso,accepted_fd);
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
-			
 		}
 	}
 }
