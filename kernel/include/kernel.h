@@ -24,6 +24,14 @@ void kernel_server_init(){
 	estadoReadySusp = list_create();
 	estadoExec = list_create();
 	estadoExit = list_create();	
+	pthread_mutex_init(&COLANEW, NULL);
+	pthread_mutex_init(&COLAREADY, NULL);
+	pthread_mutex_init(&COLAEXEC, NULL);
+	pthread_mutex_init(&COLABLOCK, NULL);
+	pthread_mutex_init(&COLABLOCKREADY, NULL);
+	pthread_mutex_init(&COLABLOCKSUSP, NULL);
+	pthread_mutex_init(&COLAEXIT, NULL);
+
 	pthread_t conexion_con_consola;
 	pthread_t planiALargoPlazo;
 	pthread_t planiACortoPlazo;

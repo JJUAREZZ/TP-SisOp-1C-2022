@@ -9,6 +9,15 @@
 #include <commons/config.h>
 #include <commons/collections/list.h>
 
+//semaforos
+pthread_mutex_t COLANEW;
+pthread_mutex_t COLAREADY;
+pthread_mutex_t COLAEXEC;
+pthread_mutex_t COLABLOCK;
+pthread_mutex_t COLABLOCKREADY;
+pthread_mutex_t COLABLOCKSUSP;
+pthread_mutex_t COLAEXIT;
+
 void *planificadorCorto(t_list*, t_log*);
 void calcularEstimacionPcb(pcb*);
 bool estimacionMayor (pcb*, pcb*);
