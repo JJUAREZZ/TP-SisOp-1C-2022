@@ -37,11 +37,11 @@ typedef struct {
 
 t_queue* estadoNew;
 t_queue* estadoReady;
-t_list* estadoBlock;
-t_list* estadoBlockSusp;
-t_list* estadoReadySusp;
-t_list* estadoExec;
-t_list* estadoExit;
+t_queue* estadoBlock;
+t_queue* estadoBlockSusp;
+t_queue* estadoReadySusp;
+t_queue* estadoExec;
+t_queue* estadoExit;
 
 uint32_t nro_proceso;
 

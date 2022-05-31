@@ -20,11 +20,11 @@ void kernel_server_init(){
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
-	estadoBlock = list_create();
-	estadoBlockSusp = list_create();
-	estadoReadySusp = list_create();
-	estadoExec = list_create();
-	estadoExit = list_create();	
+	estadoBlock = queue_create();
+	estadoBlockSusp = queue_create();
+	estadoReadySusp = queue_create();
+	estadoExec = queue_create();
+	estadoExit = queue_create();	
 	pthread_mutex_init(&COLANEW, NULL);
 	pthread_mutex_init(&COLAREADY, NULL);
 	pthread_mutex_init(&COLAEXEC, NULL);

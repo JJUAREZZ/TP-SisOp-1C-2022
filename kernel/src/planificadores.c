@@ -129,7 +129,7 @@ void planificadorALargoPlazo()
 		 pthread_mutex_lock(&COLAREADY);
 		 pthread_mutex_lock(&COLAEXEC);
 		 pthread_mutex_lock(&COLAREADY);
-		 pthread_mutex_unlock(&);
+		// pthread_mutex_unlock(&);
 		 uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+ queue_size(estadoReady)+
 		 queue_size(estadoExec);
 		 if(gradoDeMultiProgActual < valores_generales->grad_multiprog)
