@@ -69,9 +69,9 @@ void *atenderProceso(uint32_t accepted_fd)
 {
 	t_proceso *nuevoProceso= recibir_proceso(accepted_fd);
 	pcb* nuevoPcb= crearPcb(nuevoProceso);
-	//mutex
+	pthread_mutex_lock(&COLANEW);
 	queue_push(estadoNew,nuevoPcb);
-	//fin de mutex
+	pthread_mutex_unlock(&COLANEW);
 }
 
 t_proceso* recibir_proceso(uint32_t accepted_fd){
@@ -104,10 +104,10 @@ t_proceso* recibir_proceso(uint32_t accepted_fd){
 pcb *crearPcb(t_proceso *proceso)
 {
 	pcb *pcbDelProceso= malloc(sizeof(pcb));
-	//mutex para nro_proceso
+	pthread_mutex_lock(&NRODEPROCESO);
 	pcbDelProceso->id = nro_proceso;
 	nro_proceso ++;
-	//fin mutex
+	pthread_mutex_unlock(&NRODEPROCESO);
 	pcbDelProceso->tamanioProceso= proceso->tamanio;
 	pcbDelProceso->instr= proceso->instrucciones;
 	pcbDelProceso->programCounter = 0;
@@ -126,7 +126,10 @@ void planificadorALargoPlazo()
 
 		 //falta checkear pcbs a finalizar
 
-		 //mutex de las colas: ready, exec y blocked
+		 pthread_mutex_lock(&COLAREADY);
+		 pthread_mutex_lock(&COLAEXEC);
+		 pthread_mutex_lock(&COLAREADY);
+		 pthread_mutex_unlock(&);
 		 uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+ queue_size(estadoReady)+
 		 queue_size(estadoExec);
 		 if(gradoDeMultiProgActual < valores_generales->grad_multiprog)

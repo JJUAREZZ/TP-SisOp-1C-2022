@@ -17,6 +17,7 @@ pthread_mutex_t COLABLOCK;
 pthread_mutex_t COLABLOCKREADY;
 pthread_mutex_t COLABLOCKSUSP;
 pthread_mutex_t COLAEXIT;
+pthread_mutex_t NRODEPROCESO;
 
 void *planificadorCorto(t_list*, t_log*);
 void calcularEstimacionPcb(pcb*);
