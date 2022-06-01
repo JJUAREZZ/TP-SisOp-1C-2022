@@ -33,10 +33,10 @@ void enviar_mensaje(char* mensaje, int socket_cliente)
 
 
 
-t_paquete* crear_paquete(void) //Nos crea un paquete con un buffer listo para usar.
+t_paquete* crear_paquete(op_code codigo_de_operacion) //Nos crea un paquete con un buffer listo para usar.
 {
 	t_paquete* paquete = malloc(sizeof(t_paquete));
-	paquete->codigo_operacion = PAQUETE;
+	paquete->codigo_operacion = codigo_de_operacion;
 	crear_buffer(paquete); // Le inyecta un buffer
 	return paquete;
 }
@@ -164,6 +164,51 @@ t_proceso* recibir_paquete(int socket_cliente)
 	return proceso;
 }
 
+//funciones de memoria
 
+void agregarPcbAPaquete(t_paquete *paquete,pcb *pcb){
+	paquete->buffer->size+= (sizeof(uint32_t) * 4) + (sizeof(float)*3);
 
+	void calcularTamanioDeInstrucciones(instr_t *instruccion)
+	{
+		paquete->buffer->size+= (sizeof(int) *2 )  
+								+ (sizeof(int)* instruccion->nroDeParam) 
+								+instruccion->idLength +1;   
+	}
+	list_iterate(pcb->instr,calcularTamanioDeInstrucciones); 
+	void* stream= malloc(paquete->buffer->size); 
+	int offset=0; 
 
+	memcpy(stream +offset, &pcb->id,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(stream +offset, &pcb->tamanioProceso,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+
+	void copiarElementos(instr_t *instruccion){
+		memcpy(stream + offset, &instruccion->idLength, sizeof(int));
+		offset += sizeof(int);
+		memcpy(stream + offset, instruccion->id, instruccion->idLength +1);
+		offset += instruccion->idLength +1;
+		memcpy(stream + offset, &instruccion->nroDeParam, sizeof(int));
+		offset += sizeof(int);
+		for(int i=0; i< instruccion->nroDeParam; i++){
+			memcpy(stream + offset,(instruccion->param)+i, sizeof(int));
+			offset+=sizeof(int);
+		}
+	}
+	list_iterate(pcb->instr,copiarElementos);
+
+	memcpy(stream +offset, &pcb->programCounter,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(stream +offset, &pcb->tablaDePaginas,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(stream +offset, &pcb->estimacion_rafaga_actual,sizeof(float));
+	offset += sizeof(float);
+	memcpy(stream +offset, &pcb->estimacion_rafaga_anterior,sizeof(float));
+	offset += sizeof(float);
+	memcpy(stream +offset, &pcb->cpu_anterior,sizeof(float));
+	offset += sizeof(float);
+	
+	paquete->buffer->stream= stream;
+
+}

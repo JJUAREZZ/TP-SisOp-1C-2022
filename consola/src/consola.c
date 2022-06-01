@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 }
 
 void paquete(t_proceso *proceso, int conexion){
-	t_paquete *paquete= crear_paquete();
+	t_paquete *paquete= crear_paquete(PAQUETE);
 	agregar_a_paquete(paquete,proceso);
 	enviar_paquete(paquete, conexion);
 	eliminar_paquete(paquete);

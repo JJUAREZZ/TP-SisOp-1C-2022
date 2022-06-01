@@ -123,23 +123,36 @@ void planificadorALargoPlazo()
  {
 	 for(;;)
 	 {
-
 		 //falta checkear pcbs a finalizar
+		pthread_mutex_lock(&COLAREADY);
+		pthread_mutex_lock(&COLAEXEC);
+		pthread_mutex_lock(&COLABLOCK);
+		uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+
+										 queue_size(estadoReady)+
+										 queue_size(estadoExec);
+		if(gradoDeMultiProgActual < valores_generales->grad_multiprog)
+		 {	
+			pthread_mutex_lock(&COLANEW);
+			pcb *procesoAReady = queue_pop(estadoNew);
+			pthread_mutex_unlock(&COLANEW); 
 
-		 pthread_mutex_lock(&COLAREADY);
-		 pthread_mutex_lock(&COLAEXEC);
-		 pthread_mutex_lock(&COLAREADY);
-		// pthread_mutex_unlock(&);
-		 uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+ queue_size(estadoReady)+
-		 queue_size(estadoExec);
-		 if(gradoDeMultiProgActual < valores_generales->grad_multiprog)
-		 {
-			 //enviar mensaje a memoria para obtener el valor de tabla de pagina
-			 //wait memoria
-			 //pcb *procesoAReady= queue_pop(estadoNew);
-			 //procesoAReady->tablaDePaginas= lo que mande memoria
-			 queue_push(estadoReady,queue_pop(estadoNew));
+			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady); //TODO desarrollar
+			//wait()
+			if(tablaDePaginas <0){
+				perror("Error al asignar memoria al proceso");
+				return EXIT_FAILURE;
+			}
+			procesoAReady->tablaDePaginas= tablaDePaginas;
+			queue_push(estadoReady, procesoAReady);
 		 }
-		 //fin del mutex
+		pthread_mutex_unlock(&COLAREADY);
+		pthread_mutex_unlock(&COLAEXEC);
+		pthread_mutex_unlock(&COLABLOCK);
 	 }
+ }
+
+ uint32_t obtenerTablaDePagina(pcb * proceso)
+ {
+	
+	 return 1;
  }

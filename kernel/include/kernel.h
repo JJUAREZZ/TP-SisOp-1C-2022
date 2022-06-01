@@ -71,9 +71,10 @@ void *conectarse_con_consola()
 	for (;;) {
 		int accepted_fd;
 		if ((accepted_fd = accept(kernel_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
 			pthread_t atenderProcesoNuevo;
 			pthread_create(&atenderProcesoNuevo,NULL,atenderProceso,accepted_fd);
-			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
+			
 		}
 	}
 }

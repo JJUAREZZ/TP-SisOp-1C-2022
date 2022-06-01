@@ -10,11 +10,13 @@
 #include<string.h>
 #include<commons/log.h>
 #include <commons/collections/list.h>
+#include "../../shared/include/estructuras.h"
 
 typedef enum
 {
 	MENSAJE,
-	PAQUETE
+	PAQUETE,
+	PCB
 }op_code;
 
 typedef struct
@@ -41,13 +43,14 @@ typedef struct
 
 //Esta estructura contiene un codigo de operacion -contiene info sobre lo que vamos a enviar- y al buffer.
 
-void crear_buffer(t_paquete* paquete);
-t_paquete* crear_paquete(void);
-void agregar_a_paquete(t_paquete* paquete, t_proceso *proceso);
-void* serializar_paquete(t_paquete* paquete, int bytes);
-void enviar_paquete(t_paquete* paquete, int socket_cliente);
-void eliminar_paquete(t_paquete* paquete);
-void enviar_mensaje(char* mensaje, int socket_cliente);
+void crear_buffer(t_paquete* );
+t_paquete* crear_paquete(op_code);
+void agregar_a_paquete(t_paquete*, t_proceso *);
+void* serializar_paquete(t_paquete* , int );
+void enviar_paquete(t_paquete* , int );
+void eliminar_paquete(t_paquete* );
+void enviar_mensaje(char* , int );
+void agregarPcbAPaquete(t_paquete *,pcb *);
 
 void* recibir_buffer(int*, int);
 t_proceso* recibir_paquete(int);

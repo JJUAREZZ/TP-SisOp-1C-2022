@@ -39,8 +39,8 @@ void load_configuration(){
 }
 
 void paquete_pcb(pcb *proceso, int conexion){
-	t_paquete *paquete= crear_paquete();
-	agregar_a_paquete(paquete,proceso);
+	t_paquete *paquete= crear_paquete(PCB);
+	agregarPcbAPaquete(paquete,proceso);
 	enviar_paquete(paquete, conexion);
 	eliminar_paquete(paquete);
 }
