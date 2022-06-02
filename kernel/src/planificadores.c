@@ -1,13 +1,15 @@
 #include "../include/planificadores.h"
+#include "../../shared/include/estructuras.h"
 
-void *planificadorCorto(t_list* listaReady, t_log* unLogger){
-	
+// ***************** Planificador a Corto Plazo ******************* 
+
+void *planificadorCorto(t_queue* listaReady, t_log* unLogger){
+
 	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
 	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
 
 	if(utilizarFifo == 0){
 			//Ejecutar FIFO.
-			//Esta linea no va a ser falta
 			log_info(unLogger, "Planificador por FIFO.");
 			planificadorFifo(listaReady, unLogger);
 	}	
@@ -23,36 +25,59 @@ void calcularEstimacionPcb(pcb* proceso){
 		proceso->estimacion_rafaga_anterior * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa); 
 }
 
-//Ver si funciona.
-bool estimacionMayor (pcb* proceso1, pcb* proceso2){
-	if(proceso1->estimacion_rafaga_actual > proceso2->estimacion_rafaga_actual){
-		true;
-	}else{
-		false;
-	}
-}
-
-void planificadorSrt(t_list* listaReady, t_log* unLogger){
+void planificadorSrt(t_queue* listaReady, t_log* unLogger){
+	//Falta Sincronizar.
+	//Hacer que cada vez que inicia saque el de CPU.
+	
 	int tamanioReady = list_size(listaReady);
 
 	while(tamanioReady > 0){
 
 	list_iterate(listaReady, calcularEstimacionPcb);
-	list_sort(listaReady, estimacionMayor);
+
+	pcb* primerElemento;
+	pcb* segundoElemento;
+	int i;
+
+	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+
+	//Ordeno los elementos por su estimacion_actual.
+	for(i=0; i<=tamanioReady; i++){
+		primerElemento 	= list_get(listaReady, i);
+		segundoElemento = list_get(listaReady, i+1);
+
+		if(primerElemento->estimacion_rafaga_actual < segundoElemento->estimacion_rafaga_actual){
+			list_replace(listaReady, i, segundoElemento);
+			list_replace(listaReady, i + 1, primerElemento);
+		} else {
+			list_replace(listaReady, i, primerElemento);
+			list_replace(listaReady, i+1, segundoElemento);
+		}
+	}
+
+	//Envio los Procesos al CPU.
+	//Ver como enviar de a uno
+	pcb* elemEjecutar = queue_pop(listaReady);
+
+	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
+	log_info(unLogger, "Proceso enviado a CPU");
 
 	}	
 }
 
 //ver si tiene que agarrar un proceso o una lista de ready.
-void planificadorFifo(t_list* listaReady, t_log* unLogger){
+void planificadorFifo(t_queue* listaReady, t_log* unLogger){
 
 	int tamanioReady = list_size(listaReady);
+	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
 
 	while(tamanioReady > 0){
 
-	pcb* elemEjecutar = list_remove(listaReady, 0);
 	//Enviar Primer elemento de la lista a Cpu Dispatch
-	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+	//Ver como enviar de a uno
+
+	pcb* elemEjecutar = queue_pop(listaReady);
+
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	log_info(unLogger, "Proceso enviado a CPU");
 
@@ -113,6 +138,8 @@ pcb *crearPcb(t_proceso *proceso)
 	pcbDelProceso->programCounter = 0;
 	pcbDelProceso->tablaDePaginas = 0;
 	pcbDelProceso->estimacion_rafaga_actual = valores_generales->est_inicial;
+	pcbDelProceso->estimacion_rafaga_anterior = valores_generales->est_inicial;
+	pcbDelProceso->cpu_anterior = 1;
 	free(proceso);
 	printf("\nPCB del proceso creado");
 	return pcbDelProceso;

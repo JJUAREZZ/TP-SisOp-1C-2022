@@ -38,7 +38,7 @@ void kernel_server_init(){
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
-	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo(), NULL); //HILO PLANI CORTO
+	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	pthread_join(conexion_con_consola, NULL);
 }
 
