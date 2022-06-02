@@ -35,24 +35,13 @@ void kernel_server_init(){
 
 	pthread_t conexion_con_consola;
 	pthread_t planiALargoPlazo;
+	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
+	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
 	pthread_join(conexion_con_consola, NULL);
-}
-
-
-
-pthread_mutex_t mutexPlan_corto;
-pthread_mutex_init(mutexPlan_corto); 
-
-//Ver si utilizar
-void* planificadorACortoPlazo(){
-
-	pthread_mutex_lock(&mutexPlan_corto);
-	planificadorCorto(estadoReady, logger);
-	pthread_mutex_unlock(&mutexPlan_corto);
 }
 
 void *conectarse_con_consola()

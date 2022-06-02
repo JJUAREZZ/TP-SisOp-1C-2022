@@ -19,12 +19,16 @@ pthread_mutex_t COLABLOCKSUSP;
 pthread_mutex_t COLAEXIT;
 pthread_mutex_t NRODEPROCESO;
 
-void *planificadorCorto(t_queue* listaReady, t_log*);
-void calcularEstimacionPcb(pcb*);
-bool estimacionMayor (pcb*, pcb*);
-void planificadorSrt(t_queue* , t_log*);
-void planificadorFifo(t_queue* listaReady, t_log* unLogger);
+//Planificador a corto plazo
 
+void *planificadorACortoPlazo();
+void calcularEstimacionPcb(pcb*);
+void planificadorSrt();
+void planificadorFifo();
+
+//Planificador a mediano plazo.
+
+void *planificadorAMedianoPlazo();
 
 //planificador a largo plazo
 

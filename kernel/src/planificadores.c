@@ -1,23 +1,26 @@
 #include "../include/planificadores.h"
 #include "../../shared/include/estructuras.h"
 
-// ***************** Planificador a Corto Plazo ******************* 
+//*****************************planificador a corto plazo****************************
 
-void *planificadorCorto(t_queue* listaReady, t_log* unLogger){
+void *planificadorACortoPlazo(){
+	pthread_mutex_lock(&COLABLOCKREADY);
 
 	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
 	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
 
 	if(utilizarFifo == 0){
 			//Ejecutar FIFO.
-			log_info(unLogger, "Planificador por FIFO.");
-			planificadorFifo(listaReady, unLogger);
-	}	
+			printf("Planificador por FIFO.");
+			planificadorFifo();
+	}
+
 	if(utilizarSrt == 0){
 			//hilo que ejecuta SRT.
-			log_info(unLogger, "Planificador por SRT.");
-			planificadorSrt(listaReady, unLogger);
-	}    
+			printf ("Planificador por SRT.");
+			planificadorSrt();
+	}   
+	pthread_mutex_unlock(&COLABLOCKREADY);
 }
 
 void calcularEstimacionPcb(pcb* proceso){
@@ -25,66 +28,92 @@ void calcularEstimacionPcb(pcb* proceso){
 		proceso->estimacion_rafaga_anterior * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa); 
 }
 
-void planificadorSrt(t_queue* listaReady, t_log* unLogger){
-	//Falta Sincronizar.
-	//Hacer que cada vez que inicia saque el de CPU.
+void planificadorSrt(){
+	//FALTA: Sincronizar para enviar de a uno y recibir bien el estadoReady.
+	//FALTA: Hacer que desaloje el proceos de CPU.
 	
-	int tamanioReady = list_size(listaReady);
+	u_int32_t tamanioReady = queue_size(estadoReady);
+	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
 
 	while(tamanioReady > 0){
 
-	list_iterate(listaReady, calcularEstimacionPcb);
+	//Calculo las estimaciones de cada PCB
+	list_iterate(estadoReady, calcularEstimacionPcb);
 
 	pcb* primerElemento;
 	pcb* segundoElemento;
 	int i;
 
-	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+	//FALTA: Interrumpir lo que estan ejecutando en CPU.
 
 	//Ordeno los elementos por su estimacion_actual.
 	for(i=0; i<=tamanioReady; i++){
-		primerElemento 	= list_get(listaReady, i);
-		segundoElemento = list_get(listaReady, i+1);
+		primerElemento 	= list_get(estadoReady, i);
+		segundoElemento = list_get(estadoReady, i+1);
 
 		if(primerElemento->estimacion_rafaga_actual < segundoElemento->estimacion_rafaga_actual){
-			list_replace(listaReady, i, segundoElemento);
-			list_replace(listaReady, i + 1, primerElemento);
+			list_replace(estadoReady, i, segundoElemento);
+			list_replace(estadoReady, i + 1, primerElemento);
 		} else {
-			list_replace(listaReady, i, primerElemento);
-			list_replace(listaReady, i+1, segundoElemento);
+			list_replace(estadoReady, i, primerElemento);
+			list_replace(estadoReady, i+1, segundoElemento);
 		}
 	}
 
 	//Envio los Procesos al CPU.
-	//Ver como enviar de a uno
-	pcb* elemEjecutar = queue_pop(listaReady);
+	//FALTA: Crear un mutex compartido con CPU para que envie de a uno.
 
+	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
-	log_info(unLogger, "Proceso enviado a CPU");
+	printf ("Proceso enviado a CPU");
 
 	}	
 }
 
-//ver si tiene que agarrar un proceso o una lista de ready.
-void planificadorFifo(t_queue* listaReady, t_log* unLogger){
+void planificadorFifo(){
 
-	int tamanioReady = list_size(listaReady);
-	int conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+	u_int32_t tamanioReady = queue_size(estadoReady);
+	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
 
 	while(tamanioReady > 0){
 
 	//Enviar Primer elemento de la lista a Cpu Dispatch
-	//Ver como enviar de a uno
+	////FALTA: Crear un mutex compartido con CPU para que envie de a uno.
 
-	pcb* elemEjecutar = queue_pop(listaReady);
-
+	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
-	log_info(unLogger, "Proceso enviado a CPU");
-
-	//Recibir de blocked los Procesos.
-	pcb* elemRecib; 
-
+	printf("Proceso enviado a CPU");
 	}
+}
+
+//*****************************planificador a mediano plazo****************************
+
+void *planificadorAMedianoPlazo(){
+
+	//Enviar de bloqueado a bloqueado suspendido.
+
+	uint32_t tamanioBlocked = queue_size(estadoBlock);
+	int i;
+	pcb* procesoBloqueado;
+	
+	for(i=0; i<=tamanioBlocked; i++){
+		procesoBloqueado = list_get(estadoBlock, i);
+
+		//Supuestamente el programCounterDeberia estar apuntando a la instruccion IO.
+
+		t_list* listaDeInstrucciones = procesoBloqueado->instr;
+		int* apunteProgCounter = procesoBloqueado->programCounter;
+		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
+		uint32_t* tiempoIO = instruccionBloqueada->param;
+
+		//Si el tiempo en IO es mayor al limite de bloqueo enviar a block suspended.
+		if(tiempoIO > valores_generales->max_block){
+			list_remove(estadoBlock, i);
+			queue_push(estadoBlockSusp, procesoBloqueado);
+			//FALTA: Enviar mensaje a memoria.
+		}
+	}
+
 }
 
 
