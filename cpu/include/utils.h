@@ -10,6 +10,7 @@
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
+#include "cpu.h"
 #include "../../shared/include/sockets.h"
 #include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
@@ -42,12 +43,12 @@ void load_configuration_cpu(){
 	//Lleno los struct con los valores de IP y PUERTO de cada uno que necesitamos.
     cpu_config.entradas_tlb = config_get_int_value(config, "ENTRADAS_TLB");
     cpu_config.reemplazo_tlb =config_get_string_value(config, "REEMPLAZO_TLB");
-    cpu_config.retar_noop = config_int_string_value(config, "RETARDO_NOOP");
-    cpu_config.ip_memoria = config_string_string_value(config, "IP_MEMORIA");
-    cpu_config.puerto_memoria = config_int_string_value(config, "PUERTO_MEMORIA");
-    cpu_config.ip_dispatch = config_string_string_value(kernel_config, "IP_CPU");
-    cpu_config.puerto_escucha_dispatch  = config_int_string_value(config, "PUERTO_ESCUCHA_DISPATCH");
-    cpu_config.ip_interrupt = config_string_string_value(kernel_config, "IP_CPU");
+    cpu_config.retar_noop = config_get_int_value(config, "RETARDO_NOOP");
+    cpu_config.ip_memoria = config_get_string_value(config, "IP_MEMORIA");
+    cpu_config.puerto_memoria = config_get_int_value(config, "PUERTO_MEMORIA");
+    cpu_config.ip_dispatch = config_get_string_value(kernel_config, "IP_CPU");
+    cpu_config.puerto_escucha_dispatch  = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH");
+    cpu_config.ip_interrupt = config_get_string_value(kernel_config, "IP_CPU");
     cpu_config.puerto_escucha_interrupt = config_get_int_value(config, "PUERTO_ESCUCHA_INTERRUPT");
 
 }
