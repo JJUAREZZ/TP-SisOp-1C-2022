@@ -32,6 +32,8 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLABLOCKREADY, NULL);
 	pthread_mutex_init(&COLABLOCKSUSP, NULL);
 	pthread_mutex_init(&COLAEXIT, NULL);
+	sem_init(semEnviarDispatch, 0, 1);
+	sem_init(semInterrumpirCPU, 0, 1);
 
 	pthread_t conexion_con_consola;
 	pthread_t planiALargoPlazo;

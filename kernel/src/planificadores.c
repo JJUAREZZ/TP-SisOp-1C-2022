@@ -34,6 +34,7 @@ void planificadorSrt(){
 	
 	u_int32_t tamanioReady = queue_size(estadoReady);
 	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+	u_int32_t conexion_cpu_interrupt = socket_connect_to_server(config_valores_cpu_interrupt->ip, config_valores_cpu_interrupt->puerto);
 
 	while(tamanioReady > 0){
 
@@ -44,7 +45,12 @@ void planificadorSrt(){
 	pcb* segundoElemento;
 	int i;
 
-	//FALTA: Interrumpir lo que estan ejecutando en CPU.
+	//Interrumpir lo que estan ejecutando en CPU.
+	sem_wait(&semInterrumpirCPU);
+	interrumpirCPU = 1;
+	paquete_uint(&interrumpirCPU, &conexion_cpu_interrupt);
+	//FALTA: HACER FUNCION QUE RECIBA PROCESO DE CPU INTERRUPT.
+	sem_post(&semInterrumpirCPU);
 
 	//Ordeno los elementos por su estimacion_actual.
 	for(i=0; i<=tamanioReady; i++){
@@ -61,8 +67,7 @@ void planificadorSrt(){
 	}
 
 	//Envio los Procesos al CPU.
-	//FALTA: Crear un mutex compartido con CPU para que envie de a uno.
-
+	sem_wait(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf ("Proceso enviado a CPU");
@@ -78,11 +83,11 @@ void planificadorFifo(){
 	while(tamanioReady > 0){
 
 	//Enviar Primer elemento de la lista a Cpu Dispatch
-	////FALTA: Crear un mutex compartido con CPU para que envie de a uno.
-
+	sem_wait(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf("Proceso enviado a CPU");
+
 	}
 }
 
