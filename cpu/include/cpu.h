@@ -11,6 +11,10 @@
 
 t_log *logger;
 
+pcb* recibir_pcb(uint32_t accepted_fd);
+void *atenderPcb(uint32_t accepted_fd);
+void fetch(pcb* pcb);
+
 void *conectar_dispatcher()
 {
 	logger = log_create("log.log", "Servidor Dispatcher", 1, LOG_LEVEL_DEBUG);
@@ -27,12 +31,12 @@ void *conectar_dispatcher()
 	}
 
 	log_info(logger, "¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...\n");
-	/*for (;;) {
+	for (;;) {
 		int accepted_fd;
-		if ((accepted_fd = accept(kernel_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+		if ((accepted_fd = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
 
-			pthread_t hilo;
-			pthread_create(&hilo,NULL,recibir_proceso,accepted_fd);
+			pthread_t atenderNuevoPcb;
+			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd);
 
 			//FUNCIONA DESINCRONIZADO;
 			//pthread_t planificador_corto;
@@ -43,7 +47,7 @@ void *conectar_dispatcher()
 
 			
 		}
-	}*/
+	}
 }
 
 #endif /* SRC_CPU_H_ */
