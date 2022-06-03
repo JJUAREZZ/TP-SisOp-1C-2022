@@ -46,11 +46,12 @@ void planificadorSrt(){
 	int i;
 
 	//Interrumpir lo que estan ejecutando en CPU.
-	sem_wait(&semInterrumpirCPU);
+
+	pthread_mutex_lock(&semInterrumpirCPU);
 	interrumpirCPU = 1;
-	paquete_uint(&interrumpirCPU, &conexion_cpu_interrupt);
+	send(conexion_cpu_interrupt, &interrumpirCPU, sizeof(uint32_t), NULL);
 	//FALTA: HACER FUNCION QUE RECIBA PROCESO DE CPU INTERRUPT.
-	sem_post(&semInterrumpirCPU);
+	pthread_mutex_unlock(&semInterrumpirCPU);
 
 	//Ordeno los elementos por su estimacion_actual.
 	for(i=0; i<=tamanioReady; i++){
@@ -67,13 +68,18 @@ void planificadorSrt(){
 	}
 
 	//Envio los Procesos al CPU.
-	sem_wait(&semEnviarDispatch);
+	pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf ("Proceso enviado a CPU");
 
 	}	
 }
+
+/*recibir_pcb_interrupt(){
+	recv()
+}
+*/
 
 void planificadorFifo(){
 
@@ -83,7 +89,7 @@ void planificadorFifo(){
 	while(tamanioReady > 0){
 
 	//Enviar Primer elemento de la lista a Cpu Dispatch
-	sem_wait(&semEnviarDispatch);
+	pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf("Proceso enviado a CPU");
@@ -194,16 +200,17 @@ void planificadorALargoPlazo()
 		if(gradoDeMultiProgActual < valores_generales->grad_multiprog)
 		 {	
 			pthread_mutex_lock(&COLANEW);
-			pcb *procesoAReady = queue_pop(estadoNew);
+			pcb *procesoAReady = list_remove(estadoNew, 0);
 			pthread_mutex_unlock(&COLANEW); 
-
+			
 			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady); //TODO desarrollar
 			//wait()
 			if(tablaDePaginas <0){
 				perror("Error al asignar memoria al proceso");
 				return EXIT_FAILURE;
 			}
-			procesoAReady->tablaDePaginas= tablaDePaginas;
+			procesoAReady->tablaDePaginas = tablaDePaginas;
+
 			queue_push(estadoReady, procesoAReady);
 		 }
 		pthread_mutex_unlock(&COLAREADY);
