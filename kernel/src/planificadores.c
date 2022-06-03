@@ -136,8 +136,7 @@ void planificadorALargoPlazo()
 			pcb *procesoAReady = queue_pop(estadoNew);
 			pthread_mutex_unlock(&COLANEW); 
 
-			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady); //TODO desarrollar
-			//wait()
+			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
 			if(tablaDePaginas <0){
 				perror("Error al asignar memoria al proceso");
 				return EXIT_FAILURE;
@@ -148,11 +147,24 @@ void planificadorALargoPlazo()
 		pthread_mutex_unlock(&COLAREADY);
 		pthread_mutex_unlock(&COLAEXEC);
 		pthread_mutex_unlock(&COLABLOCK);
+
+
+		
 	 }
  }
 
  uint32_t obtenerTablaDePagina(pcb * proceso)
  {
-	
-	 return 1;
+	/*
+	int conexionDeMemoria= socket_create_listener(config_valores, char* port); 
+	int conexion= socket_connect_to_server(config_valores_memoria->ip, config_valores_memoria->puerto);
+	t_paquete *paquete= crear_paquete(PCB);
+	agregar_a_paquete(paquete,proceso);
+	enviar_paquete(paquete, conexion);
+	eliminar_paquete(paquete);
+	//wait
+	 */
+
+
+	return 1;
  }
