@@ -41,12 +41,12 @@ void kernel_server_init(){
 	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
-	pthread_join(conexion_con_consola, NULL);
+	pthread_join(conexion_con_consola, NULL); 
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
 
-	//pthread_join(conexion_con_consola, NULL); (lo puse en la 44).
+	//pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
 	pthread_join(planiACortoPlazo, NULL);
 	pthread_join(planiAMedianoPlazo, NULL);

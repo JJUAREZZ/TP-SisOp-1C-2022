@@ -17709,3 +17709,9 @@
 
 [INFO] 10:44:03:324 Servidor/(6665:6666): Creando un hilo para atender una conexión en el socket 5
 [INFO] 10:44:13:711 Servidor/(6665:6666): Creando un hilo para atender una conexión en el socket 6
+[INFO] 11:42:25:266 Servidor/(10286:10287): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 11:43:10:696 Servidor/(10555:10556): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 11:44:04:909 Servidor/(10555:10556): Creando un hilo para atender una conexión en el socket 5
+[INFO] 12:00:18:112 Servidor/(10555:10556): Creando un hilo para atender una conexión en el socket 6
