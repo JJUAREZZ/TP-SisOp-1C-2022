@@ -64,17 +64,18 @@ typedef struct {
 	char* puerto_kernel;
 } kernel_config;
 
-kernel_config config_valores;
+kernel_config *config_valores;
 
 void cargar_configuracion(void){
 	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/kernel/cfg/kernel.config");
+	config_valores= malloc(sizeof(kernel_config));
 
 	if(config == NULL){
 		perror("Archivo de configuracion no encontrado");
 	}
 
-	config_valores.ip_kernel = config_get_string_value(config, "IP_KERNEL");
-	config_valores.puerto_kernel = config_get_string_value(config, "PUERTO_KERNEL");
+	config_valores->ip_kernel = config_get_string_value(config, "IP_KERNEL");
+	config_valores->puerto_kernel = config_get_string_value(config, "PUERTO_KERNEL");
 }
 
 

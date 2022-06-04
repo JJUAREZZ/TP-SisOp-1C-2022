@@ -42,6 +42,25 @@
                     "ignoreFailures": true
                 },
             ]
+        },
+        {
+            "name": "(gdb) memoria",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/memoria/memoria",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Habilitar la impresión con sangría para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ]
         }
         
         

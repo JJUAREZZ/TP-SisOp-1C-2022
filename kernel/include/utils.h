@@ -44,14 +44,14 @@ t_queue* estadoExit;
 
 uint32_t nro_proceso;
 
-
+gralStruct *valores_generales;
 config_conex* config_valores_kernel;
 config_conex* config_valores_memoria;
 config_conex* config_valores_cpu_dispatch;
 config_conex* config_valores_cpu_interrupt;
 //falta puerto escucha.
 
-gralStruct *valores_generales;
+
 void paquete_pcb(pcb *proceso, int conexion);
 void load_configuration();
 

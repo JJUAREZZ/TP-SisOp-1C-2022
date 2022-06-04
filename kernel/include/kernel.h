@@ -4,7 +4,6 @@
 #include "utils.h"
 #include "planificadores.h"
 #include "../../shared/include/sockets.h"
-#include "../../shared/include/serializacion.h"
 #include "../../shared/include/estructuras.h"
 #include <commons/log.h>
 #include <commons/config.h>
@@ -34,22 +33,22 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLABLOCKSUSP, NULL);
 	pthread_mutex_init(&COLAEXIT, NULL);
 	pthread_mutex_init(&semEnviarDispatch, NULL);
-	pthread_mutex_init(&semInterrumpirCPU, NULL);
+	//pthread_mutex_init(&semInterrumpirCPU, NULL);
 
 	pthread_t conexion_con_consola;
 	pthread_t planiALargoPlazo;
 	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
-	pthread_join(conexion_con_consola, NULL); 
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
-	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
-	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
+	//pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
+	//pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
 
 	//pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
 	pthread_join(planiACortoPlazo, NULL);
 	pthread_join(planiAMedianoPlazo, NULL);
+	pthread_join(conexion_con_consola, NULL); 
 }
 
 void *conectarse_con_consola()
@@ -85,23 +84,3 @@ uint32_t conectarse_con_memoria()
 }
 
 #endif /* SRC_KERNEL_H_ */
-
-
-/*
-conexion_con_memoria= conexion;
-	for(;;)
-	{
-		uint32_t cod_op = recibir_operacion(conexion_con_memoria);
-		if(cod_op>0){
-			switch (cod_op)
-			{
-			case IDTABLADEPAGINA:
-				uint32_t = recibir_idTablaDePagina(conexion_con_memoria);
-				break;
-			default:
-				return EXIT_FAILURE;
-			}
-	}
-	return proceso;
-	}
- */

@@ -186,6 +186,7 @@ pcb *crearPcb(t_proceso *proceso)
 }
 
 
+
 void planificadorALargoPlazo()
  {
 	 for(;;)
@@ -197,10 +198,11 @@ void planificadorALargoPlazo()
 		uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+
 										 queue_size(estadoReady)+
 										 queue_size(estadoExec);
-		if(gradoDeMultiProgActual < valores_generales->grad_multiprog)
+		if(gradoDeMultiProgActual < valores_generales->grad_multiprog && 
+			queue_size (estadoNew)>0)
 		 {	
 			pthread_mutex_lock(&COLANEW);
-			pcb *procesoAReady = list_remove(estadoNew, 0);
+			pcb *procesoAReady = queue_pop(estadoNew);
 			pthread_mutex_unlock(&COLANEW); 
 
 			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
@@ -209,6 +211,8 @@ void planificadorALargoPlazo()
 				return EXIT_FAILURE;
 			}
 			procesoAReady->tablaDePaginas = tablaDePaginas;
+			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
+			printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
 
 			queue_push(estadoReady, procesoAReady);
 		 }

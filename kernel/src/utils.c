@@ -12,11 +12,11 @@ void load_configuration(){
 	//Lleno los struct con los valores de IP y PUERTO de cada uno que necesitamos.
 	config_valores_kernel = malloc(sizeof(config_conex));
 	config_valores_kernel->ip = config_get_string_value(config, "IP_KERNEL");
-	config_valores_kernel->puerto = config_get_int_value(config, "PUERTO_KERNEL");
+	config_valores_kernel->puerto = config_get_string_value(config, "PUERTO_KERNEL");
 
 	config_valores_memoria = malloc(sizeof(config_conex*));
 	config_valores_memoria->ip = config_get_string_value(config, "IP_MEMORIA");
-	config_valores_memoria->puerto = config_get_int_value(config, "PUERTO_MEMORIA");
+	config_valores_memoria->puerto = config_get_string_value(config, "PUERTO_MEMORIA");
 
 	config_valores_cpu_dispatch = malloc(sizeof(config_conex*));
 	config_valores_cpu_dispatch->ip =config_get_string_value(config, "PUERTO_CPU_DISPATCH");

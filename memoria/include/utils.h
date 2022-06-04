@@ -29,7 +29,7 @@ void load_configuration(){
 	}
 
     valores_generales_memoria = malloc(sizeof(gralMemoria));
-    valores_generales_memoria->puertoMemoria = config_get_int_value(config, "PUERTO_ESCUCHA");
+    valores_generales_memoria->puertoMemoria = config_get_string_value(config, "PUERTO_ESCUCHA");
     valores_generales_memoria->tamMemoria = config_get_int_value(config, "TAM_MEMORIA");
     valores_generales_memoria->tamPagina = config_get_int_value(config, "TAM_PAGINA");
     valores_generales_memoria->pagPorTabla = config_get_int_value(config, "PAGINAS_POR_TABLA");

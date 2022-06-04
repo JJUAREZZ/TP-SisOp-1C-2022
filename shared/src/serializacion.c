@@ -167,7 +167,7 @@ t_proceso* recibir_paquete(int socket_cliente)
 pcb * recibir_pcb(int socket)
 {
 	uint32_t tamanio;
-	uint32_t desplazamiento;
+	uint32_t desplazamiento=0;
 	void* buffer=recibir_buffer(&tamanio,socket);
 	pcb* pcb_proceso= malloc(sizeof(pcb));
 	t_list *instrucciones= list_create();
@@ -216,7 +216,7 @@ pcb * recibir_pcb(int socket)
 //funciones de memoria
 
 void agregarPcbAPaquete(t_paquete *paquete,pcb *pcb){
-	paquete->buffer->size+= (sizeof(uint32_t) * 4) + (sizeof(float)*3);
+	paquete->buffer->size+= (sizeof(uint32_t) * 5) + (sizeof(float)*3);
 
 	void calcularTamanioDeInstrucciones(instr_t *instruccion)
 	{
@@ -233,7 +233,7 @@ void agregarPcbAPaquete(t_paquete *paquete,pcb *pcb){
 	memcpy(stream +offset, &pcb->tamanioProceso,sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 	uint32_t tamanio_lista= list_size(pcb->instr);
-	memcpy(stream +offset, tamanio_lista,sizeof(uint32_t));
+	memcpy(stream +offset, &tamanio_lista,sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 
 	void copiarElementos(instr_t *instruccion){

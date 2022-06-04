@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 	list_iterate(proceso->instrucciones,closure);
 	
 	cargar_configuracion();
-	conexion= socket_connect_to_server(config_valores.ip_kernel, config_valores.puerto_kernel);
+	conexion= socket_connect_to_server(config_valores->ip_kernel, config_valores->puerto_kernel);
 	paquete(proceso,conexion);
 }
 
