@@ -49,3 +49,6 @@ pcb* recibir_pcb(uint32_t accepted_fd) {
 void fetch(pcb* pcb) {
 	list_get(pcb->instr, pcb->programCounter);
 }
+
+//*** UTILIZAR sem_post(&semEnviarDispatch); CUANDO LA CPU ESTE DESOCUPADA ***
+//*** CUANDO interrumpirCPU = 1, interrumpir la CPU y enviar el PCB a KERNEL *** 

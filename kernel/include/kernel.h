@@ -10,6 +10,7 @@
 #include <commons/config.h>
 #include <commons/collections/list.h>
 #include <commons/collections/queue.h>
+#include <semaphore.h>
 
 t_log *logger;
 void* planificadorACortoPlazo();
@@ -32,16 +33,23 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLABLOCKREADY, NULL);
 	pthread_mutex_init(&COLABLOCKSUSP, NULL);
 	pthread_mutex_init(&COLAEXIT, NULL);
+	pthread_mutex_init(&semEnviarDispatch, NULL);
+	pthread_mutex_init(&semInterrumpirCPU, NULL);
 
 	pthread_t conexion_con_consola;
 	pthread_t planiALargoPlazo;
 	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
+	pthread_join(conexion_con_consola, NULL); 
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
-	pthread_join(conexion_con_consola, NULL); 
+
+	//pthread_join(conexion_con_consola, NULL);
+	pthread_join(planiALargoPlazo, NULL);
+	pthread_join(planiACortoPlazo, NULL);
+	pthread_join(planiAMedianoPlazo, NULL);
 }
 
 void *conectarse_con_consola()

@@ -44,3 +44,10 @@ void paquete_pcb(pcb *proceso, int conexion){
 	enviar_paquete(paquete, conexion);
 	eliminar_paquete(paquete);
 }
+
+void paquete_uint(uint32_t* numero, uint32_t* conexion){
+	t_paquete *paquete= crear_paquete(PAQUETE);
+	agregarPcbAPaquete(paquete,numero);
+	enviar_paquete(paquete, conexion);
+	eliminar_paquete(paquete);
+}

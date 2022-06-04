@@ -34,6 +34,7 @@ void planificadorSrt(){
 	
 	u_int32_t tamanioReady = queue_size(estadoReady);
 	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+	u_int32_t conexion_cpu_interrupt = socket_connect_to_server(config_valores_cpu_interrupt->ip, config_valores_cpu_interrupt->puerto);
 
 	while(tamanioReady > 0){
 
@@ -44,7 +45,13 @@ void planificadorSrt(){
 	pcb* segundoElemento;
 	int i;
 
-	//FALTA: Interrumpir lo que estan ejecutando en CPU.
+	//Interrumpir lo que estan ejecutando en CPU.
+
+	pthread_mutex_lock(&semInterrumpirCPU);
+	interrumpirCPU = 1;
+	send(conexion_cpu_interrupt, &interrumpirCPU, sizeof(uint32_t), NULL);
+	//FALTA: HACER FUNCION QUE RECIBA PROCESO DE CPU INTERRUPT.
+	pthread_mutex_unlock(&semInterrumpirCPU);
 
 	//Ordeno los elementos por su estimacion_actual.
 	for(i=0; i<=tamanioReady; i++){
@@ -61,14 +68,18 @@ void planificadorSrt(){
 	}
 
 	//Envio los Procesos al CPU.
-	//FALTA: Crear un mutex compartido con CPU para que envie de a uno.
-
+	pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf ("Proceso enviado a CPU");
 
 	}	
 }
+
+/*recibir_pcb_interrupt(){
+	recv()
+}
+*/
 
 void planificadorFifo(){
 
@@ -78,11 +89,11 @@ void planificadorFifo(){
 	while(tamanioReady > 0){
 
 	//Enviar Primer elemento de la lista a Cpu Dispatch
-	////FALTA: Crear un mutex compartido con CPU para que envie de a uno.
-
+	pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf("Proceso enviado a CPU");
+
 	}
 }
 
@@ -189,7 +200,7 @@ void planificadorALargoPlazo()
 		if(gradoDeMultiProgActual < valores_generales->grad_multiprog)
 		 {	
 			pthread_mutex_lock(&COLANEW);
-			pcb *procesoAReady = queue_pop(estadoNew);
+			pcb *procesoAReady = list_remove(estadoNew, 0);
 			pthread_mutex_unlock(&COLANEW); 
 
 			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
@@ -197,7 +208,8 @@ void planificadorALargoPlazo()
 				perror("Error al asignar memoria al proceso");
 				return EXIT_FAILURE;
 			}
-			procesoAReady->tablaDePaginas= tablaDePaginas;
+			procesoAReady->tablaDePaginas = tablaDePaginas;
+
 			queue_push(estadoReady, procesoAReady);
 		 }
 		pthread_mutex_unlock(&COLAREADY);

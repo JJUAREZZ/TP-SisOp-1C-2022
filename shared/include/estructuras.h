@@ -1,5 +1,13 @@
 #ifndef ESTRUCTURAS_H_
 #define ESTRUCTURAS_H_
+#include <semaphore.h>
+
+//Semaforos...
+sem_t* semEnviarDispatch;
+sem_t* semInterrumpirCPU;
+
+//Flag para interrumpir la cpu.
+uint32_t *interrumpirCPU;
 
 typedef struct {
 	int idLength;
