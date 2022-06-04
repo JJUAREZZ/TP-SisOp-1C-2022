@@ -204,23 +204,18 @@ void planificadorALargoPlazo()
 		pthread_mutex_unlock(&COLAEXEC);
 		pthread_mutex_unlock(&COLABLOCK);
 
-
-		
 	 }
  }
 
- uint32_t obtenerTablaDePagina(pcb * proceso)
+ uint32_t obtenerTablaDePagina(pcb * pcb_proceso)
  {
-	/*
-	int conexionDeMemoria= socket_create_listener(config_valores, char* port); 
-	int conexion= socket_connect_to_server(config_valores_memoria->ip, config_valores_memoria->puerto);
-	t_paquete *paquete= crear_paquete(PCB);
-	agregar_a_paquete(paquete,proceso);
+	 uint32_t id;
+	 uint32_t conexion= conectarse_con_memoria(); 
+	t_paquete *paquete= crear_paquete(TABLADEPAGINA);
+	agregarPcbAPaquete(paquete,pcb_proceso);
 	enviar_paquete(paquete, conexion);
+
+	recv(conexion, &id, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
 	eliminar_paquete(paquete);
-	//wait
-	 */
-
-
-	return 1;
+	return id;
  }

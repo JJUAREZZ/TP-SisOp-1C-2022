@@ -16,7 +16,8 @@ typedef enum
 {
 	MENSAJE,
 	PAQUETE,
-	PCB
+	PCB,
+	TABLADEPAGINA
 }op_code;
 
 typedef struct
@@ -54,5 +55,6 @@ void agregarPcbAPaquete(t_paquete *,pcb *);
 
 void* recibir_buffer(int*, int);
 t_proceso* recibir_paquete(int);
+pcb * recibir_pcb(int );
 int recibir_operacion(int);
 #endif

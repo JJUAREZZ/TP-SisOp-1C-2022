@@ -18,7 +18,6 @@
 #include <pthread.h>
 
 uint32_t kernel_socket;
-
 //Estructura para poder escuchar y conectarnos a todos los puertos
 typedef struct {
 	char* ip;

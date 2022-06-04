@@ -164,6 +164,55 @@ t_proceso* recibir_paquete(int socket_cliente)
 	return proceso;
 }
 
+pcb * recibir_pcb(int socket)
+{
+	uint32_t tamanio;
+	uint32_t desplazamiento;
+	void* buffer=recibir_buffer(&tamanio,socket);
+	pcb* pcb_proceso= malloc(sizeof(pcb));
+	t_list *instrucciones= list_create();
+
+	memcpy(&pcb_proceso->id, buffer+desplazamiento, sizeof(uint32_t));
+	desplazamiento += sizeof(uint32_t);
+	memcpy(&pcb_proceso->tamanioProceso,buffer+desplazamiento,sizeof(uint32_t));
+	desplazamiento += sizeof(uint32_t);
+	memcpy(&tamanio, buffer+desplazamiento,sizeof(uint32_t));
+	desplazamiento += sizeof(uint32_t);
+	
+	for(int i=0; i<tamanio; i++)
+	{
+		instr_t *instruccion= malloc(sizeof(instr_t));
+		memcpy(&instruccion->idLength, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		instruccion->id= malloc(instruccion->idLength +1);
+		memcpy(instruccion->id, buffer + desplazamiento, instruccion->idLength +1);
+		desplazamiento+= instruccion->idLength +1;
+		memcpy(&instruccion->nroDeParam, buffer + desplazamiento, sizeof(int));
+		desplazamiento+=sizeof(int);
+		instruccion->param= malloc(sizeof(int)* instruccion->nroDeParam);
+		for(int i=0; i< instruccion->nroDeParam; i++){
+			memcpy((instruccion->param)+i, buffer + desplazamiento, sizeof(int));
+			desplazamiento+=sizeof(int);
+		}
+		list_add(instrucciones, instruccion);
+	}
+	pcb_proceso->instr= instrucciones;
+
+	memcpy(&pcb_proceso->programCounter, buffer+desplazamiento, sizeof(uint32_t));
+	desplazamiento += sizeof(uint32_t);
+	memcpy(&pcb_proceso->tablaDePaginas,buffer+desplazamiento,sizeof(uint32_t));
+	desplazamiento += sizeof(uint32_t);
+	memcpy(&pcb_proceso->estimacion_rafaga_actual,buffer+desplazamiento,sizeof(float));
+	desplazamiento += sizeof(float);
+	memcpy(&pcb_proceso->estimacion_rafaga_anterior,buffer+desplazamiento,sizeof(float));
+	desplazamiento += sizeof(float);
+	memcpy(&pcb_proceso->cpu_anterior,buffer+desplazamiento,sizeof(float));
+	desplazamiento += sizeof(float);
+
+	return pcb_proceso;
+}
+
+
 //funciones de memoria
 
 void agregarPcbAPaquete(t_paquete *paquete,pcb *pcb){
@@ -182,6 +231,9 @@ void agregarPcbAPaquete(t_paquete *paquete,pcb *pcb){
 	memcpy(stream +offset, &pcb->id,sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 	memcpy(stream +offset, &pcb->tamanioProceso,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	uint32_t tamanio_lista= list_size(pcb->instr);
+	memcpy(stream +offset, tamanio_lista,sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 
 	void copiarElementos(instr_t *instruccion){
@@ -210,5 +262,4 @@ void agregarPcbAPaquete(t_paquete *paquete,pcb *pcb){
 	offset += sizeof(float);
 	
 	paquete->buffer->stream= stream;
-
 }

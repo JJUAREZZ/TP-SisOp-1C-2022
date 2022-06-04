@@ -14,10 +14,9 @@
 t_log *logger;
 void* planificadorACortoPlazo();
 void *conectarse_con_consola();
-void *conectarse_con_memoria();
+uint32_t conectarse_con_memoria();
 
 void kernel_server_init(){
-
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
@@ -35,12 +34,10 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLAEXIT, NULL);
 
 	pthread_t conexion_con_consola;
-	pthread_t conexion_con_memoria;
 	pthread_t planiALargoPlazo;
 	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
-	pthread_create(&conexion_con_memoria, NULL, conectarse_con_consola, NULL);
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
@@ -71,11 +68,32 @@ void *conectarse_con_consola()
 	}
 }
 
-void *conectarse_con_memoria()
+uint32_t conectarse_con_memoria()
 {
-
-
-
+	uint32_t conexion= socket_connect_to_server(config_valores_memoria->ip, config_valores_memoria->puerto);
+	if(conexion<0)
+		return EXIT_FAILURE;
+	return conexion;
 }
 
 #endif /* SRC_KERNEL_H_ */
+
+
+/*
+conexion_con_memoria= conexion;
+	for(;;)
+	{
+		uint32_t cod_op = recibir_operacion(conexion_con_memoria);
+		if(cod_op>0){
+			switch (cod_op)
+			{
+			case IDTABLADEPAGINA:
+				uint32_t = recibir_idTablaDePagina(conexion_con_memoria);
+				break;
+			default:
+				return EXIT_FAILURE;
+			}
+	}
+	return proceso;
+	}
+ */
