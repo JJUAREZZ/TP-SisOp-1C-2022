@@ -11,8 +11,9 @@
 
 t_log *logger;
 
-pcb* recibir_pcb(uint32_t accepted_fd);
 void *atenderPcb(uint32_t accepted_fd);
+void atenderInterrupcion(uint32_t accepted_fd);
+void ciclo_de_instruccion(pcb* pcb);
 void fetch(pcb* pcb);
 
 void *conectar_dispatcher()
@@ -23,29 +24,36 @@ void *conectar_dispatcher()
 	socklen_t addrlen = sizeof client_info;
 	printf("Creando socket y escuchando \n");
 
-	int cpu_dispatcher_socket = socket_create_listener(cpu_config.ip_dispatch, cpu_config.puerto_escucha_dispatch);
+	int cpu_dispatcher_socket = socket_create_listener(cpu_config.ip_cpu, cpu_config.puerto_escucha_dispatch);
+	int cpu_interrupt_socket = socket_create_listener(cpu_config.ip_cpu, cpu_config.puerto_escucha_interrupt);
 
 	if(cpu_dispatcher_socket < 0){
-		log_info(logger, "Error al crear server");
+		log_info(logger, "Error al crear server dispatcher");
+		return;
+	}
+	if(cpu_interrupt_socket < 0){
+		log_info(logger, "Error al crear server interrupt");
 		return;
 	}
 
 	log_info(logger, "¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...\n");
+	log_info(logger, "¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...\n");
+
 	for (;;) {
-		int accepted_fd;
-		if ((accepted_fd = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+		int accepted_fd_dispatch;
+		int accepted_fd_interrupt;
+		if ((accepted_fd_dispatch = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
 
 			pthread_t atenderNuevoPcb;
-			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd);
-
-			//FUNCIONA DESINCRONIZADO;
-			//pthread_t planificador_corto;
-			//pthread_create(&planificador_corto, NULL, planificadorACortoPlazo, NULL);
-
-
-			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
+			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
+			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd_dispatch);
 
 			
+		}
+		if ((accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+			pthread_t atenderNuevaInterrupcion;
+			pthread_create(&atenderNuevaInterrupcion,NULL,atenderInterrupcion,accepted_fd_interrupt);
+			log_info(logger,"Creando un hilo para atender una interrupcion en el socket %d", accepted_fd_interrupt);
 		}
 	}
 }

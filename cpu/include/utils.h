@@ -7,6 +7,8 @@
 #include <sys/stat.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <unistd.h>
+#include <string.h>
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
@@ -23,10 +25,9 @@ typedef struct{
     int retar_noop;
     char* ip_memoria;
     int puerto_memoria;
-    char* ip_dispatch;
     int puerto_escucha_dispatch;
-    char* ip_interrupt;
     int puerto_escucha_interrupt;
+    char* ip_cpu;
 } valores_config_cpu;
 
 valores_config_cpu cpu_config;
@@ -34,7 +35,6 @@ valores_config_cpu cpu_config;
 void load_configuration_cpu(){
 
 	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/cpu/cfg/cpu.config");
-    t_config* kernel_config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/kernel/cfg/cpu.config");
 
 	if(config == NULL){
 		perror("Archivo de configuracion no encontrado");
@@ -46,10 +46,9 @@ void load_configuration_cpu(){
     cpu_config.retar_noop = config_get_int_value(config, "RETARDO_NOOP");
     cpu_config.ip_memoria = config_get_string_value(config, "IP_MEMORIA");
     cpu_config.puerto_memoria = config_get_int_value(config, "PUERTO_MEMORIA");
-    cpu_config.ip_dispatch = config_get_string_value(kernel_config, "IP_CPU");
     cpu_config.puerto_escucha_dispatch  = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH");
-    cpu_config.ip_interrupt = config_get_string_value(kernel_config, "IP_CPU");
-    cpu_config.puerto_escucha_interrupt = config_get_int_value(config, "PUERTO_ESCUCHA_INTERRUPT");
+    cpu_config.puerto_escucha_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT");
+    cpu_config.ip_cpu = config_get_string_value(config, "IP_CPU");
 
 }
 
