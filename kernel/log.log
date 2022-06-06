@@ -17841,3 +17841,10 @@
 
 [INFO] 12:07:06:199 Servidor/(1108:1109): Creando un hilo para atender una conexión en el socket 15
 [INFO] 12:08:01:699 Servidor/(1108:1109): Creando un hilo para atender una conexión en el socket 16
+[INFO] 15:31:02:605 Servidor/(6474:6475): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 15:31:34:211 Servidor/(6474:6475): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:36:54:104 Servidor/(7278:7279): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 15:37:04:560 Servidor/(7278:7279): Creando un hilo para atender una conexión en el socket 15
+[INFO] 15:37:16:698 Servidor/(7278:7279): Creando un hilo para atender una conexión en el socket 16
