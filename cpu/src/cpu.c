@@ -19,6 +19,7 @@ void atenderInterrupcion(uint32_t accepted_fd){
 }
 
 void *atenderPcb(uint32_t accepted_fd){
+	printf("Me llego un PCB con este tamaño: %d", 1);	
 	pcb *nuevoPcb = recibir_pcb(accepted_fd);
 	printf("Me llego un PCB con este tamaño: %d", nuevoPcb->tamanioProceso);
 	ciclo_de_instruccion(nuevoPcb);

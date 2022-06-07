@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
                 "name": "(gdb) consola",
                 "type": "cppdbg",
@@ -48,6 +49,25 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/memoria/memoria",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Habilitar la impresión con sangría para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ]
+        },
+        {
+            "name": "(gdb) cpu",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cpu/cpu",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
