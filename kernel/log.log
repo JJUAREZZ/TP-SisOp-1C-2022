@@ -17855,3 +17855,33 @@
 [INFO] 18:00:53:829 Servidor/(17359:17360): Creando un hilo para atender una conexión en el socket 15
 [INFO] 18:10:44:556 Servidor/(18176:18177): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
+[INFO] 23:37:35:959 Servidor/(3853:3854): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 23:38:44:159 Servidor/(3853:3854): Creando un hilo para atender una conexión en el socket 5
+[INFO] 00:06:06:608 Servidor/(5593:5594): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:06:10:852 Servidor/(5593:5594): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:06:23:839 Servidor/(5593:5594): Creando un hilo para atender una conexión en el socket 8
+[INFO] 00:07:11:835 Servidor/(5669:5670): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:07:18:232 Servidor/(5669:5670): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:07:31:236 Servidor/(5669:5670): Creando un hilo para atender una conexión en el socket 8
+[INFO] 00:07:55:315 Servidor/(5669:5670): Creando un hilo para atender una conexión en el socket 10
+[INFO] 00:08:00:334 Servidor/(5669:5670): Creando un hilo para atender una conexión en el socket 12
+[INFO] 00:08:06:441 Servidor/(5669:5670): Creando un hilo para atender una conexión en el socket 14
+[INFO] 00:08:15:807 Servidor/(5669:5670): Creando un hilo para atender una conexión en el socket 16
+[INFO] 03:09:10:927 Servidor/(5813:5814): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 03:09:49:415 Servidor/(5834:5835): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:10:23:110 Servidor/(5886:5887): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:10:26:438 Servidor/(5886:5887): Creando un hilo para atender una conexión en el socket 870
+[INFO] 00:11:38:795 Servidor/(5966:5968): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:11:44:423 Servidor/(5966:5968): Creando un hilo para atender una conexión en el socket 5
+[INFO] 03:11:56:375 Servidor/(6009:6010): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:12:42:571 Servidor/(6049:6050): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:12:47:272 Servidor/(6049:6050): Creando un hilo para atender una conexión en el socket 817

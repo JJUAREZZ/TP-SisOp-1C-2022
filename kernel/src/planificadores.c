@@ -1,26 +1,68 @@
 #include "../include/planificadores.h"
 #include "../../shared/include/estructuras.h"
+#include "sys/time.h"
+#include <unistd.h>
 
 //*****************************planificador a corto plazo****************************
 
 void *planificadorACortoPlazo(){
-	pthread_mutex_lock(&COLABLOCKREADY);
+	
+	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
+
+	if(conexion_cpu_dispatch < 0){
+		printf("Fallo a conectarse con cpu_dispatch");
+		return EXIT_FAILURE;
+	}
+
+	u_int32_t conexion_cpu_interrupt = socket_connect_to_server(config_valores_cpu_interrupt->ip, config_valores_cpu_interrupt->puerto);
+
+	if(conexion_cpu_interrupt < 0){
+		printf("Fallo a conectarse con cpu_interrupt");
+		return EXIT_FAILURE;
+	}
 
 	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
 	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
 
+	pthread_mutex_lock(&COLABLOCKREADY);
+
+	uint32_t tamanioReady = queue_size(estadoReady);
+	while(tamanioReady > 0){
+
 	if(utilizarFifo == 0){
 			//Ejecutar FIFO.
+			planificadorFifo(conexion_cpu_dispatch);
 			printf("Planificador por FIFO.");
-			planificadorFifo();
 	}
 
 	if(utilizarSrt == 0){
 			//hilo que ejecuta SRT.
+			planificadorSrt(conexion_cpu_interrupt);
 			printf ("Planificador por SRT.");
-			planificadorSrt();
 	}   
+
+	}
 	pthread_mutex_unlock(&COLABLOCKREADY);
+
+}
+
+void recibir_pcb_dispatch(uint32_t *conexion){
+	pcb* procesoRecibido = recibir_pcb(conexion);
+	uint32_t cod_op = recibir_operacion(conexion);
+	if(cod_op>0){
+		switch(cod_op){
+			case BLOCKED:
+			pthread_mutex_lock(&COLABLOCK);
+			queue_push(estadoBlock, procesoRecibido);
+			printf("Proceso enviado a bloqueado");
+			pthread_mutex_unlock(&COLABLOCK);
+			case TERMINATED:
+			pthread_mutex_lock(&COLAEXIT);
+			queue_push(estadoExit, procesoRecibido);
+			printf("Proceso enviado a EXIT");
+			pthread_mutex_unlock(&COLAEXIT);
+		}
+	}
 }
 
 void calcularEstimacionPcb(pcb* proceso){
@@ -28,30 +70,25 @@ void calcularEstimacionPcb(pcb* proceso){
 		proceso->estimacion_rafaga_anterior * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa); 
 }
 
-void planificadorSrt(){
+
+
+void planificadorSrt(uint32_t conexionDispatch, uint32_t conexionInterrupt){
 	//FALTA: Sincronizar para enviar de a uno y recibir bien el estadoReady.
-	//FALTA: Hacer que desaloje el proceos de CPU.
 	
-	u_int32_t tamanioReady = queue_size(estadoReady);
-	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
-	u_int32_t conexion_cpu_interrupt = socket_connect_to_server(config_valores_cpu_interrupt->ip, config_valores_cpu_interrupt->puerto);
-
-	while(tamanioReady > 0){
-
-	//Calculo las estimaciones de cada PCB
-	list_iterate(estadoReady, calcularEstimacionPcb);
-
 	pcb* primerElemento;
 	pcb* segundoElemento;
 	int i;
 
-	//Interrumpir lo que estan ejecutando en CPU.
+	uint32_t tamanioReady = queue_size(estadoReady);
 
+	//Interrumpir lo que estan ejecutando en CPU.
 	pthread_mutex_lock(&semInterrumpirCPU);
 	interrumpirCPU = 1;
-	send(conexion_cpu_interrupt, &interrumpirCPU, sizeof(uint32_t), NULL);
-	//FALTA: HACER FUNCION QUE RECIBA PROCESO DE CPU INTERRUPT.
+	send(conexionInterrupt, &interrumpirCPU, sizeof(uint32_t), NULL);
+	pcb* elementoInterrumpido = recibir_pcb(conexionInterrupt);
 	pthread_mutex_unlock(&semInterrumpirCPU);
+
+	list_iterate(estadoReady, calcularEstimacionPcb);
 
 	//Ordeno los elementos por su estimacion_actual.
 	for(i=0; i<=tamanioReady; i++){
@@ -68,63 +105,86 @@ void planificadorSrt(){
 	}
 
 	//Envio los Procesos al CPU.
-	pthread_mutex_lock(&semEnviarDispatch);
+	//Mutex para enviar a dispatch.
+	//pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
-	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
+	paquete_pcb(elemEjecutar, conexionDispatch);
 	printf ("Proceso enviado a CPU");
-
-	}	
+	
 }
 
-/*recibir_pcb_interrupt(){
-	recv()
-}
-*/
-
-void planificadorFifo(){
-
-	u_int32_t tamanioReady = queue_size(estadoReady);
-	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
-
-	while(tamanioReady > 0){
+void planificadorFifo(uint32_t conexionDispatch){
 
 	//Enviar Primer elemento de la lista a Cpu Dispatch
 	pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
-	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
+	paquete_pcb(elemEjecutar, conexionDispatch);
 	printf("Proceso enviado a CPU");
 
-	}
 }
 
 //*****************************planificador a mediano plazo****************************
 
+
+
 void *planificadorAMedianoPlazo(){
 
-	//Enviar de bloqueado a bloqueado suspendido.
+	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
 
-	uint32_t tamanioBlocked = queue_size(estadoBlock);
-	int i;
-	pcb* procesoBloqueado;
-	
-	for(i=0; i<=tamanioBlocked; i++){
-		procesoBloqueado = list_get(estadoBlock, i);
-
-		//Supuestamente el programCounterDeberia estar apuntando a la instruccion IO.
-
-		t_list* listaDeInstrucciones = procesoBloqueado->instr;
-		int* apunteProgCounter = procesoBloqueado->programCounter;
-		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
-		uint32_t* tiempoIO = instruccionBloqueada->param;
-
-		//Si el tiempo en IO es mayor al limite de bloqueo enviar a block suspended.
-		if(tiempoIO > valores_generales->max_block){
-			list_remove(estadoBlock, i);
-			queue_push(estadoBlockSusp, procesoBloqueado);
-			//FALTA: Enviar mensaje a memoria.
-		}
+	if(conexion_cpu_dispatch < 0){
+		printf("Fallo a conectarse con cpu_dispatch");
+		return EXIT_FAILURE;
 	}
 
+	uint32_t conexion_memoria = socket_connect_to_server(config_valores_memoria->ip, config_valores_memoria->puerto);
+
+	if(conexion_memoria < 0){
+		printf("Fallo al conectarse con memoria");
+		return EXIT_FAILURE;
+	}
+
+	recibir_pcb_dispatch(conexion_cpu_dispatch);
+
+	pthread_mutex_lock(&COLABLOCK);
+
+	struct timeval initialBlock;
+	struct timeval finalBlock;
+
+	uint32_t tiempoMaxBlock = valores_generales->max_block;
+
+	if(estadoBlock != NULL){
+
+		pcb *procesoIO = queue_pop(estadoBlock);
+		t_list *listaDeInstrucciones = procesoIO->instr;
+		int *apunteProgCounter = procesoIO->programCounter;
+		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
+		uint32_t* tiempoIO = instruccionBloqueada->param;
+	
+		if(tiempoIO < tiempoMaxBlock){
+			usleep(tiempoIO);
+			queue_push(estadoReady, procesoIO);
+			printf("Proceso bloqueado enviado devuelta a ready");
+		}
+
+		else if (tiempoIO > tiempoMaxBlock){
+
+			gettimeofday(&initialBlock, NULL);
+			usleep(tiempoMaxBlock);
+			gettimeofday(&finalBlock, NULL);
+
+			uint32_t tiempoRestanteBloqueo = finalBlock.tv_usec - initialBlock.tv_usec;
+			queue_push(estadoBlockSusp, procesoIO);
+			printf("Proceso bloqueado enviado a suspendido.");
+			//TODO: Enviar mensaje a memoria.
+			usleep(tiempoRestanteBloqueo);
+			pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
+			queue_push(estadoReadySusp, procesoASuspReady);
+			printf("Proceso enviado a suspended ready.");
+
+		}	
+	}	
+	
+		pthread_mutex_unlock(&COLABLOCK);
 }
 
 
