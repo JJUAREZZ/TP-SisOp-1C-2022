@@ -17863,3 +17863,6 @@
 [INFO] 17:27:33:043 Servidor/(7348:7349): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 17:28:35:442 Servidor/(7348:7349): Creando un hilo para atender una conexión en el socket 15
+[INFO] 18:19:08:768 Servidor/(11969:11970): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 18:19:20:730 Servidor/(11969:11970): Creando un hilo para atender una conexión en el socket 15

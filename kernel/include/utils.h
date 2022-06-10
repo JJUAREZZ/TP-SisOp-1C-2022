@@ -16,6 +16,8 @@
 #include "../../shared/include/estructuras.h"
 #include <commons/config.h>
 #include <pthread.h>
+#include <semaphore.h>
+#include <fcntl.h>
 
 uint32_t kernel_socket;
 //Estructura para poder escuchar y conectarnos a todos los puertos
@@ -54,6 +56,7 @@ config_conex* config_valores_cpu_interrupt;
 
 void paquete_pcb(pcb *proceso, int conexion);
 void load_configuration();
-
+void paquete_uint(uint32_t* numero, uint32_t* conexion);
+int inicializar_semaforo(sem_t** semaphore, char * sem_name, uint32_t initial_value);
 
 #endif /* SRC_UTILS_H_ */

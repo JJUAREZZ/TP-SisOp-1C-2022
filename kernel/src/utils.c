@@ -51,3 +51,19 @@ void paquete_uint(uint32_t* numero, uint32_t* conexion){
 	enviar_paquete(paquete, conexion);
 	eliminar_paquete(paquete);
 }
+
+int inicializar_semaforo(sem_t** semaphore, char * sem_name, uint32_t initial_value){
+	// O_CREAT significa "Crear el semaforo si no existe, y si existe abrirlo"
+	// S_IRWU significa "Si se crea el semaforo, hacerlo con permisos Read Write eXecute para el propietario del semaforo"
+	sem_t * openned_semaphore = sem_open(sem_name, O_CREAT, S_IRWXU, initial_value);
+
+	if (openned_semaphore == SEM_FAILED){
+		perror("sem_open");
+		return -1;
+		}
+	else {
+		printf("Semaphore [%s] openned successfully\n", sem_name);
+		*semaphore = openned_semaphore;
+		return 0;
+	}
+}
