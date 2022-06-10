@@ -83,18 +83,28 @@ void planificadorSrt(){
 
 void planificadorFifo(){
 
+/*
 	u_int32_t tamanioReady = queue_size(estadoReady);
 	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
 
-	while(tamanioReady > 0){
+	while(tamanioReady > 0){ //quizas un semaforo de tipo productor consumidor. No espera activa, debería bloquearse
 
 	//Enviar Primer elemento de la lista a Cpu Dispatch
 	pthread_mutex_lock(&semEnviarDispatch);
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf("Proceso enviado a CPU");
+	}
+*/
+	/*
+while (1)
+	{
+		sem_wait(procesosEnReady);
+		sem_wait(procesosEnRunning);
 
 	}
+	 */
+
 }
 
 //*****************************planificador a mediano plazo****************************
@@ -189,7 +199,31 @@ pcb *crearPcb(t_proceso *proceso)
 
 void planificadorALargoPlazo()
  {
-	 for(;;)
+	 pthread_t hilo1;
+	 pthread_t  hilo2;
+	 pthread_create(&hilo1,NULL,enviarProcesosAReady,NULL);
+	 pthread_create(&hilo2,NULL,terminarProcesos,NULL);
+
+	 pthread_join(hilo1, NULL);
+	 pthread_join(hilo2, NULL);
+ }
+
+ uint32_t obtenerTablaDePagina(pcb * pcb_proceso)
+ {
+	 uint32_t id;
+	 uint32_t conexion= conectarse_con_memoria(); 
+	t_paquete *paquete= crear_paquete(TABLADEPAGINA);
+	agregarPcbAPaquete(paquete,pcb_proceso);
+	enviar_paquete(paquete, conexion);
+
+	recv(conexion, &id, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
+	eliminar_paquete(paquete);
+	return id;
+ }
+
+ void enviarProcesosAReady()
+ {
+	 while(1)
 	 {
 		 //falta checkear pcbs a finalizar
 		pthread_mutex_lock(&COLAREADY);
@@ -221,17 +255,11 @@ void planificadorALargoPlazo()
 		pthread_mutex_unlock(&COLABLOCK);
 
 	 }
+
  }
-
- uint32_t obtenerTablaDePagina(pcb * pcb_proceso)
+ void terminarProcesos()
  {
-	 uint32_t id;
-	 uint32_t conexion= conectarse_con_memoria(); 
-	t_paquete *paquete= crear_paquete(TABLADEPAGINA);
-	agregarPcbAPaquete(paquete,pcb_proceso);
-	enviar_paquete(paquete, conexion);
-
-	recv(conexion, &id, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
-	eliminar_paquete(paquete);
-	return id;
+	 while(1){
+		 ;
+	 }
  }

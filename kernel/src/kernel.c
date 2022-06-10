@@ -7,7 +7,6 @@ int main(){
 
 	//create_kernel_logger();
 	load_configuration();
-	printf("\nHOLA, SOY EL KERNEL");
 	kernel_server_init(); 
 	
 

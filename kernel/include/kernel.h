@@ -24,7 +24,7 @@ void kernel_server_init(){
 	estadoBlockSusp = queue_create();
 	estadoReadySusp = queue_create();
 	estadoExec = queue_create();
-	estadoExit = queue_create();	
+	estadoExit = queue_create();
 	pthread_mutex_init(&COLANEW, NULL);
 	pthread_mutex_init(&COLAREADY, NULL);
 	pthread_mutex_init(&COLAEXEC, NULL);
