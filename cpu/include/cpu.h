@@ -24,8 +24,8 @@ void *conectar_dispatcher()
 	socklen_t addrlen = sizeof client_info;
 	printf("Creando socket y escuchando \n");
 
-	int cpu_dispatcher_socket = socket_create_listener(cpu_config.ip_cpu, cpu_config.puerto_escucha_dispatch);
-	int cpu_interrupt_socket = socket_create_listener(cpu_config.ip_cpu, cpu_config.puerto_escucha_interrupt);
+	int cpu_dispatcher_socket = socket_create_listener(cpu_config->ip_cpu, cpu_config->puerto_escucha_dispatch);
+	int cpu_interrupt_socket = socket_create_listener(cpu_config->ip_cpu, cpu_config->puerto_escucha_interrupt);
 
 	if(cpu_dispatcher_socket < 0){
 		log_info(logger, "Error al crear server dispatcher");

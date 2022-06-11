@@ -15,9 +15,13 @@ t_log *logger;
 void* planificadorACortoPlazo();
 void *conectarse_con_consola();
 uint32_t conectarse_con_memoria();
+void conectarse_con_cpu();
 
 void kernel_server_init(){
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
+	sem_init(&semProcesosEnReady,0,0);
+	sem_init(&semProcesosEnRunning,0,1);
+	sem_init(&semProcesosEnExit,0,0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
 	estadoBlock = queue_create();
@@ -36,10 +40,12 @@ void kernel_server_init(){
 	//pthread_mutex_init(&semInterrumpirCPU, NULL);
 
 	pthread_t conexion_con_consola;
+	pthread_t conexion_con_cpu;
 	pthread_t planiALargoPlazo;
 	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
-	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL); //HILO PRINCIPAL 
+	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL);
+	pthread_create(&conexion_con_cpu, NULL, conectarse_con_cpu, NULL);
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	//pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	//pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
@@ -70,10 +76,47 @@ void *conectarse_con_consola()
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd);
 			pthread_t atenderProcesoNuevo;
 			pthread_create(&atenderProcesoNuevo,NULL,atenderProceso,accepted_fd);
-			
+			pthread_detach(atenderProcesoNuevo);
 		}
 	}
 }
+
+void conectarse_con_cpu()
+{
+	uint32_t socket= socket_connect_to_server(config_valores_cpu_dispatch->ip,
+	 											config_valores_cpu_dispatch->puerto);
+	if(socket<0)
+		return EXIT_FAILURE;
+	else
+		socket_dispatch= socket;
+
+	// 
+	/*
+	while(1)
+	{
+		uint32_t cod_op= recibir_operacion(socket_dispatch);
+		if(cod_op>0)
+		{
+			switch (cod_op)
+			{
+				pcb* procesoAExit;
+
+				case PROCESOTERMINATED:
+					procesoAExit= recibir_pcb(socket);
+					queue_push(estadoExit,procesoAExit);
+					sem_post(&semProcesosEnExit);
+					break;
+				default:
+					;
+			}
+		}
+		
+
+	}*/
+	
+	
+}
+
 
 uint32_t conectarse_con_memoria()
 {

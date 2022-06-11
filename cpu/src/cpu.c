@@ -36,7 +36,7 @@ void ciclo_de_instruccion(pcb* pcb) {
 
 	//EXECUTE
 	if(strcmp(nombreInstruccion, "NO_OP") == 0){
-		usleep((cpu_config.retar_noop*instruccion->param[0]) * 100);
+		usleep((cpu_config->retar_noop*instruccion->param[0]) * 100);
 		check_interrupt(pcb);
 	} else if(strcmp(nombreInstruccion, "I/O") == 0){
 

@@ -96,16 +96,17 @@ void planificadorFifo(){
 	printf("Proceso enviado a CPU");
 	}
 */
-	/*
-while (1)
-	{
-		sem_wait(procesosEnReady);
-		sem_wait(procesosEnRunning);
+
+	while (1)
+		{
+			sem_wait(semProcesosEnReady);
+			sem_wait(semProcesosEnRunning);
+
+			
+
+		}
 
 	}
-	 */
-
-}
 
 //*****************************planificador a mediano plazo****************************
 
@@ -147,6 +148,7 @@ void *atenderProceso(uint32_t accepted_fd)
 	pthread_mutex_lock(&COLANEW);
 	queue_push(estadoNew,nuevoPcb);
 	pthread_mutex_unlock(&COLANEW);
+	close(accepted_fd);
 }
 
 t_proceso* recibir_proceso(uint32_t accepted_fd){

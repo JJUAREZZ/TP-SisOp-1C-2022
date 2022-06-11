@@ -17,7 +17,8 @@ typedef enum
 	MENSAJE,
 	PAQUETE,
 	PCB,
-	TABLADEPAGINA
+	TABLADEPAGINA,
+	PROCESOTERMINATED
 }op_code;
 
 typedef struct
