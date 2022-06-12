@@ -1,6 +1,8 @@
 #ifndef ESTRUCTURAS_H_
 #define ESTRUCTURAS_H_
 #include <semaphore.h>
+#include <stdint.h>
+#include <commons/collections/list.h>
 
 //Semaforos...
 sem_t* semEnviarDispatch;
@@ -30,5 +32,7 @@ typedef struct{
 	float estimacion_rafaga_anterior;
 	float cpu_anterior;
 } pcb;
+
+void liberarPcb(pcb*);
 
 #endif /* SRC_ESTRUCTURAS_H_ */

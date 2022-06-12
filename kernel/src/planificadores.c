@@ -227,7 +227,7 @@ void planificadorALargoPlazo()
  {
 	 while(1)
 	 {
-		 //falta checkear pcbs a finalizar
+		 //hacer un wait para que no haga espera activa
 		pthread_mutex_lock(&COLAREADY);
 		pthread_mutex_lock(&COLAEXEC);
 		pthread_mutex_lock(&COLABLOCK);
@@ -261,7 +261,19 @@ void planificadorALargoPlazo()
  }
  void terminarProcesos()
  {
+	 
 	 while(1){
-		 ;
+		 sem_wait(&semProcesosEnExit);
+		 pcb* procesoATerminar= queue_pop(estadoExit);
+		 pcb* procesoEnEjecucion= queue_pop(estadoExec);
+		 if(procesoATerminar->id != procesoEnEjecucion->id)
+		 {
+			 printf("\nError. Proceso a terminar no estaba en ejecucion");
+			 return EXIT_FAILURE;
+		 }
+		 liberarPcb(procesoEnEjecucion);
 	 }
+	 
+	 
+	  
  }
