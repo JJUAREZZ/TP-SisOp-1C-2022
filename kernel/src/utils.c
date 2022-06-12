@@ -19,11 +19,11 @@ void load_configuration(){
 	config_valores_memoria->puerto = config_get_string_value(config, "PUERTO_MEMORIA");
 
 	config_valores_cpu_dispatch = malloc(sizeof(config_conex*));
-	config_valores_cpu_dispatch->ip =config_get_string_value(config, "PUERTO_CPU_DISPATCH");
+	config_valores_cpu_dispatch->ip =config_get_string_value(config, "IP_CPU");
 	config_valores_cpu_dispatch->puerto = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
 
 	config_valores_cpu_interrupt = malloc(sizeof(config_conex*));
-	config_valores_cpu_interrupt->ip = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
+	config_valores_cpu_interrupt->ip = config_get_string_value(config, "IP_CPU");
 	config_valores_cpu_interrupt->puerto = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
 
 	//Lleno los struct de los campos que necesitamos para el pcb y demas.
