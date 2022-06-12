@@ -21,6 +21,7 @@
 
 uint32_t kernel_socket;
 uint32_t socket_dispatch;
+uint32_t socket_interrupt;
 //Estructura para poder escuchar y conectarnos a todos los puertos
 typedef struct {
 	char* ip;

@@ -10,6 +10,7 @@ sem_t* semInterrumpirCPU;
 sem_t* semProcesosEnReady;
 sem_t* semProcesosEnRunning;
 sem_t* semProcesosEnExit;
+sem_t semProcesosEnNew;
 
 //Flag para interrumpir la cpu.
 uint32_t *interrumpirCPU;

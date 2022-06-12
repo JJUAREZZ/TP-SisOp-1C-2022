@@ -21,7 +21,8 @@ void kernel_server_init(){
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 	sem_init(&semProcesosEnReady,0,0);
 	sem_init(&semProcesosEnRunning,0,1);
-	//sem_init(&semProcesosEnExit,0,0);
+	sem_init(&semProcesosEnExit,0,0);
+	sem_init(&semProcesosEnNew,0,0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
 	estadoBlock = queue_create();
@@ -52,8 +53,8 @@ void kernel_server_init(){
 
 	//pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
-	pthread_join(planiACortoPlazo, NULL);
-	pthread_join(planiAMedianoPlazo, NULL);
+	//pthread_join(planiACortoPlazo, NULL);
+	//pthread_join(planiAMedianoPlazo, NULL);
 	pthread_join(conexion_con_consola, NULL); 
 }
 
@@ -81,14 +82,21 @@ void *conectarse_con_consola()
 }
 
 void conectarse_con_cpu()
-{
-	 
-	uint32_t socket= socket_connect_to_server(config_valores_cpu_dispatch->ip,
+{ 
+	uint32_t socket1= socket_connect_to_server(config_valores_cpu_dispatch->ip,
 	 											config_valores_cpu_dispatch->puerto);
-	if(socket<0)
+	uint32_t socket2= socket_connect_to_server(config_valores_cpu_interrupt->ip,
+	 											config_valores_cpu_interrupt->puerto);
+	
+	if(socket1<0)
 		return EXIT_FAILURE;
 	else
-		socket_dispatch= socket;
+		socket_dispatch= socket1;
+
+	if(socket2<0)
+			return EXIT_FAILURE;
+	else
+		socket_interrupt= socket2;
 
 	while(1)
 	{
@@ -102,15 +110,13 @@ void conectarse_con_cpu()
 				case PROCESOTERMINATED:
 					procesoAExit= recibir_pcb(socket);
 					queue_push(estadoExit,procesoAExit);
-					//sem_post(&semProcesosEnExit);
+					sem_post(&semProcesosEnExit);
 					break;
 				default:
 					;
 			}
 		}
-	}
-	
-	
+	}	
 }
 
 

@@ -18005,4 +18005,23 @@
 [INFO] 14:50:41:046 Servidor/(17526:17527): Creando un hilo para atender una conexión en el socket 15
 [INFO] 14:50:48:712 Servidor/(17584:17585): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
-                                                                                                                                                                                                                
+                                                                                                                                                                                                                [INFO] 09:58:41:797 Servidor/(9657:9658): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:58:54:553 Servidor/(9657:9658): Creando un hilo para atender una conexión en el socket 16
+[INFO] 10:05:20:883 Servidor/(10725:10726): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 11:35:02:824 Servidor/(24389:24390): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 11:35:08:491 Servidor/(24389:24390): Creando un hilo para atender una conexión en el socket 20
+[INFO] 11:35:09:273 Servidor/(24389:24390): Creando un hilo para atender una conexión en el socket 21
+[INFO] 11:54:44:173 Servidor/(27557:27558): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 11:54:46:269 Servidor/(27557:27558): Creando un hilo para atender una conexión en el socket 20
+[INFO] 11:54:46:958 Servidor/(27557:27558): Creando un hilo para atender una conexión en el socket 21
+[INFO] 12:02:24:442 Servidor/(28646:28647): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 12:02:34:872 Servidor/(28689:28690): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 12:02:42:501 Servidor/(28689:28690): Creando un hilo para atender una conexión en el socket 20
+[INFO] 12:02:43:302 Servidor/(28689:28690): Creando un hilo para atender una conexión en el socket 21
+[INFO] 12:04:08:535 Servidor/(28689:28690): Creando un hilo para atender una conexión en el socket 20

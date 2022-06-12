@@ -83,7 +83,7 @@ void planificadorSrt(){
 
 void planificadorFifo(){
 
-/*
+
 	u_int32_t tamanioReady = queue_size(estadoReady);
 	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
 
@@ -95,14 +95,17 @@ void planificadorFifo(){
 	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
 	printf("Proceso enviado a CPU");
 	}
-*/
+
 
 	while (1)
 		{
 			sem_wait(semProcesosEnReady);
 			sem_wait(semProcesosEnRunning);
-
-			
+			pthread_mutex_lock(&semEnviarDispatch);
+			pcb* elemEjecutar = queue_pop(estadoReady);
+			paquete_pcb(elemEjecutar, socket_dispatch);
+			printf("Proceso enviado a CPU");
+					
 
 		}
 
@@ -148,6 +151,7 @@ void *atenderProceso(uint32_t accepted_fd)
 	pthread_mutex_lock(&COLANEW);
 	queue_push(estadoNew,nuevoPcb);
 	pthread_mutex_unlock(&COLANEW);
+	sem_post(&semProcesosEnNew);
 	close(accepted_fd);
 }
 
@@ -227,7 +231,7 @@ void planificadorALargoPlazo()
  {
 	 while(1)
 	 {
-		 //hacer un wait para que no haga espera activa
+		sem_wait(&semProcesosEnNew);
 		pthread_mutex_lock(&COLAREADY);
 		pthread_mutex_lock(&COLAEXEC);
 		pthread_mutex_lock(&COLABLOCK);
@@ -261,7 +265,6 @@ void planificadorALargoPlazo()
  }
  void terminarProcesos()
  {
-	 
 	 while(1){
 		 sem_wait(&semProcesosEnExit);
 		 pcb* procesoATerminar= queue_pop(estadoExit);
@@ -273,7 +276,5 @@ void planificadorALargoPlazo()
 		 }
 		 liberarPcb(procesoEnEjecucion);
 	 }
-	 
-	 
-	  
+
  }
