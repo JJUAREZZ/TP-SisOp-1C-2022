@@ -48,14 +48,13 @@ void kernel_server_init(){
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL);
 	pthread_create(&conexion_con_cpu, NULL, conectarse_con_cpu, NULL);
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
-	//pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
+	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	//pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
 
-	//pthread_join(conexion_con_consola, NULL);
+	pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
-	//pthread_join(planiACortoPlazo, NULL);
+	pthread_join(planiACortoPlazo, NULL);
 	//pthread_join(planiAMedianoPlazo, NULL);
-	pthread_join(conexion_con_consola, NULL); 
 }
 
 void *conectarse_con_consola()
@@ -129,5 +128,7 @@ uint32_t conectarse_con_memoria()
 		return EXIT_FAILURE;
 	return conexion;
 }
+
+
 
 #endif /* SRC_KERNEL_H_ */

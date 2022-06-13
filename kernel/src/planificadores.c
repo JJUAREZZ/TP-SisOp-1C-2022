@@ -4,7 +4,7 @@
 //*****************************planificador a corto plazo****************************
 
 void *planificadorACortoPlazo(){
-	pthread_mutex_lock(&COLABLOCKREADY);
+	//pthread_mutex_lock(&COLABLOCKREADY);
 
 	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
 	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
@@ -20,7 +20,7 @@ void *planificadorACortoPlazo(){
 			printf ("Planificador por SRT.");
 			planificadorSrt();
 	}   
-	pthread_mutex_unlock(&COLABLOCKREADY);
+	//pthread_mutex_unlock(&COLABLOCKREADY);
 }
 
 void calcularEstimacionPcb(pcb* proceso){
@@ -82,33 +82,14 @@ void planificadorSrt(){
 */
 
 void planificadorFifo(){
-
-
-	u_int32_t tamanioReady = queue_size(estadoReady);
-	u_int32_t conexion_cpu_dispatch = socket_connect_to_server(config_valores_cpu_dispatch->ip, config_valores_cpu_dispatch->puerto);
-
-	while(tamanioReady > 0){ //quizas un semaforo de tipo productor consumidor. No espera activa, debería bloquearse
-
-	//Enviar Primer elemento de la lista a Cpu Dispatch
-	pthread_mutex_lock(&semEnviarDispatch);
-	pcb* elemEjecutar = queue_pop(estadoReady);
-	paquete_pcb(elemEjecutar, conexion_cpu_dispatch);
-	printf("Proceso enviado a CPU");
-	}
-
-
 	while (1)
 		{
-			sem_wait(semProcesosEnReady);
-			sem_wait(semProcesosEnRunning);
-			pthread_mutex_lock(&semEnviarDispatch);
+			sem_wait(&semProcesosEnReady);
+			sem_wait(&semProcesosEnRunning);
 			pcb* elemEjecutar = queue_pop(estadoReady);
 			paquete_pcb(elemEjecutar, socket_dispatch);
 			printf("Proceso enviado a CPU");
-					
-
 		}
-
 	}
 
 //*****************************planificador a mediano plazo****************************
@@ -149,14 +130,14 @@ void *atenderProceso(uint32_t accepted_fd)
 	t_proceso *nuevoProceso= recibir_proceso(accepted_fd);
 	pcb* nuevoPcb= crearPcb(nuevoProceso);
 	pthread_mutex_lock(&COLANEW);
-	queue_push(estadoNew,nuevoPcb);
 	pthread_mutex_unlock(&COLANEW);
+	queue_push(estadoNew,nuevoPcb);
 	sem_post(&semProcesosEnNew);
 	close(accepted_fd);
 }
 
 t_proceso* recibir_proceso(uint32_t accepted_fd){
-	t_proceso* proceso= malloc(sizeof(t_proceso));
+	t_proceso* proceso;
 	uint32_t cod_op= recibir_operacion(accepted_fd);
 	if(cod_op>0){
 		switch (cod_op)
@@ -210,8 +191,8 @@ void planificadorALargoPlazo()
 	 pthread_create(&hilo1,NULL,enviarProcesosAReady,NULL);
 	 pthread_create(&hilo2,NULL,terminarProcesos,NULL);
 
-	 pthread_join(hilo1, NULL);
-	 pthread_join(hilo2, NULL);
+	 pthread_detach(hilo1);
+	 pthread_detach(hilo2);
  }
 
  uint32_t obtenerTablaDePagina(pcb * pcb_proceso)
@@ -259,7 +240,7 @@ void planificadorALargoPlazo()
 		pthread_mutex_unlock(&COLAREADY);
 		pthread_mutex_unlock(&COLAEXEC);
 		pthread_mutex_unlock(&COLABLOCK);
-
+		sem_post(&semProcesosEnReady);
 	 }
 
  }

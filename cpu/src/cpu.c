@@ -18,10 +18,43 @@ void atenderInterrupcion(uint32_t accepted_fd){
 
 }
 
-void *atenderPcb(uint32_t accepted_fd){
-	pcb *nuevoPcb = recibir_pcb(accepted_fd);
-	printf("Me llego un PCB con este tamaño: %d", nuevoPcb->tamanioProceso);
-	ciclo_de_instruccion(nuevoPcb);
+void *atenderPcb(uint32_t accepted_fd)
+{
+	pcb *unPcb;
+	while(1){
+	uint32_t cod_op= recibir_operacion(accepted_fd);
+		if(cod_op>0)
+		{
+			switch (cod_op)
+			{
+			case PCB:
+		
+				unPcb= recibir_pcb(accepted_fd);
+				printf("\nRecibi un proceso:");
+				printf("\nid: %d",unPcb->id);
+				printf("\ntamanioProceso: %d",unPcb->tamanioProceso);
+				printf("\nprogramCounter: %d", unPcb->programCounter);
+				printf("\ntablaDePaginas: %d",unPcb->tablaDePaginas);
+				printf("\nestimacion_rafaga_actual: %f",unPcb->estimacion_rafaga_actual);
+				printf("\nestimacion_rafaga_anterior: %f",unPcb->estimacion_rafaga_anterior);
+				printf("\ncpu_anterior: %f\n",unPcb->cpu_anterior);
+				void mostrarInstrucciones(instr_t* element)
+				{
+					printf("%s ",element->id);
+					for(int i=0; i<element->nroDeParam;i++)
+						printf(" %d",(int) element->param[i]);
+					printf("\n");
+				}
+				list_iterate(unPcb->instr, mostrarInstrucciones);
+			break;
+			default:
+				;
+			}
+		}
+
+	}
+
+	//ciclo_de_instruccion(nuevoPcb);
 }
 
 void ciclo_de_instruccion(pcb* pcb) {
