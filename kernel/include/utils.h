@@ -16,8 +16,12 @@
 #include "../../shared/include/estructuras.h"
 #include <commons/config.h>
 #include <pthread.h>
+#include <semaphore.h>
+#include <fcntl.h>
 
 uint32_t kernel_socket;
+uint32_t socket_dispatch;
+uint32_t socket_interrupt;
 //Estructura para poder escuchar y conectarnos a todos los puertos
 typedef struct {
 	char* ip;
@@ -54,6 +58,6 @@ config_conex* config_valores_cpu_interrupt;
 
 void paquete_pcb(pcb *proceso, int conexion);
 void load_configuration();
-
+void paquete_uint(uint32_t* numero, uint32_t* conexion);
 
 #endif /* SRC_UTILS_H_ */

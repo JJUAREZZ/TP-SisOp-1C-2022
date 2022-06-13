@@ -19,7 +19,8 @@ typedef enum
 	PCB,
 	TABLADEPAGINA,
 	BLOCKED,
-	TERMINATED
+	TERMINATED,
+	PROCESOTERMINATED
 }op_code;
 
 typedef struct

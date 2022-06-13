@@ -51,3 +51,4 @@ void paquete_uint(uint32_t* numero, uint32_t* conexion){
 	enviar_paquete(paquete, conexion);
 	eliminar_paquete(paquete);
 }
+

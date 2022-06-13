@@ -38,4 +38,6 @@ pcb *crearPcb(t_proceso *);
 t_proceso* recibir_proceso(uint32_t);
 void *atenderProceso(uint32_t );
 uint32_t obtenerTablaDePagina(pcb *);
+void enviarProcesosAReady();
+void terminarProcesos();
 #endif /* SRC_PLANIFICADORES_H_ */

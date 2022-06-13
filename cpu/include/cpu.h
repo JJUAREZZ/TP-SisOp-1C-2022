@@ -24,8 +24,8 @@ void *conectar_dispatcher()
 	socklen_t addrlen = sizeof client_info;
 	printf("Creando socket y escuchando \n");
 
-	int cpu_dispatcher_socket = socket_create_listener(cpu_config.ip_cpu, cpu_config.puerto_escucha_dispatch);
-	int cpu_interrupt_socket = socket_create_listener(cpu_config.ip_cpu, cpu_config.puerto_escucha_interrupt);
+	int cpu_dispatcher_socket = socket_create_listener(cpu_config->ip_cpu, cpu_config->puerto_escucha_dispatch);
+	int cpu_interrupt_socket = socket_create_listener(cpu_config->ip_cpu, cpu_config->puerto_escucha_interrupt);
 
 	if(cpu_dispatcher_socket < 0){
 		log_info(logger, "Error al crear server dispatcher");
@@ -50,11 +50,11 @@ void *conectar_dispatcher()
 
 			
 		}
-		if ((accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+		/*if ((accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
 			pthread_t atenderNuevaInterrupcion;
 			pthread_create(&atenderNuevaInterrupcion,NULL,atenderInterrupcion,accepted_fd_interrupt);
 			log_info(logger,"Creando un hilo para atender una interrupcion en el socket %d", accepted_fd_interrupt);
-		}
+		}*/
 	}
 }
 
