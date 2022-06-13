@@ -11,13 +11,13 @@ void *planificadorACortoPlazo(){
 
 	if(utilizarFifo == 0){
 			//Ejecutar FIFO.
-			printf("Planificador por FIFO.");
+			printf("\nPlanificador por FIFO.\n");
 			planificadorFifo();
 	}
 
 	if(utilizarSrt == 0){
 			//hilo que ejecuta SRT.
-			printf ("Planificador por SRT.");
+			printf ("\nPlanificador por SRT.");
 			planificadorSrt();
 	}   
 	//pthread_mutex_unlock(&COLABLOCKREADY);
@@ -88,7 +88,7 @@ void planificadorFifo(){
 			sem_wait(&semProcesosEnRunning);
 			pcb* elemEjecutar = queue_pop(estadoReady);
 			paquete_pcb(elemEjecutar, socket_dispatch);
-			printf("Proceso enviado a CPU");
+			printf("\nProceso enviado a CPU\n");
 		}
 	}
 
