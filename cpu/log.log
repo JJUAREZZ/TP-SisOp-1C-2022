@@ -492,3 +492,15 @@
 
 [INFO] 22:22:02:188 Servidor Dispatcher/(18011:18011): Creando un hilo para atender una conexión en el socket 16
 [INFO] 22:22:02:189 Servidor Dispatcher/(18011:18011): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 22:28:11:388 Servidor Dispatcher/(18905:18905): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 22:28:11:388 Servidor Dispatcher/(18905:18905): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 22:28:15:657 Servidor Dispatcher/(18905:18905): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:28:15:658 Servidor Dispatcher/(18905:18905): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:19:05:692 Servidor Dispatcher/(6531:6531): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:19:05:692 Servidor Dispatcher/(6531:6531): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:19:13:137 Servidor Dispatcher/(6531:6531): Creando un hilo para atender una conexión en el socket 16
+[INFO] 15:19:13:137 Servidor Dispatcher/(6531:6531): Creando un hilo para atender una interrupcion en el socket 20
