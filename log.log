@@ -478,3 +478,12 @@
 
 [INFO] 17:27:49:200 Servidor/(9028:9033): Creando un hilo para atender una conexión en el socket 5
 [INFO] 17:27:49:219 Servidor/(9028:9033): Creando un hilo para atender una conexión en el socket 6
+[INFO] 09:23:25:435 Servidor/(4869:4874): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:23:49:101 Servidor/(4869:4874): Creando un hilo para atender una conexión en el socket 5
+[INFO] 09:25:01:723 Servidor/(4869:4874): Creando un hilo para atender una conexión en el socket 5
+[INFO] 09:32:25:281 Servidor/(5404:5411): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:32:30:580 Servidor/(5404:5411): Creando un hilo para atender una conexión en el socket 5
+[INFO] 09:33:32:631 Servidor/(5404:5411): Creando un hilo para atender una conexión en el socket 5
+[INFO] 09:33:44:745 Servidor/(5404:5411): Creando un hilo para atender una conexión en el socket 5
