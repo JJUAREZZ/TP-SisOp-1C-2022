@@ -18163,3 +18163,13 @@
 [INFO] 15:38:54:898 Servidor/(9726:9727): Creando un hilo para atender una conexión en el socket 20
 [INFO] 15:38:55:426 Servidor/(9726:9727): Creando un hilo para atender una conexión en el socket 21
 [INFO] 15:38:55:930 Servidor/(9726:9727): Creando un hilo para atender una conexión en el socket 20
+[INFO] 15:43:48:649 Servidor/(10301:10302): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 15:43:51:333 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 20
+[INFO] 15:43:51:778 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:43:51:997 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 20
+[INFO] 15:43:52:244 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:43:52:652 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 20
+[INFO] 15:43:52:859 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:43:53:058 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 20
+[INFO] 15:43:53:323 Servidor/(10301:10302): Creando un hilo para atender una conexión en el socket 21
