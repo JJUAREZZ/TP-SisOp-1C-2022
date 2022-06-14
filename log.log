@@ -465,3 +465,16 @@
 
 >>>>>>> 6cf03dc2ff64470adf84e4340e73555b927f4557
 >>>>>>> dev_kenti
+[INFO] 17:20:24:027 Servidor/(8492:8499): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:22:53:631 Servidor/(8574:8579): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:23:19:463 Servidor/(8574:8579): Creando un hilo para atender una conexión en el socket 5
+[INFO] 17:25:01:316 Servidor/(8842:8847): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:25:32:749 Servidor/(8842:8847): Creando un hilo para atender una conexión en el socket 5
+[INFO] 17:25:59:152 Servidor/(8842:8847): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:27:15:269 Servidor/(9028:9033): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:27:49:200 Servidor/(9028:9033): Creando un hilo para atender una conexión en el socket 5
+[INFO] 17:27:49:219 Servidor/(9028:9033): Creando un hilo para atender una conexión en el socket 6

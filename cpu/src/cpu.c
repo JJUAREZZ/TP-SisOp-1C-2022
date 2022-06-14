@@ -35,8 +35,8 @@ void *atenderPcb(uint32_t accepted_fd)
 				printf("\ntamanioProceso: %d",unPcb->tamanioProceso);
 				printf("\nprogramCounter: %d", unPcb->programCounter);
 				printf("\ntablaDePaginas: %d",unPcb->tablaDePaginas);
-				printf("\nestimacion_rafaga_actual: %f",unPcb->estimacion_rafaga_actual);
-				printf("\nestimacion_rafaga_anterior: %f",unPcb->estimacion_rafaga_anterior);
+				printf("\nestimacion_rafaga_actual: %d",unPcb->estimacion_rafaga_actual);
+				printf("\nestimacion_rafaga_anterior: %d",unPcb->estimacion_rafaga_anterior);
 				printf("\ncpu_anterior: %f\n",unPcb->cpu_anterior);
 				void mostrarInstrucciones(instr_t* element)
 				{
