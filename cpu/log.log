@@ -519,3 +519,106 @@
 [INFO] 15:38:42:661 Servidor Dispatcher/(9709:9709): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
 
 [INFO] 15:38:48:201 Servidor Dispatcher/(9709:9709): Creando un hilo para atender una conexión en el socket 16
+[INFO] 15:54:28:535 Servidor Dispatcher/(3259:3259): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:54:28:539 Servidor Dispatcher/(3259:3259): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:55:03:138 Servidor Dispatcher/(3259:3259): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:45:32:882 Servidor Dispatcher/(3259:3259): Creando un hilo para atender una conexión en el socket 7
+[INFO] 16:49:06:319 Servidor Dispatcher/(3259:3259): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:51:03:719 Servidor Dispatcher/(3259:3259): Creando un hilo para atender una conexión en el socket 7
+[INFO] 16:51:47:646 Servidor Dispatcher/(3259:3259): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:52:51:616 Servidor Dispatcher/(6544:6544): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:52:51:619 Servidor Dispatcher/(6544:6544): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:55:07:224 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:56:15:384 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 16:59:17:976 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:01:02:230 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:04:25:349 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:05:22:922 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:09:38:760 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:12:25:625 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:13:02:395 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:17:36:066 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:18:19:607 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:18:42:235 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:20:24:033 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:22:53:637 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:25:01:326 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 17:27:15:280 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 7
+[INFO] 17:29:01:316 Servidor Dispatcher/(6544:6544): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:39:33:114 Servidor Dispatcher/(24977:24977): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 22:39:33:115 Servidor Dispatcher/(24977:24977): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 22:39:52:830 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:40:34:103 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 22:41:52:278 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:42:14:660 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 22:42:35:353 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:43:44:418 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 22:47:19:682 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:51:53:761 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 22:53:08:767 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:54:23:029 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 22:55:05:189 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 22:57:28:319 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 22:59:44:290 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:01:56:377 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:02:22:301 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:04:28:481 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:05:20:096 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:08:32:705 Servidor Dispatcher/(24977:24977): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:12:43:314 Servidor Dispatcher/(26321:26321): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:12:43:317 Servidor Dispatcher/(26321:26321): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:12:48:645 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:13:17:787 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:13:49:339 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:17:50:013 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:18:47:078 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:20:18:025 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:20:41:238 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:24:06:982 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:30:55:827 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:33:57:130 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:34:30:240 Servidor Dispatcher/(26321:26321): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:39:10:850 Servidor Dispatcher/(27260:27260): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:39:10:851 Servidor Dispatcher/(27260:27260): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:39:20:826 Servidor Dispatcher/(27260:27260): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:40:11:799 Servidor Dispatcher/(27260:27260): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:40:52:401 Servidor Dispatcher/(27260:27260): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:41:50:902 Servidor Dispatcher/(27260:27260): Creando un hilo para atender una conexión en el socket 7
+[INFO] 23:42:05:137 Servidor Dispatcher/(27260:27260): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:46:44:489 Servidor Dispatcher/(27607:27607): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:46:44:491 Servidor Dispatcher/(27607:27607): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:46:59:778 Servidor Dispatcher/(27607:27607): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:47:49:221 Servidor Dispatcher/(27665:27665): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:47:49:223 Servidor Dispatcher/(27665:27665): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:47:58:557 Servidor Dispatcher/(27665:27665): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:48:10:842 Servidor Dispatcher/(27709:27709): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:48:10:844 Servidor Dispatcher/(27709:27709): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:48:41:073 Servidor Dispatcher/(27709:27709): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:50:12:755 Servidor Dispatcher/(27837:27837): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:50:12:758 Servidor Dispatcher/(27837:27837): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:50:23:572 Servidor Dispatcher/(27837:27837): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:57:10:496 Servidor Dispatcher/(27942:27942): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:57:10:498 Servidor Dispatcher/(27942:27942): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:57:33:987 Servidor Dispatcher/(27942:27942): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:59:56:155 Servidor Dispatcher/(27942:27942): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:00:20:931 Servidor Dispatcher/(27942:27942): Creando un hilo para atender una conexión en el socket 6

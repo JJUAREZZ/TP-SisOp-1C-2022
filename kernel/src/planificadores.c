@@ -18,59 +18,69 @@ void *planificadorACortoPlazo(){
 		}
 
 		if(utilizarSrt == 0){
-				//hilo que ejecuta SRT.
-				printf ("\nPlanificador por SRT.");
+				//Ejecuta SRT.
+				printf ("\nPlanificador por SRT.\n");
 				planificadorSrt();
 		}   
 	
 }
 
 void calcularEstimacionPcb(pcb* proceso){
-	proceso->estimacion_rafaga_actual = 
-		proceso->estimacion_rafaga_anterior * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa); 
+	return proceso->estimacion_rafaga_actual = 
+				proceso->estimacion_rafaga_anterior  * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa);
 }
 
+bool *ordenarEstimacion(pcb* proceso1, pcb* proceso2){
+	uint32_t estimacion1 = proceso1->estimacion_rafaga_actual;
+	uint32_t estimacion2 = proceso2->estimacion_rafaga_actual;
+	return estimacion1 <= estimacion2;
+}
 
+	//Interrumpir lo que estan ejecutando en CPU.
+	/*pthread_mutex_lock(&semInterrumpirCPU);
+	interrumpirCPU = 1;
+	send(socket_interrupt, &interrumpirCPU, sizeof(uint32_t), NULL);
+	pcb* elementoInterrumpido = recibir_pcb(socket_interrupt);
+	pthread_mutex_unlock(&semInterrumpirCPU);*/
 
-void planificadorSrt(uint32_t conexionDispatch, uint32_t conexionInterrupt){
-	//FALTA: Sincronizar para enviar de a uno y recibir bien el estadoReady.
-	
+void planificadorSrt(){
+
+	pcb* procEnReady;
 	pcb* primerElemento;
 	pcb* segundoElemento;
+	t_list *listaReady;
 	int i;
+	int j;
+
+	while(1){
+	
+	sem_wait(&semProcesosEnReady);
+
+	//TODO: INTERRUMPIR LO EJECUTADO EN CPU.
 
 	uint32_t tamanioReady = queue_size(estadoReady);
 
-	//Interrumpir lo que estan ejecutando en CPU.
-	pthread_mutex_lock(&semInterrumpirCPU);
-	interrumpirCPU = 1;
-	send(conexionInterrupt, &interrumpirCPU, sizeof(uint32_t), NULL);
-	pcb* elementoInterrumpido = recibir_pcb(conexionInterrupt);
-	pthread_mutex_unlock(&semInterrumpirCPU);
-
-	list_iterate(estadoReady, calcularEstimacionPcb);
-
-	//Ordeno los elementos por su estimacion_actual.
-	for(i=0; i<=tamanioReady; i++){
-		primerElemento 	= list_get(estadoReady, i);
-		segundoElemento = list_get(estadoReady, i+1);
-
-		if(primerElemento->estimacion_rafaga_actual < segundoElemento->estimacion_rafaga_actual){
-			list_replace(estadoReady, i, segundoElemento);
-			list_replace(estadoReady, i + 1, primerElemento);
-		} else {
-			list_replace(estadoReady, i, primerElemento);
-			list_replace(estadoReady, i+1, segundoElemento);
-		}
+	for(j=0; j<tamanioReady; j++){
+		procEnReady = list_get(estadoReady->elements, j);
+		calcularEstimacionPcb(procEnReady);
+		//printf("Estimacion del proceso %d : %d \n", procEnReady->id, procEnReady->estimacion_rafaga_actual);
+	}
+	
+	//Capaz se puede reemplazar el if con un semaforo 
+	list_sort(estadoReady->elements, ordenarEstimacion);
+	printf("Lista ordenada por las estimaciones. \n");
+	for(i=0; i<tamanioReady; i++){
+		primerElemento = list_get(estadoReady->elements, i);
+		printf("PROCESO %d CON ESTIMACION: %d\n", primerElemento->id, primerElemento->estimacion_rafaga_actual);
 	}
 
 	//Envio los Procesos al CPU.
-	//Mutex para enviar a dispatch.
-	//pthread_mutex_lock(&semEnviarDispatch);
+	sem_wait(&semProcesosEnRunning);
 	pcb* elemEjecutar = queue_pop(estadoReady);
-	paquete_pcb(elemEjecutar, conexionDispatch);
-	printf ("Proceso enviado a CPU");
-	
+	paquete_pcb(elemEjecutar, socket_dispatch);
+	printf("Proceso enviado a CPU\n");
+
+	}
 }
 
 void planificadorFifo(){
@@ -267,6 +277,7 @@ void planificadorALargoPlazo()
 		pthread_mutex_unlock(&COLAEXEC);
 		pthread_mutex_unlock(&COLABLOCK);
 		sem_post(&semProcesosEnReady);
+
 	 }
 
  }
