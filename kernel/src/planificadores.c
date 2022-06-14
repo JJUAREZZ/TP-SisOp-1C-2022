@@ -36,7 +36,22 @@ bool *menorEstimacion(pcb* proceso1, pcb* proceso2){
 	return estimacion1 <= estimacion2;
 }
 
-void planificadorSrt(){
+void *enviarProcesosOrdenados(){
+
+	//Envio los Procesos al CPU.
+	while(1){
+
+	sem_wait(&semProcesosOrdenados);
+	sem_wait(&semProcesosEnRunning);
+	pcb* elemEjecutar = queue_pop(estadoReady);
+	paquete_pcb(elemEjecutar, socket_dispatch);
+	printf("Proceso %d enviado a CPU\n", elemEjecutar->id );
+
+	}
+
+}	
+
+void* ordenarProcesos(){
 
 	pcb* procEnReady;
 	pcb* elemMenEstimacion;
@@ -64,13 +79,23 @@ void planificadorSrt(){
 	elemMenEstimacion = list_get(estadoReady->elements, 0);
 	printf("EL ELEMENTO %d TIENE LA MENOR ESTIMACION : %d\n", elemMenEstimacion->id, elemMenEstimacion->estimacion_rafaga_actual);
 	
+	sem_post(&semProcesosOrdenados);
+
 	}
 
-	//Envio los Procesos al CPU.
-	sem_wait(&semProcesosEnRunning);
-	pcb* elemEjecutar = queue_pop(estadoReady);
-	paquete_pcb(elemEjecutar, socket_dispatch);
-	printf("Proceso %d enviado a CPU\n", elemMenEstimacion->id );
+}
+
+void planificadorSrt(){
+
+	pthread_t hilo1;
+	pthread_t hilo2;
+
+	pthread_create(&hilo1,NULL,ordenarProcesos , NULL);
+	pthread_create(&hilo2,NULL,enviarProcesosOrdenados ,NULL);
+
+	pthread_join(&hilo1, NULL);
+	pthread_join(&hilo2, NULL);
+
 }
 
 void planificadorFifo(){
