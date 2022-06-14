@@ -21,8 +21,10 @@ void kernel_server_init(){
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 	sem_init(&semProcesosEnReady,0,0);
 	sem_init(&semProcesosEnRunning,0,1);
+	sem_init(&semProcesosEnBlock,0,0);
 	sem_init(&semProcesosEnExit,0,0);
 	sem_init(&semProcesosEnNew,0,0);
+	sem_init(&semProcesoInterrumpido,0,0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
 	estadoBlock = queue_create();
@@ -106,12 +108,23 @@ void conectarse_con_cpu()
 			switch (cod_op)
 			{
 				pcb* procesoAExit;
+				pcb* procesoABlocked;
+				pcb* procDesalojadoAReady;
 
 				case PROCESOTERMINATED:
 					procesoAExit= recibir_pcb(socket);
 					queue_push(estadoExit,procesoAExit);
 					sem_post(&semProcesosEnExit);
 					break;
+				case BLOCKED : 
+					procesoABlocked = recibir_pcb(socket1);
+					queue_push(estadoBlock, procesoABlocked);
+					sem_post(&semProcesosEnBlock);
+					break;
+				case PROCESODESALOJADO : 
+					procDesalojadoAReady = recibir_pcb(socket2);
+					queue_push(estadoReady, procDesalojadoAReady);
+					sem_post(&semProcesoInterrumpido);
 				default:
 					;
 			}

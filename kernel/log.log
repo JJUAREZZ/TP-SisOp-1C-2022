@@ -18574,3 +18574,88 @@
 [INFO] 00:00:20:934 Servidor/(28128:28129): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 00:00:28:981 Servidor/(28128:28129): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:17:46:726 Servidor/(28582:28583): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:18:05:127 Servidor/(28582:28583): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:18:23:906 Servidor/(28621:28622): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:18:28:367 Servidor/(28621:28622): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:18:54:146 Servidor/(28660:28661): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:18:58:345 Servidor/(28660:28661): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:19:03:013 Servidor/(28660:28661): Creando un hilo para atender una conexión en el socket 8
+[INFO] 00:19:07:787 Servidor/(28660:28661): Creando un hilo para atender una conexión en el socket 7
+[INFO] 00:19:19:258 Servidor/(28660:28661): Creando un hilo para atender una conexión en el socket 8
+[INFO] 08:57:13:717 Servidor/(3491:3492): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:57:35:898 Servidor/(3491:3492): Creando un hilo para atender una conexión en el socket 7
+[INFO] 08:58:03:763 Servidor/(3491:3492): Creando un hilo para atender una conexión en el socket 8
+[INFO] 08:58:32:772 Servidor/(3491:3492): Creando un hilo para atender una conexión en el socket 7
+[INFO] 08:58:51:601 Servidor/(3491:3492): Creando un hilo para atender una conexión en el socket 8
+[INFO] 08:59:11:279 Servidor/(3491:3492): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:08:55:005 Servidor/(4136:4137): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:09:07:725 Servidor/(4136:4137): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:09:34:133 Servidor/(4178:4179): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:09:41:671 Servidor/(4178:4179): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:09:54:151 Servidor/(4178:4179): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:10:06:843 Servidor/(4178:4179): Creando un hilo para atender una conexión en el socket 4
+[INFO] 09:11:05:427 Servidor/(4265:4266): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:11:11:768 Servidor/(4265:4266): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:11:18:082 Servidor/(4265:4266): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:11:34:342 Servidor/(4265:4266): Creando un hilo para atender una conexión en el socket 4
+[INFO] 09:12:07:980 Servidor/(4265:4266): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:19:47:031 Servidor/(4625:4626): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:19:50:743 Servidor/(4625:4626): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:20:39:827 Servidor/(4683:4684): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:20:43:947 Servidor/(4683:4684): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:20:54:421 Servidor/(4683:4684): Creando un hilo para atender una conexión en el socket 4
+[INFO] 09:21:29:109 Servidor/(4727:4728): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:21:36:335 Servidor/(4727:4728): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:21:43:424 Servidor/(4727:4728): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:30:13:501 Servidor/(5117:5118): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:30:18:775 Servidor/(5117:5118): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:30:33:547 Servidor/(5117:5118): Creando un hilo para atender una conexión en el socket 4
+[INFO] 09:30:49:381 Servidor/(5117:5118): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:35:53:004 Servidor/(5533:5534): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:35:56:172 Servidor/(5533:5534): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:36:07:238 Servidor/(5574:5575): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:36:10:688 Servidor/(5574:5575): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:36:21:825 Servidor/(5574:5575): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:36:31:606 Servidor/(5574:5575): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:37:41:609 Servidor/(5668:5669): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:37:45:513 Servidor/(5668:5669): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:37:52:107 Servidor/(5668:5669): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:38:20:452 Servidor/(5668:5669): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:40:21:118 Servidor/(5811:5812): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:40:25:717 Servidor/(5811:5812): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:40:33:728 Servidor/(5811:5812): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:40:41:313 Servidor/(5811:5812): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:40:46:230 Servidor/(5811:5812): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:40:52:739 Servidor/(5811:5812): Creando un hilo para atender una conexión en el socket 7
+[INFO] 10:13:11:457 Servidor/(7030:7031): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:13:16:028 Servidor/(7030:7031): Creando un hilo para atender una conexión en el socket 7
+[INFO] 10:13:27:775 Servidor/(7030:7031): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:14:06:268 Servidor/(7120:7121): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:14:10:245 Servidor/(7120:7121): Creando un hilo para atender una conexión en el socket 7
+[INFO] 10:14:24:730 Servidor/(7163:7164): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:14:28:753 Servidor/(7163:7164): Creando un hilo para atender una conexión en el socket 7
+[INFO] 10:14:37:767 Servidor/(7196:7197): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:14:42:159 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 7
+[INFO] 10:14:48:991 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:14:56:349 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 7
+[INFO] 10:15:06:065 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 8

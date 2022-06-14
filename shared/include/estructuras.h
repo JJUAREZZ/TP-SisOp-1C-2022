@@ -6,9 +6,9 @@
 
 //Semaforos...
 sem_t semEnviarDispatch;
-sem_t semInterrumpirCPU;
+sem_t semProcesoInterrumpido;
 sem_t semProcesosEnReady;
-sem_t semProcesoReadySrt;
+sem_t semProcesosEnBlock;
 sem_t semProcesosEnRunning;
 sem_t semProcesosEnExit;
 sem_t semProcesosEnNew;
