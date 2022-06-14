@@ -25,6 +25,7 @@ void kernel_server_init(){
 	sem_init(&semProcesosEnExit,0,0);
 	sem_init(&semProcesosEnNew,0,0);
 	sem_init(&semProcesoInterrumpido,0,0);
+	sem_init(&semProcesosOrdenados, 0, 0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
 	estadoBlock = queue_create();
@@ -120,11 +121,13 @@ void conectarse_con_cpu()
 					procesoABlocked = recibir_pcb(socket1);
 					queue_push(estadoBlock, procesoABlocked);
 					sem_post(&semProcesosEnBlock);
+					sem_post(&semProcesosEnRunning);
 					break;
 				case PROCESODESALOJADO : 
 					procDesalojadoAReady = recibir_pcb(socket2);
 					queue_push(estadoReady, procDesalojadoAReady);
 					sem_post(&semProcesoInterrumpido);
+					sem_post(&semProcesosEnRunning);
 				default:
 					;
 			}

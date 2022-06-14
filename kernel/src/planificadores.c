@@ -64,7 +64,6 @@ void planificadorSrt(){
 	elemMenEstimacion = list_get(estadoReady->elements, 0);
 	printf("EL ELEMENTO %d TIENE LA MENOR ESTIMACION : %d\n", elemMenEstimacion->id, elemMenEstimacion->estimacion_rafaga_actual);
 	
-	//FALTA ENVIAR A READY EL PRIMER ELEMENTO
 	}
 
 	//Envio los Procesos al CPU.

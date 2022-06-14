@@ -18659,3 +18659,6 @@
 [INFO] 10:14:48:991 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 8
 [INFO] 10:14:56:349 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 7
 [INFO] 10:15:06:065 Servidor/(7196:7197): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:56:08:567 Servidor/(3411:3412): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:56:25:176 Servidor/(3411:3412): Creando un hilo para atender una conexión en el socket 7
