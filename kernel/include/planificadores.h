@@ -20,6 +20,8 @@ pthread_mutex_t COLABLOCKSUSP;
 pthread_mutex_t COLAEXIT;
 pthread_mutex_t NRODEPROCESO;
 
+pcb* pcbDesalojado; //aca se almacena el proceso devuelto por cpu
+
 //Planificador a corto plazo
 
 void *planificadorACortoPlazo();

@@ -64,8 +64,7 @@ void* ordenarProcesos(){
 	sem_wait(&semProcesosEnReady);
 
 	//INTERRUMPIR LO EJECUTADO EN CPU
-	//send(socket_interrupt, flagInterrupcion = 1, sizeof(uint32_t), NULL);
-	//sem_wait(&semProcesoInterrumpido);
+	
 
 	uint32_t tamanioReady = queue_size(estadoReady);
 	printf("El tamanio de ready es: %d \n", tamanioReady);
@@ -86,15 +85,64 @@ void* ordenarProcesos(){
 }
 
 void planificadorSrt(){
+	//pthread_t hilo1;
+	//pthread_t hilo2;
 
-	pthread_t hilo1;
-	pthread_t hilo2;
+while(1){
+	//espera si llega un proceso a ready ó si no hay procesos en running
+	sem_wait(&semSrt);
+ 
+ // si NO hay procesos en running y HAY procesos en ready
+	if(queue_size(estadoExec) ==0 && queue_size(estadoReady >0)){
+		//obtiene el elemento con menor estimacion y lo envia
+		pcb* proceso= list_get_minimun(estadoReady->elements, menorEstimacion);
+		paquete_pcb(proceso, socket_dispatch);
+		printf("\nProceso enviado a CPU\n");
+	}
+	else if(queue_size(estadoReady >0)){
+		//obtiene el elemento con menor estimacion
+		pcb* proceso= list_get_minimun(estadoReady->elements, menorEstimacion);
+		//se interrumpe a la cpu para que mande el pcb y se queda a la espera
+		send(socket_interrupt, DESALOJARPROCESO, sizeof(uint32_t), 0);
+		sem_wait(&semProcesoInterrumpido);
 
-	pthread_create(&hilo1,NULL,ordenarProcesos , NULL);
-	pthread_create(&hilo2,NULL,enviarProcesosOrdenados ,NULL);
+		if(pcbDesalojado == NULL){
+			paquete_pcb(proceso, socket_dispatch);
+			printf("\nProceso enviado a CPU\n");
+		}
+		//compara las rafagas
+		//si la rafaga del desalojado es menor se devuelve a cpu
+		else if(pcbDesalojado->estimacion_rafaga_actual <= proceso->estimacion_rafaga_actual){
+			paquete_pcb(pcbDesalojado, socket_dispatch);
+			printf("\nProceso desalojado devuelto a CPU\n");
+			liberarPcb(pcbDesalojado);
+			pcbDesalojado =NULL;
+		}
+		//si la rafaga del recien llegado es menor
+		else if(pcbDesalojado->estimacion_rafaga_actual > proceso->estimacion_rafaga_actual){
+			bool condition(pcb* element){
+				return element->id == proceso->id;
+			}
+			//se elimina de la cola ready ese pcb
+			list_remove_by_condition(estadoReady->elements, condition);
+			//se envia dicho pcb
+			paquete_pcb(proceso, socket_dispatch);
+			printf("\nNuevo proceso enviado a CPU\n");
+			liberarPcb(proceso);
+			pcb* pcbDesalojadoActualizado= pcbDesalojado;
+			pcbDesalojado= NULL;
+			//encolo el pcb desalojado a ready otra vez
+			queue_push(estadoReady, pcbDesalojadoActualizado);
+		}
+	}
+}
 
-	pthread_join(&hilo1, NULL);
-	pthread_join(&hilo2, NULL);
+
+	//pthread_create(&hilo1,NULL,ordenarProcesos , NULL);
+	//pthread_create(&hilo2,NULL,enviarProcesosOrdenados ,NULL);
+
+	//pthread_join(&hilo1, NULL);
+	//pthread_join(&hilo2, NULL);
 
 }
 

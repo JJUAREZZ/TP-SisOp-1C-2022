@@ -26,6 +26,7 @@ void kernel_server_init(){
 	sem_init(&semProcesosEnNew,0,0);
 	sem_init(&semProcesoInterrumpido,0,0);
 	sem_init(&semProcesosOrdenados, 0, 0);
+	sem_init(&semSrt, 0, 0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
 	estadoBlock = queue_create();
@@ -42,6 +43,8 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLAEXIT, NULL);
 	pthread_mutex_init(&semEnviarDispatch, NULL);
 	//pthread_mutex_init(&semInterrumpirCPU, NULL);
+
+	pcbDesalojado=NULL;
 
 	pthread_t conexion_con_consola;
 	pthread_t conexion_con_cpu;
@@ -110,24 +113,26 @@ void conectarse_con_cpu()
 			{
 				pcb* procesoAExit;
 				pcb* procesoABlocked;
-				pcb* procDesalojadoAReady;
 
 				case PROCESOTERMINATED:
-					procesoAExit= recibir_pcb(socket);
+					procesoAExit= recibir_pcb(socket_dispatch);
+					//agregar mutex
 					queue_push(estadoExit,procesoAExit);
 					sem_post(&semProcesosEnExit);
 					break;
 				case BLOCKED : 
-					procesoABlocked = recibir_pcb(socket1);
+					procesoABlocked = recibir_pcb(socket_dispatch);
+					//agregar mutex
 					queue_push(estadoBlock, procesoABlocked);
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
+					sem_post(&semProcesoInterrumpido);
 					break;
 				case PROCESODESALOJADO : 
-					procDesalojadoAReady = recibir_pcb(socket2);
-					queue_push(estadoReady, procDesalojadoAReady);
+					//se almacena en la var global el pcb desalojado
+					pcbDesalojado = recibir_pcb(socket_interrupt);
+					//agregar mutex
 					sem_post(&semProcesoInterrumpido);
-					sem_post(&semProcesosEnRunning);
 				default:
 					;
 			}
