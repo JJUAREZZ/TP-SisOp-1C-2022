@@ -15,6 +15,7 @@ void *atenderPcb(uint32_t accepted_fd);
 void atenderInterrupcion(uint32_t accepted_fd);
 void ciclo_de_instruccion(pcb* pcb);
 void fetch(pcb* pcb);
+void devolverPcb(pcb* unPcb, uint32_t co_op, uint32_t accepted_fd);
 
 void *conectar_dispatcher()
 {

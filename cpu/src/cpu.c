@@ -1,5 +1,6 @@
 #include "../include/cpu.h"
 #include "../include/utils.h"
+#include "sys/time.h"
 #include <commons/config.h>
 #include <commons/log.h>
 #include <commons/collections/list.h>
@@ -18,10 +19,12 @@ void atenderInterrupcion(uint32_t accepted_fd){
 
 }
 
-void *atenderPcb(uint32_t accepted_fd)
-{
+void *atenderPcb(uint32_t accepted_fd){
+	struct timeval initialBlock;
+	struct timeval finalBlock;
+		
 	pcb *unPcb;
-	while(1){
+	
 	uint32_t cod_op= recibir_operacion(accepted_fd);
 		if(cod_op>0)
 		{
@@ -46,46 +49,52 @@ void *atenderPcb(uint32_t accepted_fd)
 					printf("\n");
 				}
 				list_iterate(unPcb->instr, mostrarInstrucciones);
-			break;
+				
+				break;
 			default:
-				;
+				break;
 			}
 		}
 
-	}
-
-	//ciclo_de_instruccion(nuevoPcb);
-}
-
-void ciclo_de_instruccion(pcb* pcb) {
 	
-	// FETCH
-	instr_t* instruccion;
-	instruccion = list_get(pcb->instr, pcb->programCounter);
-	
-	//DECODE
-	char* nombreInstruccion = instruccion->id;
-	printf(nombreInstruccion);
+	do {
+		//ciclo_de_instruccion(unPcb);
+		//gettimeofday(&initial, NULL);
+		// FETCH
+		instr_t* instruccion;
+		instruccion = list_get(unPcb->instr, unPcb->programCounter);
+		
+		//DECODE
+		char* nombreInstruccion = instruccion->id;
+		printf(nombreInstruccion);
+		
+		//EXECUTE
+		if(strcmp(nombreInstruccion, "NO_OP") == 0){
+			usleep((cpu_config->retar_noop*instruccion->param[0]) * 1000);
+		} else if(strcmp(nombreInstruccion, "I/O") == 0){
 
-	//EXECUTE
-	if(strcmp(nombreInstruccion, "NO_OP") == 0){
-		usleep((cpu_config->retar_noop*instruccion->param[0]) * 100);
-		check_interrupt(pcb);
-	} else if(strcmp(nombreInstruccion, "I/O") == 0){
+		} else if(strcmp(nombreInstruccion, "READ") == 0){
 
-	} else if(strcmp(nombreInstruccion, "READ") == 0){
+		} else if(strcmp(nombreInstruccion, "WRITE") == 0){
 
-	} else if(strcmp(nombreInstruccion, "WRITE") == 0){
+		} else if(strcmp(nombreInstruccion, "COPY") == 0) {
 
-	} else if(strcmp(nombreInstruccion, "COPY") == 0) {
+		} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
+			//devolverPcb(unPcb, PROCESOTERMINATED, accepted_fd);
+			break;
+		}
+		unPcb->programCounter = unPcb->programCounter + 1;
 
-	} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
+	} while(check_interrupt());
 
-	}
 }
 
 void check_interrupt(pcb* pcb){
+	return true;
+}
 
+void devolverPcb(pcb* unPcb, uint32_t co_op, uint32_t accepted_fd){
+	
 }
 
 //*** UTILIZAR sem_post(&semEnviarDispatch); CUANDO LA CPU ESTE DESOCUPADA ***
