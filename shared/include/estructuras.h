@@ -14,6 +14,7 @@ sem_t semProcesosEnExit;
 sem_t semProcesosEnNew;
 sem_t semProcesosOrdenados;
 sem_t semProcesoCpu;
+sem_t semSrt;
 
 //Flag para interrumpir la cpu.
 uint32_t *interrumpirCPU;
@@ -32,9 +33,9 @@ typedef struct{
 	t_list* instr;
 	uint32_t programCounter;
 	uint32_t tablaDePaginas;
-	uint32_t estimacion_rafaga_actual;
-	uint32_t estimacion_rafaga_anterior;
-	uint32_t cpu_anterior;
+	int estimacion_rafaga_actual;
+	int estimacion_rafaga_anterior;
+	int cpu_anterior;
 } pcb;
 
 void liberarPcb(pcb*);
