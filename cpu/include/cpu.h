@@ -10,14 +10,20 @@
 #include <commons/collections/list.h>
 
 t_log *logger;
+pcb *unPcb;
+
+sem_t semCicloInstruccion;
 
 void *atenderPcb(uint32_t accepted_fd);
 void atenderInterrupcion(uint32_t accepted_fd);
-void ciclo_de_instruccion(pcb* pcb);
+void ciclo_de_instruccion(uint32_t accepted_fd);
 void fetch(pcb* pcb);
+void devolverPcb(uint32_t co_op, uint32_t accepted_fd);
 
 void *conectar_dispatcher()
-{
+{	
+	sem_init(&semCicloInstruccion, 0, 0);
+	
 	logger = log_create("log.log", "Servidor Dispatcher", 1, LOG_LEVEL_DEBUG);
 
 	struct sockaddr_in client_info;
@@ -46,6 +52,9 @@ void *conectar_dispatcher()
 
 			pthread_t atenderNuevoPcb;
 			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
+			pthread_join(&atenderNuevoPcb, NULL);
+
+
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd_dispatch);
 
 			

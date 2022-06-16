@@ -25,10 +25,6 @@ void *planificadorACortoPlazo(){
 	
 }
 
-void calcularEstimacionPcb(pcb* proceso){
-	proceso->estimacion_rafaga_actual = 
-		proceso->estimacion_rafaga_anterior  * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa);
-}
 
 bool *menorEstimacion(pcb* proceso1, pcb* proceso2){
 	uint32_t estimacion1 = proceso1->estimacion_rafaga_actual;
@@ -46,6 +42,7 @@ void *enviarProcesosOrdenados(){
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, socket_dispatch);
 	printf("Proceso %d enviado a CPU\n", elemEjecutar->id );
+	sem_post(&semProcesoCpu);
 
 	}
 
@@ -69,11 +66,6 @@ void* ordenarProcesos(){
 
 	uint32_t tamanioReady = queue_size(estadoReady);
 	printf("El tamanio de ready es: %d \n", tamanioReady);
-
-	for(i=0; i<tamanioReady; i++){
-		primerElemento = list_get(estadoReady->elements, i);
-		calcularEstimacionPcb(primerElemento);
-	}
 	
 	list_sort(estadoReady->elements, menorEstimacion);
 	elemMenEstimacion = list_get(estadoReady->elements, 0);
@@ -106,6 +98,7 @@ void planificadorFifo(){
 			pcb* elemEjecutar = queue_pop(estadoReady);
 			paquete_pcb(elemEjecutar, socket_dispatch);
 			printf("Proceso enviado a CPU\n");
+			sem_post(&semProcesoCpu);
 		}
 }
 
@@ -115,51 +108,51 @@ void planificadorFifo(){
 
 void *planificadorAMedianoPlazo(){
 
-	pthread_mutex_lock(&COLABLOCK);
-
 	struct timeval initialBlock;
 	struct timeval finalBlock;
 
 	uint32_t tiempoMaxBlock = valores_generales->max_block;
 
 	while(1){
+
 	sem_wait(&semProcesosEnBlock);
 	
 		pcb *procesoIO = queue_pop(estadoBlock);
 		t_list *listaDeInstrucciones = procesoIO->instr;
-		int *apunteProgCounter = procesoIO->programCounter;
+		int apunteProgCounter = procesoIO->programCounter;
 		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
-		uint32_t* tiempoIO = instruccionBloqueada->param;
+		uint32_t* tiempoIO = instruccionBloqueada->param[0];
 	
 		if(tiempoIO < tiempoMaxBlock){
 			usleep(tiempoIO);
 			queue_push(estadoReady, procesoIO);
 			printf("Proceso bloqueado enviado devuelta a ready");
 			sem_post(&semProcesosEnReady);
+			break;
 		}
 
-		else if (tiempoIO > tiempoMaxBlock){
+		if (&tiempoIO > tiempoMaxBlock){
 
-			gettimeofday(&initialBlock, NULL);
-			usleep(tiempoMaxBlock);
-			gettimeofday(&finalBlock, NULL);
+		gettimeofday(&initialBlock, NULL);
+		usleep(tiempoMaxBlock);
+		gettimeofday(&finalBlock, NULL);
 
-			uint32_t tiempoBloqueo = finalBlock.tv_usec - initialBlock.tv_usec;
-			uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
-			queue_push(estadoBlockSusp, procesoIO);
-			printf("Proceso bloqueado enviado a suspendido.");
-			usleep(tiempoRestanteBloqueo);
-			//TODO: Enviar mensaje a memoria.
+		uint32_t tiempoBloqueo = finalBlock.tv_usec - initialBlock.tv_usec;
+		uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
+		queue_push(estadoBlockSusp, procesoIO);
+		printf("Proceso bloqueado enviado a suspendido.");
+		usleep(tiempoRestanteBloqueo);
+		//TODO: Enviar mensaje a memoria.
 
-			pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
-			queue_push(estadoReadySusp, procesoASuspReady);
-			printf("Proceso enviado a suspended ready.");
+		pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
+		queue_push(estadoReadySusp, procesoASuspReady);
+		printf("Proceso enviado a suspended ready.");
+		break;
 
 		}	
 		
 	}
 
-	pthread_mutex_unlock(&COLABLOCK);
 }
 
 
@@ -215,8 +208,8 @@ pcb *crearPcb(t_proceso *proceso)
 	pcbDelProceso->programCounter = 0;
 	pcbDelProceso->tablaDePaginas = 0;
 	pcbDelProceso->estimacion_rafaga_actual = valores_generales->est_inicial;
-	pcbDelProceso->estimacion_rafaga_anterior = valores_generales->est_inicial;
-	pcbDelProceso->cpu_anterior = 1;
+	pcbDelProceso->estimacion_rafaga_anterior = 0;
+	pcbDelProceso->cpu_anterior = 0.00;
 	free(proceso);
 	printf("\nPCB del proceso creado");
 	return pcbDelProceso;

@@ -59,5 +59,7 @@ config_conex* config_valores_cpu_interrupt;
 void paquete_pcb(pcb *proceso, int conexion);
 void load_configuration();
 void paquete_uint(uint32_t* numero, uint32_t* conexion);
+void calcularEstimacionPcbBloqueado(pcb* proceso);
+void calcularEstimacionPcbDesalojado(pcb* proceso);
 
 #endif /* SRC_UTILS_H_ */

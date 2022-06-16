@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <string.h>
+#include <math.h>
 #include <commons/log.h>
 #include <commons/string.h>
 #include <commons/collections/list.h>
@@ -51,6 +52,16 @@ void load_configuration_cpu(){
     cpu_config->puerto_escucha_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT");
     cpu_config->ip_cpu = config_get_string_value(config, "IP_CPU");
 
+}
+
+float time_diff(struct timeval *start, struct timeval *end)
+{
+    int seconds  = end->tv_sec  - start->tv_sec;
+    int useconds = end->tv_usec - start->tv_usec;
+
+    float tiempo_dif = ((seconds) * 1000 + useconds/1000.0) + 0.5;
+   // float tiempo_dif = (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
+    return tiempo_dif;
 }
 
 #endif /* SRC_UTILS_H_ */

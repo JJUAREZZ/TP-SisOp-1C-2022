@@ -26,6 +26,7 @@ void kernel_server_init(){
 	sem_init(&semProcesosEnNew,0,0);
 	sem_init(&semProcesoInterrumpido,0,0);
 	sem_init(&semProcesosOrdenados, 0, 0);
+	sem_init(&semProcesoCpu, 0, 0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
 	estadoBlock = queue_create();
@@ -52,12 +53,12 @@ void kernel_server_init(){
 	pthread_create(&conexion_con_cpu, NULL, conectarse_con_cpu, NULL);
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
-	//pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
+	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
 
 	pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
 	pthread_join(planiACortoPlazo, NULL);
-	//pthread_join(planiAMedianoPlazo, NULL);
+	pthread_join(planiAMedianoPlazo, NULL);
 }
 
 void *conectarse_con_consola()
@@ -102,7 +103,10 @@ void conectarse_con_cpu()
 		socket_interrupt= socket2;
 
 	while(1)
-	{
+	{	
+		
+		sem_wait(&semProcesoCpu);
+
 		uint32_t cod_op= recibir_operacion(socket_dispatch);
 		if(cod_op>0)
 		{
@@ -113,19 +117,24 @@ void conectarse_con_cpu()
 				pcb* procDesalojadoAReady;
 
 				case PROCESOTERMINATED:
-					procesoAExit= recibir_pcb(socket);
+					procesoAExit= recibir_pcb(socket_dispatch);
 					queue_push(estadoExit,procesoAExit);
 					sem_post(&semProcesosEnExit);
 					break;
 				case BLOCKED : 
-					procesoABlocked = recibir_pcb(socket1);
+					procesoABlocked = recibir_pcb(socket_dispatch);
+					printf("Proceso recibido para bloquear");
+					calcularEstimacionPcbBloqueado(procesoABlocked);
 					queue_push(estadoBlock, procesoABlocked);
+					printf("Proceso enviado a bloqueado");
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
 					break;
 				case PROCESODESALOJADO : 
 					procDesalojadoAReady = recibir_pcb(socket2);
-					queue_push(estadoReady, procDesalojadoAReady);
+					calcularEstimacionPcbDesalojado(procDesalojadoAReady);
+					list_add_in_index(estadoReady->elements, 0, procDesalojadoAReady);
+					printf("Proceso %d desalojado y enviado a ready", procDesalojadoAReady->id);
 					sem_post(&semProcesoInterrumpido);
 					sem_post(&semProcesosEnRunning);
 				default:
