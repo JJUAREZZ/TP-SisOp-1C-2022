@@ -63,7 +63,7 @@ void kernel_server_init(){
 	pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
 	pthread_join(planiACortoPlazo, NULL);
-	pthread_join(planiAMedianoPlazo, NULL);
+	//pthread_join(planiAMedianoPlazo, NULL);
 }
 
 void *conectarse_con_consola()
@@ -110,7 +110,7 @@ void conectarse_con_cpu()
 	while(1)
 	{	
 		
-		sem_wait(&semProcesoCpu);
+		//sem_wait(&semProcesoCpu);
 
 		uint32_t cod_op= recibir_operacion(socket_dispatch);
 		if(cod_op>0)

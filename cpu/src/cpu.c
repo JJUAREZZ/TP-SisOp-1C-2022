@@ -33,8 +33,10 @@ void atenderInterrupcion(uint32_t accepted_fd){
 	}	
 }
 
-void *atenderPcb(uint32_t accepted_fd){			
-	uint32_t cod_op= recibir_operacion(accepted_fd);
+void *atenderPcb(uint32_t accepted_fd){	
+
+	while(1){
+		uint32_t cod_op= recibir_operacion(accepted_fd);
 		if(cod_op>0)
 		{
 			switch (cod_op)
@@ -66,6 +68,8 @@ void *atenderPcb(uint32_t accepted_fd){
 				break;
 			}
 		}
+	}		
+	
 }
 	
 ciclo_de_instruccion(uint32_t accepted_fd){
