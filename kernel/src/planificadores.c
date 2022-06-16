@@ -13,13 +13,13 @@ void *planificadorACortoPlazo(){
 
 		if(utilizarFifo == 0){
 				//Ejecutar FIFO.
-				printf("\nPlanificador  FIFO.\n");
+				printf("\nPlanificador FIFO.\n");
 				planificadorFifo();
 		}
 
 		if(utilizarSrt == 0){
 				//Ejecuta SRT.
-				printf ("\nPlanificador por SRT.\n");
+				printf ("\nPlanificador SRT.\n");
 				planificadorSrt();
 		}   
 	
@@ -113,7 +113,7 @@ while(1){
 		pcb* proceso= queue_pop(estadoReady);
 		queue_push(estadoExec,proceso);
 		paquete_pcb(proceso, socket_dispatch);
-		printf("\nProceso enviado a CPU\n");
+		printf("\nProceso %d enviado a CPU\n", proceso->id);
 	}
 	else if(queue_size(estadoReady) >0){
 		//obtiene el elemento con menor estimacion
@@ -358,5 +358,6 @@ void planificadorALargoPlazo()
 		 }
 		 liberarPcb(procesoEnEjecucion);
 		 sem_post(&semSrt);
+		 sem_post(&semProcesoInterrumpido);
 	 }
 }

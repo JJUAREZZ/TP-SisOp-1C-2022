@@ -23,7 +23,6 @@ void atenderInterrupcion(uint32_t accepted_fd){
 		if(cod_op>0){
 			switch (cod_op){
 			case DESALOJARPROCESO:
-				log_info(logger, "Se ha recibido una interrupcion del Kernel");
 				interrupcion= 1;
 				break;
 			default:
@@ -38,7 +37,6 @@ void *atenderPcb(uint32_t accepted_fd)
 	pcb *unPcb;
 	while(1){
 	uint32_t cod_op= recibir_operacion(accepted_fd);
-	interrupcion=0;
 		if(cod_op>0)
 		{
 			switch (cod_op)
@@ -121,6 +119,8 @@ void ciclo_de_instruccion(pcb* proceso) {
 
 uint32_t check_interrupt(pcb* proceso){
 	if(interrupcion ==1){
+		interrupcion =0;
+		log_info(logger,"Se ha recibido una interrupcion del Kernel");
 		log_info(logger,"Desalojando proceso: %d", proceso->id);
 		t_paquete *paquete= crear_paquete(PROCESODESALOJADO);
 		agregarPcbAPaquete(paquete,proceso);

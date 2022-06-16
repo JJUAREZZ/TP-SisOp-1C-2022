@@ -648,3 +648,26 @@
 [INFO] 22:51:13:884 Servidor/(22203:22217): Creando un hilo para atender una conexión en el socket 15
 [INFO] 22:51:13:889 Servidor/(22203:22217): Creando un hilo para atender una conexión en el socket 23
 [INFO] 22:51:13:898 Servidor/(22203:22217): Creando un hilo para atender una conexión en el socket 25
+[INFO] 08:02:50:684 Servidor/(4173:4207): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:03:18:954 Servidor/(4173:4207): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:03:25:440 Servidor/(4173:4207): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:03:25:450 Servidor/(4173:4207): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:03:25:458 Servidor/(4173:4207): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:04:32:011 Servidor/(4563:4619): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:06:15:889 Servidor/(4563:4619): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:06:22:418 Servidor/(4563:4619): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:06:22:424 Servidor/(4563:4619): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:26:53:379 Servidor Dispatcher/(8481:8481): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:26:53:380 Servidor Dispatcher/(8481:8481): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:27:00:079 Servidor Dispatcher/(8481:8481): Creando un hilo para atender una conexión en el socket 16
+[INFO] 16:27:00:083 Servidor Dispatcher/(8481:8481): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 16:27:06:158 Servidor Dispatcher/(8481:8529): Recibi un proceso:
+[INFO] 16:27:06:159 Servidor Dispatcher/(8481:8529): id: 0
+[INFO] 16:27:06:159 Servidor Dispatcher/(8481:8529): Ejecutando instrucciones:
+[INFO] 16:27:06:159 Servidor Dispatcher/(8481:8529): NO_OP
+[INFO] 16:27:48:070 Servidor Dispatcher/(8481:8529): Se ha recibido una interrupcion del Kernel
+[INFO] 16:27:48:804 Servidor Dispatcher/(8481:8529): Desalojando proceso: 0

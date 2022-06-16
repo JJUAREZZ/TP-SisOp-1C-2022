@@ -18838,3 +18838,63 @@
 [INFO] 22:42:09:566 Servidor/(20608:20609): Creando un hilo para atender una conexión en el socket 20
 [INFO] 22:42:11:409 Servidor/(20608:20609): Creando un hilo para atender una conexión en el socket 21
 [INFO] 22:42:13:125 Servidor/(20608:20609): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:31:12:458 Servidor/(7883:7884): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:31:16:094 Servidor/(7883:7884): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:31:16:807 Servidor/(7883:7884): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:31:17:510 Servidor/(7883:7884): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:31:18:230 Servidor/(7883:7884): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:33:47:015 Servidor/(8206:8207): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:33:49:735 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:33:50:283 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:33:50:754 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:33:51:208 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:36:40:887 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:36:44:892 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:36:47:535 Servidor/(8206:8207): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:46:08:860 Servidor/(9500:9501): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:46:17:933 Servidor/(9500:9501): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:46:18:933 Servidor/(9500:9501): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:46:19:684 Servidor/(9500:9501): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:47:39:371 Servidor/(9500:9501): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:47:40:143 Servidor/(9500:9501): Creando un hilo para atender una conexión en el socket 15
+[INFO] 08:47:40:828 Servidor/(9500:9501): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:49:39:436 Servidor/(9927:9928): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 08:49:42:903 Servidor/(9927:9928): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:49:43:896 Servidor/(9927:9928): Creando un hilo para atender una conexión en el socket 21
+[INFO] 08:49:44:822 Servidor/(9927:9928): Creando un hilo para atender una conexión en el socket 20
+[INFO] 08:59:15:401 Servidor/(11015:11016): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 09:00:12:736 Servidor/(11015:11016): Creando un hilo para atender una conexión en el socket 7
+[INFO] 09:00:15:841 Servidor/(11015:11016): Creando un hilo para atender una conexión en el socket 8
+[INFO] 09:00:18:521 Servidor/(11015:11016): Creando un hilo para atender una conexión en el socket 7
+[INFO] 16:27:00:081 Servidor/(8520:8521): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:27:06:146 Servidor/(8520:8521): Creando un hilo para atender una conexión en el socket 20
+[INFO] 16:27:06:725 Servidor/(8520:8521): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:27:07:297 Servidor/(8520:8521): Creando un hilo para atender una conexión en el socket 20
+[INFO] 16:30:45:325 Servidor/(8958:8959): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:30:49:245 Servidor/(8958:8959): Creando un hilo para atender una conexión en el socket 20
+[INFO] 16:30:49:829 Servidor/(8958:8959): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:30:50:407 Servidor/(8958:8959): Creando un hilo para atender una conexión en el socket 20
+[INFO] 16:30:51:117 Servidor/(8958:8959): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:56:30:244 Servidor/(11017:11018): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:56:56:274 Servidor/(11086:11087): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:57:12:631 Servidor/(11132:11133): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:57:19:452 Servidor/(11132:11133): Creando un hilo para atender una conexión en el socket 20
+[INFO] 16:57:22:284 Servidor/(11132:11133): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:57:22:879 Servidor/(11132:11133): Creando un hilo para atender una conexión en el socket 20
+[INFO] 16:57:23:362 Servidor/(11132:11133): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:57:23:860 Servidor/(11132:11133): Creando un hilo para atender una conexión en el socket 20
+[INFO] 17:41:26:135 Servidor/(13744:13745): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:41:29:564 Servidor/(13744:13745): Creando un hilo para atender una conexión en el socket 20
+[INFO] 17:41:30:343 Servidor/(13744:13745): Creando un hilo para atender una conexión en el socket 21
+[INFO] 17:41:30:878 Servidor/(13744:13745): Creando un hilo para atender una conexión en el socket 20

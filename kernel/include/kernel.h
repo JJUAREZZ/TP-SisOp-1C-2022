@@ -42,6 +42,7 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLABLOCKREADY, NULL);
 	pthread_mutex_init(&COLABLOCKSUSP, NULL);
 	pthread_mutex_init(&COLAEXIT, NULL);
+	pthread_mutex_init(&PROCDESALOJADO, NULL);
 	pthread_mutex_init(&semEnviarDispatch, NULL);
 	//pthread_mutex_init(&semInterrumpirCPU, NULL);
 	pcbDesalojado=NULL;
@@ -117,7 +118,9 @@ void conectarse_con_cpu()
 				case PROCESOTERMINATED:
 					procesoAExit= recibir_pcb(socket_dispatch);
 					//agregar mutex
+					pthread_mutex_lock(&COLAEXIT);
 					queue_push(estadoExit,procesoAExit);
+					pthread_mutex_unlock(&COLAEXIT);
 					sem_post(&semProcesosEnExit);
 					break;
 				case BLOCKED : 
@@ -131,8 +134,9 @@ void conectarse_con_cpu()
 					break;
 				case PROCESODESALOJADO : 
 					//se almacena en la var global el pcb desalojado
+					pthread_mutex_lock(&PROCDESALOJADO);
 					pcbDesalojado = recibir_pcb(socket_dispatch);
-					//agregar mutex
+					pthread_mutex_unlock(&PROCDESALOJADO);
 					sem_post(&semProcesoInterrumpido);
 				default:
 					;

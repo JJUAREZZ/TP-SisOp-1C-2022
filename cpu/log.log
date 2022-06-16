@@ -1100,3 +1100,358 @@ EXIT
 [INFO] 23:53:38:455 Servidor Dispatcher/(22154:22220): Ejecutando instrucciones:
 [INFO] 23:53:38:455 Servidor Dispatcher/(22154:22220): I/O
 [INFO] 23:53:38:455 Servidor Dispatcher/(22154:22220): EXIT
+[INFO] 08:02:04:112 Servidor Dispatcher/(3979:3979): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:02:04:126 Servidor Dispatcher/(3979:3979): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:02:50:696 Servidor Dispatcher/(3979:3979): Creando un hilo para atender una conexión en el socket 16
+[INFO] 08:02:50:696 Servidor Dispatcher/(3979:3979): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 08:03:18:972 Servidor Dispatcher/(3979:4210): Recibi un proceso:
+[INFO] 08:03:18:974 Servidor Dispatcher/(3979:4210): id: 0
+[INFO] 08:03:18:974 Servidor Dispatcher/(3979:4210): Ejecutando instrucciones:
+[INFO] 08:03:18:974 Servidor Dispatcher/(3979:4210): NO_OP
+[INFO] 08:03:38:974 Servidor Dispatcher/(3979:4210): I/O
+[INFO] 08:03:38:975 Servidor Dispatcher/(3979:4210): EXIT
+[INFO] 08:03:39:212 Servidor Dispatcher/(3979:4211): Se ha recibido una interrupcion del Kernel
+[INFO] 08:04:25:389 Servidor Dispatcher/(4574:4574): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:04:25:389 Servidor Dispatcher/(4574:4574): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:04:32:013 Servidor Dispatcher/(4574:4574): Creando un hilo para atender una conexión en el socket 16
+[INFO] 08:04:32:014 Servidor Dispatcher/(4574:4574): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 08:06:15:907 Servidor Dispatcher/(4574:4623): Recibi un proceso:
+[INFO] 08:06:15:909 Servidor Dispatcher/(4574:4623): id: 0
+[INFO] 08:06:15:909 Servidor Dispatcher/(4574:4623): Ejecutando instrucciones:
+[INFO] 08:06:15:909 Servidor Dispatcher/(4574:4623): NO_OP
+[INFO] 08:06:26:725 Servidor Dispatcher/(4574:4624): Se ha recibido una interrupcion del Kernel
+[INFO] 08:06:35:909 Servidor Dispatcher/(4574:4623): Desalojando proceso: 0
+[INFO] 08:06:52:234 Servidor Dispatcher/(4574:4623): Recibi un proceso:
+[INFO] 08:06:52:234 Servidor Dispatcher/(4574:4623): id: 0
+[INFO] 08:06:52:234 Servidor Dispatcher/(4574:4623): Ejecutando instrucciones:
+[INFO] 08:06:52:234 Servidor Dispatcher/(4574:4623): I/O
+[INFO] 08:06:52:234 Servidor Dispatcher/(4574:4623): EXIT
+[INFO] 08:31:01:154 Servidor Dispatcher/(7847:7847): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:31:01:155 Servidor Dispatcher/(7847:7847): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:31:12:457 Servidor Dispatcher/(7847:7847): Creando un hilo para atender una conexión en el socket 16
+[INFO] 08:31:12:457 Servidor Dispatcher/(7847:7847): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 08:31:16:107 Servidor Dispatcher/(7847:7890): Recibi un proceso:
+[INFO] 08:31:16:108 Servidor Dispatcher/(7847:7890): id: 0
+[INFO] 08:31:16:108 Servidor Dispatcher/(7847:7890): Ejecutando instrucciones:
+[INFO] 08:31:16:108 Servidor Dispatcher/(7847:7890): NO_OP
+[INFO] 08:31:16:820 Servidor Dispatcher/(7847:7891): Se ha recibido una interrupcion del Kernel
+[INFO] 08:31:36:108 Servidor Dispatcher/(7847:7890): Desalojando proceso: 0
+[INFO] 08:31:36:109 Servidor Dispatcher/(7847:7891): Se ha recibido una interrupcion del Kernel
+[INFO] 08:31:36:109 Servidor Dispatcher/(7847:7890): Recibi un proceso:
+[INFO] 08:31:36:110 Servidor Dispatcher/(7847:7890): id: 0
+[INFO] 08:31:36:110 Servidor Dispatcher/(7847:7890): Ejecutando instrucciones:
+[INFO] 08:31:36:110 Servidor Dispatcher/(7847:7890): I/O
+[INFO] 08:31:36:110 Servidor Dispatcher/(7847:7890): EXIT
+[INFO] 08:33:42:103 Servidor Dispatcher/(8190:8190): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:33:42:104 Servidor Dispatcher/(8190:8190): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:33:47:005 Servidor Dispatcher/(8190:8190): Creando un hilo para atender una conexión en el socket 16
+[INFO] 08:33:47:005 Servidor Dispatcher/(8190:8190): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 08:33:49:746 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:33:49:746 Servidor Dispatcher/(8190:8213): id: 0
+[INFO] 08:33:49:746 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:33:49:746 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:33:50:290 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:34:09:746 Servidor Dispatcher/(8190:8213): Desalojando proceso: 0
+[INFO] 08:34:09:748 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:34:09:749 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:34:09:749 Servidor Dispatcher/(8190:8213): id: 0
+[INFO] 08:34:09:750 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:34:09:750 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:34:09:751 Servidor Dispatcher/(8190:8213): EXIT
+[INFO] 08:34:09:752 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:34:09:752 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:34:09:753 Servidor Dispatcher/(8190:8213): id: 1
+[INFO] 08:34:09:753 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:34:09:754 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:34:29:756 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:34:29:756 Servidor Dispatcher/(8190:8213): EXIT
+[INFO] 08:34:29:757 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:34:29:758 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:34:29:758 Servidor Dispatcher/(8190:8213): id: 2
+[INFO] 08:34:29:758 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:34:29:758 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:34:49:759 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:34:49:759 Servidor Dispatcher/(8190:8213): EXIT
+[INFO] 08:34:49:760 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:34:49:760 Servidor Dispatcher/(8190:8213): id: 3
+[INFO] 08:34:49:760 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:34:49:761 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:35:09:761 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:35:09:762 Servidor Dispatcher/(8190:8213): EXIT
+[INFO] 08:36:40:900 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:36:40:900 Servidor Dispatcher/(8190:8213): id: 4
+[INFO] 08:36:40:900 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:36:40:900 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:36:44:906 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:36:47:548 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:37:00:900 Servidor Dispatcher/(8190:8213): Desalojando proceso: 4
+[INFO] 08:37:00:901 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:37:00:901 Servidor Dispatcher/(8190:8213): id: 5
+[INFO] 08:37:00:902 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:37:00:902 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:37:20:903 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:37:20:904 Servidor Dispatcher/(8190:8213): EXIT
+[INFO] 08:37:20:904 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:37:20:904 Servidor Dispatcher/(8190:8214): Se ha recibido una interrupcion del Kernel
+[INFO] 08:37:20:906 Servidor Dispatcher/(8190:8213): id: 4
+[INFO] 08:37:20:908 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:37:20:908 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:37:20:908 Servidor Dispatcher/(8190:8213): Desalojando proceso: 4
+[INFO] 08:37:20:909 Servidor Dispatcher/(8190:8213): Recibi un proceso:
+[INFO] 08:37:20:909 Servidor Dispatcher/(8190:8213): id: 6
+[INFO] 08:37:20:909 Servidor Dispatcher/(8190:8213): Ejecutando instrucciones:
+[INFO] 08:37:20:909 Servidor Dispatcher/(8190:8213): NO_OP
+[INFO] 08:37:40:910 Servidor Dispatcher/(8190:8213): I/O
+[INFO] 08:37:40:910 Servidor Dispatcher/(8190:8213): EXIT
+[INFO] 08:46:04:430 Servidor Dispatcher/(9494:9494): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:46:04:431 Servidor Dispatcher/(9494:9494): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:46:08:860 Servidor Dispatcher/(9494:9494): Creando un hilo para atender una conexión en el socket 16
+[INFO] 08:46:08:860 Servidor Dispatcher/(9494:9494): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 08:46:17:946 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:46:17:946 Servidor Dispatcher/(9494:9505): id: 0
+[INFO] 08:46:17:946 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:46:17:946 Servidor Dispatcher/(9494:9505): NO_OP
+[INFO] 08:46:37:946 Servidor Dispatcher/(9494:9505): Se ha recibido una interrupcion del Kernel
+[INFO] 08:46:37:946 Servidor Dispatcher/(9494:9505): Desalojando proceso: 0
+[INFO] 08:46:37:947 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:46:37:947 Servidor Dispatcher/(9494:9505): id: 0
+[INFO] 08:46:37:948 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:46:37:948 Servidor Dispatcher/(9494:9505): I/O
+[INFO] 08:46:37:948 Servidor Dispatcher/(9494:9505): EXIT
+[INFO] 08:46:37:949 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:46:37:949 Servidor Dispatcher/(9494:9505): id: 1
+[INFO] 08:46:37:950 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:46:37:950 Servidor Dispatcher/(9494:9505): NO_OP
+[INFO] 08:46:57:950 Servidor Dispatcher/(9494:9505): I/O
+[INFO] 08:46:57:951 Servidor Dispatcher/(9494:9505): EXIT
+[INFO] 08:46:57:953 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:46:57:953 Servidor Dispatcher/(9494:9505): id: 2
+[INFO] 08:46:57:954 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:46:57:954 Servidor Dispatcher/(9494:9505): NO_OP
+[INFO] 08:47:17:954 Servidor Dispatcher/(9494:9505): I/O
+[INFO] 08:47:17:955 Servidor Dispatcher/(9494:9505): EXIT
+[INFO] 08:47:39:378 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:47:39:378 Servidor Dispatcher/(9494:9505): id: 3
+[INFO] 08:47:39:378 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:47:39:378 Servidor Dispatcher/(9494:9505): NO_OP
+[INFO] 08:47:59:378 Servidor Dispatcher/(9494:9505): Se ha recibido una interrupcion del Kernel
+[INFO] 08:47:59:379 Servidor Dispatcher/(9494:9505): Desalojando proceso: 3
+[INFO] 08:47:59:379 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:47:59:380 Servidor Dispatcher/(9494:9505): id: 4
+[INFO] 08:47:59:380 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:47:59:380 Servidor Dispatcher/(9494:9505): NO_OP
+[INFO] 08:48:19:380 Servidor Dispatcher/(9494:9505): I/O
+[INFO] 08:48:19:381 Servidor Dispatcher/(9494:9505): EXIT
+[INFO] 08:48:19:381 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:48:19:382 Servidor Dispatcher/(9494:9505): id: 3
+[INFO] 08:48:19:382 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:48:19:383 Servidor Dispatcher/(9494:9505): I/O
+[INFO] 08:48:19:383 Servidor Dispatcher/(9494:9505): Se ha recibido una interrupcion del Kernel
+[INFO] 08:48:19:383 Servidor Dispatcher/(9494:9505): Desalojando proceso: 3
+[INFO] 08:48:19:384 Servidor Dispatcher/(9494:9505): Recibi un proceso:
+[INFO] 08:48:19:384 Servidor Dispatcher/(9494:9505): id: 5
+[INFO] 08:48:19:385 Servidor Dispatcher/(9494:9505): Ejecutando instrucciones:
+[INFO] 08:48:19:385 Servidor Dispatcher/(9494:9505): NO_OP
+[INFO] 08:48:39:386 Servidor Dispatcher/(9494:9505): I/O
+[INFO] 08:48:39:386 Servidor Dispatcher/(9494:9505): EXIT
+[INFO] 08:49:30:620 Servidor Dispatcher/(9905:9905): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:49:30:620 Servidor Dispatcher/(9905:9905): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:49:39:434 Servidor Dispatcher/(9905:9905): Creando un hilo para atender una conexión en el socket 16
+[INFO] 08:49:39:435 Servidor Dispatcher/(9905:9905): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 08:49:42:916 Servidor Dispatcher/(9905:9933): Recibi un proceso:
+[INFO] 08:49:42:916 Servidor Dispatcher/(9905:9933): id: 0
+[INFO] 08:49:42:916 Servidor Dispatcher/(9905:9933): Ejecutando instrucciones:
+[INFO] 08:49:42:916 Servidor Dispatcher/(9905:9933): NO_OP
+[INFO] 08:50:02:916 Servidor Dispatcher/(9905:9933): Se ha recibido una interrupcion del Kernel
+[INFO] 08:50:02:917 Servidor Dispatcher/(9905:9933): Desalojando proceso: 0
+[INFO] 08:50:02:918 Servidor Dispatcher/(9905:9933): Recibi un proceso:
+[INFO] 08:50:02:918 Servidor Dispatcher/(9905:9933): id: 0
+[INFO] 08:50:02:918 Servidor Dispatcher/(9905:9933): Ejecutando instrucciones:
+[INFO] 08:50:02:918 Servidor Dispatcher/(9905:9933): I/O
+[INFO] 08:50:02:919 Servidor Dispatcher/(9905:9933): EXIT
+[INFO] 08:50:02:919 Servidor Dispatcher/(9905:9933): Recibi un proceso:
+[INFO] 08:50:02:920 Servidor Dispatcher/(9905:9933): id: 1
+[INFO] 08:50:02:920 Servidor Dispatcher/(9905:9933): Ejecutando instrucciones:
+[INFO] 08:50:02:920 Servidor Dispatcher/(9905:9933): NO_OP
+[INFO] 08:50:22:921 Servidor Dispatcher/(9905:9933): I/O
+[INFO] 08:50:22:921 Servidor Dispatcher/(9905:9933): EXIT
+[INFO] 08:50:22:922 Servidor Dispatcher/(9905:9933): Recibi un proceso:
+[INFO] 08:50:22:922 Servidor Dispatcher/(9905:9933): id: 2
+[INFO] 08:50:22:922 Servidor Dispatcher/(9905:9933): Ejecutando instrucciones:
+[INFO] 08:50:22:922 Servidor Dispatcher/(9905:9933): NO_OP
+[INFO] 08:50:42:923 Servidor Dispatcher/(9905:9933): I/O
+[INFO] 08:50:42:923 Servidor Dispatcher/(9905:9933): EXIT
+[INFO] 08:57:49:591 Servidor Dispatcher/(10809:10809): Error al crear server dispatcher
+[INFO] 08:58:15:783 Servidor Dispatcher/(10872:10872): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 08:58:15:783 Servidor Dispatcher/(10872:10872): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 08:59:15:401 Servidor Dispatcher/(10872:10872): Creando un hilo para atender una conexión en el socket 6
+[INFO] 08:59:15:401 Servidor Dispatcher/(10872:10872): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 09:00:12:740 Servidor Dispatcher/(10872:11022): Recibi un proceso:
+[INFO] 09:00:12:740 Servidor Dispatcher/(10872:11022): id: 0
+[INFO] 09:00:12:740 Servidor Dispatcher/(10872:11022): Ejecutando instrucciones:
+[INFO] 09:00:12:740 Servidor Dispatcher/(10872:11022): NO_OP
+[INFO] 09:00:32:740 Servidor Dispatcher/(10872:11022): Se ha recibido una interrupcion del Kernel
+[INFO] 09:00:32:741 Servidor Dispatcher/(10872:11022): Desalojando proceso: 0
+[INFO] 09:00:32:742 Servidor Dispatcher/(10872:11022): Recibi un proceso:
+[INFO] 09:00:32:742 Servidor Dispatcher/(10872:11022): id: 0
+[INFO] 09:00:32:742 Servidor Dispatcher/(10872:11022): Ejecutando instrucciones:
+[INFO] 09:00:32:742 Servidor Dispatcher/(10872:11022): I/O
+[INFO] 09:00:32:743 Servidor Dispatcher/(10872:11022): EXIT
+[INFO] 09:00:32:744 Servidor Dispatcher/(10872:11022): Recibi un proceso:
+[INFO] 09:00:32:744 Servidor Dispatcher/(10872:11022): id: 1
+[INFO] 09:00:32:744 Servidor Dispatcher/(10872:11022): Ejecutando instrucciones:
+[INFO] 09:00:32:744 Servidor Dispatcher/(10872:11022): NO_OP
+[INFO] 09:00:52:745 Servidor Dispatcher/(10872:11022): I/O
+[INFO] 09:00:52:746 Servidor Dispatcher/(10872:11022): EXIT
+[INFO] 09:00:52:747 Servidor Dispatcher/(10872:11022): Recibi un proceso:
+[INFO] 09:00:52:747 Servidor Dispatcher/(10872:11022): id: 2
+[INFO] 09:00:52:748 Servidor Dispatcher/(10872:11022): Ejecutando instrucciones:
+[INFO] 09:00:52:748 Servidor Dispatcher/(10872:11022): NO_OP
+[INFO] 09:01:12:748 Servidor Dispatcher/(10872:11022): I/O
+[INFO] 09:01:12:749 Servidor Dispatcher/(10872:11022): EXIT
+[INFO] 16:30:40:041 Servidor Dispatcher/(8941:8941): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:30:40:042 Servidor Dispatcher/(8941:8941): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:30:45:323 Servidor Dispatcher/(8941:8941): Creando un hilo para atender una conexión en el socket 16
+[INFO] 16:30:45:323 Servidor Dispatcher/(8941:8941): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 16:30:49:257 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:30:49:257 Servidor Dispatcher/(8941:8965): id: 0
+[INFO] 16:30:49:257 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:30:49:258 Servidor Dispatcher/(8941:8965): NO_OP
+[INFO] 16:31:09:258 Servidor Dispatcher/(8941:8965): Se ha recibido una interrupcion del Kernel
+[INFO] 16:31:09:258 Servidor Dispatcher/(8941:8965): Desalojando proceso: 0
+[INFO] 16:31:09:259 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:31:09:259 Servidor Dispatcher/(8941:8965): id: 0
+[INFO] 16:31:09:260 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:31:09:260 Servidor Dispatcher/(8941:8965): I/O
+[INFO] 16:31:09:260 Servidor Dispatcher/(8941:8965): Se ha recibido una interrupcion del Kernel
+[INFO] 16:31:09:261 Servidor Dispatcher/(8941:8965): Desalojando proceso: 0
+[INFO] 16:31:09:261 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:31:09:261 Servidor Dispatcher/(8941:8965): id: 0
+[INFO] 16:31:09:261 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:31:09:263 Servidor Dispatcher/(8941:8965): EXIT
+[INFO] 16:31:09:264 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:31:09:264 Servidor Dispatcher/(8941:8965): id: 1
+[INFO] 16:31:09:264 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:31:09:264 Servidor Dispatcher/(8941:8965): NO_OP
+[INFO] 16:31:29:265 Servidor Dispatcher/(8941:8965): Se ha recibido una interrupcion del Kernel
+[INFO] 16:31:29:265 Servidor Dispatcher/(8941:8965): Desalojando proceso: 1
+[INFO] 16:31:29:266 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:31:29:266 Servidor Dispatcher/(8941:8965): id: 1
+[INFO] 16:31:29:266 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:31:29:267 Servidor Dispatcher/(8941:8965): I/O
+[INFO] 16:31:29:267 Servidor Dispatcher/(8941:8965): EXIT
+[INFO] 16:31:29:267 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:31:29:268 Servidor Dispatcher/(8941:8965): id: 2
+[INFO] 16:31:29:268 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:31:29:268 Servidor Dispatcher/(8941:8965): NO_OP
+[INFO] 16:31:49:269 Servidor Dispatcher/(8941:8965): I/O
+[INFO] 16:31:49:269 Servidor Dispatcher/(8941:8965): EXIT
+[INFO] 16:31:49:270 Servidor Dispatcher/(8941:8965): Recibi un proceso:
+[INFO] 16:31:49:270 Servidor Dispatcher/(8941:8965): id: 3
+[INFO] 16:31:49:270 Servidor Dispatcher/(8941:8965): Ejecutando instrucciones:
+[INFO] 16:31:49:271 Servidor Dispatcher/(8941:8965): NO_OP
+[INFO] 16:32:09:271 Servidor Dispatcher/(8941:8965): I/O
+[INFO] 16:32:09:271 Servidor Dispatcher/(8941:8965): EXIT
+[INFO] 16:56:25:838 Servidor Dispatcher/(11002:11002): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:56:25:839 Servidor Dispatcher/(11002:11002): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:56:30:242 Servidor Dispatcher/(11002:11002): Creando un hilo para atender una conexión en el socket 16
+[INFO] 16:56:30:243 Servidor Dispatcher/(11002:11002): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 16:56:56:274 Servidor Dispatcher/(11002:11002): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:56:56:274 Servidor Dispatcher/(11002:11002): Creando un hilo para atender una interrupcion en el socket 16
+[INFO] 16:57:08:268 Servidor Dispatcher/(11119:11119): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:57:08:269 Servidor Dispatcher/(11119:11119): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:57:12:629 Servidor Dispatcher/(11119:11119): Creando un hilo para atender una conexión en el socket 16
+[INFO] 16:57:12:630 Servidor Dispatcher/(11119:11119): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 16:57:19:465 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:19:465 Servidor Dispatcher/(11119:11138): id: 0
+[INFO] 16:57:19:465 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:19:465 Servidor Dispatcher/(11119:11138): NO_OP
+[INFO] 16:57:39:465 Servidor Dispatcher/(11119:11138): Se ha recibido una interrupcion del Kernel
+[INFO] 16:57:39:465 Servidor Dispatcher/(11119:11138): Desalojando proceso: 0
+[INFO] 16:57:39:466 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:39:467 Servidor Dispatcher/(11119:11138): id: 0
+[INFO] 16:57:39:467 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:39:467 Servidor Dispatcher/(11119:11138): I/O
+[INFO] 16:57:39:467 Servidor Dispatcher/(11119:11138): Se ha recibido una interrupcion del Kernel
+[INFO] 16:57:39:467 Servidor Dispatcher/(11119:11138): Desalojando proceso: 0
+[INFO] 16:57:39:468 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:39:468 Servidor Dispatcher/(11119:11138): id: 0
+[INFO] 16:57:39:469 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:39:469 Servidor Dispatcher/(11119:11138): EXIT
+[INFO] 16:57:39:470 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:39:470 Servidor Dispatcher/(11119:11138): id: 1
+[INFO] 16:57:39:470 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:39:471 Servidor Dispatcher/(11119:11138): NO_OP
+[INFO] 16:57:59:472 Servidor Dispatcher/(11119:11138): Se ha recibido una interrupcion del Kernel
+[INFO] 16:57:59:472 Servidor Dispatcher/(11119:11138): Desalojando proceso: 1
+[INFO] 16:57:59:473 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:59:473 Servidor Dispatcher/(11119:11138): id: 1
+[INFO] 16:57:59:473 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:59:473 Servidor Dispatcher/(11119:11138): I/O
+[INFO] 16:57:59:473 Servidor Dispatcher/(11119:11138): Se ha recibido una interrupcion del Kernel
+[INFO] 16:57:59:473 Servidor Dispatcher/(11119:11138): Desalojando proceso: 1
+[INFO] 16:57:59:474 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:59:474 Servidor Dispatcher/(11119:11138): id: 1
+[INFO] 16:57:59:474 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:59:474 Servidor Dispatcher/(11119:11138): EXIT
+[INFO] 16:57:59:475 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:57:59:475 Servidor Dispatcher/(11119:11138): id: 2
+[INFO] 16:57:59:475 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:57:59:475 Servidor Dispatcher/(11119:11138): NO_OP
+[INFO] 16:58:19:475 Servidor Dispatcher/(11119:11138): I/O
+[INFO] 16:58:19:476 Servidor Dispatcher/(11119:11138): EXIT
+[INFO] 16:58:19:476 Servidor Dispatcher/(11119:11138): Recibi un proceso:
+[INFO] 16:58:19:477 Servidor Dispatcher/(11119:11138): id: 3
+[INFO] 16:58:19:477 Servidor Dispatcher/(11119:11138): Ejecutando instrucciones:
+[INFO] 16:58:19:477 Servidor Dispatcher/(11119:11138): NO_OP
+[INFO] 16:58:39:478 Servidor Dispatcher/(11119:11138): I/O
+[INFO] 16:58:39:478 Servidor Dispatcher/(11119:11138): EXIT
+[INFO] 17:41:21:464 Servidor Dispatcher/(13730:13730): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 17:41:21:465 Servidor Dispatcher/(13730:13730): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 17:41:26:131 Servidor Dispatcher/(13730:13730): Creando un hilo para atender una conexión en el socket 16
+[INFO] 17:41:26:131 Servidor Dispatcher/(13730:13730): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 17:41:29:582 Servidor Dispatcher/(13730:13751): Recibi un proceso:
+[INFO] 17:41:29:582 Servidor Dispatcher/(13730:13751): id: 0
+[INFO] 17:41:29:582 Servidor Dispatcher/(13730:13751): Ejecutando instrucciones:
+[INFO] 17:41:29:582 Servidor Dispatcher/(13730:13751): NO_OP
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): Se ha recibido una interrupcion del Kernel
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): Desalojando proceso: 0
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): Recibi un proceso:
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): id: 0
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): Ejecutando instrucciones:
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): I/O
+[INFO] 17:41:49:583 Servidor Dispatcher/(13730:13751): EXIT
+[INFO] 17:41:49:590 Servidor Dispatcher/(13730:13751): Recibi un proceso:
+[INFO] 17:41:49:590 Servidor Dispatcher/(13730:13751): id: 1
+[INFO] 17:41:49:590 Servidor Dispatcher/(13730:13751): Ejecutando instrucciones:
+[INFO] 17:41:49:590 Servidor Dispatcher/(13730:13751): NO_OP
+[INFO] 17:42:09:590 Servidor Dispatcher/(13730:13751): Se ha recibido una interrupcion del Kernel
+[INFO] 17:42:09:591 Servidor Dispatcher/(13730:13751): Desalojando proceso: 1
+[INFO] 17:42:09:591 Servidor Dispatcher/(13730:13751): Recibi un proceso:
+[INFO] 17:42:09:591 Servidor Dispatcher/(13730:13751): id: 2
+[INFO] 17:42:09:591 Servidor Dispatcher/(13730:13751): Ejecutando instrucciones:
+[INFO] 17:42:09:591 Servidor Dispatcher/(13730:13751): NO_OP
+[INFO] 17:42:29:592 Servidor Dispatcher/(13730:13751): I/O
+[INFO] 17:42:29:592 Servidor Dispatcher/(13730:13751): EXIT

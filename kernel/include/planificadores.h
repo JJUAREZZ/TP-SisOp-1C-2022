@@ -19,6 +19,7 @@ pthread_mutex_t COLABLOCKREADY;
 pthread_mutex_t COLABLOCKSUSP;
 pthread_mutex_t COLAEXIT;
 pthread_mutex_t NRODEPROCESO;
+pthread_mutex_t PROCDESALOJADO;
 
 pcb* pcbDesalojado; //aca se almacena el proceso devuelto por cpu
 
