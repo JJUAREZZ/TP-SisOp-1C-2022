@@ -85,7 +85,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			cpu_pasado = time_diff(&initialBlock, &finalBlock);
 			ceil(cpu_pasado);
 			printf("\nEl tiempon de ejecucion fue : %d\n", cpu_pasado);
-			unPcb->cpu_anterior = cpu_pasado * 1000;
+			unPcb->cpu_anterior = cpu_pasado;
 			devolverPcb(BLOCKED, accepted_fd);
 			printf("\nProceso %d enviado a bloqueado\n.", unPcb->id);
 			break;
