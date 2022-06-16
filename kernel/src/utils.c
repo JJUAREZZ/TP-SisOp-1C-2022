@@ -52,3 +52,16 @@ void paquete_uint(uint32_t* numero, uint32_t* conexion){
 	eliminar_paquete(paquete);
 }
 
+void calcularEstimacionPcbBloqueado(pcb* proceso){
+	proceso->estimacion_rafaga_anterior = proceso->estimacion_rafaga_actual;
+
+	proceso->estimacion_rafaga_actual = 
+		proceso->estimacion_rafaga_anterior  * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa);
+}
+
+void calcularEstimacionPcbDesalojado(pcb* proceso){
+	proceso->estimacion_rafaga_anterior = proceso->estimacion_rafaga_actual;
+
+	proceso->estimacion_rafaga_actual = proceso->estimacion_rafaga_anterior - proceso->cpu_anterior;
+
+}

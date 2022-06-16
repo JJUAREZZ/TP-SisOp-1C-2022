@@ -19,12 +19,7 @@ void atenderInterrupcion(uint32_t accepted_fd){
 
 }
 
-void *atenderPcb(uint32_t accepted_fd){
-	struct timeval initialBlock;
-	struct timeval finalBlock;
-		
-	pcb *unPcb;
-	
+void *atenderPcb(uint32_t accepted_fd){			
 	uint32_t cod_op= recibir_operacion(accepted_fd);
 		if(cod_op>0)
 		{
@@ -49,17 +44,27 @@ void *atenderPcb(uint32_t accepted_fd){
 					printf("\n");
 				}
 				list_iterate(unPcb->instr, mostrarInstrucciones);
-				
+
+				ciclo_de_instruccion(accepted_fd);
+	
 				break;
 			default:
 				break;
 			}
 		}
-
+}
 	
-	do {
-		//ciclo_de_instruccion(unPcb);
-		//gettimeofday(&initial, NULL);
+ciclo_de_instruccion(uint32_t accepted_fd){
+
+	struct timeval initialBlock;
+	struct timeval finalBlock;
+
+	uint32_t cpu_pasado;
+
+	gettimeofday(&initialBlock, NULL);
+	/*while(check_interrupt){*/
+	while(1){
+		
 		// FETCH
 		instr_t* instruccion;
 		instruccion = list_get(unPcb->instr, unPcb->programCounter);
@@ -70,8 +75,18 @@ void *atenderPcb(uint32_t accepted_fd){
 		
 		//EXECUTE
 		if(strcmp(nombreInstruccion, "NO_OP") == 0){
-			usleep((cpu_config->retar_noop*instruccion->param[0]) * 1000);
+
+			printf("\nEsperando %d milisegundos\n",cpu_config->retar_noop*instruccion->param[0]);
+			usleep(cpu_config->retar_noop*instruccion->param[0]);
+
 		} else if(strcmp(nombreInstruccion, "I/O") == 0){
+
+			gettimeofday(&finalBlock, NULL);
+			cpu_pasado = time_diff(&initialBlock, &finalBlock);
+			unPcb->cpu_anterior = cpu_pasado * 1000;
+			devolverPcb(BLOCKED, accepted_fd);
+			printf("\nProceso %d enviado a bloqueado\n.", unPcb->id);
+			break;
 
 		} else if(strcmp(nombreInstruccion, "READ") == 0){
 
@@ -80,21 +95,31 @@ void *atenderPcb(uint32_t accepted_fd){
 		} else if(strcmp(nombreInstruccion, "COPY") == 0) {
 
 		} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
-			//devolverPcb(unPcb, PROCESOTERMINATED, accepted_fd);
+
+			gettimeofday(&finalBlock, NULL);
+			cpu_pasado = time_diff(&initialBlock, &finalBlock);
+			unPcb->cpu_anterior = cpu_pasado * 1000;
+			devolverPcb(PROCESOTERMINATED, accepted_fd);
+			printf("\nProceso %d enviado a exit.\n", unPcb->id);
 			break;
+
 		}
 		unPcb->programCounter = unPcb->programCounter + 1;
 
-	} while(check_interrupt());
+	} 
 
 }
+
 
 void check_interrupt(pcb* pcb){
 	return true;
 }
 
-void devolverPcb(pcb* unPcb, uint32_t co_op, uint32_t accepted_fd){
-	
+void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
+	t_paquete *paquete = crear_paquete(co_op);
+	agregarPcbAPaquete(paquete, unPcb);
+	enviar_paquete(paquete, accepted_fd);
+	eliminar_paquete(paquete);
 }
 
 //*** UTILIZAR sem_post(&semEnviarDispatch); CUANDO LA CPU ESTE DESOCUPADA ***

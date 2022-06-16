@@ -53,4 +53,10 @@ void load_configuration_cpu(){
 
 }
 
+uint32_t time_diff(struct timeval *start, struct timeval *end)
+{
+    float tiempo_dif = (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
+    return (int) tiempo_dif;
+}
+
 #endif /* SRC_UTILS_H_ */

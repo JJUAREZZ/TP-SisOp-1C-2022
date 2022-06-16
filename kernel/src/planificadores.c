@@ -25,10 +25,6 @@ void *planificadorACortoPlazo(){
 	
 }
 
-void calcularEstimacionPcb(pcb* proceso){
-	proceso->estimacion_rafaga_actual = 
-		proceso->estimacion_rafaga_anterior  * (1 - valores_generales->alfa) + proceso->cpu_anterior * (1 - valores_generales->alfa);
-}
 
 bool *menorEstimacion(pcb* proceso1, pcb* proceso2){
 	uint32_t estimacion1 = proceso1->estimacion_rafaga_actual;
@@ -46,6 +42,7 @@ void *enviarProcesosOrdenados(){
 	pcb* elemEjecutar = queue_pop(estadoReady);
 	paquete_pcb(elemEjecutar, socket_dispatch);
 	printf("Proceso %d enviado a CPU\n", elemEjecutar->id );
+	sem_post(&semProcesoCpu);
 
 	}
 
@@ -69,11 +66,6 @@ void* ordenarProcesos(){
 
 	uint32_t tamanioReady = queue_size(estadoReady);
 	printf("El tamanio de ready es: %d \n", tamanioReady);
-
-	for(i=0; i<tamanioReady; i++){
-		primerElemento = list_get(estadoReady->elements, i);
-		calcularEstimacionPcb(primerElemento);
-	}
 	
 	list_sort(estadoReady->elements, menorEstimacion);
 	elemMenEstimacion = list_get(estadoReady->elements, 0);
@@ -106,6 +98,7 @@ void planificadorFifo(){
 			pcb* elemEjecutar = queue_pop(estadoReady);
 			paquete_pcb(elemEjecutar, socket_dispatch);
 			printf("Proceso enviado a CPU\n");
+			sem_post(&semProcesoCpu);
 		}
 }
 
@@ -215,8 +208,8 @@ pcb *crearPcb(t_proceso *proceso)
 	pcbDelProceso->programCounter = 0;
 	pcbDelProceso->tablaDePaginas = 0;
 	pcbDelProceso->estimacion_rafaga_actual = valores_generales->est_inicial;
-	pcbDelProceso->estimacion_rafaga_anterior = valores_generales->est_inicial;
-	pcbDelProceso->cpu_anterior = 1;
+	pcbDelProceso->estimacion_rafaga_anterior = 0;
+	pcbDelProceso->cpu_anterior = 0.00;
 	free(proceso);
 	printf("\nPCB del proceso creado");
 	return pcbDelProceso;
