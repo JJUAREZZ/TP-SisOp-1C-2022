@@ -2202,3 +2202,103 @@ EXIT
 [INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): id: 2
 [INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): NO_OP
 [INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): Esperando 20000 milisegundos
+[INFO] 20:40:36:271 Servidor Dispatcher/(25568:25568): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:40:36:272 Servidor Dispatcher/(25568:25568): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:40:42:808 Servidor Dispatcher/(25568:25568): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:40:42:809 Servidor Dispatcher/(25568:25568): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:40:47:730 Servidor Dispatcher/(25568:25595): Recibi un proceso:
+[INFO] 20:40:47:730 Servidor Dispatcher/(25568:25595): id: 0
+[INFO] 20:40:47:730 Servidor Dispatcher/(25568:25595): NO_OP
+[INFO] 20:40:47:730 Servidor Dispatcher/(25568:25595): Esperando 20000 milisegundos
+[INFO] 20:41:07:731 Servidor Dispatcher/(25568:25595): EXIT
+[INFO] 20:41:07:732 Servidor Dispatcher/(25568:25595): Proceso 0 enviado a exit.
+[INFO] 20:41:40:006 Servidor Dispatcher/(25699:25699): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:41:40:015 Servidor Dispatcher/(25699:25699): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:41:53:318 Servidor Dispatcher/(25699:25699): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:41:53:319 Servidor Dispatcher/(25699:25699): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:42:35:156 Servidor Dispatcher/(25699:25758): Recibi un proceso:
+[INFO] 20:42:35:157 Servidor Dispatcher/(25699:25758): id: 0
+[INFO] 20:42:35:157 Servidor Dispatcher/(25699:25758): NO_OP
+[INFO] 20:42:35:157 Servidor Dispatcher/(25699:25758): Esperando 20000 milisegundos
+[INFO] 20:42:55:158 Servidor Dispatcher/(25699:25758): EXIT
+[INFO] 20:42:55:158 Servidor Dispatcher/(25699:25758): Proceso 0 enviado a exit.
+[INFO] 20:45:45:971 Servidor Dispatcher/(26059:26059): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:45:45:972 Servidor Dispatcher/(26059:26059): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:45:50:584 Servidor Dispatcher/(26059:26059): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:45:50:584 Servidor Dispatcher/(26059:26059): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:45:53:247 Servidor Dispatcher/(26059:26087): Recibi un proceso:
+[INFO] 20:45:53:247 Servidor Dispatcher/(26059:26087): id: 0
+[INFO] 20:45:53:247 Servidor Dispatcher/(26059:26087): NO_OP
+[INFO] 20:45:53:248 Servidor Dispatcher/(26059:26087): Esperando 20000 milisegundos
+[INFO] 20:46:13:248 Servidor Dispatcher/(26059:26087): EXIT
+[INFO] 20:46:13:248 Servidor Dispatcher/(26059:26087): Proceso 0 enviado a exit.
+[INFO] 20:46:51:626 Servidor Dispatcher/(26196:26196): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:46:51:626 Servidor Dispatcher/(26196:26196): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:46:59:915 Servidor Dispatcher/(26196:26196): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:46:59:915 Servidor Dispatcher/(26196:26196): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:47:14:820 Servidor Dispatcher/(26196:26252): Recibi un proceso:
+[INFO] 20:47:14:820 Servidor Dispatcher/(26196:26252): id: 0
+[INFO] 20:47:14:820 Servidor Dispatcher/(26196:26252): NO_OP
+[INFO] 20:47:14:821 Servidor Dispatcher/(26196:26252): Esperando 20000 milisegundos
+[INFO] 20:47:34:821 Servidor Dispatcher/(26196:26252): EXIT
+[INFO] 20:47:34:821 Servidor Dispatcher/(26196:26252): Proceso 0 enviado a exit.
+[INFO] 20:49:54:969 Servidor Dispatcher/(26542:26542): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:49:54:970 Servidor Dispatcher/(26542:26542): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:49:58:812 Servidor Dispatcher/(26542:26542): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:49:58:812 Servidor Dispatcher/(26542:26542): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:50:02:075 Servidor Dispatcher/(26542:26553): Recibi un proceso:
+[INFO] 20:50:02:075 Servidor Dispatcher/(26542:26553): id: 0
+[INFO] 20:50:02:075 Servidor Dispatcher/(26542:26553): NO_OP
+[INFO] 20:50:02:075 Servidor Dispatcher/(26542:26553): Esperando 20000 milisegundos
+[INFO] 20:50:22:075 Servidor Dispatcher/(26542:26553): EXIT
+[INFO] 20:50:22:076 Servidor Dispatcher/(26542:26553): Proceso 0 enviado a exit.
+[INFO] 20:50:22:076 Servidor Dispatcher/(26542:26553): Recibi un proceso:
+[INFO] 20:50:22:076 Servidor Dispatcher/(26542:26553): id: 1
+[INFO] 20:50:22:076 Servidor Dispatcher/(26542:26553): NO_OP
+[INFO] 20:50:22:076 Servidor Dispatcher/(26542:26553): Esperando 20000 milisegundos
+[INFO] 20:50:42:077 Servidor Dispatcher/(26542:26553): EXIT
+[INFO] 20:50:42:077 Servidor Dispatcher/(26542:26553): Proceso 1 enviado a exit.
+[INFO] 20:50:42:078 Servidor Dispatcher/(26542:26553): Recibi un proceso:
+[INFO] 20:50:42:078 Servidor Dispatcher/(26542:26553): id: 2
+[INFO] 20:50:42:079 Servidor Dispatcher/(26542:26553): NO_OP
+[INFO] 20:50:42:079 Servidor Dispatcher/(26542:26553): Esperando 20000 milisegundos
+[INFO] 20:51:02:080 Servidor Dispatcher/(26542:26553): EXIT
+[INFO] 20:51:02:080 Servidor Dispatcher/(26542:26553): Proceso 2 enviado a exit.
+[INFO] 20:51:02:081 Servidor Dispatcher/(26542:26553): Recibi un proceso:
+[INFO] 20:51:02:081 Servidor Dispatcher/(26542:26553): id: 3
+[INFO] 20:51:02:081 Servidor Dispatcher/(26542:26553): NO_OP
+[INFO] 20:51:02:082 Servidor Dispatcher/(26542:26553): Esperando 20000 milisegundos
+[INFO] 20:51:35:972 Servidor Dispatcher/(26764:26764): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:51:35:972 Servidor Dispatcher/(26764:26764): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:51:40:514 Servidor Dispatcher/(26764:26764): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:51:40:514 Servidor Dispatcher/(26764:26764): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:51:42:994 Servidor Dispatcher/(26764:26789): Recibi un proceso:
+[INFO] 20:51:42:994 Servidor Dispatcher/(26764:26789): id: 0
+[INFO] 20:51:42:994 Servidor Dispatcher/(26764:26789): NO_OP
+[INFO] 20:51:42:994 Servidor Dispatcher/(26764:26789): Esperando 20000 milisegundos
+[INFO] 20:52:02:995 Servidor Dispatcher/(26764:26789): EXIT
+[INFO] 20:52:02:995 Servidor Dispatcher/(26764:26789): Proceso 0 enviado a exit.
+[INFO] 20:52:02:996 Servidor Dispatcher/(26764:26789): Recibi un proceso:
+[INFO] 20:52:02:996 Servidor Dispatcher/(26764:26789): id: 1
+[INFO] 20:52:02:996 Servidor Dispatcher/(26764:26789): NO_OP
+[INFO] 20:52:02:996 Servidor Dispatcher/(26764:26789): Esperando 20000 milisegundos
+[INFO] 20:52:22:997 Servidor Dispatcher/(26764:26789): EXIT
+[INFO] 20:52:22:997 Servidor Dispatcher/(26764:26789): Proceso 1 enviado a exit.
+[INFO] 20:52:22:997 Servidor Dispatcher/(26764:26789): Recibi un proceso:
+[INFO] 20:52:22:997 Servidor Dispatcher/(26764:26789): id: 2
+[INFO] 20:52:22:997 Servidor Dispatcher/(26764:26789): NO_OP
+[INFO] 20:52:22:997 Servidor Dispatcher/(26764:26789): Esperando 20000 milisegundos
+[INFO] 20:52:42:998 Servidor Dispatcher/(26764:26789): EXIT
+[INFO] 20:52:42:998 Servidor Dispatcher/(26764:26789): Proceso 2 enviado a exit.

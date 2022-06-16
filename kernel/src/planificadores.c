@@ -156,9 +156,9 @@ void planificadorFifo(){
 			sem_wait(&semProcesosEnReady);
 			sem_wait(&semProcesosEnRunning);
 			pcb* elemEjecutar = queue_pop(estadoReady);
+			queue_push(estadoExec,elemEjecutar);
 			paquete_pcb(elemEjecutar, socket_dispatch);
-			printf("Proceso enviado a CPU\n");
-			sem_post(&semProcesoCpu);
+			printf("Proceso %d enviado a CPU\n",elemEjecutar->id );
 		}
 }
 
@@ -355,5 +355,6 @@ void planificadorALargoPlazo()
 		 liberarPcb(procesoEnEjecucion);
 		 sem_post(&semSrt);
 		 sem_post(&semProcesoInterrumpido);
+		 sem_post(&semProcesosEnRunning);
 	 }
 }

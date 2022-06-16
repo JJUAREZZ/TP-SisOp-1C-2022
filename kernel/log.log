@@ -19141,3 +19141,27 @@
 [INFO] 20:38:27:910 Servidor/(25326:25327): Creando un hilo para atender una conexión en el socket 20
 [INFO] 20:38:28:226 Servidor/(25326:25327): Creando un hilo para atender una conexión en el socket 21
 [INFO] 20:38:28:849 Servidor/(25326:25327): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:40:42:811 Servidor/(25588:25589): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:40:47:716 Servidor/(25588:25589): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:40:48:429 Servidor/(25588:25589): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:40:49:031 Servidor/(25588:25589): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:40:50:108 Servidor/(25588:25589): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:45:50:585 Servidor/(26080:26081): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:45:53:235 Servidor/(26080:26081): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:45:53:646 Servidor/(26080:26081): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:45:54:090 Servidor/(26080:26081): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:45:54:450 Servidor/(26080:26081): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:45:54:810 Servidor/(26080:26081): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:49:58:814 Servidor/(26547:26548): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:50:02:063 Servidor/(26547:26548): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:50:02:637 Servidor/(26547:26548): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:50:03:194 Servidor/(26547:26548): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:50:03:742 Servidor/(26547:26548): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:51:40:515 Servidor/(26782:26783): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:51:42:983 Servidor/(26782:26783): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:51:43:548 Servidor/(26782:26783): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:51:44:182 Servidor/(26782:26783): Creando un hilo para atender una conexión en el socket 20

@@ -831,3 +831,13 @@
 
 [INFO] 18:05:48:153 Servidor/(4618:4623): Creando un hilo para atender una conexión en el socket 5
 >>>>>>> 5f799dd044e3b83c9b04c4ee34d2291aded58ac3
+[INFO] 20:41:53:304 Servidor/(25750:25755): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:42:35:141 Servidor/(25750:25755): Creando un hilo para atender una conexión en el socket 15
+[INFO] 20:42:38:868 Servidor/(25750:25755): Creando un hilo para atender una conexión en el socket 15
+[INFO] 20:42:38:872 Servidor/(25750:25755): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:46:59:902 Servidor/(26243:26249): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:47:06:665 Servidor/(26243:26249): Creando un hilo para atender una conexión en el socket 15
+[INFO] 20:47:09:467 Servidor/(26243:26249): Creando un hilo para atender una conexión en el socket 15
+[INFO] 20:47:09:470 Servidor/(26243:26249): Creando un hilo para atender una conexión en el socket 21
