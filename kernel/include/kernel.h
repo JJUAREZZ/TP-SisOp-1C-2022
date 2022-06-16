@@ -123,10 +123,10 @@ void conectarse_con_cpu()
 					break;
 				case BLOCKED : 
 					procesoABlocked = recibir_pcb(socket_dispatch);
-					printf("Proceso recibido para bloquear");
+					printf("\nProceso %d recibido para bloquear\n", procesoABlocked->id);
 					calcularEstimacionPcbBloqueado(procesoABlocked);
 					queue_push(estadoBlock, procesoABlocked);
-					printf("Proceso enviado a bloqueado");
+					printf("Proceso %d enviado a bloqueado\n", procesoABlocked->id);
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
 					break;
@@ -134,7 +134,7 @@ void conectarse_con_cpu()
 					procDesalojadoAReady = recibir_pcb(socket2);
 					calcularEstimacionPcbDesalojado(procDesalojadoAReady);
 					list_add_in_index(estadoReady->elements, 0, procDesalojadoAReady);
-					printf("Proceso %d desalojado y enviado a ready", procDesalojadoAReady->id);
+					printf("\nProceso %d desalojado y enviado a ready\n", procDesalojadoAReady->id);
 					sem_post(&semProcesoInterrumpido);
 					sem_post(&semProcesosEnRunning);
 				default:

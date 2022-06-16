@@ -53,7 +53,6 @@ void load_configuration_cpu(){
     cpu_config->ip_cpu = config_get_string_value(config, "IP_CPU");
 
 }
-
 float time_diff(struct timeval *start, struct timeval *end)
 {
     int seconds  = end->tv_sec  - start->tv_sec;
@@ -63,5 +62,4 @@ float time_diff(struct timeval *start, struct timeval *end)
    // float tiempo_dif = (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
     return tiempo_dif;
 }
-
 #endif /* SRC_UTILS_H_ */
