@@ -9,7 +9,7 @@
 #include <commons/config.h>
 #include <commons/collections/list.h>
 
-t_log *logger;
+
 
 void *atenderPcb(uint32_t accepted_fd);
 void atenderInterrupcion(uint32_t accepted_fd);
@@ -43,18 +43,19 @@ void *conectar_dispatcher()
 		int accepted_fd_dispatch;
 		int accepted_fd_interrupt;
 		if ((accepted_fd_dispatch = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
-
+			socket_dispatch= accepted_fd_dispatch;
 			pthread_t atenderNuevoPcb;
 			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd_dispatch);
 
 			
 		}
-		/*if ((accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+		if ((accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
+			socket_interrupt= accepted_fd_interrupt;
 			pthread_t atenderNuevaInterrupcion;
 			pthread_create(&atenderNuevaInterrupcion,NULL,atenderInterrupcion,accepted_fd_interrupt);
 			log_info(logger,"Creando un hilo para atender una interrupcion en el socket %d", accepted_fd_interrupt);
-		}*/
+		}
 	}
 }
 

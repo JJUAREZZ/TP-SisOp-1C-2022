@@ -18,6 +18,15 @@
 #include "../../shared/include/estructuras.h"
 #include <commons/config.h>
 #include <pthread.h>
+#include <semaphore.h>
+
+t_log *logger;
+
+uint32_t socket_dispatch;
+uint32_t socket_interrupt;
+uint32_t interrupcion;
+sem_t semInterrupt;
+
 
 typedef struct{
     int entradas_tlb;
@@ -33,6 +42,7 @@ typedef struct{
 valores_config_cpu *cpu_config;
 
 void load_configuration_cpu(){
+    sem_init(&semInterrupt,0,0);
 
 	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/cpu/cfg/cpu.config");
 

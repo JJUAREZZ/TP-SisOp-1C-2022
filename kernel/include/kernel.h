@@ -16,6 +16,7 @@ void* planificadorACortoPlazo();
 void *conectarse_con_consola();
 uint32_t conectarse_con_memoria();
 void conectarse_con_cpu();
+void recalcularEstimacion(pcb* );
 
 void kernel_server_init(){
 	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
@@ -25,7 +26,7 @@ void kernel_server_init(){
 	sem_init(&semProcesosEnExit,0,0);
 	sem_init(&semProcesosEnNew,0,0);
 	sem_init(&semProcesoInterrumpido,0,0);
-	sem_init(&semProcesosOrdenados, 0, 0);
+	//sem_init(&semProcesosOrdenados, 0, 0);
 	sem_init(&semSrt, 0, 0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
@@ -43,7 +44,6 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLAEXIT, NULL);
 	pthread_mutex_init(&semEnviarDispatch, NULL);
 	//pthread_mutex_init(&semInterrumpirCPU, NULL);
-
 	pcbDesalojado=NULL;
 
 	pthread_t conexion_con_consola;
@@ -122,6 +122,7 @@ void conectarse_con_cpu()
 					break;
 				case BLOCKED : 
 					procesoABlocked = recibir_pcb(socket_dispatch);
+					recalcularEstimacion(procesoABlocked);
 					//agregar mutex
 					queue_push(estadoBlock, procesoABlocked);
 					sem_post(&semProcesosEnBlock);
@@ -130,7 +131,7 @@ void conectarse_con_cpu()
 					break;
 				case PROCESODESALOJADO : 
 					//se almacena en la var global el pcb desalojado
-					pcbDesalojado = recibir_pcb(socket_interrupt);
+					pcbDesalojado = recibir_pcb(socket_dispatch);
 					//agregar mutex
 					sem_post(&semProcesoInterrumpido);
 				default:
@@ -141,7 +142,12 @@ void conectarse_con_cpu()
 }
 
 
-
+void recalcularEstimacion(pcb* proceso){
+	double alfa= valores_generales->alfa;
+	uint32_t realAnterior= proceso->cpu_anterior ;
+	uint32_t estimadoAnterior= proceso->estimacion_rafaga_anterior;
+	proceso->estimacion_rafaga_actual= (realAnterior* alfa) + (estimadoAnterior * (1-alfa));
+}
 
 uint32_t conectarse_con_memoria()
 {
