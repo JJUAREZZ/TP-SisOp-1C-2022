@@ -1,4 +1,5 @@
 #include "../include/planificadores.h"
+#include "../include/utils.h"
 #include "../../shared/include/estructuras.h"
 #include "sys/time.h"
 #include <unistd.h>
@@ -184,8 +185,9 @@ void *planificadorAMedianoPlazo(){
 	
 		if(tiempoIO < tiempoMaxBlock){
 			usleep(tiempoIO);
+			procesoIO->programCounter = procesoIO->programCounter + 1;
 			queue_push(estadoReady, procesoIO);
-			printf("Proceso bloqueado enviado devuelta a ready");
+			printf("\nProceso bloqueado enviado devuelta a ready\n");
 			sem_post(&semProcesosEnReady);
 			break;
 		}
@@ -195,8 +197,8 @@ void *planificadorAMedianoPlazo(){
 		gettimeofday(&initialBlock, NULL);
 		usleep(tiempoMaxBlock);
 		gettimeofday(&finalBlock, NULL);
-
-		uint32_t tiempoBloqueo = finalBlock.tv_usec - initialBlock.tv_usec;
+		uint32_t tiempoBloqueo = time_diff_Mediano(&initialBlock, &finalBlock);
+		ceil(tiempoBloqueo);
 		uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
 		queue_push(estadoBlockSusp, procesoIO);
 		printf("Proceso bloqueado enviado a suspendido.");
@@ -204,6 +206,7 @@ void *planificadorAMedianoPlazo(){
 		//TODO: Enviar mensaje a memoria.
 
 		pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
+		procesoIO->programCounter = procesoIO->programCounter + 1;
 		queue_push(estadoReadySusp, procesoASuspReady);
 		printf("Proceso enviado a suspended ready.");
 		break;

@@ -130,12 +130,10 @@ void conectarse_con_cpu()
 					break;
 				case BLOCKED : 
 					procesoABlocked = recibir_pcb(socket_dispatch);
-					printf("Proceso recibido para bloquear");
-					//calcularEstimacionPcbBloqueado(procesoABlocked);
-					recalcularEstimacion(procesoABlocked);
-					//agregar mutex
+					printf("\nProceso %d recibido para bloquear\n", procesoABlocked->id);
+					calcularEstimacionPcbBloqueado(procesoABlocked);
 					queue_push(estadoBlock, procesoABlocked);
-					printf("Proceso enviado a bloqueado");
+					printf("Proceso %d enviado a bloqueado\n", procesoABlocked->id);
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
 					sem_post(&semProcesoInterrumpido);

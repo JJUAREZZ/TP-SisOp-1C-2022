@@ -61,5 +61,6 @@ void load_configuration();
 void paquete_uint(uint32_t* numero, uint32_t* conexion);
 void calcularEstimacionPcbBloqueado(pcb* proceso);
 void calcularEstimacionPcbDesalojado(pcb* proceso);
+float time_diff_Mediano(struct timeval *start, struct timeval *end);
 
 #endif /* SRC_UTILS_H_ */
