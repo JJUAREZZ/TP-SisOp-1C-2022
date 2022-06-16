@@ -2130,3 +2130,75 @@ EXIT
 
 [INFO] 20:02:09:846 Servidor Dispatcher/(8324:8324): Creando un hilo para atender una conexión en el socket 6
 >>>>>>> 5f799dd044e3b83c9b04c4ee34d2291aded58ac3
+[INFO] 20:34:33:985 Servidor Dispatcher/(24946:24946): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:34:33:986 Servidor Dispatcher/(24946:24946): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:34:48:510 Servidor Dispatcher/(24946:24946): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:34:48:510 Servidor Dispatcher/(24946:24946): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:34:53:994 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:34:53:994 Servidor Dispatcher/(24946:25011): id: 0
+[INFO] 20:34:53:994 Servidor Dispatcher/(24946:25011): NO_OP
+[INFO] 20:34:53:994 Servidor Dispatcher/(24946:25011): Esperando 20000 milisegundos
+[INFO] 20:35:13:994 Servidor Dispatcher/(24946:25011): Se ha recibido una interrupcion del Kernel
+[INFO] 20:35:13:994 Servidor Dispatcher/(24946:25011): Desalojando proceso: 0
+[INFO] 20:35:13:995 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:35:13:996 Servidor Dispatcher/(24946:25011): id: 0
+[INFO] 20:35:13:996 Servidor Dispatcher/(24946:25011): EXIT
+[INFO] 20:35:13:997 Servidor Dispatcher/(24946:25011): Proceso 0 enviado a exit.
+[INFO] 20:35:13:997 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:35:13:997 Servidor Dispatcher/(24946:25011): id: 1
+[INFO] 20:35:13:997 Servidor Dispatcher/(24946:25011): NO_OP
+[INFO] 20:35:13:999 Servidor Dispatcher/(24946:25011): Esperando 20000 milisegundos
+[INFO] 20:35:33:999 Servidor Dispatcher/(24946:25011): Se ha recibido una interrupcion del Kernel
+[INFO] 20:35:34:000 Servidor Dispatcher/(24946:25011): Desalojando proceso: 1
+[INFO] 20:35:34:001 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:35:34:002 Servidor Dispatcher/(24946:25011): id: 1
+[INFO] 20:35:34:003 Servidor Dispatcher/(24946:25011): EXIT
+[INFO] 20:35:34:004 Servidor Dispatcher/(24946:25011): Proceso 0 enviado a exit.
+[INFO] 20:35:34:004 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:35:34:004 Servidor Dispatcher/(24946:25011): id: 2
+[INFO] 20:35:34:004 Servidor Dispatcher/(24946:25011): NO_OP
+[INFO] 20:35:34:004 Servidor Dispatcher/(24946:25011): Esperando 20000 milisegundos
+[INFO] 20:35:54:005 Servidor Dispatcher/(24946:25011): Se ha recibido una interrupcion del Kernel
+[INFO] 20:35:54:006 Servidor Dispatcher/(24946:25011): Desalojando proceso: 2
+[INFO] 20:35:54:007 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:35:54:007 Servidor Dispatcher/(24946:25011): id: 2
+[INFO] 20:35:54:007 Servidor Dispatcher/(24946:25011): EXIT
+[INFO] 20:35:54:007 Servidor Dispatcher/(24946:25011): Proceso 0 enviado a exit.
+[INFO] 20:35:54:008 Servidor Dispatcher/(24946:25011): Recibi un proceso:
+[INFO] 20:35:54:008 Servidor Dispatcher/(24946:25011): id: 3
+[INFO] 20:35:54:008 Servidor Dispatcher/(24946:25011): NO_OP
+[INFO] 20:35:54:008 Servidor Dispatcher/(24946:25011): Esperando 20000 milisegundos
+[INFO] 20:36:14:008 Servidor Dispatcher/(24946:25011): EXIT
+[INFO] 20:36:14:009 Servidor Dispatcher/(24946:25011): Proceso 0 enviado a exit.
+[INFO] 20:38:17:778 Servidor Dispatcher/(25305:25305): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 20:38:17:778 Servidor Dispatcher/(25305:25305): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 20:38:24:659 Servidor Dispatcher/(25305:25305): Creando un hilo para atender una conexión en el socket 16
+[INFO] 20:38:24:660 Servidor Dispatcher/(25305:25305): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 20:38:27:923 Servidor Dispatcher/(25305:25333): Recibi un proceso:
+[INFO] 20:38:27:923 Servidor Dispatcher/(25305:25333): id: 0
+[INFO] 20:38:27:923 Servidor Dispatcher/(25305:25333): NO_OP
+[INFO] 20:38:27:923 Servidor Dispatcher/(25305:25333): Esperando 20000 milisegundos
+[INFO] 20:38:47:923 Servidor Dispatcher/(25305:25333): Se ha recibido una interrupcion del Kernel
+[INFO] 20:38:47:924 Servidor Dispatcher/(25305:25333): Desalojando proceso: 0
+[INFO] 20:38:47:925 Servidor Dispatcher/(25305:25333): Recibi un proceso:
+[INFO] 20:38:47:925 Servidor Dispatcher/(25305:25333): id: 0
+[INFO] 20:38:47:925 Servidor Dispatcher/(25305:25333): EXIT
+[INFO] 20:38:47:926 Servidor Dispatcher/(25305:25333): Proceso 0 enviado a exit.
+[INFO] 20:38:47:926 Servidor Dispatcher/(25305:25333): Recibi un proceso:
+[INFO] 20:38:47:927 Servidor Dispatcher/(25305:25333): id: 1
+[INFO] 20:38:47:927 Servidor Dispatcher/(25305:25333): NO_OP
+[INFO] 20:38:47:927 Servidor Dispatcher/(25305:25333): Esperando 20000 milisegundos
+[INFO] 20:39:07:928 Servidor Dispatcher/(25305:25333): Se ha recibido una interrupcion del Kernel
+[INFO] 20:39:07:928 Servidor Dispatcher/(25305:25333): Desalojando proceso: 1
+[INFO] 20:39:07:928 Servidor Dispatcher/(25305:25333): Recibi un proceso:
+[INFO] 20:39:07:928 Servidor Dispatcher/(25305:25333): id: 1
+[INFO] 20:39:07:928 Servidor Dispatcher/(25305:25333): EXIT
+[INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): Proceso 1 enviado a exit.
+[INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): Recibi un proceso:
+[INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): id: 2
+[INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): NO_OP
+[INFO] 20:39:07:929 Servidor Dispatcher/(25305:25333): Esperando 20000 milisegundos

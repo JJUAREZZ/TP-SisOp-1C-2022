@@ -121,8 +121,9 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 
 		} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
 			gettimeofday(&finalBlock, NULL); //es necesario computar el tiempo en exit?
-			devolverPcb(PROCESOTERMINATED, accepted_fd);
 			log_info(logger,"Proceso %d enviado a exit.", unPcb->id);
+			devolverPcb(PROCESOTERMINATED, accepted_fd);
+			
 			return;
 
 		}
