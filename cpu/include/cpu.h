@@ -51,13 +51,9 @@ void *conectar_dispatcher()
 		if ((accepted_fd_dispatch = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
 
 			pthread_t atenderNuevoPcb;
-			//pthread_t hiloCicloInstruccion;
-
 			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
-			//pthread_create(&hiloCicloInstruccion, NULL, ciclo_de_instruccion, accepted_fd_dispatch);
-
 			pthread_join(&atenderNuevoPcb, NULL);
-			//pthread_join(&hiloCicloInstruccion, NULL);
+
 
 			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd_dispatch);
 

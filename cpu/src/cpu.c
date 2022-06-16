@@ -83,6 +83,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 
 			gettimeofday(&finalBlock, NULL);
 			cpu_pasado = time_diff(&initialBlock, &finalBlock);
+			printf("El tiempon de ejecucion fue : %d", cpu_pasado);
 			unPcb->cpu_anterior = cpu_pasado * 1000;
 			devolverPcb(BLOCKED, accepted_fd);
 			printf("\nProceso %d enviado a bloqueado\n.", unPcb->id);
@@ -97,8 +98,6 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 		} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
 
 			gettimeofday(&finalBlock, NULL);
-			cpu_pasado = time_diff(&initialBlock, &finalBlock);
-			unPcb->cpu_anterior = cpu_pasado * 1000;
 			devolverPcb(PROCESOTERMINATED, accepted_fd);
 			printf("\nProceso %d enviado a exit.\n", unPcb->id);
 			break;

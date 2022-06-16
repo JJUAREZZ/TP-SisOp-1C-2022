@@ -108,51 +108,51 @@ void planificadorFifo(){
 
 void *planificadorAMedianoPlazo(){
 
-	pthread_mutex_lock(&COLABLOCK);
-
 	struct timeval initialBlock;
 	struct timeval finalBlock;
 
 	uint32_t tiempoMaxBlock = valores_generales->max_block;
 
 	while(1){
+
 	sem_wait(&semProcesosEnBlock);
 	
 		pcb *procesoIO = queue_pop(estadoBlock);
 		t_list *listaDeInstrucciones = procesoIO->instr;
-		int *apunteProgCounter = procesoIO->programCounter;
+		int apunteProgCounter = procesoIO->programCounter;
 		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
-		uint32_t* tiempoIO = instruccionBloqueada->param;
+		uint32_t* tiempoIO = instruccionBloqueada->param[0];
 	
 		if(tiempoIO < tiempoMaxBlock){
 			usleep(tiempoIO);
 			queue_push(estadoReady, procesoIO);
 			printf("Proceso bloqueado enviado devuelta a ready");
 			sem_post(&semProcesosEnReady);
+			break;
 		}
 
-		else if (tiempoIO > tiempoMaxBlock){
+		if (&tiempoIO > tiempoMaxBlock){
 
-			gettimeofday(&initialBlock, NULL);
-			usleep(tiempoMaxBlock);
-			gettimeofday(&finalBlock, NULL);
+		gettimeofday(&initialBlock, NULL);
+		usleep(tiempoMaxBlock);
+		gettimeofday(&finalBlock, NULL);
 
-			uint32_t tiempoBloqueo = finalBlock.tv_usec - initialBlock.tv_usec;
-			uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
-			queue_push(estadoBlockSusp, procesoIO);
-			printf("Proceso bloqueado enviado a suspendido.");
-			usleep(tiempoRestanteBloqueo);
-			//TODO: Enviar mensaje a memoria.
+		uint32_t tiempoBloqueo = finalBlock.tv_usec - initialBlock.tv_usec;
+		uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
+		queue_push(estadoBlockSusp, procesoIO);
+		printf("Proceso bloqueado enviado a suspendido.");
+		usleep(tiempoRestanteBloqueo);
+		//TODO: Enviar mensaje a memoria.
 
-			pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
-			queue_push(estadoReadySusp, procesoASuspReady);
-			printf("Proceso enviado a suspended ready.");
+		pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
+		queue_push(estadoReadySusp, procesoASuspReady);
+		printf("Proceso enviado a suspended ready.");
+		break;
 
 		}	
 		
 	}
 
-	pthread_mutex_unlock(&COLABLOCK);
 }
 
 
