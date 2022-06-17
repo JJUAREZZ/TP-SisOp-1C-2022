@@ -841,3 +841,50 @@
 [INFO] 20:47:06:665 Servidor/(26243:26249): Creando un hilo para atender una conexión en el socket 15
 [INFO] 20:47:09:467 Servidor/(26243:26249): Creando un hilo para atender una conexión en el socket 15
 [INFO] 20:47:09:470 Servidor/(26243:26249): Creando un hilo para atender una conexión en el socket 21
+[INFO] 21:11:15:733 Servidor/(28665:28671): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 21:13:13:295 Servidor Dispatcher/(29234:29234): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 21:13:13:295 Servidor Dispatcher/(29234:29234): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 21:13:21:283 Servidor Dispatcher/(29234:29234): Creando un hilo para atender una conexión en el socket 16
+[INFO] 21:13:21:287 Servidor Dispatcher/(29234:29234): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 21:13:46:554 Servidor Dispatcher/(29234:29270): Recibi un proceso:
+[INFO] 21:13:46:554 Servidor Dispatcher/(29234:29270): id: 0
+[INFO] 21:13:46:554 Servidor Dispatcher/(29234:29270): NO_OP
+[INFO] 21:13:46:554 Servidor Dispatcher/(29234:29270): Esperando 20000 milisegundos
+[INFO] 21:18:53:052 Servidor Dispatcher/(29740:29740): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 21:18:53:052 Servidor Dispatcher/(29740:29740): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 21:18:56:602 Servidor Dispatcher/(29740:29740): Creando un hilo para atender una conexión en el socket 16
+[INFO] 21:18:56:609 Servidor Dispatcher/(29740:29740): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 21:18:58:510 Servidor Dispatcher/(29740:29767): Recibi un proceso:
+[INFO] 21:18:58:510 Servidor Dispatcher/(29740:29767): id: 0
+[INFO] 21:18:58:510 Servidor Dispatcher/(29740:29767): NO_OP
+[INFO] 21:19:02:735 Servidor Dispatcher/(29740:29767): Esperando 20000 milisegundos
+[INFO] 21:20:10:553 Servidor Dispatcher/(29740:29767): Se ha recibido una interrupcion del Kernel
+[INFO] 21:20:11:123 Servidor Dispatcher/(29740:29767): Desalojando proceso: 0
+[INFO] 21:20:14:203 Servidor Dispatcher/(29740:29767): Recibi un proceso:
+[INFO] 21:20:14:203 Servidor Dispatcher/(29740:29767): id: 0
+[INFO] 21:20:14:203 Servidor Dispatcher/(29740:29767): I/O
+[INFO] 21:21:43:196 Servidor Dispatcher/(29740:29767): El tiempo de ejecucion fue : 68483
+[INFO] 21:23:06:801 Servidor Dispatcher/(29740:29767): Proceso 0 enviado a bloqueado.
+[INFO] 21:23:18:366 Servidor Dispatcher/(29740:29767): Recibi un proceso:
+[INFO] 21:23:18:999 Servidor Dispatcher/(29740:29767): id: 1
+[INFO] 21:23:19:962 Servidor Dispatcher/(29740:29767): NO_OP
+[INFO] 21:23:21:843 Servidor Dispatcher/(29740:29767): Esperando 20000 milisegundos
+[INFO] 14:27:42:737 Servidor/(20893:20902): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:28:07:505 Servidor/(20893:20902): Creando un hilo para atender una conexión en el socket 20
+[INFO] 14:28:08:205 Servidor/(20893:20902): Creando un hilo para atender una conexión en el socket 21
+[INFO] 14:29:50:210 Servidor/(21138:21146): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:30:12:665 Servidor/(21398:21406): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:31:03:582 Servidor/(21398:21406): Creando un hilo para atender una conexión en el socket 15
+[INFO] 14:31:04:308 Servidor/(21398:21406): Creando un hilo para atender una conexión en el socket 21
+[INFO] 14:41:48:678 Servidor/(22504:22513): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:41:57:506 Servidor/(22504:22513): Creando un hilo para atender una conexión en el socket 15
+[INFO] 14:41:58:449 Servidor/(22504:22513): Creando un hilo para atender una conexión en el socket 21

@@ -9,6 +9,7 @@ sem_t semEnviarDispatch;
 sem_t semProcesoInterrumpido;
 sem_t semProcesosEnReady;
 sem_t semProcesosEnBlock;
+sem_t semProcesosEnSuspReady;
 sem_t semProcesosEnRunning;
 sem_t semProcesosEnExit;
 sem_t semProcesosEnNew;

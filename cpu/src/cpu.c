@@ -98,19 +98,18 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			//lo multiplico por 1000 porque usleep recibe el tiempo en microsegundos
 			gettimeofday(&finalBlock, NULL);
 			cpu_pasado = time_diff(&initialBlock, &finalBlock);
-			ceil(cpu_pasado);
 			unPcb->cpu_anterior+= cpu_pasado;
 			
 		} else if(strcmp(nombreInstruccion, "I/O") == 0){
 			gettimeofday(&finalBlock, NULL);
 			cpu_pasado = time_diff(&initialBlock, &finalBlock);
-			ceil(cpu_pasado);
-
-			log_info(logger,"El tiempo de ejecucion fue : %d", cpu_pasado);
-
 			unPcb->cpu_anterior+= cpu_pasado;
+			log_info(logger,"El tiempo de ejecucion fue : %d", unPcb->cpu_anterior);
+
+			
 			devolverPcb(BLOCKED, accepted_fd);
 			log_info(logger,"Proceso %d enviado a bloqueado.", unPcb->id);
+			interrupcion =0; //no checkea interrupciones, así que la pone en 0
 			return;
 
 		} else if(strcmp(nombreInstruccion, "READ") == 0){

@@ -26,6 +26,7 @@ void kernel_server_init(){
 	sem_init(&semProcesosEnExit,0,0);
 	sem_init(&semProcesosEnNew,0,0);
 	sem_init(&semProcesoInterrumpido,0,0);
+	sem_init(&semProcesosEnSuspReady,0,0);
 	sem_init(&semProcesosOrdenados, 0, 0);
 	sem_init(&semProcesoCpu, 0, 0);
 	//sem_init(&semProcesosOrdenados, 0, 0);
@@ -41,8 +42,8 @@ void kernel_server_init(){
 	pthread_mutex_init(&COLAREADY, NULL);
 	pthread_mutex_init(&COLAEXEC, NULL);
 	pthread_mutex_init(&COLABLOCK, NULL);
-	pthread_mutex_init(&COLABLOCKREADY, NULL);
-	pthread_mutex_init(&COLABLOCKSUSP, NULL);
+	pthread_mutex_init(&COLASUSPBLOCKED, NULL);
+	pthread_mutex_init(&COLASUSPREADY, NULL);
 	pthread_mutex_init(&COLAEXIT, NULL);
 	pthread_mutex_init(&PROCDESALOJADO, NULL);
 	pthread_mutex_init(&semEnviarDispatch, NULL);
@@ -58,12 +59,12 @@ void kernel_server_init(){
 	pthread_create(&conexion_con_cpu, NULL, conectarse_con_cpu, NULL);
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
-	//pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
+	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
 
 	pthread_join(conexion_con_consola, NULL);
 	pthread_join(planiALargoPlazo, NULL);
 	pthread_join(planiACortoPlazo, NULL);
-	//pthread_join(planiAMedianoPlazo, NULL);
+	pthread_join(planiAMedianoPlazo, NULL);
 }
 
 void *conectarse_con_consola()
@@ -131,12 +132,14 @@ void conectarse_con_cpu()
 				case BLOCKED : 
 					procesoABlocked = recibir_pcb(socket_dispatch);
 					printf("\nProceso %d recibido para bloquear\n", procesoABlocked->id);
-					calcularEstimacionPcbBloqueado(procesoABlocked);
+					recalcularEstimacion(procesoABlocked);
 					queue_push(estadoBlock, procesoABlocked);
 					printf("Proceso %d enviado a bloqueado\n", procesoABlocked->id);
+					sem_post(&semSrt);
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
-					sem_post(&semProcesoInterrumpido);
+					if (interrupcion ==1)
+						sem_post(&semProcesoInterrumpido);
 					break;
 				case PROCESODESALOJADO : 
 					/*
@@ -159,6 +162,7 @@ void conectarse_con_cpu()
 
 
 void recalcularEstimacion(pcb* proceso){
+	proceso->estimacion_rafaga_anterior = proceso->estimacion_rafaga_actual;
 	double alfa= valores_generales->alfa;
 	uint32_t realAnterior= proceso->cpu_anterior ;
 	uint32_t estimadoAnterior= proceso->estimacion_rafaga_anterior;

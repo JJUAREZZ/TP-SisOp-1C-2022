@@ -7,8 +7,6 @@
 //*****************************planificador a corto plazo****************************
 
 void *planificadorACortoPlazo(){
-	//pthread_mutex_lock(&COLABLOCKREADY);
-
 	int utilizarFifo = strcmp(valores_generales->alg_planif, "FIFO");
 	int utilizarSrt = strcmp(valores_generales->alg_planif, "SRT");
 
@@ -114,10 +112,11 @@ while(1){
 		pcb* proceso= queue_peek(estadoReady);
 		//se interrumpe a la cpu para que mande el pcb y se queda a la espera
 		uint32_t interrupt= DESALOJARPROCESO;
+		interrupcion=1;
 		send(socket_interrupt, &interrupt, sizeof(uint32_t), 0);
 		printf("\nInterrupcion enviada a CPU\n");
 		sem_wait(&semProcesoInterrumpido); //blocked y pcbdesalojado le dan signal 
-
+		interrupcion=0;
 		if(pcbDesalojado == NULL){
 			paquete_pcb(proceso, socket_dispatch);
 			printf("\nNo hay procesos en CPU");
@@ -129,9 +128,9 @@ while(1){
 		//si la rafaga del desalojado es menor se devuelve a cpu
 		else if((pcbDesalojado->estimacion_rafaga_actual - pcbDesalojado->cpu_anterior)
 				<= proceso->estimacion_rafaga_actual){
+			liberarPcb(queue_pop(estadoExec));//elimina el pcb viejo
 			paquete_pcb(pcbDesalojado, socket_dispatch);
 			printf("\nProceso desalojado %d devuelto a CPU\n", pcbDesalojado->id);
-			liberarPcb(queue_pop(estadoExec));//elimina el pcb viejo
 			queue_push(estadoExec, pcbDesalojado);
 			pcbDesalojado =NULL;
 		}
@@ -168,54 +167,104 @@ void planificadorFifo(){
 
 void *planificadorAMedianoPlazo(){
 
+ pthread_t hilo1;
+ pthread_t  hilo2;
+ pthread_create(&hilo1,NULL,enviarProcesosDeSuspendedReadyAReady,NULL);
+ pthread_create(&hilo2,NULL,bloquearProcesos,NULL);
+
+ pthread_detach(hilo1);
+ pthread_detach(hilo2);
+
+}
+
+
+void *bloquearProcesos(){
 	struct timeval initialBlock;
 	struct timeval finalBlock;
-
 	uint32_t tiempoMaxBlock = valores_generales->max_block;
 
 	while(1){
-
-	sem_wait(&semProcesosEnBlock);
+		sem_wait(&semProcesosEnBlock);
 	
-		pcb *procesoIO = queue_pop(estadoBlock);
+		pcb *procesoIO = queue_peek(estadoBlock);
+		liberarPcb(queue_pop(estadoExec));
 		t_list *listaDeInstrucciones = procesoIO->instr;
 		int apunteProgCounter = procesoIO->programCounter;
 		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
-		uint32_t* tiempoIO = instruccionBloqueada->param[0];
+		uint32_t tiempoIO = instruccionBloqueada->param[0];
 	
 		if(tiempoIO < tiempoMaxBlock){
-			usleep(tiempoIO);
-			procesoIO->programCounter = procesoIO->programCounter + 1;
+			usleep(tiempoIO*1000);
+			procesoIO->programCounter += 1;
+			queue_pop(estadoBlock);
 			queue_push(estadoReady, procesoIO);
-			printf("\nProceso bloqueado enviado devuelta a ready\n");
+			printf("\nProceso %d bloqueado enviado devuelta a ready\n", procesoIO->id);
+			sem_post(&semSrt);
 			sem_post(&semProcesosEnReady);
-			break;
+			continue;
 		}
 
-		if (&tiempoIO > tiempoMaxBlock){
+		if(tiempoIO > tiempoMaxBlock){
+			gettimeofday(&initialBlock, NULL);
+			usleep(tiempoMaxBlock*1000);
+			gettimeofday(&finalBlock, NULL);
+			uint32_t tiempoBloqueo = time_diff_Mediano(&initialBlock, &finalBlock);
+			uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
+			queue_pop(estadoBlock);
+			queue_push(estadoBlockSusp, procesoIO);
+			printf("\nProceso %d bloqueado enviado a suspendido.\n", procesoIO->id);
+			usleep(tiempoRestanteBloqueo*1000);
+			//TODO: Enviar mensaje a memoria.
 
-		gettimeofday(&initialBlock, NULL);
-		usleep(tiempoMaxBlock);
-		gettimeofday(&finalBlock, NULL);
-		uint32_t tiempoBloqueo = time_diff_Mediano(&initialBlock, &finalBlock);
-		ceil(tiempoBloqueo);
-		uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
-		queue_push(estadoBlockSusp, procesoIO);
-		printf("Proceso bloqueado enviado a suspendido.");
-		usleep(tiempoRestanteBloqueo);
-		//TODO: Enviar mensaje a memoria.
-
-		pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
-		procesoIO->programCounter = procesoIO->programCounter + 1;
-		queue_push(estadoReadySusp, procesoASuspReady);
-		printf("Proceso enviado a suspended ready.");
-		break;
-
+			pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
+			procesoIO->programCounter +=1;
+			pthread_mutex_lock(&COLASUSPREADY);
+			queue_push(estadoReadySusp, procesoASuspReady);
+			pthread_mutex_unlock(&COLASUSPREADY);
+			sem_post(&semProcesosEnSuspReady);
+			printf("\nProceso %d enviado a suspended ready.\n",procesoIO->id);
+			continue;
 		}	
-		
 	}
-
 }
+
+void *enviarProcesosDeSuspendedReadyAReady(){
+	while(1)
+	 {
+		sem_wait(&semProcesosEnSuspReady);
+		pthread_mutex_lock(&COLAREADY);
+		pthread_mutex_lock(&COLAEXEC);
+		pthread_mutex_lock(&COLABLOCK);
+		uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+
+										 queue_size(estadoReady)+
+										 queue_size(estadoExec);
+		if(gradoDeMultiProgActual < valores_generales->grad_multiprog && 
+			queue_size (estadoReadySusp)>0)
+		 {	
+			pthread_mutex_lock(&COLASUSPREADY);
+			pcb *procesoAReady = queue_pop(estadoReadySusp);
+			pthread_mutex_unlock(&COLASUSPREADY); 
+
+			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
+			if(tablaDePaginas <0){
+				perror("Error al asignar memoria al proceso");
+				return EXIT_FAILURE;
+			}
+			procesoAReady->tablaDePaginas = tablaDePaginas;
+			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
+			printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
+
+			queue_push(estadoReady, procesoAReady);
+		 }
+		pthread_mutex_unlock(&COLAREADY);
+		pthread_mutex_unlock(&COLAEXEC);
+		pthread_mutex_unlock(&COLABLOCK);
+		sem_post(&semProcesosEnReady);
+		sem_post(&semSrt);
+	 }
+}
+
+	
 
 
 //*****************************planificador a largo plazo******************************
@@ -356,5 +405,7 @@ void planificadorALargoPlazo()
 		 sem_post(&semSrt);
 		 sem_post(&semProcesoInterrumpido);
 		 sem_post(&semProcesosEnRunning);
+	     sem_post(&semProcesosEnNew);
+		 sem_post(&semProcesosEnSuspReady);
 	 }
 }

@@ -15,8 +15,8 @@ pthread_mutex_t COLANEW;
 pthread_mutex_t COLAREADY;
 pthread_mutex_t COLAEXEC;
 pthread_mutex_t COLABLOCK;
-pthread_mutex_t COLABLOCKREADY;
-pthread_mutex_t COLABLOCKSUSP;
+pthread_mutex_t COLASUSPREADY;
+pthread_mutex_t COLASUSPBLOCKED;
 pthread_mutex_t COLAEXIT;
 pthread_mutex_t NRODEPROCESO;
 pthread_mutex_t PROCDESALOJADO;
@@ -33,6 +33,8 @@ void planificadorFifo();
 //Planificador a mediano plazo.
 
 void *planificadorAMedianoPlazo();
+void *bloquearProcesos();
+void *enviarProcesosDeSuspendedReadyAReady();
 
 //planificador a largo plazo
 

@@ -68,10 +68,11 @@ void calcularEstimacionPcbDesalojado(pcb* proceso){
 
 float time_diff_Mediano(struct timeval *start, struct timeval *end)
 {
-    int seconds  = end->tv_sec  - start->tv_sec;
-    int useconds = end->tv_usec - start->tv_usec;
+    float seconds  = end->tv_sec  - start->tv_sec;
+    float useconds = end->tv_usec - start->tv_usec;
 
-    float tiempo_dif = ((seconds) * 1000 + useconds/1000.0) + 0.5;
+    float tiempo_dif = seconds * 1000.0;
+	tiempo_dif+= useconds/1000.0;
    // float tiempo_dif = (end->tv_sec - start->tv_sec) + 1e-6*(end->tv_usec - start->tv_usec);
     return tiempo_dif;
 }
