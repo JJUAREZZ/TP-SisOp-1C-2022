@@ -2,6 +2,7 @@
 #define SRC_UTILS_H_
 #include "../../shared/include/sockets.h"
 #include <commons/config.h>
+#include <commons/bitarray.h>
 #include <commons/log.h>
 #include <pthread.h>
 
@@ -16,6 +17,29 @@ typedef struct{
     int retardoSwap;
     char* pathSwap; 
 } gralMemoria;
+
+typedef struct{
+    t_bitarray *bitmap_memoria;
+    uint32_t *memoria_principal [];
+} t_bloque_memoria;
+
+typedef struct{
+    uint32_t id_primer_nivel;
+    uint32_t *tablas_asociadas [];
+} t_tabla_de_primer_nivel;
+
+typedef struct{
+    uint32_t id_pagina;
+    uint32_t *marco;
+    uint32_t bit_presencia; // o utilizar bitmap.
+    uint32_t bit_uso;
+    uint32_t bit_modificado;
+} t_paginas_en_tabla;
+
+typedef struct{
+    uint32_t id_segundo_nivel;
+    t_paginas_en_tabla *paginas[];
+} t_tabla_segundo_nivel;
 
 gralMemoria *valores_generales_memoria;
 
@@ -40,11 +64,5 @@ void load_configuration(){
     valores_generales_memoria->pathSwap = config_get_string_value(config, "PATH_SWAP");
 
 }
-
-
-
-
-
-
 
 #endif /* SRC_MEMORIA_H_ */

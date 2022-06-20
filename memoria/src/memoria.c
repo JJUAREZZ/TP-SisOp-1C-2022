@@ -6,10 +6,12 @@
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexion(uint32_t );
 uint32_t memoria_socket;
+pcb *unPcb;
 
 int main()
 {
     load_configuration();
+	crear_memoria_principal();
 
     struct sockaddr_in client_info;
 	socklen_t addrlen = sizeof client_info;
@@ -58,7 +60,7 @@ void *atenderConexion(uint32_t socket)
 
 void *retornar_id_tabla_de_pagina(uint32_t socket)
 {
-	pcb *unPcb= recibir_pcb(socket);
+	unPcb= recibir_pcb(socket);
 	int id= unPcb->id +5; //LUEGO HAY QUE VER COMO ASIGNAMOS ESE ID.
 	printf("\nRecibi un proceso: nroDeProceso= %d", unPcb->id);
 	printf("\nAsignando tabla de pagina: id= %d\n",id);
