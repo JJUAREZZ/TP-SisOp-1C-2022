@@ -96,9 +96,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			log_info(logger,"Esperando %d milisegundos",cpu_config->retar_noop*instruccion->param[0]);
 			usleep(cpu_config->retar_noop*instruccion->param[0]*1000);  
 			//lo multiplico por 1000 porque usleep recibe el tiempo en microsegundos
-			gettimeofday(&finalBlock, NULL);
-			cpu_pasado = time_diff(&initialBlock, &finalBlock);
-			unPcb->cpu_anterior+= cpu_pasado;
+			// NO hace falta un gettimeofday aca
 			
 		} else if(strcmp(nombreInstruccion, "I/O") == 0){
 			gettimeofday(&finalBlock, NULL);
@@ -113,6 +111,8 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			return;
 
 		} else if(strcmp(nombreInstruccion, "READ") == 0){
+			uint32_t marco = mmu(READ, instruccion->param[0]);
+			printf("El marco es: %d\n", marco);
 
 		} else if(strcmp(nombreInstruccion, "WRITE") == 0){
 
@@ -156,6 +156,31 @@ void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
 	enviar_paquete(paquete, accepted_fd);
 	eliminar_paquete(paquete);
 	liberarPcb(unPcb);
+}
+
+void mmu(op_code op_co, uint32_t direc_logica){
+	// Primer acceso a memoria 
+	uint32_t marco;
+	int conexion= conectarse_con_memoria(); 
+	t_paquete *paquete= crear_paquete(op_co);
+	enviar_paquete(paquete, conexion);
+
+	recv(conexion, &marco, sizeof(uint32_t), MSG_WAITALL); 
+	eliminar_paquete(paquete);
+	return marco;
+
+	/*uint32_t numero_pagina = floor(direc_logica / 64)
+	uint32_t entrada_tabla_1er_nivel = floor(numero_pagina / 4)
+	uint32_t entrada_tabla_2do_nivel = numero_pagina % 4
+	uint32_t desplazamiento = direc_logica - numero_pagina * 64*/
+}
+
+int conectarse_con_memoria()
+{
+	int conexion= socket_connect_to_server(cpu_config->ip_memoria, cpu_config->puerto_memoria);
+	if(conexion<0)
+		return EXIT_FAILURE;
+	return conexion;
 }
 
 //*** UTILIZAR sem_post(&semEnviarDispatch); CUANDO LA CPU ESTE DESOCUPADA ***

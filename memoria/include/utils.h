@@ -26,7 +26,7 @@ typedef struct{
 typedef struct{
     uint32_t id_primer_nivel;
     uint32_t *tablas_asociadas [];
-} t_tabla_de_primer_nivel;
+} t_tabla_primer_nivel;
 
 typedef struct{
     uint32_t id_pagina;

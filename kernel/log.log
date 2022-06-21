@@ -19334,3 +19334,23 @@
 [INFO] 18:58:12:001 Servidor/(15582:15583): Creando un hilo para atender una conexión en el socket 8
 [INFO] 18:58:26:035 Servidor/(15582:15583): Creando un hilo para atender una conexión en el socket 7
 [INFO] 18:58:34:339 Servidor/(15582:15583): Creando un hilo para atender una conexión en el socket 8
+[INFO] 19:07:08:297 Servidor/(15954:15955): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:07:34:134 Servidor/(16064:16065): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:07:52:987 Servidor/(16064:16065): Creando un hilo para atender una conexión en el socket 6
+[INFO] 19:18:16:280 Servidor/(16637:16638): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 19:18:36:557 Servidor/(16637:16638): Creando un hilo para atender una conexión en el socket 6
+[INFO] 20:13:11:699 Servidor/(18730:18731): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:13:19:209 Servidor/(18730:18731): Creando un hilo para atender una conexión en el socket 7
+[INFO] 20:13:34:607 Servidor/(18750:18751): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:13:45:042 Servidor/(18750:18751): Creando un hilo para atender una conexión en el socket 7
+[INFO] 20:15:35:457 Servidor/(18937:18938): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:15:37:897 Servidor/(18937:18938): Creando un hilo para atender una conexión en el socket 7
+[INFO] 20:16:30:790 Servidor/(19022:19023): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:16:33:269 Servidor/(19022:19023): Creando un hilo para atender una conexión en el socket 7

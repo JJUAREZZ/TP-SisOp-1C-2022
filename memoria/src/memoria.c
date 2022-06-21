@@ -59,9 +59,12 @@ void *atenderConexion(uint32_t socket)
 		case TABLADEPAGINA:
 			retornar_id_tabla_de_pagina(socket);
 			//pthread_create(&hilo, NULL, retornar_id_tabla_de_pagina, socket);
+			
 			// SEGUN LA CATEDRA MEMORIA SOLO VA A TENER 2 HILOS UNO PARA ATENER A KERNEL Y OTRO PARA ATENDER A CPU
 			// NO PODEMOS CREAR UN HILO POR CADA PETICION DISTINTA QUE SE QUIERA HACER (TABLAPAGINA, READ, WRITE, ETC)
 			break;
+		case READ:
+			devolver_marco(socket);
 		default:
 			;
 		}
@@ -82,7 +85,7 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 
 uint32_t crear_tabla_del_proceso(pcb *unPcb)
 {
-	t_tabla_de_primer_nivel *tabla_primer_nivel = malloc(sizeof(t_tabla_de_primer_nivel));
+	t_tabla_primer_nivel *tabla_primer_nivel = malloc(sizeof(t_tabla_primer_nivel));
 	tabla_primer_nivel->id_primer_nivel = id_tabla_primer_nivel;
 	id_tabla_primer_nivel++;
 	uint32_t nro_paginas = unPcb->tamanioProceso / valores_generales_memoria->tamPagina;
@@ -119,6 +122,23 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 	pagina->bit_presencia = 0;
 	pagina->bit_uso = 0;
 	pagina->bit_modificado = 0;
+	pagina->marco = 1;
 
 	return pagina;
+}
+
+void devolver_marco(uint32_t socket) 
+{
+	// arbitrariamente voy a la primer pagina de la primer tabla
+	t_tabla_primer_nivel *tabla_primer_nivel = list_get(tablas_primer_nivel_list, 0);
+	uint32_t id_tabla_segundo_level = tabla_primer_nivel->tablas_asociadas[0];
+	t_tabla_segundo_nivel *tabla_segundo_nivel = list_get(tablas_segundo_nivel_list, id_tabla_segundo_level);
+	t_paginas_en_tabla *pagina =  tabla_segundo_nivel->paginas[0];
+	uint32_t marco = pagina->marco;
+
+	printf("\nTe devuevlo el marco nro: %d\n", marco);
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&marco,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
+
 }
