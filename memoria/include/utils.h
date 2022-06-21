@@ -56,7 +56,7 @@ void load_configuration(){
     valores_generales_memoria->puertoMemoria = config_get_string_value(config, "PUERTO_ESCUCHA");
     valores_generales_memoria->tamMemoria = config_get_int_value(config, "TAM_MEMORIA");
     valores_generales_memoria->tamPagina = config_get_int_value(config, "TAM_PAGINA");
-    valores_generales_memoria->pagPorTabla = config_get_int_value(config, "PAGINAS_POR_TABLA");
+    valores_generales_memoria->pagPorTabla = config_get_int_value(config, "ENTRADAS_POR_TABLA");
     valores_generales_memoria->retardoMemoria = config_get_int_value(config, "RETARDO_MEMORIA");
     valores_generales_memoria->algoReemplazo = config_get_string_value(config, "ALGORITMO_REEMPLAZO");
     valores_generales_memoria->marcPorProceso = config_get_int_value(config, "MARCOS_POR_PROCESO");

@@ -12,6 +12,10 @@ t_list tablasDePrimerNivel;
 t_list tablasDeSegundoNivel;
 t_bloque_memoria memPrincipal;
 
+uint32_t id_tabla_primer_nivel;
+uint32_t id_tabla_segundo_nivel;
+
+
 //INICIALIZAR MEMORIA COMO SERVIDOR DE KERNEL Y CPU
 memoria_init_server(){
 
