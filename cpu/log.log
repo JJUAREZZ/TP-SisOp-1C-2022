@@ -3376,3 +3376,7 @@ EXIT
 [INFO] 19:07:31:778 Servidor Dispatcher/(12382:12455): id: 2
 [INFO] 19:07:31:778 Servidor Dispatcher/(12382:12455): EXIT
 [INFO] 19:07:31:778 Servidor Dispatcher/(12382:12455): Proceso 2 enviado a exit.
+[INFO] 16:02:40:452 Servidor Dispatcher/(5099:5099): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:02:40:452 Servidor Dispatcher/(5099:5099): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+

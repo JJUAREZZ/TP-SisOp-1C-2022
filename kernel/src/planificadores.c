@@ -188,9 +188,7 @@ void *bloquearProcesos(){
 
 	while(1){
 		sem_wait(&semProcesosEnBlock);
-	
 		pcb *procesoIO = queue_peek(estadoBlock);
-		liberarPcb(queue_pop(estadoExec));
 		t_list *listaDeInstrucciones = procesoIO->instr;
 		int apunteProgCounter = procesoIO->programCounter;
 		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
@@ -256,14 +254,13 @@ void *enviarProcesosDeSuspendedReadyAReady(){
 			procesoAReady->tablaDePaginas = tablaDePaginas;
 			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
 			printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
-
 			queue_push(estadoReady, procesoAReady);
+			sem_post(&semProcesosEnReady);
+			sem_post(&semSrt);
 		 }
 		pthread_mutex_unlock(&COLAREADY);
 		pthread_mutex_unlock(&COLAEXEC);
 		pthread_mutex_unlock(&COLABLOCK);
-		sem_post(&semProcesosEnReady);
-		sem_post(&semSrt);
 	 }
 }
 
@@ -360,36 +357,39 @@ void planificadorALargoPlazo()
 	 while(1)
 	 {
 		sem_wait(&semProcesosEnNew);
+		sem_wait(&semProcesosEn)
 		pthread_mutex_lock(&COLAREADY);
 		pthread_mutex_lock(&COLAEXEC);
 		pthread_mutex_lock(&COLABLOCK);
-		uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+
+		if(queue_is_empty(estadoReadySusp)){
+			uint32_t gradoDeMultiProgActual= queue_size(estadoBlock)+
 										 queue_size(estadoReady)+
 										 queue_size(estadoExec);
-		if(gradoDeMultiProgActual < valores_generales->grad_multiprog && 
-			queue_size (estadoNew)>0)
-		 {	
-			pthread_mutex_lock(&COLANEW);
-			pcb *procesoAReady = queue_pop(estadoNew);
-			pthread_mutex_unlock(&COLANEW); 
+			if(gradoDeMultiProgActual < valores_generales->grad_multiprog && 
+				queue_size (estadoNew)>0)
+			{	
+				pthread_mutex_lock(&COLANEW);
+				pcb *procesoAReady = queue_pop(estadoNew);
+				pthread_mutex_unlock(&COLANEW); 
 
-			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
-			if(tablaDePaginas <0){
-				perror("Error al asignar memoria al proceso");
-				return EXIT_FAILURE;
+				uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
+				if(tablaDePaginas <0){
+					perror("Error al asignar memoria al proceso");
+					return EXIT_FAILURE;
+				}
+				procesoAReady->tablaDePaginas = tablaDePaginas;
+				printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
+				printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
+
+				queue_push(estadoReady, procesoAReady);
+				sem_post(&semProcesosEnReady);
+				sem_post(&semSrt);
 			}
-			procesoAReady->tablaDePaginas = tablaDePaginas;
-			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
-			printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
-
-			queue_push(estadoReady, procesoAReady);
-		 }
+		}
+		
 		pthread_mutex_unlock(&COLAREADY);
 		pthread_mutex_unlock(&COLAEXEC);
 		pthread_mutex_unlock(&COLABLOCK);
-		sem_post(&semProcesosEnReady);
-		sem_post(&semSrt);
-
 	 }
  }
 
