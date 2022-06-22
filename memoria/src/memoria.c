@@ -1,7 +1,11 @@
 #include "../include/memoria.h"
 #include "../include/utils.h"
 #include "../../shared/include/serializacion.h"
-
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <sys/mman.h>
 
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexion(uint32_t );
@@ -10,6 +14,7 @@ uint32_t crear_tabla_segundo_nivel(uint32_t);
 t_paginas_en_tabla *crear_paginas(uint32_t); 
 uint32_t memoria_socket;
 pcb *unPcb;
+uint32_t *archivoswap;
 
 t_list *tablas_primer_nivel_list;
 t_list *tablas_segundo_nivel_list;
@@ -58,6 +63,7 @@ void *atenderConexion(uint32_t socket)
 		{
 		case TABLADEPAGINA:
 			retornar_id_tabla_de_pagina(socket);
+
 			//pthread_create(&hilo, NULL, retornar_id_tabla_de_pagina, socket);
 			
 			// SEGUN LA CATEDRA MEMORIA SOLO VA A TENER 2 HILOS UNO PARA ATENER A KERNEL Y OTRO PARA ATENDER A CPU
@@ -76,12 +82,46 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 {
 	unPcb = recibir_pcb(socket);
 	uint32_t idTabla = crear_tabla_del_proceso(unPcb);
+
+	//Creo el archivo swap.
+	char* nroProceso [2];
+	sprintf(nroProceso, "%d", unPcb->id);
+	char* procesSwap;
+	procesSwap = strcat(nroProceso, ".swap");
+	char* nombreDirec;
+	nombreDirec = strcat(valores_generales_memoria->pathSwap, "/");
+	char* nombreArchivo;
+	nombreArchivo = strcat(nombreDirec, nroProceso);
+	printf("Archivo swap del proceso Creado: %s \n", nombreArchivo);
+	archivoswap = open(nombreArchivo, O_CREAT, O_RDWR);
+
+	if(archivoswap == -1){
+		printf("Error al crear el archivo swap del proceso %n \n", unPcb->id);
+		exit(1);
+	}
+
+	//Cargo el archivo de swap en 0;
+	uint32_t cantidad_paginas_necesarias = unPcb->tamanioProceso / valores_generales_memoria->tamPagina;
+
+	if(unPcb->tamanioProceso % valores_generales_memoria->tamPagina != 0){
+		cantidad_paginas_necesarias ++;
+	}
+
+	int cantidad_de_bytes = cantidad_paginas_necesarias * valores_generales_memoria->tamPagina;
+	
+	for(int i = 0; i<cantidad_de_bytes ; i++){
+		write(archivoswap, 0, sizeof(uint8_t));
+	}
+
 	printf("\nRecibi un proceso: nroDeProceso= %d", unPcb->id);
 	printf("\nAsignando tabla de pagina: id= %d\n",idTabla);
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&idTabla,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
 }
+
+
+
 
 uint32_t crear_tabla_del_proceso(pcb *unPcb)
 {
