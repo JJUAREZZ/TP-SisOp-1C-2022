@@ -67,7 +67,7 @@ typedef struct {
 kernel_config *config_valores;
 
 void cargar_configuracion(void){
-	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/kernel/cfg/kernel.config");
+	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/consola/cfg/consola.config");
 	config_valores= malloc(sizeof(kernel_config));
 
 	if(config == NULL){

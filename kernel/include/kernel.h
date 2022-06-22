@@ -110,9 +110,6 @@ void conectarse_con_cpu()
 
 	while(1)
 	{	
-		
-		//sem_wait(&semProcesoCpu);
-
 		uint32_t cod_op= recibir_operacion(socket_dispatch);
 		if(cod_op>0)
 		{
@@ -152,6 +149,8 @@ void conectarse_con_cpu()
 					pthread_mutex_lock(&PROCDESALOJADO);
 					pcbDesalojado = recibir_pcb(socket_dispatch);
 					pthread_mutex_unlock(&PROCDESALOJADO);
+					sem_post(&semProcesoInterrumpido);
+				case CPUVACIA :
 					sem_post(&semProcesoInterrumpido);
 				default:
 					;

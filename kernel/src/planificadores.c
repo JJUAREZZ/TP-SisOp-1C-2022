@@ -154,10 +154,13 @@ void planificadorFifo(){
 		{
 			sem_wait(&semProcesosEnReady);
 			sem_wait(&semProcesosEnRunning);
-			pcb* elemEjecutar = queue_pop(estadoReady);
-			queue_push(estadoExec,elemEjecutar);
-			paquete_pcb(elemEjecutar, socket_dispatch);
-			printf("Proceso %d enviado a CPU\n",elemEjecutar->id );
+			if(queue_size(estadoReady)>0){
+				pcb* elemEjecutar = queue_pop(estadoReady);
+				queue_push(estadoExec,elemEjecutar);
+				paquete_pcb(elemEjecutar, socket_dispatch);
+				printf("Proceso %d enviado a CPU\n",elemEjecutar->id );
+			}
+			
 		}
 }
 
