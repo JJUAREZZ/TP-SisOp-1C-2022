@@ -5394,3 +5394,37 @@ EXIT
 [INFO] 22:51:32:049 Servidor Dispatcher/(6245:6280): EXIT
 [INFO] 22:51:32:049 Servidor Dispatcher/(6245:6280): Proceso 2 enviado a exit.
 >>>>>>> correccionplanicorto
+[INFO] 22:55:50:684 Servidor Dispatcher/(6835:6835): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 22:55:50:684 Servidor Dispatcher/(6835:6835): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 22:55:57:837 Servidor Dispatcher/(6835:6835): Creando un hilo para atender una conexión en el socket 16
+[INFO] 22:55:57:837 Servidor Dispatcher/(6835:6835): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 22:56:03:912 Servidor Dispatcher/(6835:6867): Recibi un proceso:
+[INFO] 22:56:03:912 Servidor Dispatcher/(6835:6867): id: 0
+[INFO] 22:56:03:912 Servidor Dispatcher/(6835:6867): NO_OP
+[INFO] 22:56:03:912 Servidor Dispatcher/(6835:6867): Esperando 0 milisegundos
+[INFO] 22:56:03:912 Servidor Dispatcher/(6835:6867): NO_OP
+[INFO] 22:56:03:912 Servidor Dispatcher/(6835:6867): Esperando 0 milisegundos
+[INFO] 22:56:03:913 Servidor Dispatcher/(6835:6867): NO_OP
+[INFO] 22:56:03:913 Servidor Dispatcher/(6835:6867): Esperando 0 milisegundos
+[INFO] 22:56:03:913 Servidor Dispatcher/(6835:6867): I/O
+[INFO] 22:56:03:913 Servidor Dispatcher/(6835:6867): El tiempo de ejecucion fue : 0
+[INFO] 22:56:03:913 Servidor Dispatcher/(6835:6867): Proceso 0 enviado a bloqueado.
+[INFO] 22:56:38:289 Servidor Dispatcher/(7001:7001): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 22:56:38:290 Servidor Dispatcher/(7001:7001): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 22:56:42:287 Servidor Dispatcher/(7001:7001): Creando un hilo para atender una conexión en el socket 16
+[INFO] 22:56:42:287 Servidor Dispatcher/(7001:7001): Creando un hilo para atender una interrupcion en el socket 20
+[INFO] 22:56:46:284 Servidor Dispatcher/(7001:7024): Recibi un proceso:
+[INFO] 22:56:46:284 Servidor Dispatcher/(7001:7024): id: 0
+[INFO] 22:56:46:284 Servidor Dispatcher/(7001:7024): NO_OP
+[INFO] 22:56:46:284 Servidor Dispatcher/(7001:7024): Esperando 1000 milisegundos
+[INFO] 22:56:47:285 Servidor Dispatcher/(7001:7024): NO_OP
+[INFO] 22:56:47:285 Servidor Dispatcher/(7001:7024): Esperando 1000 milisegundos
+[INFO] 22:56:48:286 Servidor Dispatcher/(7001:7024): NO_OP
+[INFO] 22:56:48:286 Servidor Dispatcher/(7001:7024): Esperando 1000 milisegundos
+[INFO] 22:56:49:286 Servidor Dispatcher/(7001:7024): I/O
+[INFO] 22:56:49:288 Servidor Dispatcher/(7001:7024): El tiempo de ejecucion fue : 2
+[INFO] 22:56:49:288 Servidor Dispatcher/(7001:7024): Proceso 0 enviado a bloqueado.

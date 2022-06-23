@@ -19638,3 +19638,11 @@
 [INFO] 22:51:10:264 Servidor/(6269:6277): Creando un hilo para atender una conexión en el socket 21
 [INFO] 22:51:11:080 Servidor/(6269:6277): Creando un hilo para atender una conexión en el socket 22
 >>>>>>> correccionplanicorto
+[INFO] 22:55:57:848 Servidor/(6857:6858): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:56:03:509 Servidor/(6857:6858): Creando un hilo para atender una conexión en el socket 20
+[INFO] 22:56:04:216 Servidor/(6857:6858): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:56:42:289 Servidor/(7014:7015): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:56:45:869 Servidor/(7014:7015): Creando un hilo para atender una conexión en el socket 20
+[INFO] 22:56:46:516 Servidor/(7014:7015): Creando un hilo para atender una conexión en el socket 21
