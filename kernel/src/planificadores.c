@@ -32,77 +32,19 @@ bool *menorEstimacion(pcb* proceso1, pcb* proceso2){
 }
 
 
-/*
-void *enviarProcesosOrdenados(){
-
-	//Envio los Procesos al CPU.
-	while(1){
-	sem_wait(&semProcesosOrdenados);
-	sem_wait(&semProcesosEnRunning);
-	pcb* elemEjecutar = queue_pop(estadoReady);
-	paquete_pcb(elemEjecutar, socket_dispatch);
-	printf("Proceso %d enviado a CPU\n", elemEjecutar->id );
-	sem_post(&semProcesoCpu);
-
-	}
-}	
-
-*/
-/*
-void* ordenarProcesos(){
-	
-pcb* procEnReady;
-	pcb* primerElemento;
-	int i;
-	uint32_t flagInterrupcion;
-
-	while(1){
-	sem_wait(&semProcesosEnReady);
-	list_sort(estadoReady->elements, menorEstimacion);
-	pcb* procesoMenorEstimacion = list_get(estadoReady->elements, 0);
-	printf("EL PROCESO %d TIENE LA MENOR ESTIMACION : %d\n", elemMenEstimacion->id, elemMenEstimacion->estimacion_rafaga_actual);
-	//INTERRUMPIR LO EJECUTADO EN CPU
-	send(socket_interrupt, DESALOJARPROCESO, sizeof(uint32_t), 0);	
-	sem_wait(&semProcesoInterrumpido);
-	if(pcbDesalojado == NULL){
-		paquete_pcb(procesoMenorEstimacion, socket_dispatch);
-		bool condition(pcb* element){
-				return element->id == procesoMenorEstimacion->id;
-			}
-		//se elimina de la cola ready ese pcb
-		list_remove_by_condition(estadoReady->elements, condition);
-		//se envia dicho pcb
-		paquete_pcb(proceso, socket_dispatch);
-		printf("\nNuevo proceso enviado a CPU\n");
-		liberarPcb(proceso);
-
-
-
-		liberarPcb(proceso);
-		printf("\nProceso enviado a CPU\n");
-	}
-
-	uint32_t tamanioReady = queue_size(estadoReady);
-	printf("El tamanio de ready es: %d \n", tamanioReady);
-	
-	
-	sem_post(&semProcesosOrdenados);
-	}
-}
-
-*/
-
 void planificadorSrt(){
 while(1){
 	//espera si llega un proceso a ready ó si no hay procesos en running
 	sem_wait(&semSrt);
- 
+ 	pthread_mutex_lock(&COLAREADY);
  // si NO hay procesos en running y HAY procesos en ready
-	if(queue_size(estadoExec) ==0 && queue_size(estadoReady) >0){
+	if(queue_is_empty(estadoExec) && !queue_is_empty(estadoReady)){
 		//obtiene el elemento con menor estimacion y lo envia
 		list_sort(estadoReady->elements, menorEstimacion);
 		pcb* proceso= queue_pop(estadoReady);
+		pthread_mutex_lock(&COLAEXEC);
 		queue_push(estadoExec,proceso);
+		pthread_mutex_unlock(&COLAEXEC);
 		paquete_pcb(proceso, socket_dispatch);
 		printf("\nProceso %d enviado a CPU\n", proceso->id);
 	}
@@ -122,31 +64,39 @@ while(1){
 			printf("\nNo hay procesos en CPU");
 			printf("\nProceso %d enviado a CPU\n", proceso->id);
 			queue_pop(estadoReady);
+			pthread_mutex_lock(&COLAEXEC);
 			queue_push(estadoExec, proceso);
+			pthread_mutex_unlock(&COLAEXEC);
 		}
 		//compara las rafagas
 		//si la rafaga del desalojado es menor se devuelve a cpu
 		else if((pcbDesalojado->estimacion_rafaga_actual - pcbDesalojado->cpu_anterior)
 				<= proceso->estimacion_rafaga_actual){
+			pthread_mutex_lock(&COLAEXEC);
 			liberarPcb(queue_pop(estadoExec));//elimina el pcb viejo
 			paquete_pcb(pcbDesalojado, socket_dispatch);
 			printf("\nProceso desalojado %d devuelto a CPU\n", pcbDesalojado->id);
 			queue_push(estadoExec, pcbDesalojado);
+			pthread_mutex_unlock(&COLAEXEC);
 			pcbDesalojado =NULL;
 		}
 		//si la rafaga del recien llegado es menor
 		else if((pcbDesalojado->estimacion_rafaga_actual - pcbDesalojado->cpu_anterior)
 				> proceso->estimacion_rafaga_actual){
 			paquete_pcb(proceso, socket_dispatch);
+			pthread_mutex_lock(&COLAEXEC);
 			liberarPcb(queue_pop(estadoExec)); //elimina el pcb del desalojado
 			queue_pop(estadoReady);
 			queue_push(estadoExec,proceso);
+			pthread_mutex_unlock(&COLAEXEC);
 			queue_push(estadoReady,pcbDesalojado);
 			printf("\nProceso %d enviado a CPU\n", proceso->id);
 			pcbDesalojado= NULL;
 		}
 	}
+	pthread_mutex_unlock(&COLAREADY);
 }
+ 
 }
 
 void planificadorFifo(){
@@ -165,8 +115,6 @@ void planificadorFifo(){
 }
 
 //*****************************planificador a mediano plazo****************************
-
-
 
 void *planificadorAMedianoPlazo(){
 
@@ -264,9 +212,6 @@ void *enviarProcesosDeSuspendedReadyAReady(){
 	 }
 }
 
-	
-
-
 //*****************************planificador a largo plazo******************************
 
 void *atenderProceso(uint32_t accepted_fd)
@@ -327,7 +272,6 @@ pcb *crearPcb(t_proceso *proceso)
 }
 
 
-
 void planificadorALargoPlazo()
  {
 	 pthread_t hilo1;
@@ -357,7 +301,6 @@ void planificadorALargoPlazo()
 	 while(1)
 	 {
 		sem_wait(&semProcesosEnNew);
-		sem_wait(&semProcesosEn)
 		pthread_mutex_lock(&COLAREADY);
 		pthread_mutex_lock(&COLAEXEC);
 		pthread_mutex_lock(&COLABLOCK);
@@ -397,16 +340,13 @@ void planificadorALargoPlazo()
  {
 	 while(1){
 		 sem_wait(&semProcesosEnExit);
-		 pcb* procesoATerminar= queue_pop(estadoExit);
-		 pcb* procesoEnEjecucion= queue_pop(estadoExec);
-		 if(procesoATerminar->id != procesoEnEjecucion->id)
-		 {
-			 printf("\nError. Proceso a terminar no estaba en ejecucion");
-			 return EXIT_FAILURE;
-		 }
-		 liberarPcb(procesoEnEjecucion);
-		 sem_post(&semSrt);
-		 sem_post(&semProcesoInterrumpido);
+		 pthread_mutex_lock(&COLAEXIT);
+		 liberarPcb(queue_pop(estadoExit));
+		 pthread_mutex_unlock(&COLAEXIT);
+		 if (interrupcion ==1)
+			sem_post(&semProcesoInterrumpido);
+		else 
+			sem_post(&semSrt);
 		 sem_post(&semProcesosEnRunning);
 	     sem_post(&semProcesosEnNew);
 		 sem_post(&semProcesosEnSuspReady);

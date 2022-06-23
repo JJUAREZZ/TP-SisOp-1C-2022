@@ -24,12 +24,14 @@ void atenderInterrupcion(uint32_t accepted_fd){
 		if(cod_op>0){
 			switch (cod_op){
 			case DESALOJARPROCESO:
+				
 				if(unPcb==NULL){
 					uint32_t rta= CPUVACIA;
 					send(socket_dispatch, &rta, sizeof(uint32_t), 0);
-					continue;
 				}
-				interrupcion= 1;
+				else{
+					interrupcion= 1;
+				}
 				break;
 			default:
 				;
@@ -98,8 +100,8 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 		//EXECUTE
 		if(strcmp(nombreInstruccion, "NO_OP") == 0){
 
-			log_info(logger,"Esperando %d milisegundos",cpu_config->retar_noop*instruccion->param[0]);
-			usleep(cpu_config->retar_noop*instruccion->param[0]*1000);  
+			log_info(logger,"Esperando %d milisegundos",cpu_config->retar_noop);
+			usleep(cpu_config->retar_noop*1000);  
 			//lo multiplico por 1000 porque usleep recibe el tiempo en microsegundos
 			gettimeofday(&finalBlock, NULL);
 			cpu_pasado = time_diff(&initialBlock, &finalBlock);
