@@ -103,8 +103,10 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			log_info(logger,"Esperando %d milisegundos",cpu_config->retar_noop);
 			usleep(cpu_config->retar_noop*1000);  
 			//lo multiplico por 1000 porque usleep recibe el tiempo en microsegundos
-			// NO hace falta un gettimeofday aca
-			
+			gettimeofday(&finalBlock, NULL);
+			cpu_pasado = time_diff(&initialBlock, &finalBlock);
+			unPcb->cpu_anterior+= cpu_pasado;
+
 		} else if(strcmp(nombreInstruccion, "I/O") == 0){
 			gettimeofday(&finalBlock, NULL);
 			cpu_pasado = time_diff(&initialBlock, &finalBlock);
