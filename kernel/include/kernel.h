@@ -110,9 +110,6 @@ void conectarse_con_cpu()
 
 	while(1)
 	{	
-		
-		//sem_wait(&semProcesoCpu);
-
 		uint32_t cod_op= recibir_operacion(socket_dispatch);
 		if(cod_op>0)
 		{
@@ -123,36 +120,44 @@ void conectarse_con_cpu()
 
 				case PROCESOTERMINATED:
 					procesoAExit= recibir_pcb(socket_dispatch);
-					//agregar mutex
+					pthread_mutex_lock(&COLAEXEC);
+					liberarPcb(queue_pop(estadoExec));
+					pthread_mutex_unlock(&COLAEXEC);
 					pthread_mutex_lock(&COLAEXIT);
 					queue_push(estadoExit,procesoAExit);
+					printf("\nProceso %d finalizado\n", procesoAExit->id);
 					pthread_mutex_unlock(&COLAEXIT);
 					sem_post(&semProcesosEnExit);
 					break;
 				case BLOCKED : 
 					procesoABlocked = recibir_pcb(socket_dispatch);
+					pthread_mutex_lock(&COLABLOCK);
+					queue_push(estadoBlock, procesoABlocked);
+					pthread_mutex_unlock(&COLABLOCK);
+					pthread_mutex_lock(&COLAEXEC);
+					liberarPcb(queue_pop(estadoExec));
+					pthread_mutex_unlock(&COLAEXEC);
 					printf("\nProceso %d recibido para bloquear\n", procesoABlocked->id);
 					recalcularEstimacion(procesoABlocked);
-					queue_push(estadoBlock, procesoABlocked);
 					printf("Proceso %d enviado a bloqueado\n", procesoABlocked->id);
-					sem_post(&semSrt);
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
 					if (interrupcion ==1)
 						sem_post(&semProcesoInterrumpido);
+					else 
+						sem_post(&semSrt);
 					break;
 				case PROCESODESALOJADO : 
-					/*
-					procDesalojadoAReady = recibir_pcb(socket2);
-					calcularEstimacionPcbDesalojado(procDesalojadoAReady);
-					list_add_in_index(estadoReady->elements, 0, procDesalojadoAReady);
-					printf("Proceso %d desalojado y enviado a ready", procDesalojadoAReady->id);
-					*/
-					//se almacena en la var global el pcb desalojado
 					pthread_mutex_lock(&PROCDESALOJADO);
 					pcbDesalojado = recibir_pcb(socket_dispatch);
 					pthread_mutex_unlock(&PROCDESALOJADO);
+					printf("\nProceso %d desalojado recibido\n",pcbDesalojado->id);
 					sem_post(&semProcesoInterrumpido);
+					break;
+				case CPUVACIA :
+					printf("\nLa cpu esta vacia\n");
+					sem_post(&semProcesoInterrumpido);
+					break;
 				default:
 					;
 			}

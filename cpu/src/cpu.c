@@ -24,7 +24,14 @@ void atenderInterrupcion(uint32_t accepted_fd){
 		if(cod_op>0){
 			switch (cod_op){
 			case DESALOJARPROCESO:
-				interrupcion= 1;
+				
+				if(unPcb==NULL){
+					uint32_t rta= CPUVACIA;
+					send(socket_dispatch, &rta, sizeof(uint32_t), 0);
+				}
+				else{
+					interrupcion= 1;
+				}
 				break;
 			default:
 				;
@@ -93,8 +100,8 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 		//EXECUTE
 		if(strcmp(nombreInstruccion, "NO_OP") == 0){
 
-			log_info(logger,"Esperando %d milisegundos",cpu_config->retar_noop*instruccion->param[0]);
-			usleep(cpu_config->retar_noop*instruccion->param[0]*1000);  
+			log_info(logger,"Esperando %d milisegundos",cpu_config->retar_noop);
+			usleep(cpu_config->retar_noop*1000);  
 			//lo multiplico por 1000 porque usleep recibe el tiempo en microsegundos
 			// NO hace falta un gettimeofday aca
 			
@@ -104,9 +111,9 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			unPcb->cpu_anterior+= cpu_pasado;
 			log_info(logger,"El tiempo de ejecucion fue : %d", unPcb->cpu_anterior);
 
-			
-			devolverPcb(BLOCKED, accepted_fd);
 			log_info(logger,"Proceso %d enviado a bloqueado.", unPcb->id);
+			devolverPcb(BLOCKED, accepted_fd);
+			
 			interrupcion =0; //no checkea interrupciones, así que la pone en 0
 			return;
 
@@ -145,6 +152,7 @@ uint32_t check_interrupt(){
 		enviar_paquete(paquete, socket_dispatch);
 		eliminar_paquete(paquete);
 		liberarPcb(unPcb);
+		unPcb=NULL;
 		return 1;
 	}
 	return 0;
@@ -156,6 +164,7 @@ void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
 	enviar_paquete(paquete, accepted_fd);
 	eliminar_paquete(paquete);
 	liberarPcb(unPcb);
+	unPcb=NULL;
 }
 
 void mmu(op_code op_co, uint32_t direc_logica){

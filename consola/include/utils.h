@@ -48,6 +48,16 @@ t_list * crear_lista_de_instrucciones(char *path) {
 		for (int i = 1; i<=single_inst->nroDeParam; i++) {   //recorro el array a partir del id de la instruccion
 			single_inst->param[i-1]= (uint32_t) atoi(inst_and_param[i]);	//copio los parametros
 		}
+		if(strcmp(single_inst->id, "NO_OP") == 0){
+			uint32_t nroDeParam= single_inst->param[0];
+			single_inst->nroDeParam= 0;
+			free(single_inst->param);
+			single_inst->param= NULL;
+			for(int i=0;i<nroDeParam-1; i++){
+				list_add(inst_list, single_inst);
+			}
+		}
+
 		list_add(inst_list, single_inst);                   //agrego la instruccion a la lista
 	}
 	string_iterate_lines(inst_per_line, closure);
@@ -67,7 +77,7 @@ typedef struct {
 kernel_config *config_valores;
 
 void cargar_configuracion(void){
-	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/kernel/cfg/kernel.config");
+	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/consola/cfg/consola.config");
 	config_valores= malloc(sizeof(kernel_config));
 
 	if(config == NULL){

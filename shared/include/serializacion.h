@@ -23,7 +23,8 @@ typedef enum
 	PROCESOTERMINATED,
 	PROCESODESALOJADO,
 	DESALOJARPROCESO,
-	READ
+	READ,
+	CPUVACIA
 }op_code;
 
 typedef struct
