@@ -83,17 +83,20 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	unPcb = recibir_pcb(socket);
 	uint32_t idTabla = crear_tabla_del_proceso(unPcb);
 
+	char* path = valores_generales_memoria->pathSwap;
+	char nombreArchivo [50];
+
 	//Creo el archivo swap.
 	char* nroProceso [2];
 	sprintf(nroProceso, "%d", unPcb->id);
-	char* procesSwap;
-	procesSwap = strcat(nroProceso, ".swap");
-	char* nombreDirec;
-	nombreDirec = strcat(valores_generales_memoria->pathSwap, "/");
-	char* nombreArchivo;
-	nombreArchivo = strcat(nombreDirec, nroProceso);
-	printf("Archivo swap del proceso Creado: %s \n", nombreArchivo);
+	strcat(nroProceso, ".swap");
+	strcat(strcpy(nombreArchivo, path), "/");
+	strcat(nombreArchivo, nroProceso);
+	printf("\nArchivo swap del proceso Creado: %s \n", nombreArchivo);
 	archivoswap = open(nombreArchivo, O_CREAT, O_RDWR);
+
+	memset(nombreArchivo, 0, strlen(nombreArchivo));
+	memset(nroProceso, 0, strlen(nroProceso));
 
 	if(archivoswap == -1){
 		printf("Error al crear el archivo swap del proceso %n \n", unPcb->id);

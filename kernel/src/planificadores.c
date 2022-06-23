@@ -194,12 +194,7 @@ void *enviarProcesosDeSuspendedReadyAReady(){
 			pcb *procesoAReady = queue_pop(estadoReadySusp);
 			pthread_mutex_unlock(&COLASUSPREADY); 
 
-			uint32_t tablaDePaginas= obtenerTablaDePagina(procesoAReady);
-			if(tablaDePaginas <0){
-				perror("Error al asignar memoria al proceso");
-				return EXIT_FAILURE;
-			}
-			procesoAReady->tablaDePaginas = tablaDePaginas;
+			
 			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
 			printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
 			queue_push(estadoReady, procesoAReady);
