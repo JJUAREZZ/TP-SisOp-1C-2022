@@ -8,9 +8,7 @@
 #include <commons/log.h>
 #include <commons/collections/list.h>
 
-t_list tablasDePrimerNivel;
-t_list tablasDeSegundoNivel;
-t_bloque_memoria memPrincipal;
+t_bloque_memoria *memPrincipal;
 
 uint32_t id_tabla_primer_nivel;
 uint32_t id_tabla_segundo_nivel;
@@ -23,10 +21,20 @@ memoria_init_server(){
 
 void crear_memoria_principal(){
 
-    memPrincipal.memoria_principal[valores_generales_memoria->tamMemoria];
-    memPrincipal.bitmap_memoria = bitarray_create_with_mode("bitmap_memoria", valores_generales_memoria->tamMemoria, LSB_FIRST);
+    uint32_t cantidad_de_marcos = valores_generales_memoria->tamMemoria / valores_generales_memoria->tamPagina;
+
+    if(valores_generales_memoria->tamMemoria % valores_generales_memoria->tamPagina != 0){
+        cantidad_de_marcos ++;
+    }
+
+    memPrincipal = malloc(sizeof(t_bloque_memoria));
+    memPrincipal->memoria_principal[valores_generales_memoria->tamMemoria];
+    memPrincipal->bitmap_memoria = bitarray_create_with_mode("bitmap_memoria",cantidad_de_marcos, LSB_FIRST);
     printf("\n Memoria Principal Creada \n");
+
 }
+
+
 
 
 

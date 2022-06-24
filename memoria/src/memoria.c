@@ -8,7 +8,8 @@
 #include <sys/mman.h>
 
 void *retornar_id_tabla_de_pagina(uint32_t);
-void *atenderConexion(uint32_t );
+void *atenderConexionKernel(uint32_t );
+void *liberarProcesoDeMemoria(uint32_t);
 uint32_t crear_tabla_del_proceso(pcb *unPcb);
 uint32_t crear_tabla_segundo_nivel(uint32_t);
 t_paginas_en_tabla *crear_paginas(uint32_t); 
@@ -41,21 +42,24 @@ int main()
 	for (;;) 
 	{
 		pthread_t hilo;
+		pthread_t hilo1;
 		uint32_t socket;
 		socket= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
 		if (socket != -1)
 		{
-			pthread_create(&hilo,NULL,atenderConexion,socket);
+			pthread_create(&hilo,NULL,atenderConexionKernel,socket);
+			//pthread_create(&hilo1, NULL, atenderConexionCpu, socket);
 			
 		}
+		//pthread_join(hilo1, NULL);
 		pthread_join(hilo,NULL);
 	}
     return 0;
 }
 
-void *atenderConexion(uint32_t socket)
+void *atenderConexionKernel(uint32_t socket)
 {
-	pthread_t hilo;
+	//pthread_t hilo;
 	uint32_t cod_op= recibir_operacion(socket);
 	if(cod_op>0)
 	{
@@ -63,11 +67,12 @@ void *atenderConexion(uint32_t socket)
 		{
 		case TABLADEPAGINA:
 			retornar_id_tabla_de_pagina(socket);
+			break;
+		case SUSPENDED: 
+			liberarProcesoDeMemoria(socket);
+			break;
+		case DELETESWAP: 
 
-			//pthread_create(&hilo, NULL, retornar_id_tabla_de_pagina, socket);
-			
-			// SEGUN LA CATEDRA MEMORIA SOLO VA A TENER 2 HILOS UNO PARA ATENER A KERNEL Y OTRO PARA ATENDER A CPU
-			// NO PODEMOS CREAR UN HILO POR CADA PETICION DISTINTA QUE SE QUIERA HACER (TABLAPAGINA, READ, WRITE, ETC)
 			break;
 		case READ:
 			devolver_marco(socket);
@@ -75,8 +80,20 @@ void *atenderConexion(uint32_t socket)
 			;
 		}
 	}
-	//pthread_join(retornar_id_tabla_de_pagina,NULL);
+	
 }
+
+void *atenderConexionCpu(uint32_t socket){
+	uint32_t cod_op = recibir_operacion(socket);
+	if(cod_op > 0){
+		switch(cod_op){
+
+
+		}
+	}
+}
+
+
 
 void *retornar_id_tabla_de_pagina(uint32_t socket)
 {
@@ -183,5 +200,74 @@ void devolver_marco(uint32_t socket)
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&marco,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
+
+}
+
+void *liberarProcesoDeMemoria(uint32_t socket){
+    unPcb = recibir_pcb(socket);
+	uint8_t *fd;
+	uint8_t *addr;
+	int i, j, k;
+
+	//Archivo swap de este proceso especifico.
+	char* path = valores_generales_memoria->pathSwap;
+	char nombreArchivo [50];
+	char* nroProceso [2];
+	sprintf(nroProceso, "%d", unPcb->id);
+	strcat(nroProceso, ".swap");
+	strcat(strcpy(nombreArchivo, path), "/");
+	strcat(nombreArchivo, nroProceso);
+
+	fd = open(nombreArchivo, O_RDWR);
+	uint8_t largoDelArchivo = valores_generales_memoria->pagPorTabla * valores_generales_memoria->pagPorTabla;
+
+	//mapeo el archivo del proceso.
+	addr = mmap(NULL, sizeof(uint8_t) * largoDelArchivo, PROT_WRITE, MAP_SHARED, fd, 0);
+
+	//Busco la tabla de primer nivel.
+    t_tabla_primer_nivel *primerNivel;
+	primerNivel = list_get(tablas_primer_nivel_list, unPcb->tablaDePaginas);
+
+	//Itero por las tablas de segundo nivel.
+	for(i = 0; i< valores_generales_memoria->pagPorTabla; i++){
+		t_tabla_segundo_nivel *segundoNivel;
+		segundoNivel = primerNivel->tablas_asociadas[i];
+
+		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
+		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
+			t_paginas_en_tabla *pagina;
+			pagina = segundoNivel->paginas[i];
+
+			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
+			if(pagina->bit_presencia == 1){
+
+				uint8_t *comienzoDelMarco = *pagina->marco * (uint8_t)valores_generales_memoria->pagPorTabla;
+				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->pagPorTabla;
+
+				//Saco la pagina del marco y la mando al swap correspondiente.
+				uint8_t *paginaDelProceso = pagina->id_pagina;
+				uint8_t *IncioPagina = *paginaDelProceso * (uint8_t )valores_generales_memoria->pagPorTabla;
+				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->pagPorTabla;
+
+				//Copio el marco en el swap.
+				memcpy(*addr + *IncioPagina, **memPrincipal->memoria_principal + *comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamMemoria);
+				
+
+				//Saco la pagina del marco y dejo el marco en 0.
+				for(k = comienzoDelMarco; k < finDelMarco; k++){
+					memPrincipal->memoria_principal[k] == 0;	
+				}
+
+				bitarray_set_bit(memPrincipal->bitmap_memoria, pagina->marco);
+				pagina->bit_presencia = 0;
+
+				printf("\n se ha liberado el espacio del proceso %n de memoria", unPcb->id);
+
+				//TODO: ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
+			}
+
+			//TODO: ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
+		}
+	}
 
 }
