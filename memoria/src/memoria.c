@@ -241,16 +241,17 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
 
-				uint8_t *comienzoDelMarco = *pagina->marco * (uint8_t)valores_generales_memoria->pagPorTabla;
-				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->pagPorTabla;
+				uint8_t *comienzoDelMarco = *pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
-				uint8_t *paginaDelProceso = pagina->id_pagina;
-				uint8_t *IncioPagina = *paginaDelProceso * (uint8_t )valores_generales_memoria->pagPorTabla;
-				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->pagPorTabla;
+				uint8_t calculoAux = i * valores_generales_memoria->pagPorTabla;
+				uint8_t *paginaDelProceso = calculoAux + pagina->id_pagina;
+				uint8_t *IncioPagina = *paginaDelProceso * (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
 
 				//Copio el marco en el swap.
-				memcpy(*addr + *IncioPagina, **memPrincipal->memoria_principal + *comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamMemoria);
+				memcpy(*addr + *IncioPagina, **memPrincipal->memoria_principal + *comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 				
 
 				//Saco la pagina del marco y dejo el marco en 0.
