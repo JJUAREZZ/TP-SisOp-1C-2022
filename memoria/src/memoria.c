@@ -9,6 +9,7 @@
 
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexionKernel(uint32_t );
+void *atenderConexionCpu(uint32_t );
 void *liberarProcesoDeMemoria(uint32_t);
 uint32_t crear_tabla_del_proceso(pcb *unPcb);
 uint32_t crear_tabla_segundo_nivel(uint32_t);
@@ -41,18 +42,20 @@ int main()
 	printf("¡¡¡Servidor de Memoria Iniciado!!!\n");
 	for (;;) 
 	{
-		pthread_t hilo;
-		pthread_t hilo1;
+		pthread_t hiloKernel;
+		pthread_t hiloCpu;
 		uint32_t socket;
 		socket= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
 		if (socket != -1)
 		{
-			pthread_create(&hilo,NULL,atenderConexionKernel,socket);
-			//pthread_create(&hilo1, NULL, atenderConexionCpu, socket);
-			
+			pthread_create(&hiloKernel,NULL,atenderConexionKernel,socket);
+			pthread_join(hiloKernel, NULL);		
+			//pthread_create(&hiloCpu, NULL, atenderConexionCpu, socket);
+			//pthread_join(hiloCpu,NULL);
 		}
-		//pthread_join(hilo1, NULL);
-		pthread_join(hilo,NULL);
+		
+	
+		
 	}
     return 0;
 }
@@ -74,10 +77,8 @@ void *atenderConexionKernel(uint32_t socket)
 		case DELETESWAP: 
 
 			break;
-		case READ:
-			devolver_marco(socket);
 		default:
-			;
+			break;
 		}
 	}
 	
@@ -87,8 +88,11 @@ void *atenderConexionCpu(uint32_t socket){
 	uint32_t cod_op = recibir_operacion(socket);
 	if(cod_op > 0){
 		switch(cod_op){
-
-
+			case READ:
+				devolver_marco(socket);
+				break;
+			default:
+				break;		
 		}
 	}
 }
@@ -153,7 +157,7 @@ uint32_t crear_tabla_del_proceso(pcb *unPcb)
 	uint32_t nro_tablas_segundo_nivel = nro_paginas / valores_generales_memoria->pagPorTabla;
 	if(nro_paginas % valores_generales_memoria->pagPorTabla != 0) nro_tablas_segundo_nivel++;
 	for(int i = 0; i < nro_tablas_segundo_nivel; i++){
-		uint32_t id_tabla = crear_tabla_segundo_nivel(nro_paginas);
+		uint32_t id_tabla = crear_tabla_segundo_nivel(i);
 		tabla_primer_nivel->tablas_asociadas[i] = id_tabla;
 	}
 	list_add(tablas_primer_nivel_list, tabla_primer_nivel);
@@ -161,13 +165,13 @@ uint32_t crear_tabla_del_proceso(pcb *unPcb)
 	return tabla_primer_nivel->id_primer_nivel;
 }
 
-uint32_t crear_tabla_segundo_nivel(uint32_t nro_paginas) 
+uint32_t crear_tabla_segundo_nivel(uint32_t entrada_primer_nivel) 
 {
 	t_tabla_segundo_nivel *tabla_segundo_nivel = malloc(sizeof(t_tabla_segundo_nivel));
 	tabla_segundo_nivel->id_segundo_nivel = id_tabla_segundo_nivel;
 	id_tabla_segundo_nivel++;
 	for(int i = 0; i < valores_generales_memoria->pagPorTabla; i++){
-		t_paginas_en_tabla *pagina = crear_paginas(i);
+		t_paginas_en_tabla *pagina = crear_paginas((entrada_primer_nivel * valores_generales_memoria->pagPorTabla) + i);
 		tabla_segundo_nivel->paginas[i] = pagina;
 	}
 	list_add(tablas_segundo_nivel_list, tabla_segundo_nivel);
@@ -179,6 +183,7 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 {
 	t_paginas_en_tabla* pagina = malloc(sizeof(t_paginas_en_tabla));
 	pagina->id_pagina = id;
+	//printf("\nId de pagina: %d\n", pagina->id_pagina);
 	pagina->bit_presencia = 0;
 	pagina->bit_uso = 0;
 	pagina->bit_modificado = 0;
@@ -245,9 +250,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
-				uint8_t calculoAux = i * valores_generales_memoria->pagPorTabla;
-				uint8_t *paginaDelProceso = calculoAux + pagina->id_pagina;
-				uint8_t *IncioPagina = *paginaDelProceso * (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t *IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
 				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
 
 				//Copio el marco en el swap.
