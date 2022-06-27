@@ -11,6 +11,7 @@ void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexionKernel(uint32_t );
 void *atenderConexionCpu(uint32_t );
 void *liberarProcesoDeMemoria(uint32_t);
+void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t );
 uint32_t crear_tabla_del_proceso(pcb *unPcb);
 uint32_t crear_tabla_segundo_nivel(uint32_t);
 t_paginas_en_tabla *crear_paginas(uint32_t); 
@@ -48,10 +49,11 @@ int main()
 		socket= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
 		if (socket != -1)
 		{
-			pthread_create(&hiloKernel,NULL,atenderConexionKernel,socket);
-			pthread_join(hiloKernel, NULL);		
-			//pthread_create(&hiloCpu, NULL, atenderConexionCpu, socket);
-			//pthread_join(hiloCpu,NULL);
+			pthread_create(&hiloKernel,NULL,atenderConexionKernel,socket);	
+			pthread_create(&hiloCpu, NULL, atenderConexionCpu, socket);
+
+			pthread_join(hiloKernel, NULL);	
+			pthread_join(hiloCpu,NULL);
 		}
 		
 	
@@ -75,7 +77,7 @@ void *atenderConexionKernel(uint32_t socket)
 			liberarProcesoDeMemoria(socket);
 			break;
 		case DELETESWAP: 
-
+			liberarProcesoDeMemoriaYDeleteSwap(socket);
 			break;
 		default:
 			break;
@@ -113,8 +115,8 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	strcat(nroProceso, ".swap");
 	strcat(strcpy(nombreArchivo, path), "/");
 	strcat(nombreArchivo, nroProceso);
-	printf("\nArchivo swap del proceso Creado: %s \n", nombreArchivo);
 	archivoswap = open(nombreArchivo, O_CREAT, O_RDWR);
+	printf("\nArchivo swap del proceso Creado: %s \n", nombreArchivo);
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
 	memset(nroProceso, 0, strlen(nroProceso));
@@ -209,7 +211,8 @@ void devolver_marco(uint32_t socket)
 }
 
 void *liberarProcesoDeMemoria(uint32_t socket){
-    unPcb = recibir_pcb(socket);
+	//Ver si recibir pcb o tabla de paginas.
+	unPcb = recibir_pcb(socket);
 	uint8_t *fd;
 	uint8_t *addr;
 	int i, j, k;
@@ -267,11 +270,68 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 
 				printf("\n se ha liberado el espacio del proceso %n de memoria", unPcb->id);
 
-				//TODO: ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
 			}
-
-			//TODO: ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
 		}
 	}
+		printf("\n se ha liberado el espacio del proceso %n de memoria", unPcb->id);
+		//TODO: ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
+}
+
+void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
+	//Ver si recibir pcb o tabla de paginas.
+    unPcb = recibir_pcb(socket);
+	uint8_t *fd;
+	uint8_t *addr;
+	int i, j, k;
+
+	//Archivo swap de este proceso especifico.
+	char* path = valores_generales_memoria->pathSwap;
+	char nombreArchivo [50];
+	char* nroProceso [2];
+	sprintf(nroProceso, "%d", unPcb->id);
+	strcat(nroProceso, ".swap");
+	strcat(strcpy(nombreArchivo, path), "/");
+	strcat(nombreArchivo, nroProceso);
+
+	remove(nombreArchivo);
+
+	//Busco la tabla de primer nivel.
+    t_tabla_primer_nivel *primerNivel;
+	primerNivel = list_get(tablas_primer_nivel_list, unPcb->tablaDePaginas);
+
+	//Itero por las tablas de segundo nivel.
+	for(i = 0; i< valores_generales_memoria->pagPorTabla; i++){
+		t_tabla_segundo_nivel *segundoNivel;
+		segundoNivel = primerNivel->tablas_asociadas[i];
+
+		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
+		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
+			t_paginas_en_tabla *pagina;
+			pagina = segundoNivel->paginas[i];
+
+			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
+			if(pagina->bit_presencia == 1){
+
+				uint8_t *comienzoDelMarco = *pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
+
+				//Saco la pagina del marco y la mando al swap correspondiente.
+				uint8_t *IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
+		
+				//Saco la pagina del marco y dejo el marco en 0.
+				for(k = comienzoDelMarco; k < finDelMarco; k++){
+					memPrincipal->memoria_principal[k] == 0;	
+				}
+
+				bitarray_set_bit(memPrincipal->bitmap_memoria, pagina->marco);
+				pagina->bit_presencia = 0;
+
+			}
+		}
+	}
+
+	printf("\n se ha eliminado el proceso %n de memoria.", unPcb->id);
+
 
 }

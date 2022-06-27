@@ -1366,3 +1366,11 @@
 [INFO] 22:19:03:756 Servidor Dispatcher/(2421:2453): Esperando 1000 milisegundos
 [INFO] 22:19:13:757 Servidor Dispatcher/(2421:2453): NO_OP
 [INFO] 22:19:13:758 Servidor Dispatcher/(2421:2453): Esperando 1000 milisegundos
+[INFO] 23:16:17:364 Servidor/(6638:6643): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 23:16:24:499 Servidor/(6638:6643): Creando un hilo para atender una conexión en el socket 5
+[INFO] 23:18:40:234 Servidor/(6813:6819): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 23:18:58:704 Servidor/(6902:6908): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 23:19:01:812 Servidor/(6902:6908): Creando un hilo para atender una conexión en el socket 5

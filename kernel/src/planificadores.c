@@ -142,7 +142,7 @@ void *bloquearProcesos(){
 		instr_t* instruccionBloqueada = list_get(listaDeInstrucciones, apunteProgCounter);
 		uint32_t tiempoIO = instruccionBloqueada->param[0];
 	
-		if(tiempoIO < tiempoMaxBlock){
+		if(tiempoIO <= tiempoMaxBlock){
 			usleep(tiempoIO*1000);
 			procesoIO->programCounter += 1;
 			queue_pop(estadoBlock);
@@ -161,9 +161,11 @@ void *bloquearProcesos(){
 			uint32_t tiempoRestanteBloqueo = tiempoIO - tiempoBloqueo;
 			queue_pop(estadoBlock);
 			queue_push(estadoBlockSusp, procesoIO);
+
+			//Enviar mensaje a memoria
+			
 			printf("\nProceso %d bloqueado enviado a suspendido.\n", procesoIO->id);
 			usleep(tiempoRestanteBloqueo*1000);
-			//TODO: Enviar mensaje a memoria.
 
 			pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
 			procesoIO->programCounter +=1;
@@ -337,6 +339,9 @@ void planificadorALargoPlazo()
 		 sem_wait(&semProcesosEnExit);
 		 pthread_mutex_lock(&COLAEXIT);
 		 liberarPcb(queue_pop(estadoExit));
+
+		 //Enviar mensaje a memoria.
+		 
 		 pthread_mutex_unlock(&COLAEXIT);
 		 if (interrupcion ==1)
 			sem_post(&semProcesoInterrumpido);
