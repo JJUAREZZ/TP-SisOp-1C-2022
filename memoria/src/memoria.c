@@ -7,9 +7,15 @@
 #include <math.h>
 #include <sys/mman.h>
 
+
+typedef struct{
+	uint32_t *socket1;
+	uint32_t *cod_op1;
+}arg_struct;
+
 void *retornar_id_tabla_de_pagina(uint32_t);
-void *atenderConexionKernel(uint32_t );
-void *atenderConexionCpu(uint32_t );
+void *atenderConexionKernel(arg_struct*);
+void *atenderConexionCpu(arg_struct*);
 void *liberarProcesoDeMemoria(uint32_t);
 void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t );
 uint32_t crear_tabla_del_proceso(pcb *unPcb);
@@ -49,11 +55,23 @@ int main()
 		socket= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
 		if (socket != -1)
 		{
-			pthread_create(&hiloKernel,NULL,atenderConexionKernel,socket);	
-			pthread_create(&hiloCpu, NULL, atenderConexionCpu, socket);
-
-			pthread_join(hiloKernel, NULL);	
-			pthread_join(hiloCpu,NULL);
+			uint32_t cod_op= recibir_operacion(socket);
+			if(cod_op>0){
+				if(cod_op == TABLADEPAGINA ||cod_op == DELETESWAP || cod_op == SUSPENDED){
+				arg_struct argumentsK;
+				argumentsK.socket1 = socket;
+				argumentsK.cod_op1 = cod_op;
+				pthread_create(&hiloKernel,NULL,atenderConexionKernel, &argumentsK);	
+				pthread_join(hiloKernel, NULL);
+				} 
+				else if(cod_op == READ){
+				arg_struct argumentsC;
+				argumentsC.socket1 = socket;
+				argumentsC.cod_op1 = cod_op;
+				pthread_create(&hiloCpu, NULL, atenderConexionCpu, &argumentsC);
+				pthread_join(hiloCpu,NULL);
+				}
+			}
 		}
 		
 	
@@ -62,12 +80,13 @@ int main()
     return 0;
 }
 
-void *atenderConexionKernel(uint32_t socket)
+void *atenderConexionKernel(arg_struct* argumentsK)
 {
-	//pthread_t hilo;
-	uint32_t cod_op= recibir_operacion(socket);
-	if(cod_op>0)
-	{
+	//uint32_t cod_op= recibir_operacion(socket);
+	//if(cod_op>0)
+	//{
+		uint32_t cod_op = argumentsK->cod_op1;
+		uint32_t socket = argumentsK->socket1;
 		switch (cod_op)
 		{
 		case TABLADEPAGINA:
@@ -82,13 +101,14 @@ void *atenderConexionKernel(uint32_t socket)
 		default:
 			break;
 		}
-	}
-	
+	//}
 }
 
-void *atenderConexionCpu(uint32_t socket){
-	uint32_t cod_op = recibir_operacion(socket);
-	if(cod_op > 0){
+void *atenderConexionCpu(arg_struct* argumentsC){
+	//uint32_t cod_op = recibir_operacion(socket);
+	//if(cod_op > 0){
+		uint32_t cod_op = argumentsC->cod_op1;
+		uint32_t socket = argumentsC->socket1;
 		switch(cod_op){
 			case READ:
 				devolver_marco(socket);
@@ -96,7 +116,7 @@ void *atenderConexionCpu(uint32_t socket){
 			default:
 				break;		
 		}
-	}
+	//}
 }
 
 
