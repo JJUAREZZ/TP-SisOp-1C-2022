@@ -209,7 +209,7 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 	pagina->bit_presencia = 0;
 	pagina->bit_uso = 0;
 	pagina->bit_modificado = 0;
-	pagina->marco = 1;
+	pagina->marco = 0;
 
 	return pagina;
 }
@@ -233,6 +233,7 @@ void devolver_marco(uint32_t socket)
 void *liberarProcesoDeMemoria(uint32_t socket){
 	//Ver si recibir pcb o tabla de paginas.
 	unPcb = recibir_pcb(socket);
+	printf("\nProceso %d para liberar en memoria\n", unPcb->id);
 	uint8_t *fd;
 	uint8_t *addr;
 	int i, j, k;
@@ -246,6 +247,9 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	strcat(strcpy(nombreArchivo, path), "/");
 	strcat(nombreArchivo, nroProceso);
 
+	uint32_t nro_paginas = unPcb->tamanioProceso/valores_generales_memoria->tamPagina;
+	if(unPcb->tamanioProceso % valores_generales_memoria->tamPagina != 0) nro_paginas++;
+
 	fd = open(nombreArchivo, O_RDWR);
 	uint8_t largoDelArchivo = valores_generales_memoria->pagPorTabla * valores_generales_memoria->pagPorTabla;
 
@@ -256,15 +260,19 @@ void *liberarProcesoDeMemoria(uint32_t socket){
     t_tabla_primer_nivel *primerNivel;
 	primerNivel = list_get(tablas_primer_nivel_list, unPcb->tablaDePaginas);
 
+	uint32_t nro_tablas_segundo_nivel = nro_paginas / valores_generales_memoria->pagPorTabla;
+	if(nro_paginas % valores_generales_memoria->pagPorTabla != 0) nro_tablas_segundo_nivel++;
+
 	//Itero por las tablas de segundo nivel.
-	for(i = 0; i< valores_generales_memoria->pagPorTabla; i++){
+	for(i = 0; i< nro_tablas_segundo_nivel; i++){
 		t_tabla_segundo_nivel *segundoNivel;
-		segundoNivel = primerNivel->tablas_asociadas[i];
+		uint32_t id_segundo_nivel = primerNivel->tablas_asociadas[i];
+		segundoNivel = list_get(tablas_segundo_nivel_list, id_segundo_nivel);
 
 		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
 		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
 			t_paginas_en_tabla *pagina;
-			pagina = segundoNivel->paginas[i];
+			pagina = segundoNivel->paginas[j];
 
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
@@ -293,13 +301,20 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 			}
 		}
 	}
-		printf("\n se ha liberado el espacio del proceso %n de memoria", unPcb->id);
-		//TODO: ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
+
+	printf("\n se ha liberado el espacio del proceso %d de memoria\n", unPcb->id);
+	//ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
+	uint32_t result = 1;
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&result,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
+
 }
 
 void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	//Ver si recibir pcb o tabla de paginas.
     unPcb = recibir_pcb(socket);
+	printf("\nProceso %d para liberar en memoria y eliminar swap\n", unPcb->id);
 	uint8_t *fd;
 	uint8_t *addr;
 	int i, j, k;
@@ -313,6 +328,12 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	strcat(strcpy(nombreArchivo, path), "/");
 	strcat(nombreArchivo, nroProceso);
 
+	uint32_t nro_paginas = unPcb->tamanioProceso/valores_generales_memoria->tamPagina;
+	if(unPcb->tamanioProceso % valores_generales_memoria->tamPagina != 0) nro_paginas++;
+
+	uint32_t nro_tablas_segundo_nivel = nro_paginas / valores_generales_memoria->pagPorTabla;
+	if(nro_paginas % valores_generales_memoria->pagPorTabla != 0) nro_tablas_segundo_nivel++;
+
 	remove(nombreArchivo);
 
 	//Busco la tabla de primer nivel.
@@ -320,14 +341,15 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	primerNivel = list_get(tablas_primer_nivel_list, unPcb->tablaDePaginas);
 
 	//Itero por las tablas de segundo nivel.
-	for(i = 0; i< valores_generales_memoria->pagPorTabla; i++){
+	for(i = 0; i< nro_tablas_segundo_nivel; i++){
 		t_tabla_segundo_nivel *segundoNivel;
-		segundoNivel = primerNivel->tablas_asociadas[i];
+		uint32_t id_segundo_nivel = primerNivel->tablas_asociadas[i];
+		segundoNivel = list_get(tablas_segundo_nivel_list, id_segundo_nivel);
 
 		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
 		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
 			t_paginas_en_tabla *pagina;
-			pagina = segundoNivel->paginas[i];
+			pagina = segundoNivel->paginas[j];
 
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
@@ -351,7 +373,11 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 		}
 	}
 
-	printf("\n se ha eliminado el proceso %n de memoria.", unPcb->id);
+	printf("\n se ha eliminado el proceso %d de memoria.\n", unPcb->id);
 
+	uint32_t result = 1;
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&result,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
 
 }

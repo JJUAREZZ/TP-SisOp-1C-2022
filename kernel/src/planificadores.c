@@ -163,6 +163,14 @@ void *bloquearProcesos(){
 			queue_push(estadoBlockSusp, procesoIO);
 
 			//Enviar mensaje a memoria
+			uint32_t result;
+	 		uint32_t conexion= conectarse_con_memoria(); 
+			t_paquete *paquete= crear_paquete(SUSPENDED);
+			agregarPcbAPaquete(paquete,procesoIO);
+			enviar_paquete(paquete, conexion);
+
+			recv(conexion, &result, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
+			eliminar_paquete(paquete);
 			
 			printf("\nProceso %d bloqueado enviado a suspendido.\n", procesoIO->id);
 			usleep(tiempoRestanteBloqueo*1000);
@@ -198,7 +206,6 @@ void *enviarProcesosDeSuspendedReadyAReady(){
 
 			
 			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
-			printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
 			queue_push(estadoReady, procesoAReady);
 			sem_post(&semProcesosEnReady);
 			sem_post(&semSrt);
@@ -338,10 +345,19 @@ void planificadorALargoPlazo()
 	 while(1){
 		 sem_wait(&semProcesosEnExit);
 		 pthread_mutex_lock(&COLAEXIT);
-		 liberarPcb(queue_pop(estadoExit));
+		 pcb* procesoEnExit;
+		 procesoEnExit = queue_pop(estadoExit);
 
-		 //Enviar mensaje a memoria.
-		 
+		  //Enviar mensaje a memoria.
+		uint32_t result;
+	 	uint32_t conexion= conectarse_con_memoria(); 
+		t_paquete *paquete= crear_paquete(DELETESWAP);
+		agregarPcbAPaquete(paquete,procesoEnExit);
+		enviar_paquete(paquete, conexion);
+		recv(conexion, &result, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
+		eliminar_paquete(paquete);
+
+		 liberarPcb(procesoEnExit);
 		 pthread_mutex_unlock(&COLAEXIT);
 		 if (interrupcion ==1)
 			sem_post(&semProcesoInterrumpido);

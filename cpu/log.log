@@ -6707,3 +6707,439 @@ EXIT
 [INFO] 23:35:52:622 Servidor Dispatcher/(7265:7283): I/O
 [INFO] 23:35:52:623 Servidor Dispatcher/(7265:7283): El tiempo de ejecucion fue : 2002
 [INFO] 23:35:52:623 Servidor Dispatcher/(7265:7283): Proceso 0 enviado a bloqueado.
+[INFO] 23:59:16:809 Servidor Dispatcher/(7699:7699): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 23:59:16:810 Servidor Dispatcher/(7699:7699): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 23:59:20:297 Servidor Dispatcher/(7699:7699): Creando un hilo para atender una conexión en el socket 6
+[INFO] 23:59:20:299 Servidor Dispatcher/(7699:7699): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 23:59:47:690 Servidor Dispatcher/(7699:7717): Recibi un proceso:
+[INFO] 23:59:47:694 Servidor Dispatcher/(7699:7717): id: 0
+[INFO] 23:59:47:695 Servidor Dispatcher/(7699:7717): NO_OP
+[INFO] 23:59:47:696 Servidor Dispatcher/(7699:7717): Esperando 1000 milisegundos
+[INFO] 23:59:48:697 Servidor Dispatcher/(7699:7717): NO_OP
+[INFO] 23:59:48:697 Servidor Dispatcher/(7699:7717): Esperando 1000 milisegundos
+[INFO] 23:59:49:698 Servidor Dispatcher/(7699:7717): I/O
+[INFO] 23:59:49:699 Servidor Dispatcher/(7699:7717): El tiempo de ejecucion fue : 2002
+[INFO] 23:59:49:699 Servidor Dispatcher/(7699:7717): Proceso 0 enviado a bloqueado.
+[INFO] 00:00:48:175 Servidor Dispatcher/(7778:7778): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:00:48:179 Servidor Dispatcher/(7778:7778): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:00:51:369 Servidor Dispatcher/(7778:7778): Creando un hilo para atender una conexión en el socket 6
+[INFO] 00:00:51:372 Servidor Dispatcher/(7778:7778): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 00:00:55:572 Servidor Dispatcher/(7778:7796): Recibi un proceso:
+[INFO] 00:00:55:573 Servidor Dispatcher/(7778:7796): id: 0
+[INFO] 00:00:55:573 Servidor Dispatcher/(7778:7796): NO_OP
+[INFO] 00:00:55:573 Servidor Dispatcher/(7778:7796): Esperando 1000 milisegundos
+[INFO] 00:00:56:573 Servidor Dispatcher/(7778:7796): NO_OP
+[INFO] 00:00:56:574 Servidor Dispatcher/(7778:7796): Esperando 1000 milisegundos
+[INFO] 00:00:57:575 Servidor Dispatcher/(7778:7796): I/O
+[INFO] 00:00:57:576 Servidor Dispatcher/(7778:7796): El tiempo de ejecucion fue : 2002
+[INFO] 00:00:57:576 Servidor Dispatcher/(7778:7796): Proceso 0 enviado a bloqueado.
+[INFO] 00:01:09:579 Servidor Dispatcher/(7778:7796): Recibi un proceso:
+[INFO] 00:01:09:582 Servidor Dispatcher/(7778:7796): id: 0
+[INFO] 00:01:09:583 Servidor Dispatcher/(7778:7796): EXIT
+[INFO] 00:01:09:583 Servidor Dispatcher/(7778:7796): Proceso 0 enviado a exit.
+[INFO] 00:02:06:272 Servidor Dispatcher/(7869:7869): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:02:06:273 Servidor Dispatcher/(7869:7869): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:02:09:962 Servidor Dispatcher/(7869:7869): Creando un hilo para atender una conexión en el socket 6
+[INFO] 00:02:09:964 Servidor Dispatcher/(7869:7869): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 00:02:13:162 Servidor Dispatcher/(7869:7887): Recibi un proceso:
+[INFO] 00:02:13:163 Servidor Dispatcher/(7869:7887): id: 0
+[INFO] 00:02:13:163 Servidor Dispatcher/(7869:7887): NO_OP
+[INFO] 00:02:13:163 Servidor Dispatcher/(7869:7887): Esperando 1000 milisegundos
+[INFO] 00:02:14:163 Servidor Dispatcher/(7869:7887): NO_OP
+[INFO] 00:02:14:165 Servidor Dispatcher/(7869:7887): Esperando 1000 milisegundos
+[INFO] 00:02:15:165 Servidor Dispatcher/(7869:7887): I/O
+[INFO] 00:02:15:166 Servidor Dispatcher/(7869:7887): El tiempo de ejecucion fue : 2002
+[INFO] 00:02:15:166 Servidor Dispatcher/(7869:7887): Proceso 0 enviado a bloqueado.
+[INFO] 00:02:27:169 Servidor Dispatcher/(7869:7887): Recibi un proceso:
+[INFO] 00:02:27:170 Servidor Dispatcher/(7869:7887): id: 0
+[INFO] 00:02:27:170 Servidor Dispatcher/(7869:7887): EXIT
+[INFO] 00:02:27:170 Servidor Dispatcher/(7869:7887): Proceso 0 enviado a exit.
+[INFO] 00:02:50:004 Servidor Dispatcher/(7983:7983): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:02:50:005 Servidor Dispatcher/(7983:7983): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:04:32:477 Servidor Dispatcher/(8089:8089): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:04:32:481 Servidor Dispatcher/(8089:8089): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:04:37:341 Servidor Dispatcher/(8089:8089): Creando un hilo para atender una conexión en el socket 6
+[INFO] 00:04:37:343 Servidor Dispatcher/(8089:8089): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 00:05:44:605 Servidor Dispatcher/(8089:8108): Recibi un proceso:
+[INFO] 00:05:44:606 Servidor Dispatcher/(8089:8108): id: 0
+[INFO] 00:05:44:606 Servidor Dispatcher/(8089:8108): NO_OP
+[INFO] 00:05:44:606 Servidor Dispatcher/(8089:8108): Esperando 1000 milisegundos
+[INFO] 00:05:45:606 Servidor Dispatcher/(8089:8108): NO_OP
+[INFO] 00:05:45:607 Servidor Dispatcher/(8089:8108): Esperando 1000 milisegundos
+[INFO] 00:05:46:607 Servidor Dispatcher/(8089:8108): I/O
+[INFO] 00:05:46:607 Servidor Dispatcher/(8089:8108): El tiempo de ejecucion fue : 2000
+[INFO] 00:05:46:607 Servidor Dispatcher/(8089:8108): Proceso 0 enviado a bloqueado.
+[INFO] 00:05:58:611 Servidor Dispatcher/(8089:8108): Recibi un proceso:
+[INFO] 00:05:58:613 Servidor Dispatcher/(8089:8108): id: 0
+[INFO] 00:05:58:613 Servidor Dispatcher/(8089:8108): EXIT
+[INFO] 00:05:58:613 Servidor Dispatcher/(8089:8108): Proceso 0 enviado a exit.
+[INFO] 00:07:36:860 Servidor Dispatcher/(8299:8299): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:07:36:862 Servidor Dispatcher/(8299:8299): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:09:08:198 Servidor Dispatcher/(8406:8406): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:09:08:203 Servidor Dispatcher/(8406:8406): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:09:11:314 Servidor Dispatcher/(8406:8406): Creando un hilo para atender una conexión en el socket 6
+[INFO] 00:09:11:316 Servidor Dispatcher/(8406:8406): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 00:09:37:176 Servidor Dispatcher/(8406:8424): Recibi un proceso:
+[INFO] 00:09:37:177 Servidor Dispatcher/(8406:8424): id: 0
+[INFO] 00:09:37:177 Servidor Dispatcher/(8406:8424): NO_OP
+[INFO] 00:09:37:177 Servidor Dispatcher/(8406:8424): Esperando 1000 milisegundos
+[INFO] 00:09:38:186 Servidor Dispatcher/(8406:8424): NO_OP
+[INFO] 00:09:38:187 Servidor Dispatcher/(8406:8424): Esperando 1000 milisegundos
+[INFO] 00:09:39:187 Servidor Dispatcher/(8406:8424): I/O
+[INFO] 00:09:39:189 Servidor Dispatcher/(8406:8424): El tiempo de ejecucion fue : 2011
+[INFO] 00:09:39:189 Servidor Dispatcher/(8406:8424): Proceso 0 enviado a bloqueado.
+[INFO] 00:09:51:191 Servidor Dispatcher/(8406:8424): Recibi un proceso:
+[INFO] 00:09:51:192 Servidor Dispatcher/(8406:8424): id: 0
+[INFO] 00:09:51:192 Servidor Dispatcher/(8406:8424): EXIT
+[INFO] 00:09:51:193 Servidor Dispatcher/(8406:8424): Proceso 0 enviado a exit.
+[INFO] 00:11:32:404 Servidor Dispatcher/(8539:8539): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:11:32:406 Servidor Dispatcher/(8539:8539): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:12:49:101 Servidor Dispatcher/(8570:8570): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:12:49:104 Servidor Dispatcher/(8570:8570): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:12:55:474 Servidor Dispatcher/(8570:8570): Creando un hilo para atender una conexión en el socket 6
+[INFO] 00:12:55:477 Servidor Dispatcher/(8570:8570): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 00:13:00:134 Servidor Dispatcher/(8570:8591): Recibi un proceso:
+[INFO] 00:13:00:135 Servidor Dispatcher/(8570:8591): id: 0
+[INFO] 00:13:00:135 Servidor Dispatcher/(8570:8591): NO_OP
+[INFO] 00:13:00:135 Servidor Dispatcher/(8570:8591): Esperando 1000 milisegundos
+[INFO] 00:13:01:135 Servidor Dispatcher/(8570:8591): NO_OP
+[INFO] 00:13:01:136 Servidor Dispatcher/(8570:8591): Esperando 1000 milisegundos
+[INFO] 00:13:02:137 Servidor Dispatcher/(8570:8591): I/O
+[INFO] 00:13:02:139 Servidor Dispatcher/(8570:8591): El tiempo de ejecucion fue : 2003
+[INFO] 00:13:02:139 Servidor Dispatcher/(8570:8591): Proceso 0 enviado a bloqueado.
+[INFO] 00:13:14:142 Servidor Dispatcher/(8570:8591): Recibi un proceso:
+[INFO] 00:13:14:145 Servidor Dispatcher/(8570:8591): id: 0
+[INFO] 00:13:14:145 Servidor Dispatcher/(8570:8591): EXIT
+[INFO] 00:13:14:145 Servidor Dispatcher/(8570:8591): Proceso 0 enviado a exit.
+[INFO] 00:13:23:980 Servidor Dispatcher/(8638:8638): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:13:23:983 Servidor Dispatcher/(8638:8638): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:13:27:059 Servidor Dispatcher/(8638:8638): Creando un hilo para atender una conexión en el socket 6
+[INFO] 00:13:27:061 Servidor Dispatcher/(8638:8638): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 00:13:30:497 Servidor Dispatcher/(8638:8656): Recibi un proceso:
+[INFO] 00:13:30:497 Servidor Dispatcher/(8638:8656): id: 0
+[INFO] 00:13:30:497 Servidor Dispatcher/(8638:8656): NO_OP
+[INFO] 00:13:30:497 Servidor Dispatcher/(8638:8656): Esperando 1000 milisegundos
+[INFO] 00:13:31:497 Servidor Dispatcher/(8638:8656): NO_OP
+[INFO] 00:13:31:499 Servidor Dispatcher/(8638:8656): Esperando 1000 milisegundos
+[INFO] 00:13:32:500 Servidor Dispatcher/(8638:8656): I/O
+[INFO] 00:13:32:500 Servidor Dispatcher/(8638:8656): El tiempo de ejecucion fue : 2002
+[INFO] 00:13:32:500 Servidor Dispatcher/(8638:8656): Proceso 0 enviado a bloqueado.
+[INFO] 00:13:38:124 Servidor Dispatcher/(8638:8656): Recibi un proceso:
+[INFO] 00:13:38:125 Servidor Dispatcher/(8638:8656): id: 1
+[INFO] 00:13:38:125 Servidor Dispatcher/(8638:8656): NO_OP
+[INFO] 00:13:38:125 Servidor Dispatcher/(8638:8656): Esperando 1000 milisegundos
+[INFO] 00:13:39:125 Servidor Dispatcher/(8638:8656): NO_OP
+[INFO] 00:13:39:127 Servidor Dispatcher/(8638:8656): Esperando 1000 milisegundos
+[INFO] 00:13:40:127 Servidor Dispatcher/(8638:8656): I/O
+[INFO] 00:13:40:128 Servidor Dispatcher/(8638:8656): El tiempo de ejecucion fue : 2002
+[INFO] 00:13:40:128 Servidor Dispatcher/(8638:8656): Proceso 1 enviado a bloqueado.
+[INFO] 00:13:44:502 Servidor Dispatcher/(8638:8656): Recibi un proceso:
+[INFO] 00:13:44:505 Servidor Dispatcher/(8638:8656): id: 0
+[INFO] 00:13:44:505 Servidor Dispatcher/(8638:8656): EXIT
+[INFO] 00:13:44:506 Servidor Dispatcher/(8638:8656): Proceso 0 enviado a exit.
+[INFO] 00:13:46:054 Servidor Dispatcher/(8638:8656): Recibi un proceso:
+[INFO] 00:13:46:054 Servidor Dispatcher/(8638:8656): id: 2
+[INFO] 00:13:46:054 Servidor Dispatcher/(8638:8656): NO_OP
+[INFO] 00:13:46:054 Servidor Dispatcher/(8638:8656): Esperando 1000 milisegundos
+[INFO] 00:13:47:055 Servidor Dispatcher/(8638:8656): NO_OP
+[INFO] 00:13:47:055 Servidor Dispatcher/(8638:8656): Esperando 1000 milisegundos
+[INFO] 00:13:48:055 Servidor Dispatcher/(8638:8656): I/O
+[INFO] 00:13:48:056 Servidor Dispatcher/(8638:8656): El tiempo de ejecucion fue : 2000
+[INFO] 00:13:48:056 Servidor Dispatcher/(8638:8656): Proceso 2 enviado a bloqueado.
+[INFO] 15:33:02:915 Servidor Dispatcher/(4623:4623): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:33:02:918 Servidor Dispatcher/(4623:4623): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:33:08:070 Servidor Dispatcher/(4623:4623): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:33:08:072 Servidor Dispatcher/(4623:4623): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:33:41:308 Servidor Dispatcher/(4623:4641): Recibi un proceso:
+[INFO] 15:33:41:309 Servidor Dispatcher/(4623:4641): id: 0
+[INFO] 15:33:41:309 Servidor Dispatcher/(4623:4641): NO_OP
+[INFO] 15:33:41:309 Servidor Dispatcher/(4623:4641): Esperando 1000 milisegundos
+[INFO] 15:33:42:310 Servidor Dispatcher/(4623:4641): NO_OP
+[INFO] 15:33:42:312 Servidor Dispatcher/(4623:4641): Esperando 1000 milisegundos
+[INFO] 15:33:43:312 Servidor Dispatcher/(4623:4641): I/O
+[INFO] 15:33:43:314 Servidor Dispatcher/(4623:4641): El tiempo de ejecucion fue : 2004
+[INFO] 15:33:43:315 Servidor Dispatcher/(4623:4641): Proceso 0 enviado a bloqueado.
+[INFO] 15:33:55:319 Servidor Dispatcher/(4623:4641): Recibi un proceso:
+[INFO] 15:33:55:320 Servidor Dispatcher/(4623:4641): id: 0
+[INFO] 15:33:55:320 Servidor Dispatcher/(4623:4641): EXIT
+[INFO] 15:33:55:320 Servidor Dispatcher/(4623:4641): Proceso 0 enviado a exit.
+[INFO] 15:34:36:451 Servidor Dispatcher/(4773:4773): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:34:36:451 Servidor Dispatcher/(4773:4773): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:34:39:251 Servidor Dispatcher/(4773:4773): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:34:39:254 Servidor Dispatcher/(4773:4773): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:35:11:395 Servidor Dispatcher/(4773:4790): Recibi un proceso:
+[INFO] 15:35:11:396 Servidor Dispatcher/(4773:4790): id: 0
+[INFO] 15:35:11:396 Servidor Dispatcher/(4773:4790): NO_OP
+[INFO] 15:35:11:396 Servidor Dispatcher/(4773:4790): Esperando 1000 milisegundos
+[INFO] 15:35:12:396 Servidor Dispatcher/(4773:4790): NO_OP
+[INFO] 15:35:12:397 Servidor Dispatcher/(4773:4790): Esperando 1000 milisegundos
+[INFO] 15:35:13:397 Servidor Dispatcher/(4773:4790): I/O
+[INFO] 15:35:13:398 Servidor Dispatcher/(4773:4790): El tiempo de ejecucion fue : 2002
+[INFO] 15:35:13:398 Servidor Dispatcher/(4773:4790): Proceso 0 enviado a bloqueado.
+[INFO] 15:35:25:401 Servidor Dispatcher/(4773:4790): Recibi un proceso:
+[INFO] 15:35:25:403 Servidor Dispatcher/(4773:4790): id: 0
+[INFO] 15:35:25:404 Servidor Dispatcher/(4773:4790): EXIT
+[INFO] 15:35:25:404 Servidor Dispatcher/(4773:4790): Proceso 0 enviado a exit.
+[INFO] 15:35:50:957 Servidor Dispatcher/(4851:4851): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:35:50:959 Servidor Dispatcher/(4851:4851): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:36:03:726 Servidor Dispatcher/(4851:4851): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:36:03:729 Servidor Dispatcher/(4851:4851): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:36:41:577 Servidor Dispatcher/(4851:4920): Recibi un proceso:
+[INFO] 15:36:41:580 Servidor Dispatcher/(4851:4920): id: 0
+[INFO] 15:36:41:580 Servidor Dispatcher/(4851:4920): NO_OP
+[INFO] 15:36:41:580 Servidor Dispatcher/(4851:4920): Esperando 1000 milisegundos
+[INFO] 15:36:42:580 Servidor Dispatcher/(4851:4920): NO_OP
+[INFO] 15:36:42:580 Servidor Dispatcher/(4851:4920): Esperando 1000 milisegundos
+[INFO] 15:36:43:581 Servidor Dispatcher/(4851:4920): I/O
+[INFO] 15:36:43:583 Servidor Dispatcher/(4851:4920): El tiempo de ejecucion fue : 2002
+[INFO] 15:36:43:583 Servidor Dispatcher/(4851:4920): Proceso 0 enviado a bloqueado.
+[INFO] 15:36:55:157 Servidor Dispatcher/(4990:4990): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:36:55:164 Servidor Dispatcher/(4990:4990): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:37:01:046 Servidor Dispatcher/(4990:4990): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:37:01:048 Servidor Dispatcher/(4990:4990): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:37:04:008 Servidor Dispatcher/(4990:5009): Recibi un proceso:
+[INFO] 15:37:04:009 Servidor Dispatcher/(4990:5009): id: 0
+[INFO] 15:37:04:009 Servidor Dispatcher/(4990:5009): NO_OP
+[INFO] 15:37:04:009 Servidor Dispatcher/(4990:5009): Esperando 1000 milisegundos
+[INFO] 15:37:05:009 Servidor Dispatcher/(4990:5009): NO_OP
+[INFO] 15:37:05:010 Servidor Dispatcher/(4990:5009): Esperando 1000 milisegundos
+[INFO] 15:37:06:011 Servidor Dispatcher/(4990:5009): I/O
+[INFO] 15:37:06:011 Servidor Dispatcher/(4990:5009): El tiempo de ejecucion fue : 2001
+[INFO] 15:37:06:011 Servidor Dispatcher/(4990:5009): Proceso 0 enviado a bloqueado.
+[INFO] 15:37:18:211 Servidor Dispatcher/(4990:5009): Recibi un proceso:
+[INFO] 15:37:18:212 Servidor Dispatcher/(4990:5009): id: 0
+[INFO] 15:37:18:212 Servidor Dispatcher/(4990:5009): EXIT
+[INFO] 15:37:18:212 Servidor Dispatcher/(4990:5009): Proceso 0 enviado a exit.
+[INFO] 15:38:47:418 Servidor Dispatcher/(5490:5490): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:38:47:423 Servidor Dispatcher/(5490:5490): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:39:29:122 Servidor Dispatcher/(5563:5563): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:39:29:126 Servidor Dispatcher/(5563:5563): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:39:35:205 Servidor Dispatcher/(5563:5563): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:39:35:208 Servidor Dispatcher/(5563:5563): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:39:50:591 Servidor Dispatcher/(5563:5586): Recibi un proceso:
+[INFO] 15:39:50:592 Servidor Dispatcher/(5563:5586): id: 0
+[INFO] 15:39:50:592 Servidor Dispatcher/(5563:5586): NO_OP
+[INFO] 15:39:50:592 Servidor Dispatcher/(5563:5586): Esperando 1000 milisegundos
+[INFO] 15:39:51:592 Servidor Dispatcher/(5563:5586): NO_OP
+[INFO] 15:39:51:593 Servidor Dispatcher/(5563:5586): Esperando 1000 milisegundos
+[INFO] 15:39:52:593 Servidor Dispatcher/(5563:5586): I/O
+[INFO] 15:39:52:594 Servidor Dispatcher/(5563:5586): El tiempo de ejecucion fue : 2001
+[INFO] 15:39:52:594 Servidor Dispatcher/(5563:5586): Proceso 0 enviado a bloqueado.
+[INFO] 15:42:01:115 Servidor Dispatcher/(5563:5586): Recibi un proceso:
+[INFO] 15:42:01:117 Servidor Dispatcher/(5563:5586): id: 0
+[INFO] 15:42:01:117 Servidor Dispatcher/(5563:5586): EXIT
+[INFO] 15:42:01:117 Servidor Dispatcher/(5563:5586): Proceso 0 enviado a exit.
+[INFO] 15:44:41:341 Servidor Dispatcher/(5951:5951): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:44:41:346 Servidor Dispatcher/(5951:5951): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:44:44:199 Servidor Dispatcher/(5951:5951): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:44:44:201 Servidor Dispatcher/(5951:5951): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:45:14:139 Servidor Dispatcher/(5951:5974): Recibi un proceso:
+[INFO] 15:45:14:139 Servidor Dispatcher/(5951:5974): id: 0
+[INFO] 15:45:14:139 Servidor Dispatcher/(5951:5974): NO_OP
+[INFO] 15:45:14:140 Servidor Dispatcher/(5951:5974): Esperando 1000 milisegundos
+[INFO] 15:45:15:140 Servidor Dispatcher/(5951:5974): NO_OP
+[INFO] 15:45:15:141 Servidor Dispatcher/(5951:5974): Esperando 1000 milisegundos
+[INFO] 15:45:16:141 Servidor Dispatcher/(5951:5974): I/O
+[INFO] 15:45:16:142 Servidor Dispatcher/(5951:5974): El tiempo de ejecucion fue : 2001
+[INFO] 15:45:16:142 Servidor Dispatcher/(5951:5974): Proceso 0 enviado a bloqueado.
+[INFO] 15:46:13:723 Servidor Dispatcher/(5951:5974): Recibi un proceso:
+[INFO] 15:46:13:724 Servidor Dispatcher/(5951:5974): id: 0
+[INFO] 15:46:13:724 Servidor Dispatcher/(5951:5974): EXIT
+[INFO] 15:46:13:724 Servidor Dispatcher/(5951:5974): Proceso 0 enviado a exit.
+[INFO] 15:46:43:746 Servidor Dispatcher/(6141:6141): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:46:43:748 Servidor Dispatcher/(6141:6141): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:46:47:604 Servidor Dispatcher/(6141:6141): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:46:47:606 Servidor Dispatcher/(6141:6141): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 15:47:11:514 Servidor Dispatcher/(6141:6161): Recibi un proceso:
+[INFO] 15:47:11:515 Servidor Dispatcher/(6141:6161): id: 0
+[INFO] 15:47:11:515 Servidor Dispatcher/(6141:6161): NO_OP
+[INFO] 15:47:11:515 Servidor Dispatcher/(6141:6161): Esperando 1000 milisegundos
+[INFO] 15:47:12:516 Servidor Dispatcher/(6141:6161): NO_OP
+[INFO] 15:47:12:517 Servidor Dispatcher/(6141:6161): Esperando 1000 milisegundos
+[INFO] 15:47:13:517 Servidor Dispatcher/(6141:6161): I/O
+[INFO] 15:47:13:518 Servidor Dispatcher/(6141:6161): El tiempo de ejecucion fue : 2003
+[INFO] 15:47:13:518 Servidor Dispatcher/(6141:6161): Proceso 0 enviado a bloqueado.
+[INFO] 15:47:46:839 Servidor Dispatcher/(6141:6161): Recibi un proceso:
+[INFO] 15:47:46:840 Servidor Dispatcher/(6141:6161): id: 0
+[INFO] 15:47:46:840 Servidor Dispatcher/(6141:6161): EXIT
+[INFO] 15:47:46:840 Servidor Dispatcher/(6141:6161): Proceso 0 enviado a exit.
+[INFO] 15:59:31:663 Servidor Dispatcher/(6645:6645): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:59:31:672 Servidor Dispatcher/(6645:6645): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:59:35:399 Servidor Dispatcher/(6645:6645): Creando un hilo para atender una conexión en el socket 6
+[INFO] 15:59:35:401 Servidor Dispatcher/(6645:6645): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:00:00:755 Servidor Dispatcher/(6645:6664): Recibi un proceso:
+[INFO] 16:00:00:755 Servidor Dispatcher/(6645:6664): id: 0
+[INFO] 16:00:00:755 Servidor Dispatcher/(6645:6664): NO_OP
+[INFO] 16:00:00:755 Servidor Dispatcher/(6645:6664): Esperando 1000 milisegundos
+[INFO] 16:00:01:756 Servidor Dispatcher/(6645:6664): NO_OP
+[INFO] 16:00:01:756 Servidor Dispatcher/(6645:6664): Esperando 1000 milisegundos
+[INFO] 16:00:02:757 Servidor Dispatcher/(6645:6664): I/O
+[INFO] 16:00:02:758 Servidor Dispatcher/(6645:6664): El tiempo de ejecucion fue : 2001
+[INFO] 16:00:02:758 Servidor Dispatcher/(6645:6664): Proceso 0 enviado a bloqueado.
+[INFO] 16:02:37:582 Servidor Dispatcher/(6971:6971): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:02:37:585 Servidor Dispatcher/(6971:6971): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:02:41:124 Servidor Dispatcher/(6971:6971): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:02:41:127 Servidor Dispatcher/(6971:6971): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:03:03:977 Servidor Dispatcher/(6971:6989): Recibi un proceso:
+[INFO] 16:03:03:978 Servidor Dispatcher/(6971:6989): id: 0
+[INFO] 16:03:03:978 Servidor Dispatcher/(6971:6989): NO_OP
+[INFO] 16:03:03:978 Servidor Dispatcher/(6971:6989): Esperando 1000 milisegundos
+[INFO] 16:03:04:978 Servidor Dispatcher/(6971:6989): NO_OP
+[INFO] 16:03:04:979 Servidor Dispatcher/(6971:6989): Esperando 1000 milisegundos
+[INFO] 16:03:05:979 Servidor Dispatcher/(6971:6989): I/O
+[INFO] 16:03:05:980 Servidor Dispatcher/(6971:6989): El tiempo de ejecucion fue : 2001
+[INFO] 16:03:05:980 Servidor Dispatcher/(6971:6989): Proceso 0 enviado a bloqueado.
+[INFO] 16:03:12:436 Servidor Dispatcher/(7031:7031): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:03:12:439 Servidor Dispatcher/(7031:7031): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:03:24:805 Servidor Dispatcher/(7031:7031): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:03:24:807 Servidor Dispatcher/(7031:7031): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:03:37:209 Servidor Dispatcher/(7031:7109): Recibi un proceso:
+[INFO] 16:03:37:209 Servidor Dispatcher/(7031:7109): id: 0
+[INFO] 16:03:37:209 Servidor Dispatcher/(7031:7109): NO_OP
+[INFO] 16:03:37:210 Servidor Dispatcher/(7031:7109): Esperando 1000 milisegundos
+[INFO] 16:03:38:210 Servidor Dispatcher/(7031:7109): NO_OP
+[INFO] 16:03:38:210 Servidor Dispatcher/(7031:7109): Esperando 1000 milisegundos
+[INFO] 16:03:39:211 Servidor Dispatcher/(7031:7109): I/O
+[INFO] 16:03:39:212 Servidor Dispatcher/(7031:7109): El tiempo de ejecucion fue : 2001
+[INFO] 16:03:39:212 Servidor Dispatcher/(7031:7109): Proceso 0 enviado a bloqueado.
+[INFO] 16:06:47:731 Servidor Dispatcher/(7031:7109): Recibi un proceso:
+[INFO] 16:06:47:732 Servidor Dispatcher/(7031:7109): id: 0
+[INFO] 16:06:47:732 Servidor Dispatcher/(7031:7109): EXIT
+[INFO] 16:06:47:732 Servidor Dispatcher/(7031:7109): Proceso 0 enviado a exit.
+[INFO] 16:14:14:212 Servidor Dispatcher/(7527:7527): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:14:14:214 Servidor Dispatcher/(7527:7527): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:14:21:526 Servidor Dispatcher/(7527:7527): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:14:21:528 Servidor Dispatcher/(7527:7527): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:14:41:542 Servidor Dispatcher/(7527:7546): Recibi un proceso:
+[INFO] 16:14:41:543 Servidor Dispatcher/(7527:7546): id: 0
+[INFO] 16:14:41:543 Servidor Dispatcher/(7527:7546): NO_OP
+[INFO] 16:14:41:543 Servidor Dispatcher/(7527:7546): Esperando 1000 milisegundos
+[INFO] 16:14:42:543 Servidor Dispatcher/(7527:7546): NO_OP
+[INFO] 16:14:42:546 Servidor Dispatcher/(7527:7546): Esperando 1000 milisegundos
+[INFO] 16:14:43:546 Servidor Dispatcher/(7527:7546): I/O
+[INFO] 16:14:43:546 Servidor Dispatcher/(7527:7546): El tiempo de ejecucion fue : 2002
+[INFO] 16:14:43:546 Servidor Dispatcher/(7527:7546): Proceso 0 enviado a bloqueado.
+[INFO] 16:18:35:783 Servidor Dispatcher/(7992:7992): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:18:35:790 Servidor Dispatcher/(7992:7992): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:18:41:365 Servidor Dispatcher/(7992:7992): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:18:41:368 Servidor Dispatcher/(7992:7992): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:18:57:538 Servidor Dispatcher/(7992:8010): Recibi un proceso:
+[INFO] 16:18:57:539 Servidor Dispatcher/(7992:8010): id: 0
+[INFO] 16:18:57:539 Servidor Dispatcher/(7992:8010): NO_OP
+[INFO] 16:18:57:539 Servidor Dispatcher/(7992:8010): Esperando 1000 milisegundos
+[INFO] 16:18:58:539 Servidor Dispatcher/(7992:8010): NO_OP
+[INFO] 16:18:58:540 Servidor Dispatcher/(7992:8010): Esperando 1000 milisegundos
+[INFO] 16:18:59:540 Servidor Dispatcher/(7992:8010): I/O
+[INFO] 16:18:59:541 Servidor Dispatcher/(7992:8010): El tiempo de ejecucion fue : 2001
+[INFO] 16:18:59:542 Servidor Dispatcher/(7992:8010): Proceso 0 enviado a bloqueado.
+[INFO] 16:20:45:715 Servidor Dispatcher/(7992:8010): Recibi un proceso:
+[INFO] 16:20:45:716 Servidor Dispatcher/(7992:8010): id: 0
+[INFO] 16:20:45:716 Servidor Dispatcher/(7992:8010): EXIT
+[INFO] 16:20:45:716 Servidor Dispatcher/(7992:8010): Proceso 0 enviado a exit.
+[INFO] 16:21:12:943 Servidor Dispatcher/(8165:8165): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:21:12:946 Servidor Dispatcher/(8165:8165): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:21:18:080 Servidor Dispatcher/(8165:8165): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:21:18:083 Servidor Dispatcher/(8165:8165): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:21:39:467 Servidor Dispatcher/(8165:8184): Recibi un proceso:
+[INFO] 16:21:39:468 Servidor Dispatcher/(8165:8184): id: 0
+[INFO] 16:21:39:468 Servidor Dispatcher/(8165:8184): NO_OP
+[INFO] 16:21:39:468 Servidor Dispatcher/(8165:8184): Esperando 1000 milisegundos
+[INFO] 16:21:40:468 Servidor Dispatcher/(8165:8184): NO_OP
+[INFO] 16:21:40:469 Servidor Dispatcher/(8165:8184): Esperando 1000 milisegundos
+[INFO] 16:21:41:469 Servidor Dispatcher/(8165:8184): I/O
+[INFO] 16:21:41:470 Servidor Dispatcher/(8165:8184): El tiempo de ejecucion fue : 2001
+[INFO] 16:21:41:470 Servidor Dispatcher/(8165:8184): Proceso 0 enviado a bloqueado.
+[INFO] 16:23:03:838 Servidor Dispatcher/(8165:8184): Recibi un proceso:
+[INFO] 16:23:03:839 Servidor Dispatcher/(8165:8184): id: 0
+[INFO] 16:23:03:839 Servidor Dispatcher/(8165:8184): EXIT
+[INFO] 16:23:03:840 Servidor Dispatcher/(8165:8184): Proceso 0 enviado a exit.
+[INFO] 16:24:22:829 Servidor Dispatcher/(8346:8346): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:24:22:838 Servidor Dispatcher/(8346:8346): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:24:25:666 Servidor Dispatcher/(8346:8346): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:24:25:669 Servidor Dispatcher/(8346:8346): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:24:52:725 Servidor Dispatcher/(8346:8364): Recibi un proceso:
+[INFO] 16:24:52:725 Servidor Dispatcher/(8346:8364): id: 0
+[INFO] 16:24:52:725 Servidor Dispatcher/(8346:8364): NO_OP
+[INFO] 16:24:52:725 Servidor Dispatcher/(8346:8364): Esperando 1000 milisegundos
+[INFO] 16:24:53:726 Servidor Dispatcher/(8346:8364): NO_OP
+[INFO] 16:24:53:726 Servidor Dispatcher/(8346:8364): Esperando 1000 milisegundos
+[INFO] 16:24:54:727 Servidor Dispatcher/(8346:8364): I/O
+[INFO] 16:24:54:728 Servidor Dispatcher/(8346:8364): El tiempo de ejecucion fue : 2002
+[INFO] 16:24:54:728 Servidor Dispatcher/(8346:8364): Proceso 0 enviado a bloqueado.
+[INFO] 16:25:37:448 Servidor Dispatcher/(8346:8364): Recibi un proceso:
+[INFO] 16:25:37:449 Servidor Dispatcher/(8346:8364): id: 0
+[INFO] 16:25:37:449 Servidor Dispatcher/(8346:8364): EXIT
+[INFO] 16:25:37:449 Servidor Dispatcher/(8346:8364): Proceso 0 enviado a exit.
+[INFO] 16:26:34:872 Servidor Dispatcher/(8504:8504): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:26:34:873 Servidor Dispatcher/(8504:8504): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:27:35:082 Servidor Dispatcher/(8575:8575): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:27:35:087 Servidor Dispatcher/(8575:8575): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:27:38:025 Servidor Dispatcher/(8575:8575): Creando un hilo para atender una conexión en el socket 6
+[INFO] 16:27:38:027 Servidor Dispatcher/(8575:8575): Creando un hilo para atender una interrupcion en el socket 7
+[INFO] 16:27:40:876 Servidor Dispatcher/(8575:8593): Recibi un proceso:
+[INFO] 16:27:40:876 Servidor Dispatcher/(8575:8593): id: 0
+[INFO] 16:27:40:876 Servidor Dispatcher/(8575:8593): NO_OP
+[INFO] 16:27:40:877 Servidor Dispatcher/(8575:8593): Esperando 1000 milisegundos
+[INFO] 16:27:41:878 Servidor Dispatcher/(8575:8593): NO_OP
+[INFO] 16:27:41:878 Servidor Dispatcher/(8575:8593): Esperando 1000 milisegundos
+[INFO] 16:27:42:879 Servidor Dispatcher/(8575:8593): I/O
+[INFO] 16:27:42:880 Servidor Dispatcher/(8575:8593): El tiempo de ejecucion fue : 2003
+[INFO] 16:27:42:880 Servidor Dispatcher/(8575:8593): Proceso 0 enviado a bloqueado.
+[INFO] 16:27:54:883 Servidor Dispatcher/(8575:8593): Recibi un proceso:
+[INFO] 16:27:54:884 Servidor Dispatcher/(8575:8593): id: 0
+[INFO] 16:27:54:884 Servidor Dispatcher/(8575:8593): EXIT
+[INFO] 16:27:54:884 Servidor Dispatcher/(8575:8593): Proceso 0 enviado a exit.
