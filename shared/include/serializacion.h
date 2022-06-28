@@ -29,8 +29,7 @@ typedef enum
 	IDTABLASEGUNDONIVEL,
 	MARCO,
 	SUSPENDED,
-	DELETESWAP,
-	CPUVACIA
+	DELETESWAP
 }op_code;
 
 typedef struct

@@ -19907,3 +19907,7 @@
 
 [INFO] 16:27:40:863 Servidor/(8583:8584): Creando un hilo para atender una conexión en el socket 7
 >>>>>>> e7354750190a70ce1e267fc8f962ef18cfe2b0d8
+[INFO] 20:57:02:547 Servidor/(5223:5224): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:57:21:601 Servidor/(5223:5224): Creando un hilo para atender una conexión en el socket 20
+[INFO] 20:57:23:529 Servidor/(5223:5224): Creando un hilo para atender una conexión en el socket 21
