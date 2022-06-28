@@ -28,6 +28,9 @@ typedef enum
 	HANDSHAKE_CPU,
 	IDTABLASEGUNDONIVEL,
 	MARCO
+	SUSPENDED,
+	DELETESWAP,
+	CPUVACIA
 }op_code;
 
 typedef struct

@@ -20,7 +20,7 @@ typedef struct{
 
 typedef struct{
     t_bitarray *bitmap_memoria;
-    uint32_t *memoria_principal [];
+    uint8_t *memoria_principal [];
 } t_bloque_memoria;
 
 typedef struct{
@@ -30,7 +30,7 @@ typedef struct{
 
 typedef struct{
     uint32_t id_pagina;
-    uint32_t *marco;
+    uint8_t *marco;
     uint32_t bit_presencia; // o utilizar bitmap.
     uint32_t bit_uso;
     uint32_t bit_modificado;
