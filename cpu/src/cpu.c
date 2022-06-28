@@ -6,13 +6,15 @@
 #include <commons/collections/list.h>
 #include <sys/time.h> 
 
-struct timeval t1, t2;
-double computarTiempo();
 uint32_t check_interrupt();
+pthread_t conexion_con_memoria;
+uint32_t mmu (uint32_t , uint32_t );
 
 int main() {
 
     load_configuration_cpu();
+	pthread_create(&conexion_con_memoria, NULL, conectarse_con_memoria, NULL);
+	pthread_detach(conexion_con_memoria);
     conectar_dispatcher();
 
     return 0;    
@@ -120,8 +122,11 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			return;
 
 		} else if(strcmp(nombreInstruccion, "READ") == 0){
-			uint32_t marco = mmu(READ, instruccion->param[0]);
-			printf("El marco es: %d\n", marco);
+			uint32_t direccionLogica= instruccion->param[0];
+			uint32_t tablaDePaginas= unPcb->tablaDePaginas;
+			
+			uint32_t direccionFisica= mmu(direccionLogica,tablaDePaginas);
+			//aca se conecta a memoria, para pasarle la direccion fisica con el cod_op READ
 
 		} else if(strcmp(nombreInstruccion, "WRITE") == 0){
 
@@ -169,30 +174,52 @@ void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
 	unPcb=NULL;
 }
 
-void mmu(op_code op_co, uint32_t direc_logica){
-	// Primer acceso a memoria 
-	uint32_t marco;
-	int conexion= conectarse_con_memoria(); 
-	t_paquete *paquete= crear_paquete(op_co);
-	enviar_paquete(paquete, conexion);
+uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
+	uint32_t numero_pagina,entrada_tabla_1er_nivel,entrada_tabla_2do_nivel,desplazamiento;
 
-	recv(conexion, &marco, sizeof(uint32_t), MSG_WAITALL); 
-	eliminar_paquete(paquete);
-	return marco;
+	numero_pagina= floor(direccion_logica / memoria_config->tam_pagina);
+	entrada_tabla_1er_nivel = floor(numero_pagina / memoria_config->entradas_por_tabla);
+	entrada_tabla_2do_nivel = numero_pagina % memoria_config->entradas_por_tabla;
+    desplazamiento = direccion_logica - (numero_pagina * memoria_config->tam_pagina);
 
-	/*uint32_t numero_pagina = floor(direc_logica / 64)
-	uint32_t entrada_tabla_1er_nivel = floor(numero_pagina / 4)
-	uint32_t entrada_tabla_2do_nivel = numero_pagina % 4
-	uint32_t desplazamiento = direc_logica - numero_pagina * 64*/
+//FALTA TLB
+
+	uint32_t id_tabla_primer_nivel, id_tabla_segundo_nivel, marco, direccion_fisica;
+	uint32_t cod_op, offset, tamanio;
+	void *buffer;
+
+	id_tabla_primer_nivel= tablaDePaginas;
+
+	//enviar paquete con id_tabla_primer_nivel y entrada_tabla_1er_nivel
+	cod_op= IDTABLASEGUNDONIVEL;
+	offset=0;
+	tamanio= sizeof(uint32_t)*3;
+	buffer= malloc(tamanio);
+	memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&id_tabla_primer_nivel,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&entrada_tabla_1er_nivel,sizeof(uint32_t));
+	send(socket_memoria, buffer, tamanio, 0);
+	free(buffer);
+	recv(socket_memoria, &id_tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
+	
+	//enviar paquete con id_tabla_segundo_nivel y entrada_tabla_2do_nivel
+	cod_op= MARCO;
+	offset=0;
+	tamanio= sizeof(uint32_t)*3;
+	buffer= malloc(tamanio);
+	memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&id_tabla_segundo_nivel,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&entrada_tabla_2do_nivel,sizeof(uint32_t));
+	send(socket_memoria, buffer, tamanio, 0);
+	free(buffer);
+	recv(socket_memoria, &marco, sizeof(uint32_t), MSG_WAITALL);
+
+	direccion_fisica= (marco * memoria_config->tam_pagina) + desplazamiento;
+
+	return direccion_fisica;
 }
 
-int conectarse_con_memoria()
-{
-	int conexion= socket_connect_to_server(cpu_config->ip_memoria, cpu_config->puerto_memoria);
-	if(conexion<0)
-		return EXIT_FAILURE;
-	return conexion;
-}
-
-//*** UTILIZAR sem_post(&semEnviarDispatch); CUANDO LA CPU ESTE DESOCUPADA ***
-//*** CUANDO interrumpirCPU = 1, interrumpir la CPU y enviar el PCB a KERNEL *** 

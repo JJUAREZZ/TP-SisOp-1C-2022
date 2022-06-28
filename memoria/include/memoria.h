@@ -23,7 +23,7 @@ memoria_init_server(){
 
 void crear_memoria_principal(){
 
-    memPrincipal.memoria_principal[valores_generales_memoria->tamMemoria];
+    memPrincipal.memoria_principal[valores_generales_memoria->tamMemoria]; //TODO malloc
     memPrincipal.bitmap_memoria = bitarray_create_with_mode("bitmap_memoria", valores_generales_memoria->tamMemoria, LSB_FIRST);
     printf("\n Memoria Principal Creada \n");
 }

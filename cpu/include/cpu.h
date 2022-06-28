@@ -56,7 +56,7 @@ void *conectar_dispatcher()
 			pthread_join(&atenderNuevoPcb, NULL);
 
 
-			log_info(logger,"Creando un hilo para atender una conexión en el socket %d", accepted_fd_dispatch);
+			log_info(logger,"Creando un hilo para atender una conexion en el socket %d", accepted_fd_dispatch);
 
 			
 		}
@@ -68,5 +68,37 @@ void *conectar_dispatcher()
 		}
 	}
 }
+
+void *conectarse_con_memoria()
+{
+	uint32_t conexion= socket_connect_to_server(cpu_config->ip_memoria, cpu_config->puerto_memoria);
+	if(conexion<0){
+		log_info(logger, "Error al conectarse con Memoria");
+		return EXIT_FAILURE;
+	}
+	socket_memoria= conexion;
+	uint32_t cod_op= HANDSHAKE_CPU;
+	send(socket_memoria, &cod_op, sizeof(uint32_t), 0);
+
+	while(1){
+		uint32_t cod_op= recibir_operacion(socket_dispatch);
+		if(cod_op>0)
+		{
+			switch (cod_op)
+			{
+				case HANDSHAKE_CPU:
+				recv(socket_memoria, &memoria_config->tam_pagina, sizeof(uint32_t), MSG_WAITALL);
+				recv(socket_memoria, &memoria_config->entradas_por_tabla, sizeof(uint32_t), MSG_WAITALL);
+				log_info(logger, "Valores de config de Memoria recibidos con exito");
+				break;
+				
+				default:
+					;
+			}
+		}
+	}	
+}
+
+
 
 #endif /* SRC_CPU_H_ */

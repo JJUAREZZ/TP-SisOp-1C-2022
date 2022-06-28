@@ -20,12 +20,14 @@
 #include <commons/config.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <math.h>
 
 t_log *logger;
 
 uint32_t socket_dispatch;
 uint32_t socket_interrupt;
 uint32_t interrupcion;
+uint32_t socket_memoria;
 sem_t semInterrupt;
 
 
@@ -40,7 +42,13 @@ typedef struct{
     char* ip_cpu;
 } valores_config_cpu;
 
+typedef struct{
+    uint32_t tam_pagina;
+    uint32_t entradas_por_tabla;
+} valores_config_memoria;
+
 valores_config_cpu *cpu_config;
+valores_config_memoria *memoria_config;
 
 void load_configuration_cpu(){
     sem_init(&semInterrupt,0,0);
