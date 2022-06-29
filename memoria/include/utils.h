@@ -6,6 +6,8 @@
 #include <commons/log.h>
 #include <pthread.h>
 
+t_log *logger;
+
 typedef struct{
     int puertoMemoria;
     int tamMemoria;

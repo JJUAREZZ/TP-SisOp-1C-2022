@@ -181,6 +181,7 @@ uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
 	entrada_tabla_1er_nivel = floor(numero_pagina / memoria_config->entradas_por_tabla);
 	entrada_tabla_2do_nivel = numero_pagina % memoria_config->entradas_por_tabla;
     desplazamiento = direccion_logica - (numero_pagina * memoria_config->tam_pagina);
+	//printf("%d\n", memoria_config->tam_pagina);
 
 //FALTA TLB
 

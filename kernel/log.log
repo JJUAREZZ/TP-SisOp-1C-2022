@@ -19911,3 +19911,12 @@
 
 [INFO] 20:57:21:601 Servidor/(5223:5224): Creando un hilo para atender una conexión en el socket 20
 [INFO] 20:57:23:529 Servidor/(5223:5224): Creando un hilo para atender una conexión en el socket 21
+[INFO] 20:23:52:318 Servidor/(13717:13718): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:24:19:895 Servidor/(13717:13718): Creando un hilo para atender una conexión en el socket 7
+[INFO] 20:25:20:883 Servidor/(13813:13814): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:25:23:001 Servidor/(13813:13814): Creando un hilo para atender una conexión en el socket 7
+[INFO] 20:54:06:110 Servidor/(16850:16851): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 20:54:08:067 Servidor/(16850:16851): Creando un hilo para atender una conexión en el socket 7

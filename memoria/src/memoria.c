@@ -13,6 +13,7 @@ typedef struct{
 	uint32_t *cod_op1;
 }arg_struct;
 
+void *handshake(uint32_t);
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexionKernel(arg_struct*);
 void *atenderConexionCpu(arg_struct*);
@@ -21,6 +22,7 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t );
 uint32_t crear_tabla_del_proceso(pcb *unPcb);
 uint32_t crear_tabla_segundo_nivel(uint32_t);
 t_paginas_en_tabla *crear_paginas(uint32_t); 
+void* devolver_id_tabla_segundo_nivel(uint32_t);
 uint32_t memoria_socket;
 pcb *unPcb;
 uint32_t *archivoswap;
@@ -64,7 +66,7 @@ int main()
 				pthread_create(&hiloKernel,NULL,atenderConexionKernel, &argumentsK);	
 				pthread_join(hiloKernel, NULL);
 				} 
-				else if(cod_op == READ){
+				else if(cod_op == READ || cod_op == HANDSHAKE_CPU || cod_op == IDTABLASEGUNDONIVEL || cod_op == MARCO){
 				arg_struct argumentsC;
 				argumentsC.socket1 = socket;
 				argumentsC.cod_op1 = cod_op;
@@ -110,13 +112,40 @@ void *atenderConexionCpu(arg_struct* argumentsC){
 		uint32_t cod_op = argumentsC->cod_op1;
 		uint32_t socket = argumentsC->socket1;
 		switch(cod_op){
+			case HANDSHAKE_CPU:
+				handshake(socket);
+				break;
 			case READ:
 				devolver_marco(socket);
+				break;
+			case IDTABLASEGUNDONIVEL:
+				devolver_id_tabla_segundo_nivel(socket);
+				break;
+			case MARCO:
 				break;
 			default:
 				break;		
 		}
 	//}
+}
+
+void *handshake(uint32_t socket){
+	void *buffer;
+	
+	uint32_t cod_op= HANDSHAKE_CPU;
+	uint32_t offset=0;
+	uint32_t tamanio= sizeof(uint32_t)*3;
+	buffer= malloc(tamanio);
+	memcpy(buffer,&cod_op,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&valores_generales_memoria->tamPagina,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&valores_generales_memoria->pagPorTabla,sizeof(uint32_t));
+	
+	send(socket, buffer, tamanio, 0);
+	
+	
+	free(buffer);
 }
 
 
@@ -380,4 +409,10 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	memcpy(stream,&result,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
 
+}
+
+void* devolver_id_tabla_segundo_nivel(uint32_t socket){
+	uint32_t entrada_tabla_1er_nivel, buffer;
+	recv(socket, &buffer, sizeof(uint32_t), 0);
+	printf("que hay aca: %d", buffer);
 }
