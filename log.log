@@ -1463,3 +1463,86 @@
 [INFO] 20:53:40:067 Servidor Dispatcher/(16776:16776): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
 
 [INFO] 20:53:52:532 Servidor Dispatcher/(16776:16785): Valores de config de Memoria recibidos con exito
+[INFO] 13:44:59:609 Servidor Dispatcher/(4968:4968): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:44:59:610 Servidor Dispatcher/(4968:4968): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:44:59:613 Servidor Dispatcher/(4968:4975): Valores de config de Memoria recibidos con exito
+[INFO] 13:45:36:115 Servidor Dispatcher/(5045:5045): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:45:36:115 Servidor Dispatcher/(5045:5045): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:45:42:565 Servidor Dispatcher/(5045:5051): Valores de config de Memoria recibidos con exito
+[INFO] 13:46:12:657 Servidor Dispatcher/(5045:5045): Creando un hilo para atender una conexion en el socket 6
+[INFO] 13:46:12:662 Servidor Dispatcher/(5045:5107): Recibi un proceso:
+[INFO] 13:46:12:663 Servidor Dispatcher/(5045:5107): id: 0
+[INFO] 13:46:12:664 Servidor Dispatcher/(5045:5107): NO_OP
+[INFO] 13:46:12:664 Servidor Dispatcher/(5045:5107): Esperando 1000 milisegundos
+[INFO] 13:46:12:666 Servidor Dispatcher/(5045:5045): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:46:13:665 Servidor Dispatcher/(5045:5107): NO_OP
+[INFO] 13:46:13:665 Servidor Dispatcher/(5045:5107): Esperando 1000 milisegundos
+[INFO] 13:46:14:665 Servidor Dispatcher/(5045:5107): READ
+[INFO] 13:47:21:938 Servidor Dispatcher/(5178:5178): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:47:21:939 Servidor Dispatcher/(5178:5178): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:47:31:562 Servidor Dispatcher/(5178:5189): Valores de config de Memoria recibidos con exito
+[INFO] 13:47:48:027 Servidor Dispatcher/(5178:5178): Creando un hilo para atender una conexion en el socket 6
+[INFO] 13:47:48:033 Servidor Dispatcher/(5178:5235): Recibi un proceso:
+[INFO] 13:47:48:035 Servidor Dispatcher/(5178:5235): id: 0
+[INFO] 13:47:48:036 Servidor Dispatcher/(5178:5235): NO_OP
+[INFO] 13:47:48:037 Servidor Dispatcher/(5178:5235): Esperando 1000 milisegundos
+[INFO] 13:47:48:039 Servidor Dispatcher/(5178:5178): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:47:49:037 Servidor Dispatcher/(5178:5235): NO_OP
+[INFO] 13:47:49:037 Servidor Dispatcher/(5178:5235): Esperando 1000 milisegundos
+[INFO] 13:47:50:038 Servidor Dispatcher/(5178:5235): READ
+[INFO] 15:36:25:415 Servidor Dispatcher/(8461:8461): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:36:25:416 Servidor Dispatcher/(8461:8461): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:36:54:530 Servidor Dispatcher/(8575:8575): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 15:36:54:530 Servidor Dispatcher/(8575:8575): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 15:37:08:980 Servidor Dispatcher/(8575:8575): Creando un hilo para atender una conexion en el socket 6
+[INFO] 15:37:08:986 Servidor Dispatcher/(8575:8575): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 15:37:09:670 Servidor Dispatcher/(8575:8580): Valores de config de Memoria recibidos con exito
+[INFO] 15:37:32:453 Servidor Dispatcher/(8575:8612): Recibi un proceso:
+[INFO] 15:37:32:454 Servidor Dispatcher/(8575:8612): id: 0
+[INFO] 15:37:32:454 Servidor Dispatcher/(8575:8612): NO_OP
+[INFO] 15:37:32:455 Servidor Dispatcher/(8575:8612): Esperando 1000 milisegundos
+[INFO] 15:37:41:694 Servidor Dispatcher/(8575:8612): NO_OP
+[INFO] 15:37:41:695 Servidor Dispatcher/(8575:8612): Esperando 1000 milisegundos
+[INFO] 15:37:42:695 Servidor Dispatcher/(8575:8612): READ
+[INFO] 16:06:17:316 Servidor Dispatcher/(9903:9903): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:06:17:316 Servidor Dispatcher/(9903:9903): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:08:14:021 Servidor Dispatcher/(10010:10010): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:08:14:021 Servidor Dispatcher/(10010:10010): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:08:58:766 Servidor Dispatcher/(10085:10085): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:08:58:767 Servidor Dispatcher/(10085:10085): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:09:04:042 Servidor Dispatcher/(10085:10085): Creando un hilo para atender una conexion en el socket 6
+[INFO] 16:09:04:045 Servidor Dispatcher/(10085:10085): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 16:11:07:937 Servidor Dispatcher/(10206:10206): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:11:07:938 Servidor Dispatcher/(10206:10206): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:20:18:697 Servidor Dispatcher/(11180:11180): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:20:18:698 Servidor Dispatcher/(11180:11180): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:20:18:706 Servidor Dispatcher/(11180:11186): Valores de config de Memoria recibidos con exito
+[INFO] 16:20:46:682 Servidor Dispatcher/(11180:11180): Creando un hilo para atender una conexion en el socket 6
+[INFO] 16:20:46:686 Servidor Dispatcher/(11180:11180): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 16:20:51:743 Servidor Dispatcher/(11180:11210): Recibi un proceso:
+[INFO] 16:20:51:744 Servidor Dispatcher/(11180:11210): id: 0
+[INFO] 16:20:51:744 Servidor Dispatcher/(11180:11210): NO_OP
+[INFO] 16:20:51:744 Servidor Dispatcher/(11180:11210): Esperando 1000 milisegundos
+[INFO] 16:20:52:744 Servidor Dispatcher/(11180:11210): NO_OP
+[INFO] 16:20:52:744 Servidor Dispatcher/(11180:11210): Esperando 1000 milisegundos
+[INFO] 16:20:53:745 Servidor Dispatcher/(11180:11210): READ

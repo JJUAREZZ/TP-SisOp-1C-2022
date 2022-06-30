@@ -175,6 +175,16 @@ void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
 }
 
 uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
+
+	uint32_t conectar_memoria = socket_connect_to_server(cpu_config->ip_memoria, cpu_config->puerto_memoria);
+	
+	if(conectar_memoria<0){
+		log_info(logger, "Error al conectarse con Memoria");
+		return EXIT_FAILURE;
+	}
+
+	socket_memoria = conectar_memoria;
+
 	uint32_t numero_pagina,entrada_tabla_1er_nivel,entrada_tabla_2do_nivel,desplazamiento;
 
 	numero_pagina= floor(direccion_logica / memoria_config->tam_pagina);
@@ -206,7 +216,9 @@ uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
 	recv(socket_memoria, &id_tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 	
 	//enviar paquete con id_tabla_segundo_nivel y entrada_tabla_2do_nivel
-	// aca memoria va a necesitar el id_tabla_primer_nivel y entrada_tabla_1er_nivel tambien porque no la sabe sino
+	//Faltaria la tabla de primer nivel. Asi podemos acceder al swap para hacer el algoritmo de reemplazo 
+	//en caso que tenga todos los marcos disponibles llenos.
+	
 	cod_op= MARCO;
 	offset=0;
 	tamanio= sizeof(uint32_t)*3;

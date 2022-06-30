@@ -2,6 +2,7 @@
 #include "../include/utils.h"
 #include "../../shared/include/serializacion.h"
 #include <fcntl.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -85,9 +86,6 @@ int main()
 
 void *atenderConexionKernel(arg_struct* argumentsK)
 {
-	//uint32_t cod_op= recibir_operacion(socket);
-	//if(cod_op>0)
-	//{
 		uint32_t cod_op = argumentsK->cod_op1;
 		uint32_t socket = argumentsK->socket1;
 		switch (cod_op)
@@ -104,12 +102,9 @@ void *atenderConexionKernel(arg_struct* argumentsK)
 		default:
 			break;
 		}
-	//}
 }
 
 void *atenderConexionCpu(arg_struct* argumentsC){
-	//uint32_t cod_op = recibir_operacion(socket);
-	//if(cod_op > 0){
 		uint32_t cod_op = argumentsC->cod_op1;
 		uint32_t socket = argumentsC->socket1;
 		switch(cod_op){
@@ -128,7 +123,6 @@ void *atenderConexionCpu(arg_struct* argumentsC){
 			default:
 				break;		
 		}
-	//}
 }
 
 void *handshake(uint32_t socket){
@@ -145,8 +139,7 @@ void *handshake(uint32_t socket){
 	memcpy(buffer+offset,&valores_generales_memoria->pagPorTabla,sizeof(uint32_t));
 	
 	send(socket, buffer, tamanio, 0);
-	
-	
+
 	free(buffer);
 }
 
@@ -195,6 +188,7 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&idTabla,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
+	free(stream);
 }
 
 
@@ -300,6 +294,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
 
 				//Copio el marco en el swap.
+				usleep(valores_generales_memoria->retardoSwap);
 				memcpy(*addr + *IncioPagina, **memPrincipal->memoria_principal + *comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 				
 
@@ -317,12 +312,13 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 		}
 	}
 
-	printf("\n se ha liberado el espacio del proceso %d de memoria\n", unPcb->id);
+	printf("\nSe ha liberado el espacio del proceso %d de memoria\n", unPcb->id);
 	//ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
 	uint32_t result = 1;
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&result,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
+	free(stream);
 
 }
 
@@ -388,20 +384,21 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 		}
 	}
 
-	printf("\n se ha eliminado el proceso %d de memoria.\n", unPcb->id);
+	printf("\nSe ha eliminado el proceso %d de memoria.\n", unPcb->id);
 
 	uint32_t result = 1;
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&result,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
+	free(stream);
 
 }
 
 void* devolver_id_tabla_segundo_nivel(uint32_t socket){
-	uint32_t entrada_tabla_1er_nivel, cod_op, id_tabla_primer_nivel;
-	recv(socket, &cod_op, sizeof(uint32_t), 0);
-	recv(socket, &id_tabla_primer_nivel, sizeof(uint32_t), 0);
-	recv(socket, &entrada_tabla_1er_nivel, sizeof(uint32_t), 0);	
+	uint32_t entrada_tabla_1er_nivel,id_tabla_primer_nivel, cod_op;
+	//recv(socket, &cod_op, sizeof(uint32_t), 0);
+	recv(socket, &id_tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &entrada_tabla_1er_nivel, sizeof(uint32_t), MSG_WAITALL);	
 
 	t_tabla_primer_nivel *tabla;
 	tabla = list_get(tablas_primer_nivel_list, id_tabla_primer_nivel);
@@ -410,8 +407,63 @@ void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
+
+	printf("Entrada %d tabla de segundo nivel enviada con exito.", id_tabla_segundo_nivel);
+
+	free(stream);
 }
 
 void* devolver_marco(uint32_t socket){
+	uint32_t tabla_segundo_nivel, entrada_segundo_nivel, cod_op;
+	//recv(socket, &cod_op, sizeof(uint32_t), 0);
+	recv(socket, &tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &entrada_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 
+	t_tabla_segundo_nivel *tabla;
+	tabla = list_get(tablas_segundo_nivel_list, tabla_segundo_nivel);
+
+	t_paginas_en_tabla *pagina;
+	pagina = tabla->paginas[entrada_segundo_nivel];
+
+	//Iria lo comentado
+	uint32_t *marco = pagina->marco;
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&marco,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
+
+/*	
+	if(pagina->bit_presencia == 1){
+		uint32_t *marco = pagina->marco;
+
+		void *stream= malloc(sizeof(uint32_t));
+		memcpy(stream,&marco,sizeof(uint32_t));
+		send(socket,stream,sizeof(uint32_t),NULL);
+
+		printf("\nMarco %d enviado al MMU.\n", marco);
+
+		free(stream);
+
+	} else if(pagina -> bit_presencia != 0) {
+
+		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
+		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
+
+		printf("\n La pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
+
+		//TODO: Recorrer la tabla de primer nivel y ver si la cant de pag con presencia en 1 es == marcos_por_proceso.
+		//Si ya estan todos los marcos asignados del proceso -> realizar algoritmo.
+		if(utilizarClock == 0){
+			//Desarrollo algoritmo Clock.
+		}
+
+		if(utilizarClockM == 0){
+			//Desarrollo algoritmo ClockM.
+		}
+
+		//Si no estan todos los marcos asignados -> asignar uno.
+	
+		
+	}
+
+*/
 }
