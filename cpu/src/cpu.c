@@ -175,12 +175,23 @@ void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
 }
 
 uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
+
+	uint32_t conectar_memoria = socket_connect_to_server(cpu_config->ip_memoria, cpu_config->puerto_memoria);
+	
+	if(conectar_memoria<0){
+		log_info(logger, "Error al conectarse con Memoria");
+		return EXIT_FAILURE;
+	}
+
+	socket_memoria = conectar_memoria;
+
 	uint32_t numero_pagina,entrada_tabla_1er_nivel,entrada_tabla_2do_nivel,desplazamiento;
 
 	numero_pagina= floor(direccion_logica / memoria_config->tam_pagina);
 	entrada_tabla_1er_nivel = floor(numero_pagina / memoria_config->entradas_por_tabla);
 	entrada_tabla_2do_nivel = numero_pagina % memoria_config->entradas_por_tabla;
     desplazamiento = direccion_logica - (numero_pagina * memoria_config->tam_pagina);
+	//printf("%d\n", memoria_config->tam_pagina);
 
 //FALTA TLB
 
