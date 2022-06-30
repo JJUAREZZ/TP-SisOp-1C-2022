@@ -23,6 +23,7 @@ uint32_t crear_tabla_del_proceso(pcb *unPcb);
 uint32_t crear_tabla_segundo_nivel(uint32_t);
 t_paginas_en_tabla *crear_paginas(uint32_t); 
 void* devolver_id_tabla_segundo_nivel(uint32_t);
+void* devolver_marco(uint32_t);
 uint32_t memoria_socket;
 pcb *unPcb;
 uint32_t *archivoswap;
@@ -122,6 +123,7 @@ void *atenderConexionCpu(arg_struct* argumentsC){
 				devolver_id_tabla_segundo_nivel(socket);
 				break;
 			case MARCO:
+				devolver_marco(socket);
 				break;
 			default:
 				break;		
@@ -241,22 +243,6 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 	pagina->marco = 0;
 
 	return pagina;
-}
-
-void devolver_marco(uint32_t socket) 
-{
-	// arbitrariamente voy a la primer pagina de la primer tabla
-	t_tabla_primer_nivel *tabla_primer_nivel = list_get(tablas_primer_nivel_list, 0);
-	uint32_t id_tabla_segundo_level = tabla_primer_nivel->tablas_asociadas[0];
-	t_tabla_segundo_nivel *tabla_segundo_nivel = list_get(tablas_segundo_nivel_list, id_tabla_segundo_level);
-	t_paginas_en_tabla *pagina =  tabla_segundo_nivel->paginas[0];
-	uint32_t marco = pagina->marco;
-
-	printf("\nTe devuevlo el marco nro: %d\n", marco);
-	void *stream= malloc(sizeof(uint32_t));
-	memcpy(stream,&marco,sizeof(uint32_t));
-	send(socket,stream,sizeof(uint32_t),NULL);
-
 }
 
 void *liberarProcesoDeMemoria(uint32_t socket){
@@ -412,7 +398,20 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 }
 
 void* devolver_id_tabla_segundo_nivel(uint32_t socket){
-	uint32_t entrada_tabla_1er_nivel, buffer;
-	recv(socket, &buffer, sizeof(uint32_t), 0);
-	printf("que hay aca: %d", buffer);
+	uint32_t entrada_tabla_1er_nivel, cod_op, id_tabla_primer_nivel;
+	recv(socket, &cod_op, sizeof(uint32_t), 0);
+	recv(socket, &id_tabla_primer_nivel, sizeof(uint32_t), 0);
+	recv(socket, &entrada_tabla_1er_nivel, sizeof(uint32_t), 0);	
+
+	t_tabla_primer_nivel *tabla;
+	tabla = list_get(tablas_primer_nivel_list, id_tabla_primer_nivel);
+	uint32_t id_tabla_segundo_nivel = tabla->tablas_asociadas[entrada_tabla_1er_nivel];
+	
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
+}
+
+void* devolver_marco(uint32_t socket){
+
 }

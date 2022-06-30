@@ -85,7 +85,7 @@ void *conectarse_con_memoria()
 	while(1){
 		//uint32_t cod_op= recibir_operacion(socket_dispatch);
 		// Nose porque el cod_op no lo recibe si se usa la funcion recibir_operacion
-		uint32_t cod_op, tamanio, entradas;
+		uint32_t cod_op;
 		recv(socket_memoria, &cod_op, sizeof(uint32_t), MSG_WAITALL);
 		if(cod_op>0)
 		{
