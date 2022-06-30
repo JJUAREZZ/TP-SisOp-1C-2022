@@ -31,13 +31,15 @@ void planificadorSrt();
 void planificadorFifo();
 
 //Planificador a mediano plazo.
-
+uint32_t resultado_suspension;
 void *planificadorAMedianoPlazo();
 void *bloquearProcesos();
 void *enviarProcesosDeSuspendedReadyAReady();
 
 //planificador a largo plazo
 
+uint32_t id_tabla_pagina;
+uint32_t resultado_delete_swap;
 void planificadorALargoPlazo();
 pcb *crearPcb(t_proceso *);
 t_proceso* recibir_proceso(uint32_t);

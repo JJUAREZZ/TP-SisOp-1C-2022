@@ -16,6 +16,9 @@ sem_t semProcesosEnNew;
 sem_t semProcesosOrdenados;
 sem_t semProcesoCpu;
 sem_t semSrt;
+sem_t sem_obtener_tabla_de_paginas;
+sem_t sem_proceso_suspendido;
+sem_t sem_swap_proceso_terminado;
 
 //Flag para interrumpir la cpu.
 uint32_t *interrumpirCPU;

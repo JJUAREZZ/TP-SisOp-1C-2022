@@ -163,14 +163,11 @@ void *bloquearProcesos(){
 			queue_push(estadoBlockSusp, procesoIO);
 
 			//Enviar mensaje a memoria
-			uint32_t result;
-	 		uint32_t conexion= conectarse_con_memoria(); 
 			t_paquete *paquete= crear_paquete(SUSPENDED);
 			agregarPcbAPaquete(paquete,procesoIO);
-			enviar_paquete(paquete, conexion);
-
-			recv(conexion, &result, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
+			enviar_paquete(paquete, socket_memoria);
 			eliminar_paquete(paquete);
+			sem_wait(&sem_proceso_suspendido);
 			
 			printf("\nProceso %d bloqueado enviado a suspendido.\n", procesoIO->id);
 			usleep(tiempoRestanteBloqueo*1000);
@@ -289,15 +286,12 @@ void planificadorALargoPlazo()
 
  uint32_t obtenerTablaDePagina(pcb * pcb_proceso)
  {
-	 uint32_t id;
-	 uint32_t conexion= conectarse_con_memoria(); 
 	t_paquete *paquete= crear_paquete(TABLADEPAGINA);
 	agregarPcbAPaquete(paquete,pcb_proceso);
-	enviar_paquete(paquete, conexion);
-
-	recv(conexion, &id, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
+	enviar_paquete(paquete, socket_memoria);
+	sem_wait(&sem_obtener_tabla_de_paginas);
 	eliminar_paquete(paquete);
-	return id;
+	return id_tabla_pagina;
  }
 
  void enviarProcesosAReady()
@@ -348,13 +342,11 @@ void planificadorALargoPlazo()
 		 pcb* procesoEnExit;
 		 procesoEnExit = queue_pop(estadoExit);
 
-		  //Enviar mensaje a memoria.
-		uint32_t result;
-	 	uint32_t conexion= conectarse_con_memoria(); 
+		  //Enviar mensaje a memoria.	 	
 		t_paquete *paquete= crear_paquete(DELETESWAP);
 		agregarPcbAPaquete(paquete,procesoEnExit);
-		enviar_paquete(paquete, conexion);
-		recv(conexion, &result, sizeof(uint32_t), MSG_WAITALL); //se bloquea hasta recibir la respuesta
+		enviar_paquete(paquete, socket_memoria);
+		sem_wait(&sem_swap_proceso_terminado);
 		eliminar_paquete(paquete);
 
 		 liberarPcb(procesoEnExit);

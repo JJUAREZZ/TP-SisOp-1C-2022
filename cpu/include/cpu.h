@@ -54,7 +54,7 @@ void *conectar_dispatcher()
 			socket_dispatch= accepted_fd_dispatch;
 			pthread_t atenderNuevoPcb;
 			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
-			pthread_join(&atenderNuevoPcb, NULL);
+			pthread_join(&atenderNuevoPcb, NULL); //?????
 
 
 			log_info(logger,"Creando un hilo para atender una conexion en el socket %d", accepted_fd_dispatch);

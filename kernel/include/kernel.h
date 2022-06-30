@@ -14,8 +14,8 @@
 t_log *logger;
 void* planificadorACortoPlazo();
 void *conectarse_con_consola();
-uint32_t conectarse_con_memoria();
 void conectarse_con_cpu();
+void conectarse_con_memoria();
 void recalcularEstimacion(pcb* );
 
 void kernel_server_init(){
@@ -29,7 +29,9 @@ void kernel_server_init(){
 	sem_init(&semProcesosEnSuspReady,0,0);
 	sem_init(&semProcesosOrdenados, 0, 0);
 	sem_init(&semProcesoCpu, 0, 0);
-	//sem_init(&semProcesosOrdenados, 0, 0);
+	sem_init(&sem_obtener_tabla_de_paginas, 0, 0);
+	sem_init(&sem_proceso_suspendido, 0, 0);
+	sem_init(&sem_swap_proceso_terminado, 0, 0);	
 	sem_init(&semSrt, 0, 0);
 	estadoNew 	= queue_create();
 	estadoReady = queue_create();
@@ -52,11 +54,13 @@ void kernel_server_init(){
 
 	pthread_t conexion_con_consola;
 	pthread_t conexion_con_cpu;
+	pthread_t conexion_con_memoria;
 	pthread_t planiALargoPlazo;
 	pthread_t planiAMedianoPlazo;
 	pthread_t planiACortoPlazo;
 	pthread_create(&conexion_con_consola, NULL, conectarse_con_consola, NULL);
 	pthread_create(&conexion_con_cpu, NULL, conectarse_con_cpu, NULL);
+	pthread_create(&conexion_con_memoria, NULL, conectarse_con_memoria, NULL);
 	pthread_create(&planiALargoPlazo, NULL, planificadorALargoPlazo, NULL); //HILO PLANI LARGO
 	pthread_create(&planiACortoPlazo, NULL,planificadorACortoPlazo, NULL); //HILO PLANI CORTO
 	pthread_create(&planiAMedianoPlazo, NULL, planificadorAMedianoPlazo, NULL); //HILO PLANI MEDIANO.
@@ -65,6 +69,8 @@ void kernel_server_init(){
 	pthread_join(planiALargoPlazo, NULL);
 	pthread_join(planiACortoPlazo, NULL);
 	pthread_join(planiAMedianoPlazo, NULL);
+	pthread_join(conexion_con_cpu, NULL);
+	pthread_join(conexion_con_memoria, NULL);
 }
 
 void *conectarse_con_consola()
@@ -174,12 +180,38 @@ void recalcularEstimacion(pcb* proceso){
 	proceso->estimacion_rafaga_actual= (realAnterior* alfa) + (estimadoAnterior * (1-alfa));
 }
 
-uint32_t conectarse_con_memoria()
-{
+void conectarse_con_memoria(){
 	uint32_t conexion= socket_connect_to_server(config_valores_memoria->ip, config_valores_memoria->puerto);
 	if(conexion<0)
 		return EXIT_FAILURE;
-	return conexion;
+	socket_memoria= conexion;
+
+log_info(logger, "Conectado con Memoria!");
+
+	while(1)
+	{	
+		uint32_t cod_op= recibir_operacion(socket_memoria);
+		if(cod_op>0)
+		{
+			switch (cod_op)
+			{
+				case TABLADEPAGINA:
+				recv(socket_memoria, &id_tabla_pagina, sizeof(uint32_t), MSG_WAITALL); 
+				sem_post(&sem_obtener_tabla_de_paginas);
+					break;
+				case DELETESWAP : 
+					recv(socket_memoria, &resultado_delete_swap, sizeof(uint32_t), MSG_WAITALL); 
+					sem_post(&sem_swap_proceso_terminado);
+					break;
+				case SUSPENDED : 
+					recv(socket_memoria, &resultado_suspension, sizeof(uint32_t), MSG_WAITALL); 
+					sem_post(&sem_proceso_suspendido);
+					break;
+				default:
+					break;
+			}
+		}
+	}	
 }
 
 

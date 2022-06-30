@@ -14,6 +14,9 @@ typedef struct{
 	uint32_t *cod_op1;
 }arg_struct;
 
+void *conectarse_con_kernel(uint32_t );
+void *conectarse_con_cpu(uint32_t );
+
 void *handshake(uint32_t);
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexionKernel(arg_struct*);
@@ -36,11 +39,10 @@ int main()
 {
     load_configuration();
 	crear_memoria_principal();
-
 	tablas_primer_nivel_list = list_create();
-	tablas_segundo_nivel_list = list_create();	
+	tablas_segundo_nivel_list = list_create();
 
-    struct sockaddr_in client_info;
+	struct sockaddr_in client_info;
 	socklen_t addrlen = sizeof client_info;
 	printf("Creando socket y escuchando \n");
 
@@ -51,79 +53,22 @@ int main()
 		return -1;
 	}
 	printf("¡¡¡Servidor de Memoria Iniciado!!!\n");
-	for (;;) 
-	{
-		pthread_t hiloKernel;
-		pthread_t hiloCpu;
-		uint32_t socket;
-		socket= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
-		if (socket != -1)
-		{
-			uint32_t cod_op= recibir_operacion(socket);
-			if(cod_op>0){
-				if(cod_op == TABLADEPAGINA ||cod_op == DELETESWAP || cod_op == SUSPENDED){
-				arg_struct argumentsK;
-				argumentsK.socket1 = socket;
-				argumentsK.cod_op1 = cod_op;
-				pthread_create(&hiloKernel,NULL,atenderConexionKernel, &argumentsK);	
-				pthread_join(hiloKernel, NULL);
-				} 
-				else if(cod_op == READ || cod_op == HANDSHAKE_CPU || cod_op == IDTABLASEGUNDONIVEL || cod_op == MARCO){
-				arg_struct argumentsC;
-				argumentsC.socket1 = socket;
-				argumentsC.cod_op1 = cod_op;
-				pthread_create(&hiloCpu, NULL, atenderConexionCpu, &argumentsC);
-				pthread_join(hiloCpu,NULL);
-				}
-			}
-		}
-		
+
+	pthread_t conexion_con_kernel, conexion_con_cpu;
+	uint32_t socket_cpu, socket_kernel;
+
+	socket_cpu= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
+	if(socket_cpu>0)
+		pthread_create(&conexion_con_cpu,NULL,conectarse_con_cpu,socket_cpu);
+
+	socket_kernel= accept(memoria_socket,(struct sockaddr *) &client_info, &addrlen);
+	if(socket_kernel>0)
+		pthread_create(&conexion_con_kernel,NULL,conectarse_con_kernel,socket_kernel);
 	
-		
-	}
-    return 0;
+	pthread_join(conexion_con_kernel, NULL);
+	pthread_join(conexion_con_cpu, NULL);	
 }
 
-void *atenderConexionKernel(arg_struct* argumentsK)
-{
-		uint32_t cod_op = argumentsK->cod_op1;
-		uint32_t socket = argumentsK->socket1;
-		switch (cod_op)
-		{
-		case TABLADEPAGINA:
-			retornar_id_tabla_de_pagina(socket);
-			break;
-		case SUSPENDED: 
-			liberarProcesoDeMemoria(socket);
-			break;
-		case DELETESWAP: 
-			liberarProcesoDeMemoriaYDeleteSwap(socket);
-			break;
-		default:
-			break;
-		}
-}
-
-void *atenderConexionCpu(arg_struct* argumentsC){
-		uint32_t cod_op = argumentsC->cod_op1;
-		uint32_t socket = argumentsC->socket1;
-		switch(cod_op){
-			case HANDSHAKE_CPU:
-				handshake(socket);
-				break;
-			case READ:
-				devolver_marco(socket);
-				break;
-			case IDTABLASEGUNDONIVEL:
-				devolver_id_tabla_segundo_nivel(socket);
-				break;
-			case MARCO:
-				devolver_marco(socket);
-				break;
-			default:
-				break;		
-		}
-}
 
 void *handshake(uint32_t socket){
 	void *buffer;
@@ -142,7 +87,6 @@ void *handshake(uint32_t socket){
 
 	free(buffer);
 }
-
 
 
 void *retornar_id_tabla_de_pagina(uint32_t socket)
@@ -185,9 +129,12 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 
 	printf("\nRecibi un proceso: nroDeProceso= %d", unPcb->id);
 	printf("\nAsignando tabla de pagina: id= %d\n",idTabla);
-	void *stream= malloc(sizeof(uint32_t));
-	memcpy(stream,&idTabla,sizeof(uint32_t));
-	send(socket,stream,sizeof(uint32_t),NULL);
+	uint32_t tamanio= sizeof(uint32_t)*2;
+	void *stream= malloc(tamanio);
+	uint32_t cod_op= TABLADEPAGINA;
+	memcpy(stream, &cod_op,sizeof(uint32_t));
+	memcpy(stream+sizeof(uint32_t),&idTabla,sizeof(uint32_t));
+	send(socket,stream,tamanio,NULL);
 	free(stream);
 }
 
@@ -315,9 +262,12 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	printf("\nSe ha liberado el espacio del proceso %d de memoria\n", unPcb->id);
 	//ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
 	uint32_t result = 1;
-	void *stream= malloc(sizeof(uint32_t));
-	memcpy(stream,&result,sizeof(uint32_t));
-	send(socket,stream,sizeof(uint32_t),NULL);
+	uint32_t cod_op= SUSPENDED;
+	uint32_t tamanio= sizeof(uint32_t)*2;
+	void *stream= malloc(tamanio);
+	memcpy(stream,&cod_op,sizeof(uint32_t));
+	memcpy(stream+ sizeof(uint32_t),&result,sizeof(uint32_t));
+	send(socket,stream,tamanio,NULL);
 	free(stream);
 
 }
@@ -387,9 +337,12 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	printf("\nSe ha eliminado el proceso %d de memoria.\n", unPcb->id);
 
 	uint32_t result = 1;
-	void *stream= malloc(sizeof(uint32_t));
-	memcpy(stream,&result,sizeof(uint32_t));
-	send(socket,stream,sizeof(uint32_t),NULL);
+	uint32_t tamanio= sizeof(uint32_t)*2;
+	void *stream= malloc(tamanio);
+	uint32_t cod_op= DELETESWAP;
+	memcpy(stream,&cod_op,sizeof(uint32_t));
+	memcpy(stream+sizeof(uint32_t),&result,sizeof(uint32_t));
+	send(socket,stream,tamanio,NULL);
 	free(stream);
 
 }
@@ -414,8 +367,10 @@ void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 }
 
 void* devolver_marco(uint32_t socket){
-	uint32_t tabla_segundo_nivel, entrada_segundo_nivel, cod_op;
+	uint32_t tabla_primer_nivel,tabla_segundo_nivel, entrada_segundo_nivel, cod_op;
+
 	//recv(socket, &cod_op, sizeof(uint32_t), 0);
+	recv(socket, &tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
 	recv(socket, &tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 	recv(socket, &entrada_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 
@@ -467,3 +422,50 @@ void* devolver_marco(uint32_t socket){
 
 */
 }
+
+void *conectarse_con_kernel(uint32_t socket){
+	while(1){
+		uint32_t cod_op= recibir_operacion(socket);
+		if(cod_op>0){
+			switch (cod_op){
+			case TABLADEPAGINA:
+				retornar_id_tabla_de_pagina(socket);
+				break;
+			case SUSPENDED: 
+				liberarProcesoDeMemoria(socket);
+				break;
+			case DELETESWAP: 
+				liberarProcesoDeMemoriaYDeleteSwap(socket);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+
+void *conectarse_con_cpu(uint32_t socket){
+	while(1){
+		uint32_t cod_op= recibir_operacion(socket);
+		if(cod_op>0)
+		{
+			switch(cod_op){
+			case HANDSHAKE_CPU:
+				handshake(socket);
+				break;
+			case READ:
+				devolver_marco(socket);
+				break;
+			case IDTABLASEGUNDONIVEL:
+				devolver_id_tabla_segundo_nivel(socket);
+				break;
+			case MARCO:
+				devolver_marco(socket);
+				break;
+			default:
+				break;		
+			}
+		}
+	}
+}
+
