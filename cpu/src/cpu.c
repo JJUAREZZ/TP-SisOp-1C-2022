@@ -204,12 +204,14 @@ uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
 	free(buffer);
 	recv(socket_memoria, &id_tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 	
-	//enviar paquete con id_tabla_segundo_nivel y entrada_tabla_2do_nivel
+	//enviar paquete con id_tabla_primer_nivel, id_tabla_segundo_nivel y entrada_tabla_2do_nivel
 	cod_op= MARCO;
 	offset=0;
-	tamanio= sizeof(uint32_t)*3;
+	tamanio= sizeof(uint32_t)*4;
 	buffer= malloc(tamanio);
 	memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&id_tabla_primer_nivel,sizeof(uint32_t));
 	offset += sizeof(uint32_t);
 	memcpy(buffer+offset,&id_tabla_segundo_nivel,sizeof(uint32_t));
 	offset += sizeof(uint32_t);
