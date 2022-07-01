@@ -361,7 +361,7 @@ void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
 
-	printf("Entrada %d tabla de segundo nivel enviada con exito.", id_tabla_segundo_nivel);
+	printf("\nEntrada %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
 
 	free(stream);
 }
@@ -374,19 +374,15 @@ void* devolver_marco(uint32_t socket){
 	recv(socket, &tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 	recv(socket, &entrada_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
 
+	t_tabla_primer_nivel *tabla1;
+	tabla1 = list_get(tablas_primer_nivel_list, tabla_primer_nivel);
+
 	t_tabla_segundo_nivel *tabla;
 	tabla = list_get(tablas_segundo_nivel_list, tabla_segundo_nivel);
 
 	t_paginas_en_tabla *pagina;
 	pagina = tabla->paginas[entrada_segundo_nivel];
-
-	//Iria lo comentado
-	uint32_t *marco = pagina->marco;
-	void *stream= malloc(sizeof(uint32_t));
-	memcpy(stream,&marco,sizeof(uint32_t));
-	send(socket,stream,sizeof(uint32_t),NULL);
-
-/*	
+	
 	if(pagina->bit_presencia == 1){
 		uint32_t *marco = pagina->marco;
 
@@ -405,22 +401,34 @@ void* devolver_marco(uint32_t socket){
 
 		printf("\n La pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
 
-		//TODO: Recorrer la tabla de primer nivel y ver si la cant de pag con presencia en 1 es == marcos_por_proceso.
-		//Si ya estan todos los marcos asignados del proceso -> realizar algoritmo.
-		if(utilizarClock == 0){
+		// Recorrer las tablas de paginas.
+		size_t *cant_primeras_entradas = sizeof(&tabla1->tablas_asociadas) / sizeof(tabla1->tablas_asociadas[0]); 
+
+		uint32_t cant_marcos_asignados;
+		cant_marcos_asignados = 0;
+
+		for(int i = 0; i<cant_primeras_entradas ; i++){
+			t_tabla_segundo_nivel *tablaSeg = list_get(tablas_segundo_nivel_list, tabla1->tablas_asociadas[i]);
+			for(int j=0; j<valores_generales_memoria->pagPorTabla; j++){
+				t_paginas_en_tabla *tPagina = tablaSeg->paginas[j];
+				if(tPagina->bit_presencia == 1);
+				cant_marcos_asignados ++;
+			}
+		}
+
+		//Si la cantidad de marcos asignados es == marcos por proceso -> Realizo algoritmo reemplazo.
+		if(cant_marcos_asignados == valores_generales_memoria->marcPorProceso){
+				if(utilizarClock == 0){
 			//Desarrollo algoritmo Clock.
-		}
-
-		if(utilizarClockM == 0){
+			}	
+			if(utilizarClockM == 0){
 			//Desarrollo algoritmo ClockM.
-		}
-
-		//Si no estan todos los marcos asignados -> asignar uno.
-	
-		
+			}
+		} else if (cant_marcos_asignados < valores_generales_memoria->marcPorProceso){
+			//TODO: leer de swap y asignar alguna pagina al marco.
+		}	
 	}
 
-*/
 }
 
 void *conectarse_con_kernel(uint32_t socket){
