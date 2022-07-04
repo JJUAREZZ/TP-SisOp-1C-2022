@@ -8748,3 +8748,125 @@ EXIT
 [INFO] 16:50:48:103 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
 [INFO] 16:50:49:104 Servidor Dispatcher/(12395:12445): EXIT
 [INFO] 16:50:49:104 Servidor Dispatcher/(12395:12445): Proceso 2 enviado a exit.
+[INFO] 17:59:07:690 Servidor Dispatcher/(19163:19163): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 17:59:07:691 Servidor Dispatcher/(19163:19163): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 17:59:07:708 Servidor Dispatcher/(19163:19164): Valores de config de Memoria recibidos con exito
+[INFO] 17:59:11:018 Servidor Dispatcher/(19163:19163): Creando un hilo para atender una conexion en el socket 16
+[INFO] 17:59:11:018 Servidor Dispatcher/(19163:19163): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 17:59:14:823 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:14:823 Servidor Dispatcher/(19163:19199): id: 0
+[INFO] 17:59:14:823 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:14:823 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:15:823 Servidor Dispatcher/(19163:19199): Se ha recibido una interrupcion del Kernel
+[INFO] 17:59:15:823 Servidor Dispatcher/(19163:19199): Desalojando proceso: 0
+[INFO] 17:59:15:824 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:15:824 Servidor Dispatcher/(19163:19199): id: 0
+[INFO] 17:59:15:824 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:15:824 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:16:824 Servidor Dispatcher/(19163:19199): Se ha recibido una interrupcion del Kernel
+[INFO] 17:59:16:824 Servidor Dispatcher/(19163:19199): Desalojando proceso: 0
+[INFO] 17:59:16:829 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:16:829 Servidor Dispatcher/(19163:19199): id: 0
+[INFO] 17:59:16:829 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:16:829 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): I/O
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): El tiempo de ejecucion fue : 3000
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): Proceso 0 enviado a bloqueado.
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): id: 1
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:17:830 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:18:830 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:18:831 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:19:833 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:19:834 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:20:834 Servidor Dispatcher/(19163:19199): I/O
+[INFO] 17:59:20:834 Servidor Dispatcher/(19163:19199): El tiempo de ejecucion fue : 3002
+[INFO] 17:59:20:835 Servidor Dispatcher/(19163:19199): Proceso 1 enviado a bloqueado.
+[INFO] 17:59:20:836 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:20:836 Servidor Dispatcher/(19163:19199): id: 2
+[INFO] 17:59:20:836 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:20:836 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:21:838 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:21:838 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:22:839 Servidor Dispatcher/(19163:19199): Se ha recibido una interrupcion del Kernel
+[INFO] 17:59:22:839 Servidor Dispatcher/(19163:19199): Desalojando proceso: 2
+[INFO] 17:59:22:840 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:22:840 Servidor Dispatcher/(19163:19199): id: 0
+[INFO] 17:59:22:840 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:22:841 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:23:841 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:23:841 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:24:842 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:24:844 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:25:844 Servidor Dispatcher/(19163:19199): EXIT
+[INFO] 17:59:25:845 Servidor Dispatcher/(19163:19199): Proceso 0 enviado a exit.
+[INFO] 17:59:25:846 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:25:847 Servidor Dispatcher/(19163:19199): id: 2
+[INFO] 17:59:25:847 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:25:847 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:26:848 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:26:848 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:27:848 Servidor Dispatcher/(19163:19199): Se ha recibido una interrupcion del Kernel
+[INFO] 17:59:27:849 Servidor Dispatcher/(19163:19199): Desalojando proceso: 2
+[INFO] 17:59:27:850 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:27:850 Servidor Dispatcher/(19163:19199): id: 1
+[INFO] 17:59:27:850 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:27:850 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:28:851 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:28:852 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:29:852 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:29:854 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:30:854 Servidor Dispatcher/(19163:19199): EXIT
+[INFO] 17:59:30:854 Servidor Dispatcher/(19163:19199): Proceso 1 enviado a exit.
+[INFO] 17:59:30:855 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:30:855 Servidor Dispatcher/(19163:19199): id: 2
+[INFO] 17:59:30:855 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:30:856 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:31:856 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:31:856 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:32:857 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:32:857 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:33:858 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:33:858 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:34:859 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:34:861 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:35:861 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:35:862 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:36:862 Servidor Dispatcher/(19163:19199): EXIT
+[INFO] 17:59:36:863 Servidor Dispatcher/(19163:19199): Proceso 2 enviado a exit.
+[INFO] 17:59:51:571 Servidor Dispatcher/(19163:19199): Recibi un proceso:
+[INFO] 17:59:51:571 Servidor Dispatcher/(19163:19199): id: 3
+[INFO] 17:59:51:571 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:51:571 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:52:572 Servidor Dispatcher/(19163:19199): NO_OP
+[INFO] 17:59:52:572 Servidor Dispatcher/(19163:19199): Esperando 1000 milisegundos
+[INFO] 17:59:53:572 Servidor Dispatcher/(19163:19199): READ
+[INFO] 17:59:53:573 Servidor Dispatcher/(19163:19199): Id de tabla segundo nivel recibido: 3
+[INFO] 18:03:48:135 Servidor Dispatcher/(19163:19199): Marco recibido: 3
+[INFO] 18:03:48:135 Servidor Dispatcher/(19163:19199): Direccion Fisica obtenida: 192
+[INFO] 18:03:48:138 Servidor Dispatcher/(19163:19199): I/O
+[INFO] 18:03:48:139 Servidor Dispatcher/(19163:19199): El tiempo de ejecucion fue : 2000
+[INFO] 18:03:48:139 Servidor Dispatcher/(19163:19199): Proceso 3 enviado a bloqueado.
+[INFO] 18:04:29:426 Servidor Dispatcher/(19700:19700): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 18:04:29:427 Servidor Dispatcher/(19700:19700): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 18:04:35:561 Servidor Dispatcher/(19700:19701): Valores de config de Memoria recibidos con exito
+[INFO] 18:04:42:820 Servidor Dispatcher/(19700:19700): Creando un hilo para atender una conexion en el socket 16
+[INFO] 18:04:42:834 Servidor Dispatcher/(19700:19700): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 18:05:00:594 Servidor Dispatcher/(19700:19768): Recibi un proceso:
+[INFO] 18:05:00:594 Servidor Dispatcher/(19700:19768): id: 0
+[INFO] 18:05:00:594 Servidor Dispatcher/(19700:19768): NO_OP
+[INFO] 18:05:00:594 Servidor Dispatcher/(19700:19768): Esperando 1000 milisegundos
+[INFO] 18:05:01:594 Servidor Dispatcher/(19700:19768): NO_OP
+[INFO] 18:05:01:594 Servidor Dispatcher/(19700:19768): Esperando 1000 milisegundos
+[INFO] 18:05:02:595 Servidor Dispatcher/(19700:19768): READ
+[INFO] 18:05:02:663 Servidor Dispatcher/(19700:19768): Id de tabla segundo nivel recibido: 0
+[INFO] 18:06:50:347 Servidor Dispatcher/(19700:19768): Marco recibido: 0
+[INFO] 18:06:50:347 Servidor Dispatcher/(19700:19768): Direccion Fisica obtenida: 0
+[INFO] 18:06:50:347 Servidor Dispatcher/(19700:19768): I/O
+[INFO] 18:06:50:347 Servidor Dispatcher/(19700:19768): El tiempo de ejecucion fue : 2000
+[INFO] 18:06:50:348 Servidor Dispatcher/(19700:19768): Proceso 0 enviado a bloqueado.

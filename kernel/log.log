@@ -20113,3 +20113,14 @@
 [INFO] 16:50:27:292 Servidor/(12433:12434): Creando un hilo para atender una conexión en el socket 21
 [INFO] 16:50:28:412 Servidor/(12433:12434): Creando un hilo para atender una conexión en el socket 22
 [INFO] 16:50:31:409 Servidor/(12433:12434): Creando un hilo para atender una conexión en el socket 21
+[INFO] 17:59:11:017 Servidor/(19187:19190): Conectado con Memoria!
+[INFO] 17:59:11:022 Servidor/(19187:19188): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 17:59:14:816 Servidor/(19187:19188): Creando un hilo para atender una conexión en el socket 21
+[INFO] 17:59:15:492 Servidor/(19187:19188): Creando un hilo para atender una conexión en el socket 22
+[INFO] 17:59:16:346 Servidor/(19187:19188): Creando un hilo para atender una conexión en el socket 21
+[INFO] 17:59:51:562 Servidor/(19187:19188): Creando un hilo para atender una conexión en el socket 22
+[INFO] 18:04:42:820 Servidor/(19756:19759): Conectado con Memoria!
+[INFO] 18:04:42:826 Servidor/(19756:19757): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 18:04:57:162 Servidor/(19756:19757): Creando un hilo para atender una conexión en el socket 21
