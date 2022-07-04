@@ -83,8 +83,6 @@ void *conectarse_con_memoria()
 	send(socket_memoria, &cod_op, sizeof(uint32_t), 0);
 
 	while(1){
-		//uint32_t cod_op= recibir_operacion(socket_dispatch);
-		// Nose porque el cod_op no lo recibe si se usa la funcion recibir_operacion
 		uint32_t cod_op;
 		recv(socket_memoria, &cod_op, sizeof(uint32_t), MSG_WAITALL);
 		if(cod_op>0)
@@ -95,7 +93,6 @@ void *conectarse_con_memoria()
 				recv(socket_memoria, &memoria_config->tam_pagina, sizeof(uint32_t), MSG_WAITALL);
 				recv(socket_memoria, &memoria_config->entradas_por_tabla, sizeof(uint32_t), MSG_WAITALL);
 				log_info(logger, "Valores de config de Memoria recibidos con exito");
-				
 				return;
 				break;
 				

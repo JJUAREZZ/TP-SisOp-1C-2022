@@ -31,6 +31,15 @@ uint32_t socket_memoria;
 sem_t semInterrupt;
 
 
+
+typedef struct {
+    uint32_t pagina;
+    uint32_t marco;
+    double ultima_referencia;
+    double instante_de_carga;
+}entrada_tlb;
+//se inicializa cuando se carga el config
+
 typedef struct{
     int entradas_tlb;
     char* reemplazo_tlb;
@@ -49,6 +58,7 @@ typedef struct{
 
 valores_config_cpu *cpu_config;
 valores_config_memoria *memoria_config;
+entrada_tlb *tlb;
 
 void load_configuration_cpu(){
     sem_init(&semInterrupt,0,0);
@@ -70,6 +80,7 @@ void load_configuration_cpu(){
     cpu_config->puerto_escucha_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT");
     cpu_config->ip_cpu = config_get_string_value(config, "IP_CPU");
 
+    tlb = malloc(sizeof(entrada_tlb)* cpu_config->entradas_tlb);
 }
 float time_diff(struct timeval *start, struct timeval *end)
 {

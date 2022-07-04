@@ -20107,3 +20107,9 @@
 [INFO] 20:35:14:183 Servidor/(3709:3710): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 20:35:17:579 Servidor/(3709:3710): Creando un hilo para atender una conexión en el socket 8
+[INFO] 16:49:50:378 Servidor/(12433:12436): Conectado con Memoria!
+[INFO] 16:49:50:382 Servidor/(12433:12434): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 16:50:27:292 Servidor/(12433:12434): Creando un hilo para atender una conexión en el socket 21
+[INFO] 16:50:28:412 Servidor/(12433:12434): Creando un hilo para atender una conexión en el socket 22
+[INFO] 16:50:31:409 Servidor/(12433:12434): Creando un hilo para atender una conexión en el socket 21

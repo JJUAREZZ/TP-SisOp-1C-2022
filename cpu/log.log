@@ -8659,3 +8659,92 @@ EXIT
 [INFO] 20:35:31:599 Servidor Dispatcher/(3699:3721): id: 0
 [INFO] 20:35:31:599 Servidor Dispatcher/(3699:3721): EXIT
 [INFO] 20:35:31:599 Servidor Dispatcher/(3699:3721): Proceso 0 enviado a exit.
+[INFO] 16:49:34:209 Servidor Dispatcher/(12395:12395): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:49:34:209 Servidor Dispatcher/(12395:12395): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:49:34:223 Servidor Dispatcher/(12395:12396): Valores de config de Memoria recibidos con exito
+[INFO] 16:49:50:379 Servidor Dispatcher/(12395:12395): Creando un hilo para atender una conexion en el socket 16
+[INFO] 16:49:50:380 Servidor Dispatcher/(12395:12395): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:50:27:298 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:27:299 Servidor Dispatcher/(12395:12445): id: 0
+[INFO] 16:50:27:299 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:27:299 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:28:299 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:28:299 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:29:300 Servidor Dispatcher/(12395:12445): Se ha recibido una interrupcion del Kernel
+[INFO] 16:50:29:300 Servidor Dispatcher/(12395:12445): Desalojando proceso: 0
+[INFO] 16:50:29:301 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:29:301 Servidor Dispatcher/(12395:12445): id: 0
+[INFO] 16:50:29:302 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:29:302 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:30:303 Servidor Dispatcher/(12395:12445): I/O
+[INFO] 16:50:30:303 Servidor Dispatcher/(12395:12445): El tiempo de ejecucion fue : 3001
+[INFO] 16:50:30:303 Servidor Dispatcher/(12395:12445): Proceso 0 enviado a bloqueado.
+[INFO] 16:50:30:304 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:30:304 Servidor Dispatcher/(12395:12445): id: 1
+[INFO] 16:50:30:305 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:30:305 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:31:305 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:31:305 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:32:306 Servidor Dispatcher/(12395:12445): Se ha recibido una interrupcion del Kernel
+[INFO] 16:50:32:306 Servidor Dispatcher/(12395:12445): Desalojando proceso: 1
+[INFO] 16:50:32:307 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:32:307 Servidor Dispatcher/(12395:12445): id: 1
+[INFO] 16:50:32:307 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:32:308 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:33:308 Servidor Dispatcher/(12395:12445): I/O
+[INFO] 16:50:33:308 Servidor Dispatcher/(12395:12445): El tiempo de ejecucion fue : 3000
+[INFO] 16:50:33:309 Servidor Dispatcher/(12395:12445): Proceso 1 enviado a bloqueado.
+[INFO] 16:50:33:309 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:33:309 Servidor Dispatcher/(12395:12445): id: 2
+[INFO] 16:50:33:309 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:33:309 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:34:310 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:34:310 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:35:310 Servidor Dispatcher/(12395:12445): Se ha recibido una interrupcion del Kernel
+[INFO] 16:50:35:311 Servidor Dispatcher/(12395:12445): Desalojando proceso: 2
+[INFO] 16:50:35:313 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:35:313 Servidor Dispatcher/(12395:12445): id: 0
+[INFO] 16:50:35:313 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:35:314 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:36:314 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:36:314 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:37:315 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:37:315 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:38:082 Servidor Dispatcher/(12395:12445): EXIT
+[INFO] 16:50:38:082 Servidor Dispatcher/(12395:12445): Proceso 0 enviado a exit.
+[INFO] 16:50:38:089 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:38:089 Servidor Dispatcher/(12395:12445): id: 2
+[INFO] 16:50:38:091 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:38:091 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:39:092 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:39:092 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:40:093 Servidor Dispatcher/(12395:12445): Se ha recibido una interrupcion del Kernel
+[INFO] 16:50:40:093 Servidor Dispatcher/(12395:12445): Desalojando proceso: 2
+[INFO] 16:50:40:094 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:40:094 Servidor Dispatcher/(12395:12445): id: 1
+[INFO] 16:50:40:094 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:40:094 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:41:094 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:41:094 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:42:094 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:42:095 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:43:095 Servidor Dispatcher/(12395:12445): EXIT
+[INFO] 16:50:43:096 Servidor Dispatcher/(12395:12445): Proceso 1 enviado a exit.
+[INFO] 16:50:43:097 Servidor Dispatcher/(12395:12445): Recibi un proceso:
+[INFO] 16:50:43:098 Servidor Dispatcher/(12395:12445): id: 2
+[INFO] 16:50:43:098 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:43:098 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:44:098 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:44:099 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:45:099 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:45:100 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:46:100 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:46:101 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:47:101 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:47:102 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:48:103 Servidor Dispatcher/(12395:12445): NO_OP
+[INFO] 16:50:48:103 Servidor Dispatcher/(12395:12445): Esperando 1000 milisegundos
+[INFO] 16:50:49:104 Servidor Dispatcher/(12395:12445): EXIT
+[INFO] 16:50:49:104 Servidor Dispatcher/(12395:12445): Proceso 2 enviado a exit.

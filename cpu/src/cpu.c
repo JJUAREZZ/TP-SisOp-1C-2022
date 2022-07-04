@@ -9,6 +9,7 @@
 uint32_t check_interrupt();
 pthread_t conexion_con_memoria;
 uint32_t mmu (uint32_t , uint32_t );
+uint32_t obtener_id_tabla_segundo_nivel(uint32_t, uint32_t);
 
 int main() {
 
@@ -229,4 +230,50 @@ uint32_t mmu (uint32_t direccion_logica, uint32_t tablaDePaginas){
 	log_info(logger, "Direccion Fisica obtenida: %d", direccion_fisica);
 	return direccion_fisica;
 }
+
+uint32_t obtener_id_tabla_segundo_nivel(uint32_t id_tabla_primer_nivel, uint32_t entrada_tabla_1er_nivel){
+	uint32_t id_tabla_segundo_nivel, cod_op, offset, tamanio;
+	void *buffer;
+	//enviar paquete con id_tabla_primer_nivel y entrada_tabla_1er_nivel
+	cod_op= IDTABLASEGUNDONIVEL;
+	offset=0;
+	tamanio= sizeof(uint32_t)*3;
+	buffer= malloc(tamanio);
+	memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&id_tabla_primer_nivel,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&entrada_tabla_1er_nivel,sizeof(uint32_t));
+	send(socket_memoria, buffer, tamanio, 0);
+	free(buffer);
+	recv(socket_memoria, &id_tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
+	log_info(logger, "Id de tabla segundo nivel recibido: %d", id_tabla_segundo_nivel);
+
+	return id_tabla_segundo_nivel;
+}
+
+uint32_t obtener_marco(uint32_t id_tabla_primer_nivel,uint32_t id_tabla_segundo_nivel,
+						uint32_t entrada_tabla_2do_nivel){
+	uint32_t marco, cod_op, offset, tamanio;
+	void *buffer;
+	//enviar paquete con id_tabla_primer_nivel, id_tabla_segundo_nivel y entrada_tabla_2do_nivel
+	cod_op= MARCO;
+	offset=0;
+	tamanio= sizeof(uint32_t)*4;
+	buffer= malloc(tamanio);
+	memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&id_tabla_primer_nivel,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&id_tabla_segundo_nivel,sizeof(uint32_t));
+	offset += sizeof(uint32_t);
+	memcpy(buffer+offset,&entrada_tabla_2do_nivel,sizeof(uint32_t));
+	send(socket_memoria, buffer, tamanio, 0);
+	free(buffer);
+	recv(socket_memoria, &marco, sizeof(uint32_t), MSG_WAITALL);
+	log_info(logger, "Marco recibido: %d", marco);
+
+	return marco;
+}
+
 
