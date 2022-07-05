@@ -33,10 +33,11 @@ sem_t semInterrupt;
 
 
 typedef struct {
-    uint32_t pagina;
-    uint32_t marco;
+    int pagina;
+    int marco;
     double ultima_referencia;
     double instante_de_carga;
+    bool vacio;
 }entrada_tlb;
 //se inicializa cuando se carga el config
 
@@ -81,6 +82,12 @@ void load_configuration_cpu(){
     cpu_config->ip_cpu = config_get_string_value(config, "IP_CPU");
 
     tlb = malloc(sizeof(entrada_tlb)* cpu_config->entradas_tlb);
+    //esto se ve feo, pero es para indicar que las entradas estan vacias
+    for(int i=0; i<cpu_config->entradas_tlb;i++){
+        tlb[i].pagina= -1;
+        tlb[i].marco= -1;
+		tlb[i].vacio = true;
+	}
 }
 float time_diff(struct timeval *start, struct timeval *end)
 {

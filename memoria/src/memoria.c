@@ -7,6 +7,7 @@
 #include <string.h>
 #include <math.h>
 #include <sys/mman.h>
+#include <time.h>
 
 
 typedef struct{
@@ -394,7 +395,7 @@ void* devolver_marco(uint32_t socket){
 
 		free(stream);
 
-	} else if(pagina -> bit_presencia != 0) {
+	} else if(pagina -> bit_presencia == 0) {
 
 		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
 		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
@@ -428,6 +429,7 @@ void* devolver_marco(uint32_t socket){
 			//TODO: leer de swap y asignar alguna pagina al marco.
 		}	
 	}
+	
 
 }
 

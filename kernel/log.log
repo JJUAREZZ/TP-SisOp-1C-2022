@@ -20124,3 +20124,34 @@
 [INFO] 18:04:42:826 Servidor/(19756:19757): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 18:04:57:162 Servidor/(19756:19757): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:02:36:733 Servidor/(1653:1656): Conectado con Memoria!
+[INFO] 22:02:36:735 Servidor/(1653:1654): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:02:42:904 Servidor/(1653:1654): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:04:11:119 Servidor/(1783:1786): Conectado con Memoria!
+[INFO] 22:04:11:122 Servidor/(1783:1784): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:04:13:575 Servidor/(1783:1784): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:14:54:908 Servidor/(2655:2658): Conectado con Memoria!
+[INFO] 22:14:54:908 Servidor/(2655:2656): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:15:08:372 Servidor/(2655:2656): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:20:30:170 Servidor/(3144:3151): Conectado con Memoria!
+[INFO] 22:20:30:176 Servidor/(3144:3145): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:20:32:947 Servidor/(3144:3145): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:22:09:338 Servidor/(3387:3390): Conectado con Memoria!
+[INFO] 22:22:09:340 Servidor/(3387:3388): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:22:14:177 Servidor/(3387:3388): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:25:26:877 Servidor/(3691:3694): Conectado con Memoria!
+[INFO] 22:25:26:879 Servidor/(3691:3692): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:25:29:641 Servidor/(3691:3692): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:26:37:081 Servidor/(3691:3692): Creando un hilo para atender una conexión en el socket 22
+[INFO] 22:34:58:976 Servidor/(4453:4456): Conectado con Memoria!
+[INFO] 22:34:58:984 Servidor/(4453:4454): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 22:35:02:406 Servidor/(4453:4454): Creando un hilo para atender una conexión en el socket 21
+[INFO] 22:37:31:174 Servidor/(4453:4454): Creando un hilo para atender una conexión en el socket 22
+[INFO] 22:40:05:648 Servidor/(4453:4454): Creando un hilo para atender una conexión en el socket 21

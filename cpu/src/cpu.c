@@ -11,6 +11,11 @@ pthread_t conexion_con_memoria;
 uint32_t mmu (uint32_t , uint32_t );
 uint32_t obtener_id_tabla_segundo_nivel(uint32_t, uint32_t);
 uint32_t obtener_marco(uint32_t ,uint32_t ,uint32_t );
+int consultar_tlb(uint32_t);
+void agregar_a_tlb(uint32_t, uint32_t);
+int buscar_por_marco(uint32_t);
+int entrada_vacia();
+void algoritmo_de_reemplazo(uint32_t,uint32_t);
 
 int main() {
 
@@ -56,22 +61,7 @@ void *atenderPcb(uint32_t accepted_fd){
 		
 				unPcb= recibir_pcb(accepted_fd);
 				log_info(logger,"Recibi un proceso:");
-				log_info(logger,"id: %d",unPcb->id);
-				//printf("\ntamanioProceso: %d",unPcb->tamanioProceso);
-				//printf("\nprogramCounter: %d", unPcb->programCounter);
-				//printf("\ntablaDePaginas: %d",unPcb->tablaDePaginas);
-				//printf("\nestimacion_rafaga_actual: %d",unPcb->estimacion_rafaga_actual);
-				//printf("\nestimacion_rafaga_anterior: %d",unPcb->estimacion_rafaga_anterior);
-				//printf("\ncpu_anterior: %f\n",unPcb->cpu_anterior);
-				
-				void mostrarInstrucciones(instr_t* element)
-				{
-					printf("%s ",element->id);
-					for(int i=0; i<element->nroDeParam;i++)
-						printf(" %d",(int) element->param[i]);
-					printf("\n");
-				}
-				//list_iterate(unPcb->instr, mostrarInstrucciones);
+				log_info(logger,"id: %d",unPcb->id);		
 				ciclo_de_instruccion(accepted_fd);
 	
 				break;
@@ -177,20 +167,27 @@ void devolverPcb(uint32_t co_op, uint32_t accepted_fd){
 }
 
 uint32_t mmu (uint32_t direccion_logica, uint32_t id_tabla_primer_nivel){
-	uint32_t numero_pagina,entrada_tabla_1er_nivel,entrada_tabla_2do_nivel,desplazamiento;
+	uint32_t numero_pagina,entrada_tabla_1er_nivel,entrada_tabla_2do_nivel,desplazamiento,
+	direccion_fisica;
 
 	numero_pagina= floor(direccion_logica / memoria_config->tam_pagina);
 	entrada_tabla_1er_nivel = floor(numero_pagina / memoria_config->entradas_por_tabla);
 	entrada_tabla_2do_nivel = numero_pagina % memoria_config->entradas_por_tabla;
     desplazamiento = direccion_logica - (numero_pagina * memoria_config->tam_pagina);
-	
-	//FALTA TLB
 
-	uint32_t id_tabla_segundo_nivel, marco, direccion_fisica;
+	uint32_t id_tabla_segundo_nivel, marco;
 
-	id_tabla_segundo_nivel= obtener_id_tabla_segundo_nivel(id_tabla_primer_nivel, 
-															entrada_tabla_1er_nivel);
-	marco= obtener_marco(id_tabla_primer_nivel,id_tabla_segundo_nivel,entrada_tabla_2do_nivel);
+	int respuesta= consultar_tlb(numero_pagina);
+	//TLB MISS
+	if(respuesta<0){
+		id_tabla_segundo_nivel= obtener_id_tabla_segundo_nivel(id_tabla_primer_nivel,entrada_tabla_1er_nivel);
+		marco= obtener_marco(id_tabla_primer_nivel,id_tabla_segundo_nivel,entrada_tabla_2do_nivel);
+		agregar_a_tlb(numero_pagina, marco);
+	}
+	//TLB HIT
+	else{
+		marco= respuesta;
+	}
 
 	direccion_fisica= (marco * memoria_config->tam_pagina) + desplazamiento;
 	log_info(logger, "Direccion Fisica obtenida: %d", direccion_fisica);
@@ -242,4 +239,93 @@ uint32_t obtener_marco(uint32_t id_tabla_primer_nivel,uint32_t id_tabla_segundo_
 	return marco;
 }
 
+int consultar_tlb(uint32_t numero_pagina){
+	int marco = -1;
+	for(int i=0; i< cpu_config->entradas_tlb;i++){
+		if(tlb[i].pagina == numero_pagina){
+			struct timeval t;
+			gettimeofday(&t, NULL);
+			double seconds  = t.tv_sec;
+			double useconds = t.tv_usec;
+			double tiempo = seconds* 1000.0;
+			tiempo += useconds/1000.0;
+
+			marco= tlb[i].marco;
+			tlb[i].ultima_referencia= tiempo;
+			break;
+		}
+	}
+	return marco;
+}
+
+void agregar_a_tlb(uint32_t numero_pagina, uint32_t marco){
+	int entrada= buscar_por_marco(marco);
+	if(entrada>=0)
+		reemplazar_pagina(entrada,numero_pagina);
+	else{
+		entrada= entrada_vacia();
+		if(entrada>0){
+			struct timeval t;
+			gettimeofday(&t, NULL);
+			double seconds  = t.tv_sec;
+			double useconds = t.tv_usec;
+			double tiempo = seconds* 1000.0;
+			tiempo += useconds/1000.0;
+
+			tlb[entrada].pagina= numero_pagina;
+			tlb[entrada].marco= marco;
+			tlb[entrada].ultima_referencia=tiempo;
+			tlb[entrada].instante_de_carga=tiempo;
+			tlb[entrada].vacio= false;
+		}
+		else 
+			algoritmo_de_reemplazo(numero_pagina, marco);
+	}
+}
+
+int buscar_por_marco(uint32_t marco){
+	int entrada= -1;
+	for(int i=0; i< cpu_config->entradas_tlb;i++){
+		if(tlb[i].marco == marco){
+			entrada=i;
+			break;
+		}
+	}
+	return entrada;
+}
+
+void reemplazar_pagina(uint32_t entrada, uint32_t numero_pagina){
+	struct timeval t;
+	gettimeofday(&t, NULL);
+	double seconds  = t.tv_sec;
+    double useconds = t.tv_usec;
+    double tiempo = seconds* 1000.0;
+    tiempo += useconds/1000.0;
+	tlb[entrada].instante_de_carga = tiempo;
+	tlb[entrada].pagina= numero_pagina;
+	tlb[entrada].ultima_referencia= tiempo;
+}
+
+int entrada_vacia(){
+	int entrada= -1;
+	for(int i=0; i< cpu_config->entradas_tlb;i++){
+		if(tlb[i].vacio){
+			entrada=i;
+			break;
+		}
+	}
+	return entrada;
+}
+
+void algoritmo_de_reemplazo(uint32_t numero_pagina,uint32_t marco){
+	int fifo = strcmp(cpu_config->reemplazo_tlb, "FIFO");
+	int lru = strcmp(cpu_config->reemplazo_tlb, "LRU");
+		if(fifo == 0){
+				//Ejecuta FIFO.
+		}
+
+		if(lru == 0){
+				//Ejecuta LRU.
+		}   
+}
 
