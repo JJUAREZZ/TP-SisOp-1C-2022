@@ -29,8 +29,8 @@ void crear_memoria_principal(){
 
     memPrincipal = malloc(sizeof(t_bloque_memoria));
     memPrincipal->memoria_principal[valores_generales_memoria->tamMemoria];
-    memPrincipal->bitmap_memoria = bitarray_create_with_mode("bitmap_memoria",cantidad_de_marcos, LSB_FIRST);
-    printf("\n Memoria Principal Creada \n");
+    memPrincipal->bitmap_memoria = bitarray_create_with_mode("bitmap_memoria",cantidad_de_marcos, MSB_FIRST);
+    printf("\nMemoria Principal Creada\n");
 
 }
 

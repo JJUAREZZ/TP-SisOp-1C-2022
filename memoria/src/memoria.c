@@ -7,6 +7,7 @@
 #include <string.h>
 #include <math.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 #include <time.h>
 
 
@@ -97,14 +98,17 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 
 	char* path = valores_generales_memoria->pathSwap;
 	char nombreArchivo [50];
-
+	uint8_t *addr;
 	//Creo el archivo swap.
 	char* nroProceso [2];
 	sprintf(nroProceso, "%d", unPcb->id);
 	strcat(nroProceso, ".swap");
 	strcat(strcpy(nombreArchivo, path), "/");
 	strcat(nombreArchivo, nroProceso);
-	archivoswap = open(nombreArchivo, O_CREAT, O_RDWR);
+
+	mkdir(path, 0775);
+
+	archivoswap = open(nombreArchivo,O_CREAT | O_RDWR, S_IRWXU);
 	printf("\nArchivo swap del proceso Creado: %s \n", nombreArchivo);
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
@@ -123,10 +127,26 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	}
 
 	int cantidad_de_bytes = cantidad_paginas_necesarias * valores_generales_memoria->tamPagina;
-	
-	for(int i = 0; i<cantidad_de_bytes ; i++){
-		write(archivoswap, 0, sizeof(uint8_t));
+
+	size_t tamanioArchivo = sizeof(uint8_t) * cantidad_de_bytes;
+
+	uint8_t nCero = 0;
+
+	for(int i = 0; i<cantidad_de_bytes; i++){
+		write(archivoswap, "0", sizeof(uint8_t));
 	}
+
+	struct stat fd_size;
+
+	fstat(archivoswap, &fd_size);
+
+	addr = mmap(NULL,fd_size.st_size, PROT_WRITE | PROT_READ, MAP_SHARED, archivoswap, 0);
+	
+	if(addr == MAP_FAILED){
+		perror("Error mapping\n");
+	}
+
+	close(archivoswap);
 
 	printf("\nRecibi un proceso: nroDeProceso= %d", unPcb->id);
 	printf("\nAsignando tabla de pagina: id= %d\n",idTabla);
@@ -178,7 +198,7 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 {
 	t_paginas_en_tabla* pagina = malloc(sizeof(t_paginas_en_tabla));
 	pagina->id_pagina = id;
-	//printf("\nId de pagina: %d\n", pagina->id_pagina);
+	printf("\nId de pagina: %d\n", pagina->id_pagina);
 	pagina->bit_presencia = 0;
 	pagina->bit_uso = 0;
 	pagina->bit_modificado = 0;
@@ -187,8 +207,165 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 	return pagina;
 }
 
+void* devolver_id_tabla_segundo_nivel(uint32_t socket){
+	uint32_t entrada_tabla_1er_nivel,id_tabla_primer_nivel, cod_op;
+	//recv(socket, &cod_op, sizeof(uint32_t), 0);
+	recv(socket, &id_tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &entrada_tabla_1er_nivel, sizeof(uint32_t), MSG_WAITALL);	
+
+	t_tabla_primer_nivel *tabla;
+	tabla = list_get(tablas_primer_nivel_list, id_tabla_primer_nivel);
+	uint32_t id_tabla_segundo_nivel = tabla->tablas_asociadas[entrada_tabla_1er_nivel];
+	
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
+
+	printf("\nEntrada %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
+
+	free(stream);
+}
+
+
+
+void* devolver_marco(uint32_t socket){
+
+	int w;
+
+	uint32_t tabla_primer_nivel,tabla_segundo_nivel, entrada_segundo_nivel, cod_op;
+
+	recv(socket, &tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &entrada_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
+
+	t_tabla_primer_nivel *tabla1;
+	tabla1 = list_get(tablas_primer_nivel_list, tabla_primer_nivel);
+
+	t_tabla_segundo_nivel *tabla;
+	tabla = list_get(tablas_segundo_nivel_list, tabla_segundo_nivel);
+
+	t_paginas_en_tabla *pagina;
+	pagina = tabla->paginas[entrada_segundo_nivel];
+
+	int *fd;
+	uint8_t *addr;
+
+	struct stat sb;
+	
+	char* path = valores_generales_memoria->pathSwap;
+	char nombreArchivo [50];
+	char* nroProceso [2];
+	sprintf(nroProceso, "%d", tabla_primer_nivel);
+	strcat(nroProceso, ".swap");
+	strcat(strcpy(nombreArchivo, path), "/");
+	strcat(nombreArchivo, nroProceso);
+	
+	fd = open(nombreArchivo,O_CREAT | O_RDWR, S_IRWXU);
+
+	fstat(fd, &sb);
+
+	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_SHARED, fd, 0);
+
+	memset(nombreArchivo, 0, strlen(nombreArchivo));
+	memset(nroProceso, 0, strlen(nroProceso));
+
+	if(pagina->bit_presencia == 1){
+		uint8_t *marco = pagina->marco;
+
+		void *stream= malloc(sizeof(uint8_t));
+		memcpy(stream,&marco,sizeof(uint8_t));
+		send(socket,stream,sizeof(uint8_t),NULL);
+
+		printf("\nMarco %d enviado al MMU.\n", marco);
+
+		free(stream);
+
+	} else if(pagina->bit_presencia == 0) {
+
+		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
+		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
+
+		printf("\nLa pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
+
+		// Recorrer las tablas de paginas.
+		size_t tamanioTabla = sizeof(&tabla1->tablas_asociadas);
+		size_t tamanioEntrada = sizeof(&tabla1->tablas_asociadas[0]);
+
+		size_t cant_primeras_entradas = tamanioTabla / tamanioEntrada; 
+
+		uint32_t cant_marcos_asignados;
+		cant_marcos_asignados = 0;
+
+		for(int i = 0; i<cant_primeras_entradas ; i++){
+			t_tabla_segundo_nivel *tablaSeg = list_get(tablas_segundo_nivel_list, tabla1->tablas_asociadas[i]);
+			for(int j=0; j<valores_generales_memoria->pagPorTabla; j++){
+				t_paginas_en_tabla *tPagina = tablaSeg->paginas[j];
+				if(tPagina->bit_presencia == 1){
+					cant_marcos_asignados ++;
+				}
+			}
+		}
+
+		//Si la cantidad de marcos asignados es == marcos por proceso -> Realizo algoritmo reemplazo.
+		if(cant_marcos_asignados == valores_generales_memoria->marcPorProceso){
+
+			if(utilizarClock == 0){
+			//Desarrollo algoritmo Clock.
+			}	
+			if(utilizarClockM == 0){
+			//Desarrollo algoritmo ClockM.
+			}
+
+		} else if (cant_marcos_asignados < valores_generales_memoria->marcPorProceso){
+			//leer de swap y asignar alguna pagina al marco.
+			uint32_t cantidad_marcos_memoria = valores_generales_memoria->tamMemoria / valores_generales_memoria->tamPagina;
+			
+			//Busco Marco libre.
+			w = 0;
+			while(w<cantidad_marcos_memoria){
+				bool marco_ocupado = bitarray_test_bit(memPrincipal->bitmap_memoria, w);
+
+				if(marco_ocupado == false){
+					//Si el marco esta libre se lo asigno a la pagina y hago el swap.
+					//NOTE: Me tira Seg_fault el set bit y no se porque
+					//bitarray_set_bit(memPrincipal->bitmap_memoria, w);
+					pagina->marco = w;
+
+					uint8_t comienzo_marco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+					uint8_t comienzo_pagina = (uint8_t)pagina->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
+
+					//Hago el swap.
+					usleep(valores_generales_memoria->retardoSwap);
+					memcpy(*memPrincipal->memoria_principal + comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
+					
+					close(fd);
+
+					pagina->bit_presencia = 1;
+
+					printf("Marco %d asignado a la pagina %d", w, pagina->id_pagina);
+
+					void *stream= malloc(sizeof(uint32_t));
+					memcpy(stream,&pagina->marco,sizeof(uint32_t));
+					send(socket,stream,sizeof(uint32_t),NULL);
+
+					printf("\nMarco %d enviado al MMU.\n", pagina->marco);
+
+					free(stream);
+
+					break;
+				}
+
+				w++;
+			}
+
+		}	
+
+		cant_marcos_asignados = 0;
+	}
+
+}
+
 void *liberarProcesoDeMemoria(uint32_t socket){
-	//Ver si recibir pcb o tabla de paginas.
 	unPcb = recibir_pcb(socket);
 	printf("\nProceso %d para liberar en memoria\n", unPcb->id);
 	uint8_t *fd;
@@ -207,11 +384,23 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	uint32_t nro_paginas = unPcb->tamanioProceso/valores_generales_memoria->tamPagina;
 	if(unPcb->tamanioProceso % valores_generales_memoria->tamPagina != 0) nro_paginas++;
 
-	fd = open(nombreArchivo, O_RDWR);
-	uint8_t largoDelArchivo = valores_generales_memoria->pagPorTabla * valores_generales_memoria->pagPorTabla;
 
 	//mapeo el archivo del proceso.
-	addr = mmap(NULL, sizeof(uint8_t) * largoDelArchivo, PROT_WRITE, MAP_SHARED, fd, 0);
+	fd = open(nombreArchivo, O_RDWR, S_IRWXU);
+
+	struct stat sb;
+
+	fstat(fd, &sb);
+
+	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_SHARED, fd, 0);
+
+	memset(nombreArchivo, 0, strlen(nombreArchivo));
+	memset(nroProceso, 0, strlen(nroProceso));
+
+	if(addr = MAP_FAILED){
+		perror("Error mapping\n");
+		exit(1);
+	}
 
 	//Busco la tabla de primer nivel.
     t_tabla_primer_nivel *primerNivel;
@@ -234,17 +423,16 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
 
-				uint8_t *comienzoDelMarco = *pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
-				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t comienzoDelMarco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t finDelMarco = comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
-				uint8_t *IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
-				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t finDeLaPagina = IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
 
 				//Copio el marco en el swap.
 				usleep(valores_generales_memoria->retardoSwap);
-				memcpy(*addr + *IncioPagina, **memPrincipal->memoria_principal + *comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-				
+				memcpy(addr + IncioPagina, *memPrincipal->memoria_principal + comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
 				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
@@ -316,7 +504,7 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
 
-				uint8_t *comienzoDelMarco = *pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t *comienzoDelMarco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
 				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
@@ -348,90 +536,6 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 
 }
 
-void* devolver_id_tabla_segundo_nivel(uint32_t socket){
-	uint32_t entrada_tabla_1er_nivel,id_tabla_primer_nivel, cod_op;
-	//recv(socket, &cod_op, sizeof(uint32_t), 0);
-	recv(socket, &id_tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
-	recv(socket, &entrada_tabla_1er_nivel, sizeof(uint32_t), MSG_WAITALL);	
-
-	t_tabla_primer_nivel *tabla;
-	tabla = list_get(tablas_primer_nivel_list, id_tabla_primer_nivel);
-	uint32_t id_tabla_segundo_nivel = tabla->tablas_asociadas[entrada_tabla_1er_nivel];
-	
-	void *stream= malloc(sizeof(uint32_t));
-	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
-	send(socket,stream,sizeof(uint32_t),NULL);
-
-	printf("\nEntrada %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
-
-	free(stream);
-}
-
-void* devolver_marco(uint32_t socket){
-	uint32_t tabla_primer_nivel,tabla_segundo_nivel, entrada_segundo_nivel, cod_op;
-
-	//recv(socket, &cod_op, sizeof(uint32_t), 0);
-	recv(socket, &tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
-	recv(socket, &tabla_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
-	recv(socket, &entrada_segundo_nivel, sizeof(uint32_t), MSG_WAITALL);
-
-	t_tabla_primer_nivel *tabla1;
-	tabla1 = list_get(tablas_primer_nivel_list, tabla_primer_nivel);
-
-	t_tabla_segundo_nivel *tabla;
-	tabla = list_get(tablas_segundo_nivel_list, tabla_segundo_nivel);
-
-	t_paginas_en_tabla *pagina;
-	pagina = tabla->paginas[entrada_segundo_nivel];
-	
-	if(pagina->bit_presencia == 1){
-		uint32_t *marco = pagina->marco;
-
-		void *stream= malloc(sizeof(uint32_t));
-		memcpy(stream,&marco,sizeof(uint32_t));
-		send(socket,stream,sizeof(uint32_t),NULL);
-
-		printf("\nMarco %d enviado al MMU.\n", marco);
-
-		free(stream);
-
-	} else if(pagina -> bit_presencia == 0) {
-
-		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
-		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
-
-		printf("\n La pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
-
-		// Recorrer las tablas de paginas.
-		size_t *cant_primeras_entradas = sizeof(&tabla1->tablas_asociadas) / sizeof(tabla1->tablas_asociadas[0]); 
-
-		uint32_t cant_marcos_asignados;
-		cant_marcos_asignados = 0;
-
-		for(int i = 0; i<cant_primeras_entradas ; i++){
-			t_tabla_segundo_nivel *tablaSeg = list_get(tablas_segundo_nivel_list, tabla1->tablas_asociadas[i]);
-			for(int j=0; j<valores_generales_memoria->pagPorTabla; j++){
-				t_paginas_en_tabla *tPagina = tablaSeg->paginas[j];
-				if(tPagina->bit_presencia == 1);
-				cant_marcos_asignados ++;
-			}
-		}
-
-		//Si la cantidad de marcos asignados es == marcos por proceso -> Realizo algoritmo reemplazo.
-		if(cant_marcos_asignados == valores_generales_memoria->marcPorProceso){
-				if(utilizarClock == 0){
-			//Desarrollo algoritmo Clock.
-			}	
-			if(utilizarClockM == 0){
-			//Desarrollo algoritmo ClockM.
-			}
-		} else if (cant_marcos_asignados < valores_generales_memoria->marcPorProceso){
-			//TODO: leer de swap y asignar alguna pagina al marco.
-		}	
-	}
-	
-
-}
 
 void *conectarse_con_kernel(uint32_t socket){
 	while(1){
