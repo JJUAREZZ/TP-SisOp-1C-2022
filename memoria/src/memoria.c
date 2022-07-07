@@ -260,11 +260,19 @@ void* devolver_marco(uint32_t socket){
 	strcat(strcpy(nombreArchivo, path), "/");
 	strcat(nombreArchivo, nroProceso);
 	
-	fd = open(nombreArchivo,O_CREAT | O_RDWR, S_IRWXU);
+	fd = open(nombreArchivo, O_RDWR, S_IRWXU);
+
+	if(fd == -1){
+		perror("Error al abrir el archivo");
+	}
 
 	fstat(fd, &sb);
 
-	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_SHARED, fd, 0);
+	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_PRIVATE , fd, 0);
+
+	if(addr == MAP_FAILED){
+		printf("Error al mapear el archivo.");
+	}
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
 	memset(nroProceso, 0, strlen(nroProceso));
@@ -321,14 +329,15 @@ void* devolver_marco(uint32_t socket){
 			uint32_t cantidad_marcos_memoria = valores_generales_memoria->tamMemoria / valores_generales_memoria->tamPagina;
 			
 			//Busco Marco libre.
-			w = 0;
-			while(w<cantidad_marcos_memoria){
-				bool marco_ocupado = bitarray_test_bit(memPrincipal->bitmap_memoria, w);
-
+			
+			for(int w=0; w<cantidad_marcos_memoria; w++){
+				bool marco_ocupado = bitarray_test_bit(bitmap_memoria, w);
+		
 				if(marco_ocupado == false){
 					//Si el marco esta libre se lo asigno a la pagina y hago el swap.
-					//NOTE: Me tira Seg_fault el set bit y no se porque
-					//bitarray_set_bit(memPrincipal->bitmap_memoria, w);
+					bitarray_set_bit(bitmap_memoria, w);
+					msync(bitmap_memoria->bitarray, sizeof(uint8_t) * tamanioBitmap, MS_SYNC);
+
 					pagina->marco = w;
 
 					uint8_t comienzo_marco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
@@ -336,9 +345,7 @@ void* devolver_marco(uint32_t socket){
 
 					//Hago el swap.
 					usleep(valores_generales_memoria->retardoSwap);
-					memcpy(*memPrincipal->memoria_principal + comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-					
-					close(fd);
+					memcpy(*memoria_principal + comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
 					pagina->bit_presencia = 1;
 
@@ -363,12 +370,13 @@ void* devolver_marco(uint32_t socket){
 		cant_marcos_asignados = 0;
 	}
 
+	close(fd);
 }
 
 void *liberarProcesoDeMemoria(uint32_t socket){
 	unPcb = recibir_pcb(socket);
 	printf("\nProceso %d para liberar en memoria\n", unPcb->id);
-	uint8_t *fd;
+	int *fd;
 	uint8_t *addr;
 	int i, j, k;
 
@@ -388,19 +396,22 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	//mapeo el archivo del proceso.
 	fd = open(nombreArchivo, O_RDWR, S_IRWXU);
 
+	if(fd == -1){
+		perror("Error al abrir el archivo.");
+	}
 	struct stat sb;
 
 	fstat(fd, &sb);
 
-	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_SHARED, fd, 0);
+	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_PRIVATE, fd, 0);
 
-	memset(nombreArchivo, 0, strlen(nombreArchivo));
-	memset(nroProceso, 0, strlen(nroProceso));
-
-	if(addr = MAP_FAILED){
+	if(addr == MAP_FAILED){
 		perror("Error mapping\n");
 		exit(1);
 	}
+
+	memset(nombreArchivo, 0, strlen(nombreArchivo));
+	memset(nroProceso, 0, strlen(nroProceso));
 
 	//Busco la tabla de primer nivel.
     t_tabla_primer_nivel *primerNivel;
@@ -411,14 +422,11 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 
 	//Itero por las tablas de segundo nivel.
 	for(i = 0; i< nro_tablas_segundo_nivel; i++){
-		t_tabla_segundo_nivel *segundoNivel;
-		uint32_t id_segundo_nivel = primerNivel->tablas_asociadas[i];
-		segundoNivel = list_get(tablas_segundo_nivel_list, id_segundo_nivel);
+		t_tabla_segundo_nivel *segundoNivel = list_get(tablas_segundo_nivel_list, primerNivel->tablas_asociadas[i]);;
 
 		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
 		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
-			t_paginas_en_tabla *pagina;
-			pagina = segundoNivel->paginas[j];
+			t_paginas_en_tabla *pagina = segundoNivel->paginas[j];
 
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
@@ -432,17 +440,17 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 
 				//Copio el marco en el swap.
 				usleep(valores_generales_memoria->retardoSwap);
-				memcpy(addr + IncioPagina, *memPrincipal->memoria_principal + comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
+				memcpy(addr + IncioPagina, *memoria_principal + comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
 				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					memPrincipal->memoria_principal[k] == 0;	
+					memoria_principal[k] == 0;	
 				}
 
-				bitarray_set_bit(memPrincipal->bitmap_memoria, pagina->marco);
+				bitarray_clean_bit(bitmap_memoria, pagina->marco);
 				pagina->bit_presencia = 0;
 
-				printf("\n se ha liberado el espacio del proceso %n de memoria", unPcb->id);
+				printf("\nSe ha liberado el espacio del proceso %d de memoria", unPcb->id);
 
 			}
 		}
@@ -513,10 +521,10 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 		
 				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					memPrincipal->memoria_principal[k] == 0;	
+					memoria_principal[k] == 0;	
 				}
 
-				bitarray_set_bit(memPrincipal->bitmap_memoria, pagina->marco);
+				bitarray_clean_bit(bitmap_memoria, pagina->marco);
 				pagina->bit_presencia = 0;
 
 			}
