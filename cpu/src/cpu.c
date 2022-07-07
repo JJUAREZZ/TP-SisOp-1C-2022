@@ -16,6 +16,9 @@ void agregar_a_tlb(uint32_t, uint32_t);
 int buscar_por_marco(uint32_t);
 int entrada_vacia();
 void algoritmo_de_reemplazo(uint32_t,uint32_t);
+void fifo(uint32_t ,uint32_t );
+void lru(uint32_t ,uint32_t );
+void limpiarTlb();
 
 int main() {
 
@@ -116,13 +119,63 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 		} else if(strcmp(nombreInstruccion, "READ") == 0){
 			uint32_t direccionLogica= instruccion->param[0];
 			uint32_t tablaDePaginas= unPcb->tablaDePaginas;
-			
 			uint32_t direccionFisica= mmu(direccionLogica,tablaDePaginas);
-			//aca se conecta a memoria, para pasarle la direccion fisica con el cod_op READ
+			uint32_t contenidoLeido;
 
+			uint32_t cod_op= READ, tamanio= sizeof(uint32_t)*2;
+			void* buffer= malloc(tamanio);
+			memcpy(buffer,&cod_op,sizeof(uint32_t));
+			memcpy(buffer+sizeof(uint32_t),&direccionFisica, sizeof(uint32_t));
+			send(socket_memoria, buffer, tamanio, 0);
+			free(buffer);
+			recv(socket_memoria, &contenidoLeido, sizeof(uint32_t), MSG_WAITALL);
+
+			log_info(logger,"\n %d\n",contenidoLeido); //imprime el valor leído
 		} else if(strcmp(nombreInstruccion, "WRITE") == 0){
+			uint32_t direccionLogica= instruccion->param[0];
+			uint32_t contenidoAEscribir= instruccion->param[1];
+			uint32_t tablaDePaginas= unPcb->tablaDePaginas;
+			uint32_t direccionFisica= mmu(direccionLogica,tablaDePaginas);
 
+			uint32_t cod_op= WRITE, tamanio= sizeof(uint32_t)*3, offset =0;
+			void* buffer= malloc(tamanio);
+			memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&direccionFisica, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&contenidoAEscribir, sizeof(uint32_t));
+			send(socket_memoria, buffer, tamanio, 0);
+			free(buffer);
+			//alguna confirmacion de memoria?
+			
 		} else if(strcmp(nombreInstruccion, "COPY") == 0) {
+			uint32_t direccionLogicaDestino= instruccion->param[0];
+			uint32_t direccionLogicaOrigen= instruccion->param[1];
+			uint32_t tablaDePaginas= unPcb->tablaDePaginas;
+			uint32_t direccionFisicaDestino= mmu(direccionLogicaDestino,tablaDePaginas);
+			uint32_t direccionFisicaOrigen= mmu(direccionLogicaOrigen,tablaDePaginas);
+
+			uint32_t contenidoLeido;
+			uint32_t cod_op= READ, tamanio= sizeof(uint32_t)*2;
+			void* buffer= malloc(tamanio);
+			memcpy(buffer,&cod_op,sizeof(uint32_t));
+			memcpy(buffer+sizeof(uint32_t),&direccionFisicaOrigen, sizeof(uint32_t));
+			send(socket_memoria, buffer, tamanio, 0);
+			free(buffer);
+			recv(socket_memoria, &contenidoLeido, sizeof(uint32_t), MSG_WAITALL);
+
+			cod_op= WRITE;
+			tamanio= sizeof(uint32_t)*3;
+			buffer= malloc(tamanio);
+			uint32_t offset =0;
+
+			memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&direccionFisicaDestino, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&contenidoLeido, sizeof(uint32_t));
+			send(socket_memoria, buffer, tamanio, 0);
+			free(buffer);
 
 		} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
 			gettimeofday(&finalBlock, NULL); //es necesario computar el tiempo en exit?
@@ -152,6 +205,7 @@ uint32_t check_interrupt(){
 		eliminar_paquete(paquete);
 		liberarPcb(unPcb);
 		unPcb=NULL;
+		limpiarTlb();
 		return 1;
 	}
 	return 0;
@@ -176,7 +230,7 @@ uint32_t mmu (uint32_t direccion_logica, uint32_t id_tabla_primer_nivel){
     desplazamiento = direccion_logica - (numero_pagina * memoria_config->tam_pagina);
 
 	uint32_t id_tabla_segundo_nivel, marco;
-
+	
 	int respuesta= consultar_tlb(numero_pagina);
 	//TLB MISS
 	if(respuesta<0){
@@ -245,11 +299,8 @@ int consultar_tlb(uint32_t numero_pagina){
 		if(tlb[i].pagina == numero_pagina){
 			struct timeval t;
 			gettimeofday(&t, NULL);
-			double seconds  = t.tv_sec;
-			double useconds = t.tv_usec;
-			double tiempo = seconds* 1000.0;
-			tiempo += useconds/1000.0;
-
+			double tiempo  = t.tv_sec - tiempo_inicial_cpu;
+			
 			marco= tlb[i].marco;
 			tlb[i].ultima_referencia= tiempo;
 			break;
@@ -267,11 +318,8 @@ void agregar_a_tlb(uint32_t numero_pagina, uint32_t marco){
 		if(entrada>0){
 			struct timeval t;
 			gettimeofday(&t, NULL);
-			double seconds  = t.tv_sec;
-			double useconds = t.tv_usec;
-			double tiempo = seconds* 1000.0;
-			tiempo += useconds/1000.0;
-
+			double tiempo  = t.tv_sec - tiempo_inicial_cpu;
+			
 			tlb[entrada].pagina= numero_pagina;
 			tlb[entrada].marco= marco;
 			tlb[entrada].ultima_referencia=tiempo;
@@ -297,10 +345,7 @@ int buscar_por_marco(uint32_t marco){
 void reemplazar_pagina(uint32_t entrada, uint32_t numero_pagina){
 	struct timeval t;
 	gettimeofday(&t, NULL);
-	double seconds  = t.tv_sec;
-    double useconds = t.tv_usec;
-    double tiempo = seconds* 1000.0;
-    tiempo += useconds/1000.0;
+	double tiempo  = t.tv_sec - tiempo_inicial_cpu;
 	tlb[entrada].instante_de_carga = tiempo;
 	tlb[entrada].pagina= numero_pagina;
 	tlb[entrada].ultima_referencia= tiempo;
@@ -329,3 +374,52 @@ void algoritmo_de_reemplazo(uint32_t numero_pagina,uint32_t marco){
 		}   
 }
 
+void fifo(uint32_t numero_pagina,uint32_t marco){
+	int len= cpu_config->entradas_tlb;
+	int entrada;
+	struct timeval t;		
+	gettimeofday(&t, NULL);
+	double presente  = t.tv_sec - tiempo_inicial_cpu; //tiempo actual
+
+	int menor_instante_de_carga = presente;
+	//obtengo la entrada con el menor instante de carga
+	for(int i=0; i<len; i++){
+		if(tlb[i].instante_de_carga < menor_instante_de_carga){
+			entrada=i;
+			menor_instante_de_carga= tlb[i].instante_de_carga;
+		}
+	}
+	//se reemplaza la entrada victima
+	tlb[entrada].pagina	= numero_pagina;
+	tlb[entrada].marco = marco;
+	tlb[entrada].instante_de_carga = presente;
+	tlb[entrada].ultima_referencia = presente;
+}
+
+void lru(uint32_t numero_pagina,uint32_t marco){
+	int len= cpu_config->entradas_tlb;
+	int entrada;
+	struct timeval t;		
+	gettimeofday(&t, NULL);
+	double presente  = t.tv_sec - tiempo_inicial_cpu; //tiempo actual
+
+	int menor_tiempo_referencia = presente;
+	//obtengo la entrada con el menor tiempo de referencia (mas reciente)
+	for(int i=0; i<len; i++){
+		if(tlb[i].ultima_referencia < menor_tiempo_referencia){
+			entrada=i;
+			menor_tiempo_referencia= tlb[i].ultima_referencia;
+		}
+	}
+	//se reemplaza la entrada victima
+	tlb[entrada].pagina	= numero_pagina;
+	tlb[entrada].marco = marco;
+	tlb[entrada].instante_de_carga = presente;
+	tlb[entrada].ultima_referencia = presente;
+}
+
+void limpiarTlb(){
+	for(int i=0; i< cpu_config->entradas_tlb; i++){
+		tlb[i].vacio= true;
+	}
+}

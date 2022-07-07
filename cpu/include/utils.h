@@ -39,6 +39,9 @@ typedef struct {
     double instante_de_carga;
     bool vacio;
 }entrada_tlb;
+
+struct timeval tiempo_cpu;
+double tiempo_inicial_cpu;
 //se inicializa cuando se carga el config
 
 typedef struct{
@@ -60,6 +63,8 @@ typedef struct{
 valores_config_cpu *cpu_config;
 valores_config_memoria *memoria_config;
 entrada_tlb *tlb;
+
+
 
 void load_configuration_cpu(){
     sem_init(&semInterrupt,0,0);
@@ -88,6 +93,8 @@ void load_configuration_cpu(){
         tlb[i].marco= -1;
 		tlb[i].vacio = true;
 	}
+    gettimeofday(&tiempo_cpu, NULL);
+    tiempo_inicial_cpu= tiempo_cpu.tv_sec; 
 }
 float time_diff(struct timeval *start, struct timeval *end)
 {
