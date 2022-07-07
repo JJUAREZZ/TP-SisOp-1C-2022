@@ -9444,3 +9444,537 @@ EXIT
 [INFO] 09:57:23:677 Servidor Dispatcher/(4825:4847): id: 0
 [INFO] 09:57:23:677 Servidor Dispatcher/(4825:4847): EXIT
 [INFO] 09:57:23:677 Servidor Dispatcher/(4825:4847): Proceso 0 enviado a exit.
+[INFO] 10:26:51:305 Servidor Dispatcher/(5021:5021): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 10:26:51:307 Servidor Dispatcher/(5021:5021): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 10:27:25:137 Servidor Dispatcher/(5021:5021): Creando un hilo para atender una conexion en el socket 6
+[INFO] 10:27:25:139 Servidor Dispatcher/(5021:5021): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 10:27:47:238 Servidor Dispatcher/(5021:5082): Recibi un proceso:
+[INFO] 10:27:47:238 Servidor Dispatcher/(5021:5082): id: 0
+[INFO] 10:27:47:238 Servidor Dispatcher/(5021:5082): NO_OP
+[INFO] 10:27:47:238 Servidor Dispatcher/(5021:5082): Esperando 1000 milisegundos
+[INFO] 10:27:48:239 Servidor Dispatcher/(5021:5082): NO_OP
+[INFO] 10:27:48:240 Servidor Dispatcher/(5021:5082): Esperando 1000 milisegundos
+[INFO] 10:27:49:241 Servidor Dispatcher/(5021:5082): READ
+[INFO] 10:35:11:890 Servidor Dispatcher/(5585:5585): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 10:35:11:894 Servidor Dispatcher/(5585:5585): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 10:35:31:824 Servidor Dispatcher/(5585:5585): Creando un hilo para atender una conexion en el socket 6
+[INFO] 10:35:31:825 Servidor Dispatcher/(5585:5585): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 10:35:37:921 Servidor Dispatcher/(5585:5608): Recibi un proceso:
+[INFO] 10:35:37:922 Servidor Dispatcher/(5585:5608): id: 0
+[INFO] 10:35:37:922 Servidor Dispatcher/(5585:5608): NO_OP
+[INFO] 10:35:37:922 Servidor Dispatcher/(5585:5608): Esperando 1000 milisegundos
+[INFO] 10:35:38:923 Servidor Dispatcher/(5585:5608): NO_OP
+[INFO] 10:35:38:924 Servidor Dispatcher/(5585:5608): Esperando 1000 milisegundos
+[INFO] 10:35:39:924 Servidor Dispatcher/(5585:5608): READ
+[INFO] 10:39:02:713 Servidor Dispatcher/(5805:5805): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 10:39:02:715 Servidor Dispatcher/(5805:5805): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 10:39:45:188 Servidor Dispatcher/(5805:5805): Creando un hilo para atender una conexion en el socket 6
+[INFO] 10:39:45:188 Servidor Dispatcher/(5805:5805): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 10:39:48:422 Servidor Dispatcher/(5805:5836): Recibi un proceso:
+[INFO] 10:39:48:422 Servidor Dispatcher/(5805:5836): id: 0
+[INFO] 10:39:48:423 Servidor Dispatcher/(5805:5836): NO_OP
+[INFO] 10:39:48:423 Servidor Dispatcher/(5805:5836): Esperando 1000 milisegundos
+[INFO] 10:39:49:424 Servidor Dispatcher/(5805:5836): NO_OP
+[INFO] 10:39:49:424 Servidor Dispatcher/(5805:5836): Esperando 1000 milisegundos
+[INFO] 10:39:50:425 Servidor Dispatcher/(5805:5836): READ
+[INFO] 10:45:20:682 Servidor Dispatcher/(5982:5982): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 10:45:20:684 Servidor Dispatcher/(5982:5982): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 10:45:57:694 Servidor Dispatcher/(5982:5982): Creando un hilo para atender una conexion en el socket 6
+[INFO] 10:45:57:705 Servidor Dispatcher/(5982:5982): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:36:53:466 Servidor Dispatcher/(4012:4012): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:36:53:468 Servidor Dispatcher/(4012:4012): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:36:53:466 Servidor Dispatcher/(4012:4013): Valores de config de Memoria recibidos con exito
+[INFO] 13:37:21:235 Servidor Dispatcher/(4012:4012): Creando un hilo para atender una conexion en el socket 7
+[INFO] 13:37:21:237 Servidor Dispatcher/(4012:4012): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:37:41:564 Servidor Dispatcher/(4012:4048): Recibi un proceso:
+[INFO] 13:37:41:564 Servidor Dispatcher/(4012:4048): id: 0
+[INFO] 13:37:41:564 Servidor Dispatcher/(4012:4048): NO_OP
+[INFO] 13:37:41:564 Servidor Dispatcher/(4012:4048): Esperando 1000 milisegundos
+[INFO] 13:37:42:564 Servidor Dispatcher/(4012:4048): NO_OP
+[INFO] 13:37:42:564 Servidor Dispatcher/(4012:4048): Esperando 1000 milisegundos
+[INFO] 13:37:43:565 Servidor Dispatcher/(4012:4048): READ
+[INFO] 13:37:43:566 Servidor Dispatcher/(4012:4048): Id de tabla segundo nivel recibido: 0
+[INFO] 13:37:43:568 Servidor Dispatcher/(4012:4048): Marco recibido: 0
+[INFO] 13:37:43:568 Servidor Dispatcher/(4012:4048): Direccion Fisica obtenida: 44
+[INFO] 13:38:23:012 Servidor Dispatcher/(4012:4048): 
+ -1229977968
+
+[INFO] 13:38:23:015 Servidor Dispatcher/(4012:4048): I/O
+[INFO] 13:38:23:017 Servidor Dispatcher/(4012:4048): El tiempo de ejecucion fue : 2002
+[INFO] 13:38:23:018 Servidor Dispatcher/(4012:4048): Proceso 0 enviado a bloqueado.
+[INFO] 13:51:54:517 Servidor Dispatcher/(4554:4554): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:51:54:520 Servidor Dispatcher/(4554:4554): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:51:54:522 Servidor Dispatcher/(4554:4555): Valores de config de Memoria recibidos con exito
+[INFO] 13:51:59:709 Servidor Dispatcher/(4554:4554): Creando un hilo para atender una conexion en el socket 6
+[INFO] 13:51:59:711 Servidor Dispatcher/(4554:4554): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:52:02:563 Servidor Dispatcher/(4554:4577): Recibi un proceso:
+[INFO] 13:52:02:563 Servidor Dispatcher/(4554:4577): id: 0
+[INFO] 13:52:02:563 Servidor Dispatcher/(4554:4577): NO_OP
+[INFO] 13:52:02:563 Servidor Dispatcher/(4554:4577): Esperando 1000 milisegundos
+[INFO] 13:52:03:565 Servidor Dispatcher/(4554:4577): NO_OP
+[INFO] 13:52:03:565 Servidor Dispatcher/(4554:4577): Esperando 1000 milisegundos
+[INFO] 13:52:04:566 Servidor Dispatcher/(4554:4577): READ
+[INFO] 13:52:04:567 Servidor Dispatcher/(4554:4577): Id de tabla segundo nivel recibido: 0
+[INFO] 13:52:04:569 Servidor Dispatcher/(4554:4577): Marco recibido: 0
+[INFO] 13:52:04:569 Servidor Dispatcher/(4554:4577): Direccion Fisica obtenida: 44
+[INFO] 13:52:24:718 Servidor Dispatcher/(4554:4577): 
+ 0
+
+[INFO] 13:52:24:719 Servidor Dispatcher/(4554:4577): I/O
+[INFO] 13:52:24:719 Servidor Dispatcher/(4554:4577): El tiempo de ejecucion fue : 2002
+[INFO] 13:52:24:719 Servidor Dispatcher/(4554:4577): Proceso 0 enviado a bloqueado.
+[INFO] 13:53:35:065 Servidor Dispatcher/(4660:4660): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:53:35:067 Servidor Dispatcher/(4660:4660): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:53:35:079 Servidor Dispatcher/(4660:4661): Valores de config de Memoria recibidos con exito
+[INFO] 13:53:38:201 Servidor Dispatcher/(4660:4660): Creando un hilo para atender una conexion en el socket 6
+[INFO] 13:53:38:201 Servidor Dispatcher/(4660:4660): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:53:44:325 Servidor Dispatcher/(4660:4682): Recibi un proceso:
+[INFO] 13:53:44:326 Servidor Dispatcher/(4660:4682): id: 0
+[INFO] 13:53:44:326 Servidor Dispatcher/(4660:4682): NO_OP
+[INFO] 13:53:44:326 Servidor Dispatcher/(4660:4682): Esperando 1000 milisegundos
+[INFO] 13:53:45:328 Servidor Dispatcher/(4660:4682): NO_OP
+[INFO] 13:53:45:329 Servidor Dispatcher/(4660:4682): Esperando 1000 milisegundos
+[INFO] 13:53:46:330 Servidor Dispatcher/(4660:4682): READ
+[INFO] 13:53:46:332 Servidor Dispatcher/(4660:4682): Id de tabla segundo nivel recibido: 0
+[INFO] 13:53:46:334 Servidor Dispatcher/(4660:4682): Marco recibido: 0
+[INFO] 13:53:46:334 Servidor Dispatcher/(4660:4682): Direccion Fisica obtenida: 44
+[INFO] 13:53:46:335 Servidor Dispatcher/(4660:4682): 
+ 0
+
+[INFO] 13:53:46:335 Servidor Dispatcher/(4660:4682): I/O
+[INFO] 13:53:46:335 Servidor Dispatcher/(4660:4682): El tiempo de ejecucion fue : 2004
+[INFO] 13:53:46:335 Servidor Dispatcher/(4660:4682): Proceso 0 enviado a bloqueado.
+[INFO] 13:56:26:436 Servidor Dispatcher/(4782:4782): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:56:26:439 Servidor Dispatcher/(4782:4782): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:56:29:006 Servidor Dispatcher/(4782:4782): Creando un hilo para atender una conexion en el socket 6
+[INFO] 13:56:29:008 Servidor Dispatcher/(4782:4782): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:56:54:492 Servidor Dispatcher/(4832:4832): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:56:54:499 Servidor Dispatcher/(4832:4832): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:56:54:504 Servidor Dispatcher/(4832:4833): Valores de config de Memoria recibidos con exito
+[INFO] 13:57:13:349 Servidor Dispatcher/(4894:4894): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 13:57:13:351 Servidor Dispatcher/(4894:4894): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 13:57:13:357 Servidor Dispatcher/(4894:4895): Valores de config de Memoria recibidos con exito
+[INFO] 13:57:16:708 Servidor Dispatcher/(4894:4894): Creando un hilo para atender una conexion en el socket 6
+[INFO] 13:57:16:711 Servidor Dispatcher/(4894:4894): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 13:57:19:651 Servidor Dispatcher/(4894:4916): Recibi un proceso:
+[INFO] 13:57:19:651 Servidor Dispatcher/(4894:4916): id: 0
+[INFO] 13:57:19:651 Servidor Dispatcher/(4894:4916): NO_OP
+[INFO] 13:57:19:651 Servidor Dispatcher/(4894:4916): Esperando 1000 milisegundos
+[INFO] 13:57:20:652 Servidor Dispatcher/(4894:4916): NO_OP
+[INFO] 13:57:20:653 Servidor Dispatcher/(4894:4916): Esperando 1000 milisegundos
+[INFO] 13:57:21:654 Servidor Dispatcher/(4894:4916): READ
+[INFO] 13:57:21:655 Servidor Dispatcher/(4894:4916): Id de tabla segundo nivel recibido: 0
+[INFO] 13:57:21:658 Servidor Dispatcher/(4894:4916): Marco recibido: 0
+[INFO] 13:57:21:658 Servidor Dispatcher/(4894:4916): Direccion Fisica obtenida: 44
+[INFO] 13:57:26:132 Servidor Dispatcher/(4894:4916): 
+ 0
+
+[INFO] 13:57:26:132 Servidor Dispatcher/(4894:4916): I/O
+[INFO] 13:57:26:132 Servidor Dispatcher/(4894:4916): El tiempo de ejecucion fue : 2002
+[INFO] 13:57:26:132 Servidor Dispatcher/(4894:4916): Proceso 0 enviado a bloqueado.
+[INFO] 14:20:40:940 Servidor Dispatcher/(5492:5492): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:20:40:944 Servidor Dispatcher/(5492:5492): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:20:40:951 Servidor Dispatcher/(5492:5493): Valores de config de Memoria recibidos con exito
+[INFO] 14:20:49:787 Servidor Dispatcher/(5492:5492): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:20:49:788 Servidor Dispatcher/(5492:5492): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:21:00:903 Servidor Dispatcher/(5492:5562): Recibi un proceso:
+[INFO] 14:21:00:903 Servidor Dispatcher/(5492:5562): id: 0
+[INFO] 14:21:00:903 Servidor Dispatcher/(5492:5562): NO_OP
+[INFO] 14:21:00:903 Servidor Dispatcher/(5492:5562): Esperando 1000 milisegundos
+[INFO] 14:21:01:904 Servidor Dispatcher/(5492:5562): NO_OP
+[INFO] 14:21:01:906 Servidor Dispatcher/(5492:5562): Esperando 1000 milisegundos
+[INFO] 14:21:02:906 Servidor Dispatcher/(5492:5562): READ
+[INFO] 14:21:02:910 Servidor Dispatcher/(5492:5562): Id de tabla segundo nivel recibido: 0
+[INFO] 14:21:02:914 Servidor Dispatcher/(5492:5562): Marco recibido: 0
+[INFO] 14:21:02:914 Servidor Dispatcher/(5492:5562): Direccion Fisica obtenida: 44
+[INFO] 14:21:02:915 Servidor Dispatcher/(5492:5562): 
+ 0
+
+[INFO] 14:21:02:916 Servidor Dispatcher/(5492:5562): I/O
+[INFO] 14:21:02:920 Servidor Dispatcher/(5492:5562): El tiempo de ejecucion fue : 2006
+[INFO] 14:21:02:920 Servidor Dispatcher/(5492:5562): Proceso 0 enviado a bloqueado.
+[INFO] 14:25:22:842 Servidor Dispatcher/(5869:5869): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:25:22:849 Servidor Dispatcher/(5869:5869): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:25:22:854 Servidor Dispatcher/(5869:5870): Valores de config de Memoria recibidos con exito
+[INFO] 14:25:26:343 Servidor Dispatcher/(5869:5869): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:25:26:346 Servidor Dispatcher/(5869:5869): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:25:29:490 Servidor Dispatcher/(5869:5891): Recibi un proceso:
+[INFO] 14:25:29:490 Servidor Dispatcher/(5869:5891): id: 0
+[INFO] 14:25:29:490 Servidor Dispatcher/(5869:5891): NO_OP
+[INFO] 14:25:29:490 Servidor Dispatcher/(5869:5891): Esperando 1000 milisegundos
+[INFO] 14:25:30:491 Servidor Dispatcher/(5869:5891): NO_OP
+[INFO] 14:25:30:492 Servidor Dispatcher/(5869:5891): Esperando 1000 milisegundos
+[INFO] 14:25:31:492 Servidor Dispatcher/(5869:5891): READ
+[INFO] 14:25:31:493 Servidor Dispatcher/(5869:5891): Id de tabla segundo nivel recibido: 0
+[INFO] 14:25:31:495 Servidor Dispatcher/(5869:5891): Marco recibido: 0
+[INFO] 14:25:31:495 Servidor Dispatcher/(5869:5891): Direccion Fisica obtenida: 44
+[INFO] 14:25:50:254 Servidor Dispatcher/(5869:5891): 
+ 0
+
+[INFO] 14:25:50:255 Servidor Dispatcher/(5869:5891): I/O
+[INFO] 14:25:50:255 Servidor Dispatcher/(5869:5891): El tiempo de ejecucion fue : 2000
+[INFO] 14:25:50:255 Servidor Dispatcher/(5869:5891): Proceso 0 enviado a bloqueado.
+[INFO] 14:27:38:288 Servidor Dispatcher/(5959:5959): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:27:38:289 Servidor Dispatcher/(5959:5959): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:27:53:388 Servidor Dispatcher/(6026:6026): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:27:53:390 Servidor Dispatcher/(6026:6026): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:27:53:397 Servidor Dispatcher/(6026:6027): Valores de config de Memoria recibidos con exito
+[INFO] 14:27:59:348 Servidor Dispatcher/(6026:6026): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:27:59:349 Servidor Dispatcher/(6026:6026): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:28:03:735 Servidor Dispatcher/(6026:6048): Recibi un proceso:
+[INFO] 14:28:03:736 Servidor Dispatcher/(6026:6048): id: 0
+[INFO] 14:28:03:736 Servidor Dispatcher/(6026:6048): NO_OP
+[INFO] 14:28:03:736 Servidor Dispatcher/(6026:6048): Esperando 1000 milisegundos
+[INFO] 14:28:04:736 Servidor Dispatcher/(6026:6048): NO_OP
+[INFO] 14:28:04:737 Servidor Dispatcher/(6026:6048): Esperando 1000 milisegundos
+[INFO] 14:28:05:738 Servidor Dispatcher/(6026:6048): READ
+[INFO] 14:28:05:739 Servidor Dispatcher/(6026:6048): Id de tabla segundo nivel recibido: 0
+[INFO] 14:28:05:742 Servidor Dispatcher/(6026:6048): Marco recibido: 0
+[INFO] 14:28:05:742 Servidor Dispatcher/(6026:6048): Direccion Fisica obtenida: 44
+[INFO] 14:28:08:762 Servidor Dispatcher/(6026:6048): 
+ 0
+
+[INFO] 14:28:08:763 Servidor Dispatcher/(6026:6048): I/O
+[INFO] 14:28:08:763 Servidor Dispatcher/(6026:6048): El tiempo de ejecucion fue : 2001
+[INFO] 14:28:08:763 Servidor Dispatcher/(6026:6048): Proceso 0 enviado a bloqueado.
+[INFO] 14:28:54:030 Servidor Dispatcher/(6026:6048): Recibi un proceso:
+[INFO] 14:28:54:030 Servidor Dispatcher/(6026:6048): id: 1
+[INFO] 14:28:54:030 Servidor Dispatcher/(6026:6048): NO_OP
+[INFO] 14:28:54:030 Servidor Dispatcher/(6026:6048): Esperando 1000 milisegundos
+[INFO] 14:28:55:031 Servidor Dispatcher/(6026:6048): NO_OP
+[INFO] 14:28:55:032 Servidor Dispatcher/(6026:6048): Esperando 1000 milisegundos
+[INFO] 14:28:56:033 Servidor Dispatcher/(6026:6048): READ
+[INFO] 14:29:04:839 Servidor Dispatcher/(6026:6048): Id de tabla segundo nivel recibido: 0
+[INFO] 14:29:25:640 Servidor Dispatcher/(6026:6048): Marco recibido: 0
+[INFO] 14:29:25:640 Servidor Dispatcher/(6026:6048): Direccion Fisica obtenida: 44
+[INFO] 14:29:25:641 Servidor Dispatcher/(6026:6048): 
+ -1228929184
+
+[INFO] 14:29:25:641 Servidor Dispatcher/(6026:6048): I/O
+[INFO] 14:29:25:641 Servidor Dispatcher/(6026:6048): El tiempo de ejecucion fue : 2002
+[INFO] 14:29:25:641 Servidor Dispatcher/(6026:6048): Proceso 1 enviado a bloqueado.
+[INFO] 14:31:28:951 Servidor Dispatcher/(6181:6181): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:31:28:953 Servidor Dispatcher/(6181:6181): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:31:28:960 Servidor Dispatcher/(6181:6182): Valores de config de Memoria recibidos con exito
+[INFO] 14:31:32:352 Servidor Dispatcher/(6181:6181): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:31:32:353 Servidor Dispatcher/(6181:6181): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:31:37:056 Servidor Dispatcher/(6181:6203): Recibi un proceso:
+[INFO] 14:31:37:056 Servidor Dispatcher/(6181:6203): id: 0
+[INFO] 14:31:37:056 Servidor Dispatcher/(6181:6203): NO_OP
+[INFO] 14:31:37:056 Servidor Dispatcher/(6181:6203): Esperando 1000 milisegundos
+[INFO] 14:31:38:057 Servidor Dispatcher/(6181:6203): NO_OP
+[INFO] 14:31:38:058 Servidor Dispatcher/(6181:6203): Esperando 1000 milisegundos
+[INFO] 14:31:39:059 Servidor Dispatcher/(6181:6203): READ
+[INFO] 14:31:39:060 Servidor Dispatcher/(6181:6203): Id de tabla segundo nivel recibido: 0
+[INFO] 14:31:39:063 Servidor Dispatcher/(6181:6203): Marco recibido: 0
+[INFO] 14:31:39:063 Servidor Dispatcher/(6181:6203): Direccion Fisica obtenida: 44
+[INFO] 14:31:39:064 Servidor Dispatcher/(6181:6203): 
+ 0
+
+[INFO] 14:31:39:064 Servidor Dispatcher/(6181:6203): I/O
+[INFO] 14:31:39:065 Servidor Dispatcher/(6181:6203): El tiempo de ejecucion fue : 2001
+[INFO] 14:31:39:065 Servidor Dispatcher/(6181:6203): Proceso 0 enviado a bloqueado.
+[INFO] 14:31:44:366 Servidor Dispatcher/(6181:6203): Recibi un proceso:
+[INFO] 14:31:44:369 Servidor Dispatcher/(6181:6203): id: 1
+[INFO] 14:31:44:369 Servidor Dispatcher/(6181:6203): NO_OP
+[INFO] 14:31:44:369 Servidor Dispatcher/(6181:6203): Esperando 1000 milisegundos
+[INFO] 14:31:45:370 Servidor Dispatcher/(6181:6203): NO_OP
+[INFO] 14:31:45:371 Servidor Dispatcher/(6181:6203): Esperando 1000 milisegundos
+[INFO] 14:31:46:372 Servidor Dispatcher/(6181:6203): READ
+[INFO] 14:31:46:372 Servidor Dispatcher/(6181:6203): Id de tabla segundo nivel recibido: 0
+[INFO] 14:32:30:776 Servidor Dispatcher/(6181:6203): Marco recibido: 0
+[INFO] 14:32:30:779 Servidor Dispatcher/(6181:6203): Direccion Fisica obtenida: 44
+[INFO] 14:32:30:780 Servidor Dispatcher/(6181:6203): 
+ -1228929184
+
+[INFO] 14:32:30:780 Servidor Dispatcher/(6181:6203): I/O
+[INFO] 14:32:30:780 Servidor Dispatcher/(6181:6203): El tiempo de ejecucion fue : 2002
+[INFO] 14:32:30:780 Servidor Dispatcher/(6181:6203): Proceso 1 enviado a bloqueado.
+[INFO] 14:33:27:524 Servidor Dispatcher/(6333:6333): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:33:27:525 Servidor Dispatcher/(6333:6333): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:33:27:528 Servidor Dispatcher/(6333:6334): Valores de config de Memoria recibidos con exito
+[INFO] 14:33:33:303 Servidor Dispatcher/(6333:6333): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:33:33:304 Servidor Dispatcher/(6333:6333): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:34:20:906 Servidor Dispatcher/(6425:6425): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:34:20:909 Servidor Dispatcher/(6425:6425): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:34:20:919 Servidor Dispatcher/(6425:6426): Valores de config de Memoria recibidos con exito
+[INFO] 14:34:30:984 Servidor Dispatcher/(6425:6425): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:34:30:986 Servidor Dispatcher/(6425:6425): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:34:36:479 Servidor Dispatcher/(6425:6451): Recibi un proceso:
+[INFO] 14:34:36:480 Servidor Dispatcher/(6425:6451): id: 0
+[INFO] 14:34:36:480 Servidor Dispatcher/(6425:6451): NO_OP
+[INFO] 14:34:36:480 Servidor Dispatcher/(6425:6451): Esperando 1000 milisegundos
+[INFO] 14:34:37:480 Servidor Dispatcher/(6425:6451): NO_OP
+[INFO] 14:34:37:481 Servidor Dispatcher/(6425:6451): Esperando 1000 milisegundos
+[INFO] 14:34:38:481 Servidor Dispatcher/(6425:6451): READ
+[INFO] 14:34:38:484 Servidor Dispatcher/(6425:6451): Id de tabla segundo nivel recibido: 0
+[INFO] 14:35:01:533 Servidor Dispatcher/(6425:6451): Marco recibido: 0
+[INFO] 14:35:01:534 Servidor Dispatcher/(6425:6451): Direccion Fisica obtenida: 44
+[INFO] 14:35:06:538 Servidor Dispatcher/(6425:6451): 
+ 0
+
+[INFO] 14:35:06:539 Servidor Dispatcher/(6425:6451): I/O
+[INFO] 14:35:06:539 Servidor Dispatcher/(6425:6451): El tiempo de ejecucion fue : 2000
+[INFO] 14:35:06:539 Servidor Dispatcher/(6425:6451): Proceso 0 enviado a bloqueado.
+[INFO] 14:35:12:305 Servidor Dispatcher/(6425:6451): Recibi un proceso:
+[INFO] 14:35:12:305 Servidor Dispatcher/(6425:6451): id: 1
+[INFO] 14:35:12:305 Servidor Dispatcher/(6425:6451): NO_OP
+[INFO] 14:35:12:305 Servidor Dispatcher/(6425:6451): Esperando 1000 milisegundos
+[INFO] 14:35:13:306 Servidor Dispatcher/(6425:6451): NO_OP
+[INFO] 14:35:13:307 Servidor Dispatcher/(6425:6451): Esperando 1000 milisegundos
+[INFO] 14:35:14:307 Servidor Dispatcher/(6425:6451): READ
+[INFO] 14:35:14:308 Servidor Dispatcher/(6425:6451): Id de tabla segundo nivel recibido: 0
+[INFO] 14:35:54:640 Servidor Dispatcher/(6425:6451): Marco recibido: 0
+[INFO] 14:35:54:642 Servidor Dispatcher/(6425:6451): Direccion Fisica obtenida: 44
+[INFO] 14:35:54:642 Servidor Dispatcher/(6425:6451): 
+ -1229977760
+
+[INFO] 14:35:54:648 Servidor Dispatcher/(6425:6451): I/O
+[INFO] 14:35:54:648 Servidor Dispatcher/(6425:6451): El tiempo de ejecucion fue : 2000
+[INFO] 14:35:54:648 Servidor Dispatcher/(6425:6451): Proceso 1 enviado a bloqueado.
+[INFO] 14:36:25:249 Servidor Dispatcher/(6581:6581): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:36:25:254 Servidor Dispatcher/(6581:6581): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:36:33:812 Servidor Dispatcher/(6591:6591): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:36:33:814 Servidor Dispatcher/(6591:6591): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:36:33:818 Servidor Dispatcher/(6591:6592): Valores de config de Memoria recibidos con exito
+[INFO] 14:36:36:990 Servidor Dispatcher/(6591:6591): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:36:36:994 Servidor Dispatcher/(6591:6591): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:36:40:365 Servidor Dispatcher/(6591:6613): Recibi un proceso:
+[INFO] 14:36:40:365 Servidor Dispatcher/(6591:6613): id: 0
+[INFO] 14:36:40:365 Servidor Dispatcher/(6591:6613): NO_OP
+[INFO] 14:36:40:365 Servidor Dispatcher/(6591:6613): Esperando 1000 milisegundos
+[INFO] 14:36:41:366 Servidor Dispatcher/(6591:6613): NO_OP
+[INFO] 14:36:41:367 Servidor Dispatcher/(6591:6613): Esperando 1000 milisegundos
+[INFO] 14:36:42:368 Servidor Dispatcher/(6591:6613): READ
+[INFO] 14:36:42:369 Servidor Dispatcher/(6591:6613): Id de tabla segundo nivel recibido: 0
+[INFO] 14:36:42:371 Servidor Dispatcher/(6591:6613): Marco recibido: 0
+[INFO] 14:36:42:372 Servidor Dispatcher/(6591:6613): Direccion Fisica obtenida: 44
+[INFO] 14:36:42:372 Servidor Dispatcher/(6591:6613): 
+ 0
+
+[INFO] 14:36:42:372 Servidor Dispatcher/(6591:6613): I/O
+[INFO] 14:36:42:372 Servidor Dispatcher/(6591:6613): El tiempo de ejecucion fue : 2002
+[INFO] 14:36:42:372 Servidor Dispatcher/(6591:6613): Proceso 0 enviado a bloqueado.
+[INFO] 14:36:54:376 Servidor Dispatcher/(6591:6613): Recibi un proceso:
+[INFO] 14:36:54:377 Servidor Dispatcher/(6591:6613): id: 0
+[INFO] 14:36:54:377 Servidor Dispatcher/(6591:6613): EXIT
+[INFO] 14:36:54:377 Servidor Dispatcher/(6591:6613): Proceso 0 enviado a exit.
+[INFO] 14:38:27:383 Servidor Dispatcher/(6678:6678): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:38:27:384 Servidor Dispatcher/(6678:6678): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:38:27:385 Servidor Dispatcher/(6678:6679): Valores de config de Memoria recibidos con exito
+[INFO] 14:38:31:508 Servidor Dispatcher/(6678:6678): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:38:31:511 Servidor Dispatcher/(6678:6678): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:38:35:008 Servidor Dispatcher/(6678:6700): Recibi un proceso:
+[INFO] 14:38:35:008 Servidor Dispatcher/(6678:6700): id: 0
+[INFO] 14:38:35:008 Servidor Dispatcher/(6678:6700): NO_OP
+[INFO] 14:38:35:008 Servidor Dispatcher/(6678:6700): Esperando 1000 milisegundos
+[INFO] 14:38:36:009 Servidor Dispatcher/(6678:6700): NO_OP
+[INFO] 14:38:36:010 Servidor Dispatcher/(6678:6700): Esperando 1000 milisegundos
+[INFO] 14:38:37:011 Servidor Dispatcher/(6678:6700): READ
+[INFO] 14:38:37:012 Servidor Dispatcher/(6678:6700): Id de tabla segundo nivel recibido: 0
+[INFO] 14:38:37:015 Servidor Dispatcher/(6678:6700): Marco recibido: 0
+[INFO] 14:38:37:015 Servidor Dispatcher/(6678:6700): Direccion Fisica obtenida: 44
+[INFO] 14:38:37:015 Servidor Dispatcher/(6678:6700): 
+ 0
+
+[INFO] 14:38:37:015 Servidor Dispatcher/(6678:6700): READ
+[INFO] 14:38:37:015 Servidor Dispatcher/(6678:6700): Id de tabla segundo nivel recibido: 0
+[INFO] 14:38:37:017 Servidor Dispatcher/(6678:6700): Marco recibido: 2
+[INFO] 14:38:37:018 Servidor Dispatcher/(6678:6700): Direccion Fisica obtenida: 133
+[INFO] 14:38:37:018 Servidor Dispatcher/(6678:6700): 
+ 0
+
+[INFO] 14:38:37:018 Servidor Dispatcher/(6678:6700): I/O
+[INFO] 14:38:37:018 Servidor Dispatcher/(6678:6700): El tiempo de ejecucion fue : 2002
+[INFO] 14:38:37:018 Servidor Dispatcher/(6678:6700): Proceso 0 enviado a bloqueado.
+[INFO] 14:38:49:025 Servidor Dispatcher/(6678:6700): Recibi un proceso:
+[INFO] 14:38:49:028 Servidor Dispatcher/(6678:6700): id: 0
+[INFO] 14:38:49:028 Servidor Dispatcher/(6678:6700): EXIT
+[INFO] 14:38:49:029 Servidor Dispatcher/(6678:6700): Proceso 0 enviado a exit.
+[INFO] 14:40:12:170 Servidor Dispatcher/(6796:6796): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:40:12:172 Servidor Dispatcher/(6796:6796): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:40:12:180 Servidor Dispatcher/(6796:6797): Valores de config de Memoria recibidos con exito
+[INFO] 14:40:18:317 Servidor Dispatcher/(6796:6796): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:40:18:317 Servidor Dispatcher/(6796:6796): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:40:21:727 Servidor Dispatcher/(6796:6818): Recibi un proceso:
+[INFO] 14:40:21:727 Servidor Dispatcher/(6796:6818): id: 0
+[INFO] 14:40:21:727 Servidor Dispatcher/(6796:6818): NO_OP
+[INFO] 14:40:21:727 Servidor Dispatcher/(6796:6818): Esperando 1000 milisegundos
+[INFO] 14:40:22:728 Servidor Dispatcher/(6796:6818): NO_OP
+[INFO] 14:40:22:729 Servidor Dispatcher/(6796:6818): Esperando 1000 milisegundos
+[INFO] 14:40:23:730 Servidor Dispatcher/(6796:6818): READ
+[INFO] 14:40:23:731 Servidor Dispatcher/(6796:6818): Id de tabla segundo nivel recibido: 0
+[INFO] 14:41:03:469 Servidor Dispatcher/(6796:6818): Marco recibido: 0
+[INFO] 14:41:03:469 Servidor Dispatcher/(6796:6818): Direccion Fisica obtenida: 44
+[INFO] 14:41:07:372 Servidor Dispatcher/(6796:6818): 
+ 0
+
+[INFO] 14:41:07:373 Servidor Dispatcher/(6796:6818): READ
+[INFO] 14:41:07:373 Servidor Dispatcher/(6796:6818): Id de tabla segundo nivel recibido: 0
+[INFO] 14:41:29:648 Servidor Dispatcher/(6796:6818): Marco recibido: 0
+[INFO] 14:41:29:649 Servidor Dispatcher/(6796:6818): Direccion Fisica obtenida: 5
+[INFO] 14:41:29:649 Servidor Dispatcher/(6796:6818): 
+ 0
+
+[INFO] 14:41:29:649 Servidor Dispatcher/(6796:6818): I/O
+[INFO] 14:41:29:649 Servidor Dispatcher/(6796:6818): El tiempo de ejecucion fue : 2002
+[INFO] 14:41:29:649 Servidor Dispatcher/(6796:6818): Proceso 0 enviado a bloqueado.
+[INFO] 14:41:56:991 Servidor Dispatcher/(6986:6986): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:41:56:996 Servidor Dispatcher/(6986:6986): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:41:57:005 Servidor Dispatcher/(6986:6987): Valores de config de Memoria recibidos con exito
+[INFO] 14:42:06:288 Servidor Dispatcher/(6986:6986): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:42:06:290 Servidor Dispatcher/(6986:6986): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:42:09:273 Servidor Dispatcher/(6986:7010): Recibi un proceso:
+[INFO] 14:42:09:273 Servidor Dispatcher/(6986:7010): id: 0
+[INFO] 14:42:09:273 Servidor Dispatcher/(6986:7010): NO_OP
+[INFO] 14:42:09:273 Servidor Dispatcher/(6986:7010): Esperando 1000 milisegundos
+[INFO] 14:42:10:273 Servidor Dispatcher/(6986:7010): NO_OP
+[INFO] 14:42:10:274 Servidor Dispatcher/(6986:7010): Esperando 1000 milisegundos
+[INFO] 14:42:11:275 Servidor Dispatcher/(6986:7010): READ
+[INFO] 14:42:11:276 Servidor Dispatcher/(6986:7010): Id de tabla segundo nivel recibido: 0
+[INFO] 14:42:35:603 Servidor Dispatcher/(6986:7010): Marco recibido: 0
+[INFO] 14:42:35:604 Servidor Dispatcher/(6986:7010): Direccion Fisica obtenida: 44
+[INFO] 14:42:42:290 Servidor Dispatcher/(6986:7010): 
+ 0
+
+[INFO] 14:42:42:291 Servidor Dispatcher/(6986:7010): READ
+[INFO] 14:42:42:291 Servidor Dispatcher/(6986:7010): Id de tabla segundo nivel recibido: 0
+[INFO] 14:43:10:868 Servidor Dispatcher/(6986:7010): Marco recibido: 1
+[INFO] 14:43:10:868 Servidor Dispatcher/(6986:7010): Direccion Fisica obtenida: 69
+[INFO] 14:43:14:337 Servidor Dispatcher/(6986:7010): 
+ 0
+
+[INFO] 14:43:14:337 Servidor Dispatcher/(6986:7010): I/O
+[INFO] 14:43:14:337 Servidor Dispatcher/(6986:7010): El tiempo de ejecucion fue : 2001
+[INFO] 14:43:14:337 Servidor Dispatcher/(6986:7010): Proceso 0 enviado a bloqueado.
+[INFO] 14:43:26:345 Servidor Dispatcher/(6986:7010): Recibi un proceso:
+[INFO] 14:43:26:346 Servidor Dispatcher/(6986:7010): id: 0
+[INFO] 14:43:26:346 Servidor Dispatcher/(6986:7010): EXIT
+[INFO] 14:43:26:346 Servidor Dispatcher/(6986:7010): Proceso 0 enviado a exit.
+[INFO] 14:43:45:933 Servidor Dispatcher/(6986:7010): Recibi un proceso:
+[INFO] 14:43:45:933 Servidor Dispatcher/(6986:7010): id: 1
+[INFO] 14:43:45:933 Servidor Dispatcher/(6986:7010): NO_OP
+[INFO] 14:43:45:933 Servidor Dispatcher/(6986:7010): Esperando 1000 milisegundos
+[INFO] 14:43:46:934 Servidor Dispatcher/(6986:7010): NO_OP
+[INFO] 14:43:46:935 Servidor Dispatcher/(6986:7010): Esperando 1000 milisegundos
+[INFO] 14:43:47:935 Servidor Dispatcher/(6986:7010): READ
+[INFO] 14:43:47:936 Servidor Dispatcher/(6986:7010): Id de tabla segundo nivel recibido: 0
+[INFO] 14:44:30:994 Servidor Dispatcher/(6986:7010): Marco recibido: 0
+[INFO] 14:44:30:995 Servidor Dispatcher/(6986:7010): Direccion Fisica obtenida: 44
+[INFO] 14:44:30:995 Servidor Dispatcher/(6986:7010): 
+ -1229977400
+
+[INFO] 14:44:30:995 Servidor Dispatcher/(6986:7010): READ
+[INFO] 14:44:30:995 Servidor Dispatcher/(6986:7010): Id de tabla segundo nivel recibido: -1229977200
+[INFO] 14:44:30:995 Servidor Dispatcher/(6986:7010): Marco recibido: -1229977200
+[INFO] 14:44:30:996 Servidor Dispatcher/(6986:7010): Direccion Fisica obtenida: -1409129467
+[INFO] 14:44:30:996 Servidor Dispatcher/(6986:7010): 
+ -1229977400
+
+[INFO] 14:44:30:996 Servidor Dispatcher/(6986:7010): I/O
+[INFO] 14:44:30:996 Servidor Dispatcher/(6986:7010): El tiempo de ejecucion fue : 2000
+[INFO] 14:44:30:996 Servidor Dispatcher/(6986:7010): Proceso 1 enviado a bloqueado.
+[INFO] 14:45:35:541 Servidor Dispatcher/(7178:7178): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:45:35:543 Servidor Dispatcher/(7178:7178): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:45:35:551 Servidor Dispatcher/(7178:7179): Valores de config de Memoria recibidos con exito
+[INFO] 14:45:39:330 Servidor Dispatcher/(7178:7178): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:45:39:336 Servidor Dispatcher/(7178:7178): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:45:44:532 Servidor Dispatcher/(7178:7200): Recibi un proceso:
+[INFO] 14:45:44:532 Servidor Dispatcher/(7178:7200): id: 0
+[INFO] 14:45:44:533 Servidor Dispatcher/(7178:7200): NO_OP
+[INFO] 14:45:44:533 Servidor Dispatcher/(7178:7200): Esperando 1000 milisegundos
+[INFO] 14:45:45:534 Servidor Dispatcher/(7178:7200): NO_OP
+[INFO] 14:45:45:535 Servidor Dispatcher/(7178:7200): Esperando 1000 milisegundos
+[INFO] 14:45:46:535 Servidor Dispatcher/(7178:7200): READ
+[INFO] 14:46:42:700 Servidor Dispatcher/(7178:7200): Id de tabla segundo nivel recibido: 0
+[INFO] 14:46:42:700 Servidor Dispatcher/(7178:7200): Marco recibido: 0
+[INFO] 14:46:42:700 Servidor Dispatcher/(7178:7200): Direccion Fisica obtenida: 44
+[INFO] 14:46:42:700 Servidor Dispatcher/(7178:7200): 
+ -1229977880
+
+[INFO] 14:46:42:701 Servidor Dispatcher/(7178:7200): READ
+[INFO] 14:46:42:701 Servidor Dispatcher/(7178:7200): Id de tabla segundo nivel recibido: -1229977680
+[INFO] 14:46:42:702 Servidor Dispatcher/(7178:7200): Marco recibido: -1229977680
+[INFO] 14:46:42:702 Servidor Dispatcher/(7178:7200): Direccion Fisica obtenida: -1409160187
+[INFO] 14:46:42:702 Servidor Dispatcher/(7178:7200): 
+ -1229977880
+
+[INFO] 14:46:42:702 Servidor Dispatcher/(7178:7200): I/O
+[INFO] 14:46:42:703 Servidor Dispatcher/(7178:7200): El tiempo de ejecucion fue : 2002
+[INFO] 14:46:42:704 Servidor Dispatcher/(7178:7200): Proceso 0 enviado a bloqueado.
+[INFO] 14:50:22:526 Servidor Dispatcher/(7361:7361): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 14:50:22:530 Servidor Dispatcher/(7361:7361): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 14:50:22:537 Servidor Dispatcher/(7361:7362): Valores de config de Memoria recibidos con exito
+[INFO] 14:50:31:370 Servidor Dispatcher/(7361:7361): Creando un hilo para atender una conexion en el socket 6
+[INFO] 14:50:31:372 Servidor Dispatcher/(7361:7361): Creando un hilo para atender una interrupcion en el socket 8
+[INFO] 14:50:34:640 Servidor Dispatcher/(7361:7385): Recibi un proceso:
+[INFO] 14:50:34:640 Servidor Dispatcher/(7361:7385): id: 0
+[INFO] 14:50:34:640 Servidor Dispatcher/(7361:7385): NO_OP
+[INFO] 14:50:34:641 Servidor Dispatcher/(7361:7385): Esperando 1000 milisegundos
+[INFO] 14:50:35:641 Servidor Dispatcher/(7361:7385): NO_OP
+[INFO] 14:50:35:642 Servidor Dispatcher/(7361:7385): Esperando 1000 milisegundos
+[INFO] 14:50:36:644 Servidor Dispatcher/(7361:7385): READ
+[INFO] 14:51:43:527 Servidor Dispatcher/(7361:7385): Id de tabla segundo nivel recibido: 0
+[INFO] 14:51:46:916 Servidor Dispatcher/(7361:7385): Marco recibido: 0
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): Direccion Fisica obtenida: 44
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): 
+ -1229977880
+
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): READ
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): Id de tabla segundo nivel recibido: -1229977680
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): Marco recibido: -1229977680
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): Direccion Fisica obtenida: -1409160187
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): 
+ -1229977880
+
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): I/O
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): El tiempo de ejecucion fue : 2002
+[INFO] 14:51:46:917 Servidor Dispatcher/(7361:7385): Proceso 0 enviado a bloqueado.

@@ -18,7 +18,7 @@ typedef struct{
 
 void *conectarse_con_kernel(uint32_t );
 void *conectarse_con_cpu(uint32_t );
-
+void *devolver_valor_memoria(uint32_t );
 void *handshake(uint32_t);
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexionKernel(arg_struct*);
@@ -209,7 +209,6 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 
 void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 	uint32_t entrada_tabla_1er_nivel,id_tabla_primer_nivel, cod_op;
-	//recv(socket, &cod_op, sizeof(uint32_t), 0);
 	recv(socket, &id_tabla_primer_nivel, sizeof(uint32_t), MSG_WAITALL);
 	recv(socket, &entrada_tabla_1er_nivel, sizeof(uint32_t), MSG_WAITALL);	
 
@@ -361,8 +360,6 @@ void* devolver_marco(uint32_t socket){
 
 					break;
 				}
-
-				w++;
 			}
 
 		}	
@@ -544,6 +541,26 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 
 }
 
+void *devolver_valor_memoria(uint32_t socket){
+
+	uint32_t direccion_fisica, valor_memoria;
+
+	recv(socket, &direccion_fisica, sizeof(uint32_t), MSG_WAITALL);
+
+	valor_memoria = memoria_principal[direccion_fisica];
+
+	printf("El valor de memoria de la direccion %d es: %d\n", direccion_fisica, valor_memoria);
+
+	printf("Valor de memoria %d enviado a Cpu.\n", valor_memoria);	
+
+
+	void *stream= malloc(sizeof(uint32_t));
+	memcpy(stream,&valor_memoria,sizeof(uint32_t));
+	send(socket,stream,sizeof(uint32_t),NULL);
+	free(stream);
+	
+}
+
 
 void *conectarse_con_kernel(uint32_t socket){
 	while(1){
@@ -576,7 +593,7 @@ void *conectarse_con_cpu(uint32_t socket){
 				handshake(socket);
 				break;
 			case READ:
-				devolver_marco(socket);
+				devolver_valor_memoria(socket);
 				break;
 			case IDTABLASEGUNDONIVEL:
 				devolver_id_tabla_segundo_nivel(socket);

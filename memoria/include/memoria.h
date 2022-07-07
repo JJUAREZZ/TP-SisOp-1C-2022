@@ -9,8 +9,8 @@
 #include <commons/log.h>
 #include <commons/collections/list.h>
 
-uint32_t id_tabla_primer_nivel;
-uint32_t id_tabla_segundo_nivel;
+uint32_t id_tabla_primer_nivel = 0;
+uint32_t id_tabla_segundo_nivel = 0;
 uint32_t tamanioBitmap;
 
 

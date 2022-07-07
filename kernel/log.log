@@ -20247,3 +20247,100 @@
 [INFO] 09:55:08:235 Servidor/(4835:4836): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 09:55:11:931 Servidor/(4835:4836): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:27:25:132 Servidor/(5070:5073): Conectado con Memoria!
+[INFO] 10:27:25:141 Servidor/(5070:5071): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:27:47:232 Servidor/(5070:5071): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:35:31:819 Servidor/(5597:5600): Conectado con Memoria!
+[INFO] 10:35:31:826 Servidor/(5597:5598): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:35:37:911 Servidor/(5597:5598): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:39:45:184 Servidor/(5823:5826): Conectado con Memoria!
+[INFO] 10:39:45:193 Servidor/(5823:5824): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 10:39:48:411 Servidor/(5823:5824): Creando un hilo para atender una conexión en el socket 8
+[INFO] 10:45:57:670 Servidor/(6001:6004): Conectado con Memoria!
+[INFO] 10:45:57:681 Servidor/(6001:6002): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:32:55:803 Servidor/(3707:3710): Conectado con Memoria!
+[INFO] 13:32:55:807 Servidor/(3707:3708): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:33:38:327 Servidor/(3707:3708): Creando un hilo para atender una conexión en el socket 8
+[INFO] 13:37:21:232 Servidor/(4036:4039): Conectado con Memoria!
+[INFO] 13:37:21:238 Servidor/(4036:4037): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:37:41:552 Servidor/(4036:4037): Creando un hilo para atender una conexión en el socket 8
+[INFO] 13:51:59:709 Servidor/(4565:4568): Conectado con Memoria!
+[INFO] 13:51:59:717 Servidor/(4565:4566): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:52:02:557 Servidor/(4565:4566): Creando un hilo para atender una conexión en el socket 8
+[INFO] 13:53:38:193 Servidor/(4670:4673): Conectado con Memoria!
+[INFO] 13:53:38:203 Servidor/(4670:4671): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:53:44:314 Servidor/(4670:4671): Creando un hilo para atender una conexión en el socket 8
+[INFO] 13:56:17:552 Servidor/(4761:4764): Conectado con Memoria!
+[INFO] 13:56:17:557 Servidor/(4761:4762): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:56:29:005 Servidor/(4792:4795): Conectado con Memoria!
+[INFO] 13:56:29:009 Servidor/(4792:4793): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:56:31:768 Servidor/(4792:4793): Creando un hilo para atender una conexión en el socket 8
+[INFO] 13:57:16:705 Servidor/(4904:4907): Conectado con Memoria!
+[INFO] 13:57:16:712 Servidor/(4904:4905): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 13:57:19:645 Servidor/(4904:4905): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:22:51:473 Servidor/(5721:5724): Conectado con Memoria!
+[INFO] 14:22:51:476 Servidor/(5721:5722): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:22:55:483 Servidor/(5721:5722): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:25:26:340 Servidor/(5879:5882): Conectado con Memoria!
+[INFO] 14:25:26:355 Servidor/(5879:5880): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:25:29:483 Servidor/(5879:5880): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:27:59:346 Servidor/(6036:6039): Conectado con Memoria!
+[INFO] 14:27:59:351 Servidor/(6036:6037): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:28:03:727 Servidor/(6036:6037): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:28:50:941 Servidor/(6036:6037): Creando un hilo para atender una conexión en el socket 9
+[INFO] 14:31:32:350 Servidor/(6191:6194): Conectado con Memoria!
+[INFO] 14:31:32:355 Servidor/(6191:6192): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:31:37:043 Servidor/(6191:6192): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:31:44:361 Servidor/(6191:6192): Creando un hilo para atender una conexión en el socket 9
+[INFO] 14:33:33:301 Servidor/(6343:6346): Conectado con Memoria!
+[INFO] 14:33:33:313 Servidor/(6343:6344): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:34:30:982 Servidor/(6439:6442): Conectado con Memoria!
+[INFO] 14:34:30:988 Servidor/(6439:6440): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:34:36:471 Servidor/(6439:6440): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:35:12:297 Servidor/(6439:6440): Creando un hilo para atender una conexión en el socket 9
+[INFO] 14:35:22:798 Servidor/(6439:6440): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:36:17:146 Servidor/(6561:6564): Conectado con Memoria!
+[INFO] 14:36:17:156 Servidor/(6561:6562): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:36:36:986 Servidor/(6601:6604): Conectado con Memoria!
+[INFO] 14:36:36:997 Servidor/(6601:6602): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:36:40:357 Servidor/(6601:6602): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:38:31:506 Servidor/(6688:6691): Conectado con Memoria!
+[INFO] 14:38:31:513 Servidor/(6688:6689): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:38:34:999 Servidor/(6688:6689): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:40:18:314 Servidor/(6806:6809): Conectado con Memoria!
+[INFO] 14:40:18:320 Servidor/(6806:6807): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:40:21:718 Servidor/(6806:6807): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:42:06:285 Servidor/(6998:7001): Conectado con Memoria!
+[INFO] 14:42:06:292 Servidor/(6998:6999): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:42:09:259 Servidor/(6998:6999): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:43:45:921 Servidor/(6998:6999): Creando un hilo para atender una conexión en el socket 9
+[INFO] 14:45:39:326 Servidor/(7188:7191): Conectado con Memoria!
+[INFO] 14:45:39:338 Servidor/(7188:7189): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:45:44:526 Servidor/(7188:7189): Creando un hilo para atender una conexión en el socket 8
+[INFO] 14:50:31:368 Servidor/(7377:7380): Conectado con Memoria!
+[INFO] 14:50:31:375 Servidor/(7377:7378): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 14:50:34:631 Servidor/(7377:7378): Creando un hilo para atender una conexión en el socket 8
