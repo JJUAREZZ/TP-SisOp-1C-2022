@@ -160,20 +160,24 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 }
 
 
-
-
 uint32_t crear_tabla_del_proceso(pcb *unPcb)
 {
 	t_tabla_primer_nivel *tabla_primer_nivel = malloc(sizeof(t_tabla_primer_nivel));
 	tabla_primer_nivel->id_primer_nivel = id_tabla_primer_nivel;
 	id_tabla_primer_nivel++;
+
 	uint32_t nro_paginas = unPcb->tamanioProceso / valores_generales_memoria->tamPagina;
-	if(unPcb->tamanioProceso % valores_generales_memoria->tamPagina != 0) nro_paginas++;
+	if(unPcb->tamanioProceso % valores_generales_memoria->tamPagina != 0)
+		nro_paginas++;
 	uint32_t nro_tablas_segundo_nivel = nro_paginas / valores_generales_memoria->pagPorTabla;
-	if(nro_paginas % valores_generales_memoria->pagPorTabla != 0) nro_tablas_segundo_nivel++;
+	if(nro_paginas % valores_generales_memoria->pagPorTabla != 0)
+		nro_tablas_segundo_nivel++;
+
+	tabla_primer_nivel->tablas_asociadas= malloc(nro_tablas_segundo_nivel);
+
 	for(int i = 0; i < nro_tablas_segundo_nivel; i++){
 		uint32_t id_tabla = crear_tabla_segundo_nivel(i);
-		tabla_primer_nivel->tablas_asociadas[i] = id_tabla;
+		memcpy(tabla_primer_nivel->tablas_asociadas+i,&id_tabla,sizeof(uint32_t));
 	}
 	list_add(tablas_primer_nivel_list, tabla_primer_nivel);
 	tabla_primer_nivel->paginas_en_memoria = queue_create();
@@ -184,12 +188,14 @@ uint32_t crear_tabla_del_proceso(pcb *unPcb)
 uint32_t crear_tabla_segundo_nivel(uint32_t entrada_primer_nivel) 
 {
 	t_tabla_segundo_nivel *tabla_segundo_nivel = malloc(sizeof(t_tabla_segundo_nivel));
+	tabla_segundo_nivel->paginas = malloc(sizeof(t_paginas_en_tabla)*valores_generales_memoria->pagPorTabla);
 	tabla_segundo_nivel->id_segundo_nivel = id_tabla_segundo_nivel;
 	id_tabla_segundo_nivel++;
 	for(int i = 0; i < valores_generales_memoria->pagPorTabla; i++){
 		uint32_t pid = (entrada_primer_nivel * valores_generales_memoria->pagPorTabla) + i ;
 		t_paginas_en_tabla *pagina = crear_paginas(pid);
-		tabla_segundo_nivel->paginas[i] = pagina;
+		memcpy(tabla_segundo_nivel->paginas+i,pagina,sizeof(t_paginas_en_tabla));
+		free(pagina);
 	}
 	list_add(tablas_segundo_nivel_list, tabla_segundo_nivel);
 	
@@ -216,7 +222,7 @@ void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 
 	t_tabla_primer_nivel *tabla;
 	tabla = list_get(tablas_primer_nivel_list, id_tabla_primer_nivel);
-	uint32_t id_tabla_segundo_nivel = tabla->tablas_asociadas[entrada_tabla_1er_nivel];
+	uint32_t id_tabla_segundo_nivel = *(tabla->tablas_asociadas+entrada_tabla_1er_nivel);
 	
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
@@ -245,8 +251,8 @@ void* devolver_marco(uint32_t socket){
 	t_tabla_segundo_nivel *tabla;
 	tabla = list_get(tablas_segundo_nivel_list, tabla_segundo_nivel);
 
-	t_paginas_en_tabla *pagina;
-	pagina = tabla->paginas[entrada_segundo_nivel];
+	t_paginas_en_tabla pagina;
+	pagina = *(tabla->paginas+entrada_segundo_nivel);
 
 	int *fd;
 	uint8_t *addr;
@@ -278,8 +284,8 @@ void* devolver_marco(uint32_t socket){
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
 	memset(nroProceso, 0, strlen(nroProceso));
 
-	if(pagina->bit_presencia == 1){
-		uint8_t *marco = pagina->marco;
+	if(pagina.bit_presencia == 1){
+		uint8_t *marco = pagina.marco;
 
 		void *stream= malloc(sizeof(uint8_t));
 		memcpy(stream,&marco,sizeof(uint8_t));
@@ -289,16 +295,16 @@ void* devolver_marco(uint32_t socket){
 
 		free(stream);
 
-	} else if(pagina->bit_presencia == 0) {
+	} else if(pagina.bit_presencia == 0) {
 
 		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
 		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
 
-		printf("\nLa pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
+		printf("\nLa pagina %d no se encuentra cargada en memoria\n", pagina.id_pagina);
 
 		// Recorrer las tablas de paginas.
 		size_t tamanioTabla = sizeof(&tabla1->tablas_asociadas);
-		size_t tamanioEntrada = sizeof(&tabla1->tablas_asociadas[0]);
+		size_t tamanioEntrada = sizeof(&tabla1->tablas_asociadas);
 
 		size_t cant_primeras_entradas = tamanioTabla / tamanioEntrada; 
 
@@ -332,28 +338,28 @@ void* devolver_marco(uint32_t socket){
 					bitarray_set_bit(bitmap_memoria, w);
 					msync(bitmap_memoria->bitarray, sizeof(uint8_t) * tamanioBitmap, MS_SYNC);
 
-					pagina->marco = w;
+					pagina.marco = w;
 
-					uint8_t comienzo_marco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
-					uint8_t comienzo_pagina = (uint8_t)pagina->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
+					uint8_t comienzo_marco = pagina.marco * (uint8_t)valores_generales_memoria->tamPagina;
+					uint8_t comienzo_pagina = (uint8_t)pagina.id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
 
 					//Hago el swap.
 					//NOTE: Sacar sizeof(uint8_t)
 					usleep(valores_generales_memoria->retardoSwap);
-					memcpy(*memoria_principal + comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
+					memcpy(memoria_principal+comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
-					pagina->bit_presencia = 1;
-					pagina->bit_uso = 1;
+					pagina.bit_presencia = 1;
+					pagina.bit_uso = 1;
 
-					queue_push(tabla1->paginas_en_memoria, pagina);
+					queue_push(tabla1->paginas_en_memoria, &pagina);
 
-					printf("Marco %d asignado a la pagina %d", w, pagina->id_pagina);
+					printf("Marco %d asignado a la pagina %d", w, pagina.id_pagina);
 
 					void *stream= malloc(sizeof(uint32_t));
-					memcpy(stream,&pagina->marco,sizeof(uint32_t));
+					memcpy(stream,&pagina.marco,sizeof(uint32_t));
 					send(socket,stream,sizeof(uint32_t),NULL);
 
-					printf("\nMarco %d enviado al MMU.\n", pagina->marco);
+					printf("\nMarco %d enviado al MMU.\n", pagina.marco);
 
 					free(stream);
 
@@ -416,11 +422,11 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 
 	//Itero por las tablas de segundo nivel.
 	for(i = 0; i< nro_tablas_segundo_nivel; i++){
-		t_tabla_segundo_nivel *segundoNivel = list_get(tablas_segundo_nivel_list, primerNivel->tablas_asociadas[i]);;
+		t_tabla_segundo_nivel *segundoNivel = list_get(tablas_segundo_nivel_list, *(primerNivel->tablas_asociadas+i));
 
 		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
 		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
-			t_paginas_en_tabla *pagina = segundoNivel->paginas[j];
+			t_paginas_en_tabla *pagina = segundoNivel->paginas+j;
 
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
@@ -434,11 +440,11 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 
 				//Copio el marco en el swap.
 				usleep(valores_generales_memoria->retardoSwap);
-				memcpy(addr + IncioPagina, *memoria_principal + comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
+				memcpy(addr + IncioPagina, memoria_principal + comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
 				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					memoria_principal[k] == 0;	
+					memoria_principal+k == 0;	
 				}
 
 				bitarray_clean_bit(bitmap_memoria, pagina->marco);
@@ -495,13 +501,13 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	//Itero por las tablas de segundo nivel.
 	for(i = 0; i< nro_tablas_segundo_nivel; i++){
 		t_tabla_segundo_nivel *segundoNivel;
-		uint32_t id_segundo_nivel = primerNivel->tablas_asociadas[i];
+		uint32_t id_segundo_nivel = *(primerNivel->tablas_asociadas+i);
 		segundoNivel = list_get(tablas_segundo_nivel_list, id_segundo_nivel);
 
 		//Itero por las paginas de la tabla de segundo nivel y veo si esta en uno su bit de presencia.
 		for(j=0; j< valores_generales_memoria->pagPorTabla; j++){
 			t_paginas_en_tabla *pagina;
-			pagina = segundoNivel->paginas[j];
+			pagina = segundoNivel->paginas+j;
 
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
@@ -515,7 +521,7 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 		
 				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					memoria_principal[k] == 0;	
+					memoria_principal+k == 0;	
 				}
 
 				bitarray_clean_bit(bitmap_memoria, pagina->marco);
@@ -544,7 +550,7 @@ void *devolver_valor_memoria(uint32_t socket){
 
 	recv(socket, &direccion_fisica, sizeof(uint32_t), MSG_WAITALL);
 
-	valor_memoria = memoria_principal[direccion_fisica];
+	valor_memoria = memoria_principal+direccion_fisica;
 
 	printf("El valor de memoria de la direccion %d es: %d\n", direccion_fisica, valor_memoria);
 

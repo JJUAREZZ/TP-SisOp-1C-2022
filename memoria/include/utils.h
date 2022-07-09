@@ -22,13 +22,13 @@ typedef struct{
 } gralMemoria;
 
 t_bitarray *bitmap_memoria;
-uint8_t *memoria_principal [];
+uint8_t *memoria_principal;
 void *puntero_a_bits;
 
 typedef struct{
     uint32_t id_primer_nivel;
     t_queue *paginas_en_memoria;
-    uint32_t *tablas_asociadas [];
+    uint32_t *tablas_asociadas;
 } t_tabla_primer_nivel;
 
 typedef struct{
@@ -41,7 +41,7 @@ typedef struct{
 
 typedef struct{
     uint32_t id_segundo_nivel;
-    t_paginas_en_tabla *paginas[];
+    t_paginas_en_tabla *paginas;
 } t_tabla_segundo_nivel;
 
 gralMemoria *valores_generales_memoria;
