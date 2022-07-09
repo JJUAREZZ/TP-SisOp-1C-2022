@@ -176,6 +176,7 @@ uint32_t crear_tabla_del_proceso(pcb *unPcb)
 		tabla_primer_nivel->tablas_asociadas[i] = id_tabla;
 	}
 	list_add(tablas_primer_nivel_list, tabla_primer_nivel);
+	tabla_primer_nivel->paginas_en_memoria = queue_create();
 
 	return tabla_primer_nivel->id_primer_nivel;
 }
@@ -186,7 +187,8 @@ uint32_t crear_tabla_segundo_nivel(uint32_t entrada_primer_nivel)
 	tabla_segundo_nivel->id_segundo_nivel = id_tabla_segundo_nivel;
 	id_tabla_segundo_nivel++;
 	for(int i = 0; i < valores_generales_memoria->pagPorTabla; i++){
-		t_paginas_en_tabla *pagina = crear_paginas((entrada_primer_nivel * valores_generales_memoria->pagPorTabla) + i);
+		uint32_t pid = (entrada_primer_nivel * valores_generales_memoria->pagPorTabla) + i ;
+		t_paginas_en_tabla *pagina = crear_paginas(pid);
 		tabla_segundo_nivel->paginas[i] = pagina;
 	}
 	list_add(tablas_segundo_nivel_list, tabla_segundo_nivel);
@@ -198,7 +200,7 @@ t_paginas_en_tabla *crear_paginas(uint32_t id)
 {
 	t_paginas_en_tabla* pagina = malloc(sizeof(t_paginas_en_tabla));
 	pagina->id_pagina = id;
-	printf("\nId de pagina: %d\n", pagina->id_pagina);
+	//printf("\nId de pagina: %d\n", pagina->id_pagina);
 	pagina->bit_presencia = 0;
 	pagina->bit_uso = 0;
 	pagina->bit_modificado = 0;
@@ -300,18 +302,11 @@ void* devolver_marco(uint32_t socket){
 
 		size_t cant_primeras_entradas = tamanioTabla / tamanioEntrada; 
 
-		uint32_t cant_marcos_asignados;
-		cant_marcos_asignados = 0;
+		int cant_marcos_asignados;
+		//cant_marcos_asignados = 0;
 
-		for(int i = 0; i<cant_primeras_entradas ; i++){
-			t_tabla_segundo_nivel *tablaSeg = list_get(tablas_segundo_nivel_list, tabla1->tablas_asociadas[i]);
-			for(int j=0; j<valores_generales_memoria->pagPorTabla; j++){
-				t_paginas_en_tabla *tPagina = tablaSeg->paginas[j];
-				if(tPagina->bit_presencia == 1){
-					cant_marcos_asignados ++;
-				}
-			}
-		}
+		//Esto se puede reemplazar por: 
+		cant_marcos_asignados = queue_size(tabla1->paginas_en_memoria);
 
 		//Si la cantidad de marcos asignados es == marcos por proceso -> Realizo algoritmo reemplazo.
 		if(cant_marcos_asignados == valores_generales_memoria->marcPorProceso){
@@ -343,10 +338,14 @@ void* devolver_marco(uint32_t socket){
 					uint8_t comienzo_pagina = (uint8_t)pagina->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
 
 					//Hago el swap.
+					//NOTE: Sacar sizeof(uint8_t)
 					usleep(valores_generales_memoria->retardoSwap);
 					memcpy(*memoria_principal + comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
 					pagina->bit_presencia = 1;
+					pagina->bit_uso = 1;
+
+					queue_push(tabla1->paginas_en_memoria, pagina);
 
 					printf("Marco %d asignado a la pagina %d", w, pagina->id_pagina);
 
@@ -363,8 +362,6 @@ void* devolver_marco(uint32_t socket){
 			}
 
 		}	
-
-		cant_marcos_asignados = 0;
 	}
 
 	close(fd);

@@ -3,6 +3,7 @@
 #include "../../shared/include/sockets.h"
 #include <commons/config.h>
 #include <commons/bitarray.h>
+#include <commons/collections/queue.h>
 #include <commons/log.h>
 #include <pthread.h>
 
@@ -26,14 +27,14 @@ void *puntero_a_bits;
 
 typedef struct{
     uint32_t id_primer_nivel;
-    uint32_t *puntero_pagina_victima;
+    t_queue *paginas_en_memoria;
     uint32_t *tablas_asociadas [];
 } t_tabla_primer_nivel;
 
 typedef struct{
     uint32_t id_pagina;
     uint8_t  marco;
-    uint32_t bit_presencia; // o utilizar bitmap.
+    uint32_t bit_presencia; 
     uint32_t bit_uso;
     uint32_t bit_modificado;
 } t_paginas_en_tabla;
