@@ -598,6 +598,8 @@ void *conectarse_con_cpu(uint32_t socket){
 			case READ:
 				devolver_valor_memoria(socket);
 				break;
+			case WRITE:
+				break;
 			case IDTABLASEGUNDONIVEL:
 				devolver_id_tabla_segundo_nivel(socket);
 				break;

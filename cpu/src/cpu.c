@@ -138,16 +138,33 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			uint32_t tablaDePaginas= unPcb->tablaDePaginas;
 			uint32_t direccionFisica= mmu(direccionLogica,tablaDePaginas);
 
-			uint32_t cod_op= WRITE, tamanio= sizeof(uint32_t)*3, offset =0;
+			uint32_t cod_op= WRITE, tamanio= sizeof(uint32_t)*6, offset =0;
+			uint32_t numero_pagina= floor(direccionLogica / memoria_config->tam_pagina);
+			uint32_t entrada_tabla_1er_nivel = floor(numero_pagina / memoria_config->entradas_por_tabla);
+			uint32_t entrada_tabla_2do_nivel = numero_pagina % memoria_config->entradas_por_tabla;
+			uint32_t resultadoOk;
+			
 			void* buffer= malloc(tamanio);
 			memcpy(buffer+offset,&cod_op,sizeof(uint32_t));
 			offset += sizeof(uint32_t);
 			memcpy(buffer+offset,&direccionFisica, sizeof(uint32_t));
 			offset += sizeof(uint32_t);
 			memcpy(buffer+offset,&contenidoAEscribir, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&tablaDePaginas, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&entrada_tabla_1er_nivel, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&entrada_tabla_2do_nivel, sizeof(uint32_t));
+
 			send(socket_memoria, buffer, tamanio, 0);
+			recv(socket_memoria, &resultadoOk, sizeof(uint32_t), MSG_WAITALL);
+			if(resultadoOk)
+				log_info(logger, "Operacion WRITE exitosa");
+			else 	
+				log_info(logger, "Error en la operación WRITE");
+
 			free(buffer);
-			//alguna confirmacion de memoria?
 			
 		} else if(strcmp(nombreInstruccion, "COPY") == 0) {
 			uint32_t direccionLogicaDestino= instruccion->param[0];
