@@ -16,8 +16,8 @@ void agregar_a_tlb(uint32_t, uint32_t);
 int buscar_por_marco(uint32_t);
 int entrada_vacia();
 void algoritmo_de_reemplazo(uint32_t,uint32_t);
-void fifo(uint32_t ,uint32_t );
-void lru(uint32_t ,uint32_t );
+void reemplazo_fifo(uint32_t ,uint32_t );
+void reemplazo_lru(uint32_t ,uint32_t );
 void limpiarTlb();
 
 int main() {
@@ -366,15 +366,15 @@ void algoritmo_de_reemplazo(uint32_t numero_pagina,uint32_t marco){
 	int fifo = strcmp(cpu_config->reemplazo_tlb, "FIFO");
 	int lru = strcmp(cpu_config->reemplazo_tlb, "LRU");
 		if(fifo == 0){
-				fifo(numero_pagina,marco);
+				reemplazo_fifo(numero_pagina,marco);
 		}
 
 		if(lru == 0){
-				lru(numero_pagina,marco);
+				reemplazo_lru(numero_pagina,marco);
 		}   
 }
 
-void fifo(uint32_t numero_pagina,uint32_t marco){
+void reemplazo_fifo(uint32_t numero_pagina,uint32_t marco){
 	int len= cpu_config->entradas_tlb;
 	int entrada;
 	struct timeval t;		
@@ -396,7 +396,7 @@ void fifo(uint32_t numero_pagina,uint32_t marco){
 	tlb[entrada].ultima_referencia = presente;
 }
 
-void lru(uint32_t numero_pagina,uint32_t marco){
+void reemplazo_lru(uint32_t numero_pagina,uint32_t marco){
 	int len= cpu_config->entradas_tlb;
 	int entrada;
 	struct timeval t;		
