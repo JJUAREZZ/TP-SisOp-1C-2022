@@ -366,11 +366,11 @@ void algoritmo_de_reemplazo(uint32_t numero_pagina,uint32_t marco){
 	int fifo = strcmp(cpu_config->reemplazo_tlb, "FIFO");
 	int lru = strcmp(cpu_config->reemplazo_tlb, "LRU");
 		if(fifo == 0){
-				//Ejecuta FIFO.
+				fifo(numero_pagina,marco);
 		}
 
 		if(lru == 0){
-				//Ejecuta LRU.
+				lru(numero_pagina,marco);
 		}   
 }
 
