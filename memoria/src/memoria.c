@@ -19,6 +19,7 @@ typedef struct{
 void *conectarse_con_kernel(uint32_t );
 void *conectarse_con_cpu(uint32_t );
 void *devolver_valor_memoria(uint32_t );
+void escribir_en_memoria(uint32_t);
 void *handshake(uint32_t);
 void *retornar_id_tabla_de_pagina(uint32_t);
 void *atenderConexionKernel(arg_struct*);
@@ -251,8 +252,8 @@ void* devolver_marco(uint32_t socket){
 	t_tabla_segundo_nivel *tabla;
 	tabla = list_get(tablas_segundo_nivel_list, tabla_segundo_nivel);
 
-	t_paginas_en_tabla pagina;
-	pagina = *(tabla->paginas+entrada_segundo_nivel);
+	t_paginas_en_tabla *pagina;
+	pagina = tabla->paginas+entrada_segundo_nivel;
 
 	int *fd;
 	uint8_t *addr;
@@ -284,23 +285,23 @@ void* devolver_marco(uint32_t socket){
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
 	memset(nroProceso, 0, strlen(nroProceso));
 
-	if(pagina.bit_presencia == 1){
-		uint8_t *marco = pagina.marco;
+	if(pagina->bit_presencia == 1){
+		uint32_t marco = pagina->marco;
 
-		void *stream= malloc(sizeof(uint8_t));
-		memcpy(stream,&marco,sizeof(uint8_t));
-		send(socket,stream,sizeof(uint8_t),NULL);
+		void *stream= malloc(sizeof(uint32_t));
+		memcpy(stream,&marco,sizeof(uint32_t));
+		send(socket,stream,sizeof(uint32_t),NULL);
 
 		printf("\nMarco %d enviado al MMU.\n", marco);
 
 		free(stream);
 
-	} else if(pagina.bit_presencia == 0) {
+	} else if(pagina->bit_presencia == 0) {
 
 		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
 		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
 
-		printf("\nLa pagina %d no se encuentra cargada en memoria\n", pagina.id_pagina);
+		printf("\nLa pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
 
 		// Recorrer las tablas de paginas.
 		size_t tamanioTabla = sizeof(&tabla1->tablas_asociadas);
@@ -338,28 +339,28 @@ void* devolver_marco(uint32_t socket){
 					bitarray_set_bit(bitmap_memoria, w);
 					msync(bitmap_memoria->bitarray, sizeof(uint8_t) * tamanioBitmap, MS_SYNC);
 
-					pagina.marco = w;
+					pagina->marco = w;
 
-					uint8_t comienzo_marco = pagina.marco * (uint8_t)valores_generales_memoria->tamPagina;
-					uint8_t comienzo_pagina = (uint8_t)pagina.id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
+					uint8_t comienzo_marco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+					uint8_t comienzo_pagina = (uint8_t)pagina->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
 
 					//Hago el swap.
 					//NOTE: Sacar sizeof(uint8_t)
 					usleep(valores_generales_memoria->retardoSwap);
 					memcpy(memoria_principal+comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
-					pagina.bit_presencia = 1;
-					pagina.bit_uso = 1;
+					pagina->bit_presencia = 1;
+					pagina->bit_uso = 1;
 
-					queue_push(tabla1->paginas_en_memoria, &pagina);
+					queue_push(tabla1->paginas_en_memoria, pagina);
 
-					printf("Marco %d asignado a la pagina %d", w, pagina.id_pagina);
+					printf("Marco %d asignado a la pagina %d", w, pagina->id_pagina);
 
 					void *stream= malloc(sizeof(uint32_t));
-					memcpy(stream,&pagina.marco,sizeof(uint32_t));
+					memcpy(stream,&(pagina->marco),sizeof(uint32_t));
 					send(socket,stream,sizeof(uint32_t),NULL);
 
-					printf("\nMarco %d enviado al MMU.\n", pagina.marco);
+					printf("\nMarco %d enviado al MMU.\n", pagina->marco);
 
 					free(stream);
 
@@ -550,7 +551,8 @@ void *devolver_valor_memoria(uint32_t socket){
 
 	recv(socket, &direccion_fisica, sizeof(uint32_t), MSG_WAITALL);
 
-	valor_memoria = memoria_principal+direccion_fisica;
+	memcpy(&valor_memoria,memoria_principal+(uint8_t)direccion_fisica,sizeof(uint32_t));
+	//valor_memoria = *(memoria_principal+direccion_fisica); //ver si funca con los *()
 
 	printf("El valor de memoria de la direccion %d es: %d\n", direccion_fisica, valor_memoria);
 
@@ -562,6 +564,29 @@ void *devolver_valor_memoria(uint32_t socket){
 	send(socket,stream,sizeof(uint32_t),NULL);
 	free(stream);
 	
+}
+
+void escribir_en_memoria(uint32_t socket){
+	uint32_t direccion_fisica, valor_a_escribir;
+	uint32_t id_tabla_1er_nivel, id_tabla_2do_nivel, entrada_tabla_2do_nivel;
+	uint32_t resultadoOp;
+	recv(socket, &direccion_fisica, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &valor_a_escribir, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &id_tabla_1er_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &id_tabla_2do_nivel, sizeof(uint32_t), MSG_WAITALL);
+	recv(socket, &entrada_tabla_2do_nivel, sizeof(uint32_t), MSG_WAITALL);
+	
+	memcpy(memoria_principal+(uint8_t)direccion_fisica, &valor_a_escribir,sizeof(uint32_t));
+	printf("\nValor escrito: %d", *(memoria_principal+(uint8_t)direccion_fisica));
+	//actualiza la tabla de paginas
+
+	t_tabla_primer_nivel *t1= list_get(tablas_primer_nivel_list,id_tabla_1er_nivel);
+	uint32_t idT2 = *(t1->tablas_asociadas+id_tabla_2do_nivel);
+	t_tabla_segundo_nivel *t2= list_get(tablas_segundo_nivel_list,idT2);
+	(t2->paginas+entrada_tabla_2do_nivel)->bit_modificado = 1;
+
+	resultadoOp = 1;
+	send(socket,&resultadoOp,sizeof(uint32_t),NULL);
 }
 
 
@@ -599,6 +624,7 @@ void *conectarse_con_cpu(uint32_t socket){
 				devolver_valor_memoria(socket);
 				break;
 			case WRITE:
+				escribir_en_memoria(socket);
 				break;
 			case IDTABLASEGUNDONIVEL:
 				devolver_id_tabla_segundo_nivel(socket);

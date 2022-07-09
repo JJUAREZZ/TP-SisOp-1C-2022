@@ -131,7 +131,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			free(buffer);
 			recv(socket_memoria, &contenidoLeido, sizeof(uint32_t), MSG_WAITALL);
 
-			log_info(logger,"\n %d\n",contenidoLeido); //imprime el valor leído
+			log_info(logger,"Valor leido de memoria %d",contenidoLeido); //imprime el valor leído
 		} else if(strcmp(nombreInstruccion, "WRITE") == 0){
 			uint32_t direccionLogica= instruccion->param[0];
 			uint32_t contenidoAEscribir= instruccion->param[1];
@@ -160,7 +160,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			send(socket_memoria, buffer, tamanio, 0);
 			recv(socket_memoria, &resultadoOk, sizeof(uint32_t), MSG_WAITALL);
 			if(resultadoOk)
-				log_info(logger, "Operacion WRITE exitosa");
+				log_info(logger, "Se ha escrito %d en la direccion %d",contenidoAEscribir,direccionFisica);
 			else 	
 				log_info(logger, "Error en la operación WRITE");
 
