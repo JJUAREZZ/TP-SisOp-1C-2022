@@ -114,6 +114,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			devolverPcb(BLOCKED, accepted_fd);
 			
 			interrupcion =0; //no checkea interrupciones, así que la pone en 0
+			limpiarTlb();
 			return;
 
 		} else if(strcmp(nombreInstruccion, "READ") == 0){
@@ -181,7 +182,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			gettimeofday(&finalBlock, NULL); //es necesario computar el tiempo en exit?
 			log_info(logger,"Proceso %d enviado a exit.", unPcb->id);
 			devolverPcb(PROCESOTERMINATED, accepted_fd);
-			
+			limpiarTlb();
 			return;
 
 		}
@@ -296,7 +297,8 @@ uint32_t obtener_marco(uint32_t id_tabla_primer_nivel,uint32_t id_tabla_segundo_
 int consultar_tlb(uint32_t numero_pagina){
 	int marco = -1;
 	for(int i=0; i< cpu_config->entradas_tlb;i++){
-		if(tlb[i].pagina == numero_pagina){
+		if(!tlb[i].vacio){
+			if(tlb[i].pagina == numero_pagina){
 			struct timeval t;
 			gettimeofday(&t, NULL);
 			double tiempo  = t.tv_sec - tiempo_inicial_cpu;
@@ -304,7 +306,9 @@ int consultar_tlb(uint32_t numero_pagina){
 			marco= tlb[i].marco;
 			tlb[i].ultima_referencia= tiempo;
 			break;
+			}
 		}
+		
 	}
 	return marco;
 }

@@ -20415,3 +20415,15 @@
 [INFO] 15:22:30:021 Servidor/(32274:32275): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 15:22:33:042 Servidor/(32274:32275): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:44:11:054 Servidor/(32274:32275): Creando un hilo para atender una conexión en el socket 22
+[INFO] 15:44:13:235 Servidor/(32274:32275): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:47:54:468 Servidor/(1169:1172): Conectado con Memoria!
+[INFO] 15:47:54:484 Servidor/(1169:1170): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 15:47:59:087 Servidor/(1169:1170): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:48:00:888 Servidor/(1169:1170): Creando un hilo para atender una conexión en el socket 22
+[INFO] 15:53:13:152 Servidor/(1555:1558): Conectado con Memoria!
+[INFO] 15:53:13:153 Servidor/(1555:1556): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 15:53:16:980 Servidor/(1555:1556): Creando un hilo para atender una conexión en el socket 21
+[INFO] 15:53:19:267 Servidor/(1555:1556): Creando un hilo para atender una conexión en el socket 22

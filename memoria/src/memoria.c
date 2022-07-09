@@ -228,7 +228,7 @@ void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
 	send(socket,stream,sizeof(uint32_t),NULL);
 
-	printf("\nEntrada %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
+	printf("\nId %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
 
 	free(stream);
 }
