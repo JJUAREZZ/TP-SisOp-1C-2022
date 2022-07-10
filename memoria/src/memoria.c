@@ -721,14 +721,9 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 
 			}
 
-			free(pagina);
 		}
-
-		free(segundoNivel);
 	}
 
-
-	free(primerNivel);
 	printf("\nSe ha eliminado el proceso %d de memoria.\n", unPcb->id);
 
 	uint32_t result = 1;
