@@ -11249,3 +11249,428 @@ EXIT
 [INFO] 01:30:51:523 Servidor Dispatcher/(10452:10469): id: 0
 [INFO] 01:30:51:524 Servidor Dispatcher/(10452:10469): EXIT
 [INFO] 01:30:51:524 Servidor Dispatcher/(10452:10469): Proceso 0 enviado a exit.
+[INFO] 16:33:15:471 Servidor Dispatcher/(8260:8260): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:33:15:472 Servidor Dispatcher/(8260:8261): Valores de config de Memoria recibidos con exito
+[INFO] 16:33:15:487 Servidor Dispatcher/(8260:8260): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:33:21:141 Servidor Dispatcher/(8260:8260): Creando un hilo para atender una conexion en el socket 20
+[INFO] 16:33:21:141 Servidor Dispatcher/(8260:8260): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:33:24:501 Servidor Dispatcher/(8260:8298): Recibi un proceso:
+[INFO] 16:33:24:501 Servidor Dispatcher/(8260:8298): id: 0
+[INFO] 16:33:24:501 Servidor Dispatcher/(8260:8298): NO_OP
+[INFO] 16:33:24:501 Servidor Dispatcher/(8260:8298): Esperando 1000 milisegundos
+[INFO] 16:33:25:502 Servidor Dispatcher/(8260:8298): NO_OP
+[INFO] 16:33:25:502 Servidor Dispatcher/(8260:8298): Esperando 1000 milisegundos
+[INFO] 16:33:26:502 Servidor Dispatcher/(8260:8298): WRITE
+[INFO] 16:33:26:502 Servidor Dispatcher/(8260:8298): Id de tabla segundo nivel recibido: 0
+[INFO] 16:33:26:504 Servidor Dispatcher/(8260:8298): Marco recibido: 0
+[INFO] 16:33:26:504 Servidor Dispatcher/(8260:8298): Direccion Fisica obtenida: 5
+[INFO] 16:33:26:504 Servidor Dispatcher/(8260:8298): Se ha escrito el valor 251 en la direccion 5
+[INFO] 16:33:26:504 Servidor Dispatcher/(8260:8298): I/O
+[INFO] 16:33:26:504 Servidor Dispatcher/(8260:8298): El tiempo de ejecucion fue : 2000
+[INFO] 16:33:26:504 Servidor Dispatcher/(8260:8298): Proceso 0 enviado a bloqueado.
+[INFO] 16:33:38:507 Servidor Dispatcher/(8260:8298): Recibi un proceso:
+[INFO] 16:33:38:508 Servidor Dispatcher/(8260:8298): id: 0
+[INFO] 16:33:38:508 Servidor Dispatcher/(8260:8298): READ
+[INFO] 16:33:38:508 Servidor Dispatcher/(8260:8298): Id de tabla segundo nivel recibido: 0
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Marco recibido: 0
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Direccion Fisica obtenida: 5
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Valor leido de memoria 808464432
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): WRITE
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Id de tabla segundo nivel recibido: 0
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Marco recibido: 0
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Direccion Fisica obtenida: 8
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Se ha escrito el valor 737 en la direccion 8
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): COPY
+[INFO] 16:33:38:510 Servidor Dispatcher/(8260:8298): Id de tabla segundo nivel recibido: 0
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Marco recibido: 0
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Direccion Fisica obtenida: 5
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Id de tabla segundo nivel recibido: 0
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Marco recibido: 0
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Direccion Fisica obtenida: 8
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): EXIT
+[INFO] 16:33:38:511 Servidor Dispatcher/(8260:8298): Proceso 0 enviado a exit.
+[INFO] 16:35:32:292 Servidor Dispatcher/(8648:8648): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:35:32:292 Servidor Dispatcher/(8648:8648): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:35:32:304 Servidor Dispatcher/(8648:8649): Valores de config de Memoria recibidos con exito
+[INFO] 16:35:36:720 Servidor Dispatcher/(8648:8648): Creando un hilo para atender una conexion en el socket 16
+[INFO] 16:35:36:721 Servidor Dispatcher/(8648:8648): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:35:39:343 Servidor Dispatcher/(8648:8686): Recibi un proceso:
+[INFO] 16:35:39:343 Servidor Dispatcher/(8648:8686): id: 0
+[INFO] 16:35:39:343 Servidor Dispatcher/(8648:8686): NO_OP
+[INFO] 16:35:39:343 Servidor Dispatcher/(8648:8686): Esperando 1000 milisegundos
+[INFO] 16:35:40:343 Servidor Dispatcher/(8648:8686): NO_OP
+[INFO] 16:35:40:343 Servidor Dispatcher/(8648:8686): Esperando 1000 milisegundos
+[INFO] 16:35:41:344 Servidor Dispatcher/(8648:8686): WRITE
+[INFO] 16:35:41:344 Servidor Dispatcher/(8648:8686): Id de tabla segundo nivel recibido: 0
+[INFO] 16:35:41:346 Servidor Dispatcher/(8648:8686): Marco recibido: 0
+[INFO] 16:35:41:346 Servidor Dispatcher/(8648:8686): Direccion Fisica obtenida: 5
+[INFO] 16:35:41:346 Servidor Dispatcher/(8648:8686): Se ha escrito el valor 251 en la direccion 5
+[INFO] 16:35:41:346 Servidor Dispatcher/(8648:8686): I/O
+[INFO] 16:35:41:346 Servidor Dispatcher/(8648:8686): El tiempo de ejecucion fue : 2000
+[INFO] 16:35:41:346 Servidor Dispatcher/(8648:8686): Proceso 0 enviado a bloqueado.
+[INFO] 16:35:53:350 Servidor Dispatcher/(8648:8686): Recibi un proceso:
+[INFO] 16:35:53:351 Servidor Dispatcher/(8648:8686): id: 0
+[INFO] 16:35:53:351 Servidor Dispatcher/(8648:8686): READ
+[INFO] 16:35:53:351 Servidor Dispatcher/(8648:8686): Id de tabla segundo nivel recibido: 0
+[INFO] 16:35:53:354 Servidor Dispatcher/(8648:8686): Marco recibido: 0
+[INFO] 16:35:53:354 Servidor Dispatcher/(8648:8686): Direccion Fisica obtenida: 5
+[INFO] 16:35:53:354 Servidor Dispatcher/(8648:8686): Valor leido de memoria 808464432
+[INFO] 16:35:53:354 Servidor Dispatcher/(8648:8686): WRITE
+[INFO] 16:35:53:355 Servidor Dispatcher/(8648:8686): Id de tabla segundo nivel recibido: 0
+[INFO] 16:35:53:355 Servidor Dispatcher/(8648:8686): Marco recibido: 0
+[INFO] 16:35:53:355 Servidor Dispatcher/(8648:8686): Direccion Fisica obtenida: 8
+[INFO] 16:35:53:355 Servidor Dispatcher/(8648:8686): Se ha escrito el valor 737 en la direccion 8
+[INFO] 16:35:53:355 Servidor Dispatcher/(8648:8686): COPY
+[INFO] 16:35:53:355 Servidor Dispatcher/(8648:8686): Id de tabla segundo nivel recibido: 0
+[INFO] 16:35:53:356 Servidor Dispatcher/(8648:8686): Marco recibido: 0
+[INFO] 16:35:53:356 Servidor Dispatcher/(8648:8686): Direccion Fisica obtenida: 5
+[INFO] 16:35:53:356 Servidor Dispatcher/(8648:8686): Id de tabla segundo nivel recibido: 0
+[INFO] 16:35:53:356 Servidor Dispatcher/(8648:8686): Marco recibido: 0
+[INFO] 16:35:53:356 Servidor Dispatcher/(8648:8686): Direccion Fisica obtenida: 8
+[INFO] 16:35:53:357 Servidor Dispatcher/(8648:8686): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 16:35:53:357 Servidor Dispatcher/(8648:8686): EXIT
+[INFO] 16:35:53:357 Servidor Dispatcher/(8648:8686): Proceso 0 enviado a exit.
+[INFO] 16:47:01:874 Servidor Dispatcher/(10552:10552): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:47:01:875 Servidor Dispatcher/(10552:10552): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:47:01:884 Servidor Dispatcher/(10552:10553): Valores de config de Memoria recibidos con exito
+[INFO] 16:47:03:654 Servidor Dispatcher/(10552:10552): Creando un hilo para atender una conexion en el socket 16
+[INFO] 16:47:03:654 Servidor Dispatcher/(10552:10552): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:47:05:379 Servidor Dispatcher/(10552:10569): Recibi un proceso:
+[INFO] 16:47:05:379 Servidor Dispatcher/(10552:10569): id: 0
+[INFO] 16:47:05:379 Servidor Dispatcher/(10552:10569): NO_OP
+[INFO] 16:47:05:379 Servidor Dispatcher/(10552:10569): Esperando 1000 milisegundos
+[INFO] 16:47:06:380 Servidor Dispatcher/(10552:10569): NO_OP
+[INFO] 16:47:06:380 Servidor Dispatcher/(10552:10569): Esperando 1000 milisegundos
+[INFO] 16:47:07:380 Servidor Dispatcher/(10552:10569): WRITE
+[INFO] 16:47:07:381 Servidor Dispatcher/(10552:10569): Id de tabla segundo nivel recibido: 0
+[INFO] 16:47:07:385 Servidor Dispatcher/(10552:10569): Marco recibido: 0
+[INFO] 16:47:07:385 Servidor Dispatcher/(10552:10569): Direccion Fisica obtenida: 5
+[INFO] 16:47:07:385 Servidor Dispatcher/(10552:10569): Se ha escrito el valor 251 en la direccion 5
+[INFO] 16:47:07:386 Servidor Dispatcher/(10552:10569): I/O
+[INFO] 16:47:07:386 Servidor Dispatcher/(10552:10569): El tiempo de ejecucion fue : 2000
+[INFO] 16:47:07:386 Servidor Dispatcher/(10552:10569): Proceso 0 enviado a bloqueado.
+[INFO] 16:47:19:392 Servidor Dispatcher/(10552:10569): Recibi un proceso:
+[INFO] 16:47:19:392 Servidor Dispatcher/(10552:10569): id: 0
+[INFO] 16:47:19:392 Servidor Dispatcher/(10552:10569): READ
+[INFO] 16:47:19:392 Servidor Dispatcher/(10552:10569): Id de tabla segundo nivel recibido: 0
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Marco recibido: 0
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Direccion Fisica obtenida: 5
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Valor leido de memoria 808464432
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): WRITE
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Id de tabla segundo nivel recibido: 0
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Marco recibido: 0
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Direccion Fisica obtenida: 8
+[INFO] 16:47:19:394 Servidor Dispatcher/(10552:10569): Se ha escrito el valor 737 en la direccion 8
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): COPY
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Id de tabla segundo nivel recibido: 0
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Marco recibido: 0
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Direccion Fisica obtenida: 5
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Id de tabla segundo nivel recibido: 0
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Marco recibido: 0
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Direccion Fisica obtenida: 8
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): EXIT
+[INFO] 16:47:19:395 Servidor Dispatcher/(10552:10569): Proceso 0 enviado a exit.
+[INFO] 16:51:36:683 Servidor Dispatcher/(11336:11336): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:51:36:684 Servidor Dispatcher/(11336:11336): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:51:36:690 Servidor Dispatcher/(11336:11337): Valores de config de Memoria recibidos con exito
+[INFO] 16:51:38:096 Servidor Dispatcher/(11336:11336): Creando un hilo para atender una conexion en el socket 16
+[INFO] 16:51:38:097 Servidor Dispatcher/(11336:11336): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:51:39:876 Servidor Dispatcher/(11336:11355): Recibi un proceso:
+[INFO] 16:51:39:876 Servidor Dispatcher/(11336:11355): id: 0
+[INFO] 16:51:39:876 Servidor Dispatcher/(11336:11355): NO_OP
+[INFO] 16:51:39:876 Servidor Dispatcher/(11336:11355): Esperando 1000 milisegundos
+[INFO] 16:51:40:876 Servidor Dispatcher/(11336:11355): NO_OP
+[INFO] 16:51:40:877 Servidor Dispatcher/(11336:11355): Esperando 1000 milisegundos
+[INFO] 16:51:41:877 Servidor Dispatcher/(11336:11355): WRITE
+[INFO] 16:51:41:877 Servidor Dispatcher/(11336:11355): Id de tabla segundo nivel recibido: 0
+[INFO] 16:51:41:880 Servidor Dispatcher/(11336:11355): Marco recibido: 0
+[INFO] 16:51:41:880 Servidor Dispatcher/(11336:11355): Direccion Fisica obtenida: 5
+[INFO] 16:51:41:880 Servidor Dispatcher/(11336:11355): Se ha escrito el valor 251 en la direccion 5
+[INFO] 16:51:41:880 Servidor Dispatcher/(11336:11355): I/O
+[INFO] 16:51:41:880 Servidor Dispatcher/(11336:11355): El tiempo de ejecucion fue : 2000
+[INFO] 16:51:41:880 Servidor Dispatcher/(11336:11355): Proceso 0 enviado a bloqueado.
+[INFO] 16:51:53:884 Servidor Dispatcher/(11336:11355): Recibi un proceso:
+[INFO] 16:51:53:884 Servidor Dispatcher/(11336:11355): id: 0
+[INFO] 16:51:53:884 Servidor Dispatcher/(11336:11355): READ
+[INFO] 16:51:53:885 Servidor Dispatcher/(11336:11355): Id de tabla segundo nivel recibido: 0
+[INFO] 16:51:53:887 Servidor Dispatcher/(11336:11355): Marco recibido: 0
+[INFO] 16:51:53:887 Servidor Dispatcher/(11336:11355): Direccion Fisica obtenida: 5
+[INFO] 16:51:53:888 Servidor Dispatcher/(11336:11355): Valor leido de memoria 808464432
+[INFO] 16:51:53:888 Servidor Dispatcher/(11336:11355): WRITE
+[INFO] 16:51:53:888 Servidor Dispatcher/(11336:11355): Id de tabla segundo nivel recibido: 0
+[INFO] 16:51:53:888 Servidor Dispatcher/(11336:11355): Marco recibido: 0
+[INFO] 16:51:53:888 Servidor Dispatcher/(11336:11355): Direccion Fisica obtenida: 8
+[INFO] 16:51:53:889 Servidor Dispatcher/(11336:11355): Se ha escrito el valor 737 en la direccion 8
+[INFO] 16:51:53:889 Servidor Dispatcher/(11336:11355): COPY
+[INFO] 16:51:53:889 Servidor Dispatcher/(11336:11355): Id de tabla segundo nivel recibido: 0
+[INFO] 16:51:53:889 Servidor Dispatcher/(11336:11355): Marco recibido: 0
+[INFO] 16:51:53:889 Servidor Dispatcher/(11336:11355): Direccion Fisica obtenida: 5
+[INFO] 16:51:53:890 Servidor Dispatcher/(11336:11355): Id de tabla segundo nivel recibido: 0
+[INFO] 16:51:53:890 Servidor Dispatcher/(11336:11355): Marco recibido: 0
+[INFO] 16:51:53:890 Servidor Dispatcher/(11336:11355): Direccion Fisica obtenida: 8
+[INFO] 16:51:53:890 Servidor Dispatcher/(11336:11355): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 16:51:53:890 Servidor Dispatcher/(11336:11355): EXIT
+[INFO] 16:51:53:891 Servidor Dispatcher/(11336:11355): Proceso 0 enviado a exit.
+[INFO] 16:54:14:777 Servidor Dispatcher/(11772:11772): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:54:14:778 Servidor Dispatcher/(11772:11772): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:54:14:785 Servidor Dispatcher/(11772:11773): Valores de config de Memoria recibidos con exito
+[INFO] 16:54:16:582 Servidor Dispatcher/(11772:11772): Creando un hilo para atender una conexion en el socket 16
+[INFO] 16:54:16:583 Servidor Dispatcher/(11772:11772): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:54:19:303 Servidor Dispatcher/(11772:11795): Recibi un proceso:
+[INFO] 16:54:19:303 Servidor Dispatcher/(11772:11795): id: 0
+[INFO] 16:54:19:303 Servidor Dispatcher/(11772:11795): NO_OP
+[INFO] 16:54:19:303 Servidor Dispatcher/(11772:11795): Esperando 1000 milisegundos
+[INFO] 16:54:20:304 Servidor Dispatcher/(11772:11795): NO_OP
+[INFO] 16:54:20:304 Servidor Dispatcher/(11772:11795): Esperando 1000 milisegundos
+[INFO] 16:54:21:305 Servidor Dispatcher/(11772:11795): WRITE
+[INFO] 16:54:21:305 Servidor Dispatcher/(11772:11795): Id de tabla segundo nivel recibido: 0
+[INFO] 16:54:21:309 Servidor Dispatcher/(11772:11795): Marco recibido: 0
+[INFO] 16:54:21:309 Servidor Dispatcher/(11772:11795): Direccion Fisica obtenida: 5
+[INFO] 16:54:21:310 Servidor Dispatcher/(11772:11795): Se ha escrito el valor 251 en la direccion 5
+[INFO] 16:54:21:310 Servidor Dispatcher/(11772:11795): I/O
+[INFO] 16:54:21:310 Servidor Dispatcher/(11772:11795): El tiempo de ejecucion fue : 2000
+[INFO] 16:54:21:310 Servidor Dispatcher/(11772:11795): Proceso 0 enviado a bloqueado.
+[INFO] 16:54:33:315 Servidor Dispatcher/(11772:11795): Recibi un proceso:
+[INFO] 16:54:33:315 Servidor Dispatcher/(11772:11795): id: 0
+[INFO] 16:54:33:315 Servidor Dispatcher/(11772:11795): READ
+[INFO] 16:54:33:316 Servidor Dispatcher/(11772:11795): Id de tabla segundo nivel recibido: 0
+[INFO] 16:54:33:320 Servidor Dispatcher/(11772:11795): Marco recibido: 0
+[INFO] 16:54:33:320 Servidor Dispatcher/(11772:11795): Direccion Fisica obtenida: 5
+[INFO] 16:54:33:321 Servidor Dispatcher/(11772:11795): Valor leido de memoria 808464432
+[INFO] 16:54:33:321 Servidor Dispatcher/(11772:11795): WRITE
+[INFO] 16:54:33:321 Servidor Dispatcher/(11772:11795): Id de tabla segundo nivel recibido: 0
+[INFO] 16:54:33:322 Servidor Dispatcher/(11772:11795): Marco recibido: 0
+[INFO] 16:54:33:322 Servidor Dispatcher/(11772:11795): Direccion Fisica obtenida: 8
+[INFO] 16:54:33:322 Servidor Dispatcher/(11772:11795): Se ha escrito el valor 737 en la direccion 8
+[INFO] 16:54:33:323 Servidor Dispatcher/(11772:11795): COPY
+[INFO] 16:54:33:323 Servidor Dispatcher/(11772:11795): Id de tabla segundo nivel recibido: 0
+[INFO] 16:54:33:324 Servidor Dispatcher/(11772:11795): Marco recibido: 0
+[INFO] 16:54:33:324 Servidor Dispatcher/(11772:11795): Direccion Fisica obtenida: 5
+[INFO] 16:54:33:325 Servidor Dispatcher/(11772:11795): Id de tabla segundo nivel recibido: 0
+[INFO] 16:54:33:325 Servidor Dispatcher/(11772:11795): Marco recibido: 0
+[INFO] 16:54:33:325 Servidor Dispatcher/(11772:11795): Direccion Fisica obtenida: 8
+[INFO] 16:54:33:326 Servidor Dispatcher/(11772:11795): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 16:54:33:326 Servidor Dispatcher/(11772:11795): EXIT
+[INFO] 16:54:33:333 Servidor Dispatcher/(11772:11795): Proceso 0 enviado a exit.
+[INFO] 16:57:55:002 Servidor Dispatcher/(12485:12485): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 16:57:55:003 Servidor Dispatcher/(12485:12485): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 16:57:55:012 Servidor Dispatcher/(12485:12486): Valores de config de Memoria recibidos con exito
+[INFO] 16:57:56:774 Servidor Dispatcher/(12485:12485): Creando un hilo para atender una conexion en el socket 16
+[INFO] 16:57:56:774 Servidor Dispatcher/(12485:12485): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 16:57:58:582 Servidor Dispatcher/(12485:12508): Recibi un proceso:
+[INFO] 16:57:58:582 Servidor Dispatcher/(12485:12508): id: 0
+[INFO] 16:57:58:582 Servidor Dispatcher/(12485:12508): NO_OP
+[INFO] 16:57:58:582 Servidor Dispatcher/(12485:12508): Esperando 1000 milisegundos
+[INFO] 16:57:59:582 Servidor Dispatcher/(12485:12508): NO_OP
+[INFO] 16:57:59:583 Servidor Dispatcher/(12485:12508): Esperando 1000 milisegundos
+[INFO] 16:58:00:583 Servidor Dispatcher/(12485:12508): WRITE
+[INFO] 16:58:00:583 Servidor Dispatcher/(12485:12508): Id de tabla segundo nivel recibido: 0
+[INFO] 16:58:00:586 Servidor Dispatcher/(12485:12508): Marco recibido: 0
+[INFO] 16:58:00:586 Servidor Dispatcher/(12485:12508): Direccion Fisica obtenida: 5
+[INFO] 16:58:00:586 Servidor Dispatcher/(12485:12508): Se ha escrito el valor 251 en la direccion 5
+[INFO] 16:58:00:586 Servidor Dispatcher/(12485:12508): I/O
+[INFO] 16:58:00:586 Servidor Dispatcher/(12485:12508): El tiempo de ejecucion fue : 2000
+[INFO] 16:58:00:586 Servidor Dispatcher/(12485:12508): Proceso 0 enviado a bloqueado.
+[INFO] 16:58:12:590 Servidor Dispatcher/(12485:12508): Recibi un proceso:
+[INFO] 16:58:12:591 Servidor Dispatcher/(12485:12508): id: 0
+[INFO] 16:58:12:591 Servidor Dispatcher/(12485:12508): READ
+[INFO] 16:58:12:591 Servidor Dispatcher/(12485:12508): Id de tabla segundo nivel recibido: 0
+[INFO] 16:58:12:596 Servidor Dispatcher/(12485:12508): Marco recibido: 0
+[INFO] 16:58:12:596 Servidor Dispatcher/(12485:12508): Direccion Fisica obtenida: 5
+[INFO] 16:58:12:596 Servidor Dispatcher/(12485:12508): Valor leido de memoria 808464432
+[INFO] 16:58:12:597 Servidor Dispatcher/(12485:12508): WRITE
+[INFO] 16:58:12:597 Servidor Dispatcher/(12485:12508): Id de tabla segundo nivel recibido: 0
+[INFO] 16:58:12:597 Servidor Dispatcher/(12485:12508): Marco recibido: 0
+[INFO] 16:58:12:598 Servidor Dispatcher/(12485:12508): Direccion Fisica obtenida: 8
+[INFO] 16:58:12:598 Servidor Dispatcher/(12485:12508): Se ha escrito el valor 737 en la direccion 8
+[INFO] 16:58:12:598 Servidor Dispatcher/(12485:12508): COPY
+[INFO] 16:58:12:599 Servidor Dispatcher/(12485:12508): Id de tabla segundo nivel recibido: 0
+[INFO] 16:58:12:599 Servidor Dispatcher/(12485:12508): Marco recibido: 0
+[INFO] 16:58:12:600 Servidor Dispatcher/(12485:12508): Direccion Fisica obtenida: 5
+[INFO] 16:58:12:600 Servidor Dispatcher/(12485:12508): Id de tabla segundo nivel recibido: 0
+[INFO] 16:58:12:604 Servidor Dispatcher/(12485:12508): Marco recibido: 0
+[INFO] 16:58:12:604 Servidor Dispatcher/(12485:12508): Direccion Fisica obtenida: 8
+[INFO] 16:58:12:605 Servidor Dispatcher/(12485:12508): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 16:58:12:605 Servidor Dispatcher/(12485:12508): EXIT
+[INFO] 16:58:12:605 Servidor Dispatcher/(12485:12508): Proceso 0 enviado a exit.
+[INFO] 17:02:15:904 Servidor Dispatcher/(13153:13153): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 17:02:15:905 Servidor Dispatcher/(13153:13153): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 17:02:15:914 Servidor Dispatcher/(13153:13154): Valores de config de Memoria recibidos con exito
+[INFO] 17:02:17:243 Servidor Dispatcher/(13153:13153): Creando un hilo para atender una conexion en el socket 16
+[INFO] 17:02:17:243 Servidor Dispatcher/(13153:13153): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 17:02:18:658 Servidor Dispatcher/(13153:13177): Recibi un proceso:
+[INFO] 17:02:18:658 Servidor Dispatcher/(13153:13177): id: 0
+[INFO] 17:02:18:658 Servidor Dispatcher/(13153:13177): NO_OP
+[INFO] 17:02:18:658 Servidor Dispatcher/(13153:13177): Esperando 1000 milisegundos
+[INFO] 17:02:19:658 Servidor Dispatcher/(13153:13177): NO_OP
+[INFO] 17:02:19:658 Servidor Dispatcher/(13153:13177): Esperando 1000 milisegundos
+[INFO] 17:02:20:658 Servidor Dispatcher/(13153:13177): WRITE
+[INFO] 17:02:20:659 Servidor Dispatcher/(13153:13177): Id de tabla segundo nivel recibido: 0
+[INFO] 17:02:20:661 Servidor Dispatcher/(13153:13177): Marco recibido: 0
+[INFO] 17:02:20:661 Servidor Dispatcher/(13153:13177): Direccion Fisica obtenida: 5
+[INFO] 17:02:20:661 Servidor Dispatcher/(13153:13177): Se ha escrito el valor 251 en la direccion 5
+[INFO] 17:02:20:661 Servidor Dispatcher/(13153:13177): I/O
+[INFO] 17:02:20:661 Servidor Dispatcher/(13153:13177): El tiempo de ejecucion fue : 2000
+[INFO] 17:02:20:661 Servidor Dispatcher/(13153:13177): Proceso 0 enviado a bloqueado.
+[INFO] 17:02:32:668 Servidor Dispatcher/(13153:13177): Recibi un proceso:
+[INFO] 17:02:32:669 Servidor Dispatcher/(13153:13177): id: 0
+[INFO] 17:02:32:669 Servidor Dispatcher/(13153:13177): READ
+[INFO] 17:02:32:670 Servidor Dispatcher/(13153:13177): Id de tabla segundo nivel recibido: 0
+[INFO] 17:02:32:672 Servidor Dispatcher/(13153:13177): Marco recibido: 0
+[INFO] 17:02:32:673 Servidor Dispatcher/(13153:13177): Direccion Fisica obtenida: 5
+[INFO] 17:02:32:673 Servidor Dispatcher/(13153:13177): Valor leido de memoria 808464432
+[INFO] 17:02:32:673 Servidor Dispatcher/(13153:13177): WRITE
+[INFO] 17:02:32:675 Servidor Dispatcher/(13153:13177): Id de tabla segundo nivel recibido: 0
+[INFO] 17:02:32:680 Servidor Dispatcher/(13153:13177): Marco recibido: 0
+[INFO] 17:02:32:680 Servidor Dispatcher/(13153:13177): Direccion Fisica obtenida: 8
+[INFO] 17:02:32:681 Servidor Dispatcher/(13153:13177): Se ha escrito el valor 737 en la direccion 8
+[INFO] 17:02:32:681 Servidor Dispatcher/(13153:13177): COPY
+[INFO] 17:02:32:681 Servidor Dispatcher/(13153:13177): Id de tabla segundo nivel recibido: 0
+[INFO] 17:02:32:682 Servidor Dispatcher/(13153:13177): Marco recibido: 0
+[INFO] 17:02:32:682 Servidor Dispatcher/(13153:13177): Direccion Fisica obtenida: 5
+[INFO] 17:02:32:682 Servidor Dispatcher/(13153:13177): Id de tabla segundo nivel recibido: 0
+[INFO] 17:02:32:683 Servidor Dispatcher/(13153:13177): Marco recibido: 0
+[INFO] 17:02:32:683 Servidor Dispatcher/(13153:13177): Direccion Fisica obtenida: 8
+[INFO] 17:02:32:684 Servidor Dispatcher/(13153:13177): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 17:02:32:684 Servidor Dispatcher/(13153:13177): EXIT
+[INFO] 17:02:32:685 Servidor Dispatcher/(13153:13177): Proceso 0 enviado a exit.
+[INFO] 17:04:08:066 Servidor Dispatcher/(13464:13464): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 17:04:08:067 Servidor Dispatcher/(13464:13464): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 17:04:08:080 Servidor Dispatcher/(13464:13465): Valores de config de Memoria recibidos con exito
+[INFO] 17:04:09:661 Servidor Dispatcher/(13464:13464): Creando un hilo para atender una conexion en el socket 16
+[INFO] 17:04:09:662 Servidor Dispatcher/(13464:13464): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 17:04:11:393 Servidor Dispatcher/(13464:13495): Recibi un proceso:
+[INFO] 17:04:11:393 Servidor Dispatcher/(13464:13495): id: 0
+[INFO] 17:04:11:393 Servidor Dispatcher/(13464:13495): NO_OP
+[INFO] 17:04:11:393 Servidor Dispatcher/(13464:13495): Esperando 1000 milisegundos
+[INFO] 17:04:12:393 Servidor Dispatcher/(13464:13495): NO_OP
+[INFO] 17:04:12:393 Servidor Dispatcher/(13464:13495): Esperando 1000 milisegundos
+[INFO] 17:04:13:394 Servidor Dispatcher/(13464:13495): WRITE
+[INFO] 17:04:13:394 Servidor Dispatcher/(13464:13495): Id de tabla segundo nivel recibido: 0
+[INFO] 17:04:13:396 Servidor Dispatcher/(13464:13495): Marco recibido: 0
+[INFO] 17:04:13:396 Servidor Dispatcher/(13464:13495): Direccion Fisica obtenida: 5
+[INFO] 17:04:13:396 Servidor Dispatcher/(13464:13495): Se ha escrito el valor 251 en la direccion 5
+[INFO] 17:04:13:396 Servidor Dispatcher/(13464:13495): READ
+[INFO] 17:04:13:396 Servidor Dispatcher/(13464:13495): Id de tabla segundo nivel recibido: 0
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Marco recibido: 0
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Direccion Fisica obtenida: 5
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Valor leido de memoria 251
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): WRITE
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Id de tabla segundo nivel recibido: 0
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Marco recibido: 0
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Direccion Fisica obtenida: 8
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Se ha escrito el valor 737 en la direccion 8
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): COPY
+[INFO] 17:04:13:397 Servidor Dispatcher/(13464:13495): Id de tabla segundo nivel recibido: 0
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Marco recibido: 0
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Direccion Fisica obtenida: 5
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Id de tabla segundo nivel recibido: 0
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Marco recibido: 0
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Direccion Fisica obtenida: 8
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): EXIT
+[INFO] 17:04:13:398 Servidor Dispatcher/(13464:13495): Proceso 0 enviado a exit.
+[INFO] 17:16:58:525 Servidor Dispatcher/(15607:15607): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 17:16:58:525 Servidor Dispatcher/(15607:15607): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 17:16:58:537 Servidor Dispatcher/(15607:15608): Valores de config de Memoria recibidos con exito
+[INFO] 17:17:06:514 Servidor Dispatcher/(15607:15607): Creando un hilo para atender una conexion en el socket 16
+[INFO] 17:17:06:514 Servidor Dispatcher/(15607:15607): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 17:17:38:613 Servidor Dispatcher/(15607:15661): Recibi un proceso:
+[INFO] 17:17:38:613 Servidor Dispatcher/(15607:15661): id: 0
+[INFO] 17:17:38:613 Servidor Dispatcher/(15607:15661): NO_OP
+[INFO] 17:17:38:613 Servidor Dispatcher/(15607:15661): Esperando 1000 milisegundos
+[INFO] 17:17:39:614 Servidor Dispatcher/(15607:15661): NO_OP
+[INFO] 17:17:39:614 Servidor Dispatcher/(15607:15661): Esperando 1000 milisegundos
+[INFO] 17:17:40:614 Servidor Dispatcher/(15607:15661): WRITE
+[INFO] 17:17:40:615 Servidor Dispatcher/(15607:15661): Id de tabla segundo nivel recibido: 0
+[INFO] 17:17:40:619 Servidor Dispatcher/(15607:15661): Marco recibido: 0
+[INFO] 17:17:40:619 Servidor Dispatcher/(15607:15661): Direccion Fisica obtenida: 5
+[INFO] 17:17:40:620 Servidor Dispatcher/(15607:15661): Se ha escrito el valor 251 en la direccion 5
+[INFO] 17:17:40:620 Servidor Dispatcher/(15607:15661): I/O
+[INFO] 17:17:40:620 Servidor Dispatcher/(15607:15661): El tiempo de ejecucion fue : 2000
+[INFO] 17:17:40:620 Servidor Dispatcher/(15607:15661): Proceso 0 enviado a bloqueado.
+[INFO] 17:17:41:822 Servidor Dispatcher/(15607:15661): Recibi un proceso:
+[INFO] 17:17:41:822 Servidor Dispatcher/(15607:15661): id: 0
+[INFO] 17:17:41:822 Servidor Dispatcher/(15607:15661): READ
+[INFO] 17:17:41:823 Servidor Dispatcher/(15607:15661): Id de tabla segundo nivel recibido: 0
+[INFO] 17:17:41:823 Servidor Dispatcher/(15607:15661): Marco recibido: 0
+[INFO] 17:17:41:823 Servidor Dispatcher/(15607:15661): Direccion Fisica obtenida: 5
+[INFO] 17:17:41:824 Servidor Dispatcher/(15607:15661): Valor leido de memoria 251
+[INFO] 17:17:41:824 Servidor Dispatcher/(15607:15661): WRITE
+[INFO] 17:17:41:825 Servidor Dispatcher/(15607:15661): Id de tabla segundo nivel recibido: 0
+[INFO] 17:17:41:825 Servidor Dispatcher/(15607:15661): Marco recibido: 0
+[INFO] 17:17:41:825 Servidor Dispatcher/(15607:15661): Direccion Fisica obtenida: 8
+[INFO] 17:17:41:826 Servidor Dispatcher/(15607:15661): Se ha escrito el valor 737 en la direccion 8
+[INFO] 17:17:41:826 Servidor Dispatcher/(15607:15661): COPY
+[INFO] 17:17:41:827 Servidor Dispatcher/(15607:15661): Id de tabla segundo nivel recibido: 0
+[INFO] 17:17:41:827 Servidor Dispatcher/(15607:15661): Marco recibido: 0
+[INFO] 17:17:41:832 Servidor Dispatcher/(15607:15661): Direccion Fisica obtenida: 5
+[INFO] 17:17:41:832 Servidor Dispatcher/(15607:15661): Id de tabla segundo nivel recibido: 0
+[INFO] 17:17:41:833 Servidor Dispatcher/(15607:15661): Marco recibido: 0
+[INFO] 17:17:41:833 Servidor Dispatcher/(15607:15661): Direccion Fisica obtenida: 8
+[INFO] 17:17:41:834 Servidor Dispatcher/(15607:15661): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 17:17:41:834 Servidor Dispatcher/(15607:15661): EXIT
+[INFO] 17:17:41:834 Servidor Dispatcher/(15607:15661): Proceso 0 enviado a exit.
+[INFO] 17:25:28:258 Servidor Dispatcher/(17036:17036): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 17:25:28:258 Servidor Dispatcher/(17036:17036): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 17:25:28:268 Servidor Dispatcher/(17036:17037): Valores de config de Memoria recibidos con exito
+[INFO] 17:25:32:922 Servidor Dispatcher/(17036:17036): Creando un hilo para atender una conexion en el socket 16
+[INFO] 17:25:32:922 Servidor Dispatcher/(17036:17036): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 17:25:35:746 Servidor Dispatcher/(17036:17069): Recibi un proceso:
+[INFO] 17:25:35:746 Servidor Dispatcher/(17036:17069): id: 0
+[INFO] 17:25:35:746 Servidor Dispatcher/(17036:17069): NO_OP
+[INFO] 17:25:35:746 Servidor Dispatcher/(17036:17069): Esperando 1000 milisegundos
+[INFO] 17:25:36:747 Servidor Dispatcher/(17036:17069): NO_OP
+[INFO] 17:25:36:747 Servidor Dispatcher/(17036:17069): Esperando 1000 milisegundos
+[INFO] 17:25:37:748 Servidor Dispatcher/(17036:17069): WRITE
+[INFO] 17:25:37:749 Servidor Dispatcher/(17036:17069): Id de tabla segundo nivel recibido: 0
+[INFO] 17:25:37:752 Servidor Dispatcher/(17036:17069): Marco recibido: 0
+[INFO] 17:25:37:753 Servidor Dispatcher/(17036:17069): Direccion Fisica obtenida: 5
+[INFO] 17:25:37:753 Servidor Dispatcher/(17036:17069): Se ha escrito el valor 251 en la direccion 5
+[INFO] 17:25:37:753 Servidor Dispatcher/(17036:17069): I/O
+[INFO] 17:25:37:753 Servidor Dispatcher/(17036:17069): El tiempo de ejecucion fue : 2000
+[INFO] 17:25:37:754 Servidor Dispatcher/(17036:17069): Proceso 0 enviado a bloqueado.
+[INFO] 17:25:38:955 Servidor Dispatcher/(17036:17069): Recibi un proceso:
+[INFO] 17:25:38:955 Servidor Dispatcher/(17036:17069): id: 0
+[INFO] 17:25:38:955 Servidor Dispatcher/(17036:17069): READ
+[INFO] 17:25:38:956 Servidor Dispatcher/(17036:17069): Id de tabla segundo nivel recibido: 0
+[INFO] 17:25:38:957 Servidor Dispatcher/(17036:17069): Marco recibido: 0
+[INFO] 17:25:38:957 Servidor Dispatcher/(17036:17069): Direccion Fisica obtenida: 5
+[INFO] 17:25:38:957 Servidor Dispatcher/(17036:17069): Valor leido de memoria 251
+[INFO] 17:25:38:957 Servidor Dispatcher/(17036:17069): WRITE
+[INFO] 17:25:38:958 Servidor Dispatcher/(17036:17069): Id de tabla segundo nivel recibido: 0
+[INFO] 17:25:38:959 Servidor Dispatcher/(17036:17069): Marco recibido: 0
+[INFO] 17:25:38:959 Servidor Dispatcher/(17036:17069): Direccion Fisica obtenida: 8
+[INFO] 17:25:38:959 Servidor Dispatcher/(17036:17069): Se ha escrito el valor 737 en la direccion 8
+[INFO] 17:25:38:960 Servidor Dispatcher/(17036:17069): COPY
+[INFO] 17:25:38:960 Servidor Dispatcher/(17036:17069): Id de tabla segundo nivel recibido: 0
+[INFO] 17:25:38:961 Servidor Dispatcher/(17036:17069): Marco recibido: 0
+[INFO] 17:25:38:962 Servidor Dispatcher/(17036:17069): Direccion Fisica obtenida: 5
+[INFO] 17:25:38:963 Servidor Dispatcher/(17036:17069): Id de tabla segundo nivel recibido: 0
+[INFO] 17:25:38:963 Servidor Dispatcher/(17036:17069): Marco recibido: 0
+[INFO] 17:25:38:964 Servidor Dispatcher/(17036:17069): Direccion Fisica obtenida: 8
+[INFO] 17:25:38:964 Servidor Dispatcher/(17036:17069): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 17:25:38:964 Servidor Dispatcher/(17036:17069): EXIT
+[INFO] 17:25:38:968 Servidor Dispatcher/(17036:17069): Proceso 0 enviado a exit.

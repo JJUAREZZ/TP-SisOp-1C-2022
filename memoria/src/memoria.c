@@ -342,7 +342,7 @@ void* devolver_marco(uint32_t socket){
 
 					pagina->marco = w;
 
-					uint8_t comienzo_marco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+					uint8_t comienzo_marco = pagina->marco * valores_generales_memoria->tamPagina;
 					uint8_t comienzo_pagina = (uint8_t)pagina->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
 
 					//Hago el swap.
@@ -444,21 +444,17 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 				usleep(valores_generales_memoria->retardoSwap);
 				memcpy(addr + IncioPagina, memoria_principal + comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
-				//Saco la pagina del marco y dejo el marco en 0.
+				//Saco la pagina del marco y dejo el marco en 0. /
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					memoria_principal+k == 0;	
+					*(memoria_principal+k) = 0;	// no esta haciendo nada
 				}
 
 				bitarray_clean_bit(bitmap_memoria, pagina->marco);
 				pagina->bit_presencia = 0;
 
-				printf("\nSe ha liberado el espacio del proceso %d de memoria", unPcb->id);
-
 			}
 		}
 	}
-
-	printf("\nSe ha liberado el espacio del proceso %d de memoria\n", unPcb->id);
 	//ENVIAR MENSAJE A KERNEL CON PROCESO DESALOJADO
 	uint32_t result = 1;
 	uint32_t cod_op= SUSPENDED;
@@ -468,7 +464,8 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	memcpy(stream+ sizeof(uint32_t),&result,sizeof(uint32_t));
 	send(socket,stream,tamanio,NULL);
 	free(stream);
-
+	close(fd);
+	printf("\nSe ha liberado el espacio del proceso %d de memoria", unPcb->id);
 }
 
 void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
@@ -514,12 +511,12 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
 
-				uint8_t *comienzoDelMarco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
-				uint8_t *finDelMarco = *comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t comienzoDelMarco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
+				uint8_t finDelMarco = comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
-				uint8_t *IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
-				uint8_t *finDeLaPagina = *IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+				uint8_t finDeLaPagina = IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
 		
 				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
