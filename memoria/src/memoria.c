@@ -174,7 +174,7 @@ uint32_t crear_tabla_del_proceso(pcb *unPcb)
 	if(nro_paginas % valores_generales_memoria->pagPorTabla != 0)
 		nro_tablas_segundo_nivel++;
 
-	tabla_primer_nivel->tablas_asociadas= malloc(nro_tablas_segundo_nivel);
+	tabla_primer_nivel->tablas_asociadas= malloc(sizeof(uint32_t)*nro_tablas_segundo_nivel);
 
 	for(int i = 0; i < nro_tablas_segundo_nivel; i++){
 		uint32_t id_tabla = crear_tabla_segundo_nivel(i);
@@ -298,6 +298,7 @@ void* devolver_marco(uint32_t socket){
 
 	} else if(pagina->bit_presencia == 0) {
 
+		
 		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
 		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
 
@@ -346,7 +347,7 @@ void* devolver_marco(uint32_t socket){
 
 					//Hago el swap.
 					//NOTE: Sacar sizeof(uint8_t)
-					usleep(valores_generales_memoria->retardoSwap);
+					usleep(valores_generales_memoria->retardoSwap);//multiplicarlo x 1000
 					memcpy(memoria_principal+comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
 
 					pagina->bit_presencia = 1;

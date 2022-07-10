@@ -11201,3 +11201,51 @@ EXIT
 [INFO] 00:55:49:246 Servidor Dispatcher/(7061:7155): id: 0
 [INFO] 00:55:49:246 Servidor Dispatcher/(7061:7155): EXIT
 [INFO] 00:55:49:246 Servidor Dispatcher/(7061:7155): Proceso 0 enviado a exit.
+[INFO] 01:30:20:750 Servidor Dispatcher/(10452:10452): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 01:30:20:751 Servidor Dispatcher/(10452:10452): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 01:30:20:752 Servidor Dispatcher/(10452:10453): Valores de config de Memoria recibidos con exito
+[INFO] 01:30:22:807 Servidor Dispatcher/(10452:10452): Creando un hilo para atender una conexion en el socket 16
+[INFO] 01:30:22:812 Servidor Dispatcher/(10452:10452): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 01:30:25:489 Servidor Dispatcher/(10452:10469): Recibi un proceso:
+[INFO] 01:30:25:489 Servidor Dispatcher/(10452:10469): id: 0
+[INFO] 01:30:25:489 Servidor Dispatcher/(10452:10469): NO_OP
+[INFO] 01:30:25:489 Servidor Dispatcher/(10452:10469): Esperando 1000 milisegundos
+[INFO] 01:30:26:489 Servidor Dispatcher/(10452:10469): NO_OP
+[INFO] 01:30:26:489 Servidor Dispatcher/(10452:10469): Esperando 1000 milisegundos
+[INFO] 01:30:27:490 Servidor Dispatcher/(10452:10469): WRITE
+[INFO] 01:30:27:491 Servidor Dispatcher/(10452:10469): Id de tabla segundo nivel recibido: 0
+[INFO] 01:30:27:494 Servidor Dispatcher/(10452:10469): Marco recibido: 0
+[INFO] 01:30:27:495 Servidor Dispatcher/(10452:10469): Direccion Fisica obtenida: 5
+[INFO] 01:30:27:495 Servidor Dispatcher/(10452:10469): Se ha escrito el valor 251 en la direccion 5
+[INFO] 01:30:27:495 Servidor Dispatcher/(10452:10469): I/O
+[INFO] 01:30:27:496 Servidor Dispatcher/(10452:10469): El tiempo de ejecucion fue : 2000
+[INFO] 01:30:27:496 Servidor Dispatcher/(10452:10469): Proceso 0 enviado a bloqueado.
+[INFO] 01:30:39:501 Servidor Dispatcher/(10452:10469): Recibi un proceso:
+[INFO] 01:30:39:501 Servidor Dispatcher/(10452:10469): id: 0
+[INFO] 01:30:39:502 Servidor Dispatcher/(10452:10469): READ
+[INFO] 01:30:39:502 Servidor Dispatcher/(10452:10469): Id de tabla segundo nivel recibido: 0
+[INFO] 01:30:39:505 Servidor Dispatcher/(10452:10469): Marco recibido: 0
+[INFO] 01:30:39:506 Servidor Dispatcher/(10452:10469): Direccion Fisica obtenida: 5
+[INFO] 01:30:39:506 Servidor Dispatcher/(10452:10469): Valor leido de memoria 808464432
+[INFO] 01:30:39:507 Servidor Dispatcher/(10452:10469): WRITE
+[INFO] 01:30:39:507 Servidor Dispatcher/(10452:10469): Id de tabla segundo nivel recibido: 0
+[INFO] 01:30:39:508 Servidor Dispatcher/(10452:10469): Marco recibido: 0
+[INFO] 01:30:39:509 Servidor Dispatcher/(10452:10469): Direccion Fisica obtenida: 8
+[INFO] 01:30:39:509 Servidor Dispatcher/(10452:10469): Se ha escrito el valor 737 en la direccion 8
+[INFO] 01:30:39:509 Servidor Dispatcher/(10452:10469): COPY
+[INFO] 01:30:39:510 Servidor Dispatcher/(10452:10469): Id de tabla segundo nivel recibido: 0
+[INFO] 01:30:39:515 Servidor Dispatcher/(10452:10469): Marco recibido: 0
+[INFO] 01:30:39:515 Servidor Dispatcher/(10452:10469): Direccion Fisica obtenida: 5
+[INFO] 01:30:39:516 Servidor Dispatcher/(10452:10469): Id de tabla segundo nivel recibido: 0
+[INFO] 01:30:39:516 Servidor Dispatcher/(10452:10469): Marco recibido: 0
+[INFO] 01:30:39:516 Servidor Dispatcher/(10452:10469): Direccion Fisica obtenida: 8
+[INFO] 01:30:39:517 Servidor Dispatcher/(10452:10469): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 01:30:39:517 Servidor Dispatcher/(10452:10469): I/O
+[INFO] 01:30:39:518 Servidor Dispatcher/(10452:10469): El tiempo de ejecucion fue : 2000
+[INFO] 01:30:39:518 Servidor Dispatcher/(10452:10469): Proceso 0 enviado a bloqueado.
+[INFO] 01:30:51:523 Servidor Dispatcher/(10452:10469): Recibi un proceso:
+[INFO] 01:30:51:523 Servidor Dispatcher/(10452:10469): id: 0
+[INFO] 01:30:51:524 Servidor Dispatcher/(10452:10469): EXIT
+[INFO] 01:30:51:524 Servidor Dispatcher/(10452:10469): Proceso 0 enviado a exit.

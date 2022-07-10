@@ -20500,3 +20500,7 @@
 [INFO] 00:53:27:353 Servidor/(7143:7144): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 00:55:35:221 Servidor/(7143:7144): Creando un hilo para atender una conexión en el socket 21
+[INFO] 01:30:22:807 Servidor/(10459:10462): Conectado con Memoria!
+[INFO] 01:30:22:814 Servidor/(10459:10460): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 01:30:25:477 Servidor/(10459:10460): Creando un hilo para atender una conexión en el socket 21
