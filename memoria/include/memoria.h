@@ -30,7 +30,7 @@ void crear_memoria_principal(){
 
     tamanioBitmap = cantidad_de_marcos;
 
-    memoria_principal = malloc(sizeof(uint32_t) * valores_generales_memoria->tamMemoria);
+    memoria_principal = malloc(sizeof(uint8_t) * valores_generales_memoria->tamMemoria);
     puntero_a_bits = malloc(cantidad_de_marcos);
     bitmap_memoria = bitarray_create_with_mode(puntero_a_bits,cantidad_de_marcos, LSB_FIRST);
     msync(bitmap_memoria->bitarray, cantidad_de_marcos, MS_SYNC);
