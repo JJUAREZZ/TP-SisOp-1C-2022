@@ -29,6 +29,7 @@ typedef struct{
     uint32_t id_primer_nivel;
     t_queue *paginas_en_memoria;
     uint32_t *tablas_asociadas;
+    uint32_t index;
 } t_tabla_primer_nivel;
 
 typedef struct{
