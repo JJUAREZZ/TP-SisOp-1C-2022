@@ -8,6 +8,7 @@
 #include <sys/mman.h>
 #include <commons/log.h>
 #include <commons/collections/list.h>
+#include <commons/log.h>
 
 uint32_t id_tabla_primer_nivel = 0;
 uint32_t id_tabla_segundo_nivel = 0;
@@ -39,8 +40,7 @@ void crear_memoria_principal(){
         bitarray_clean_bit(bitmap_memoria, i);
     }
 
-    printf("\nMemoria Principal Creada\n");
-
+    log_info(logger, "Memoria Principal creada.");
 }
 
 

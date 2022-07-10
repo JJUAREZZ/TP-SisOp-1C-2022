@@ -3,6 +3,7 @@
 #include "../../shared/include/serializacion.h"
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
+#include <commons/log.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -43,21 +44,22 @@ t_list *tablas_segundo_nivel_list;
 int main()
 {
     load_configuration();
+	logger = log_create("log.log", "Servidor Memoria", 1, LOG_LEVEL_INFO);
 	crear_memoria_principal();
 	tablas_primer_nivel_list = list_create();
 	tablas_segundo_nivel_list = list_create();
 
 	struct sockaddr_in client_info;
 	socklen_t addrlen = sizeof client_info;
-	printf("Creando socket y escuchando \n");
+	log_info(logger, "Creando socket y escuchando \n");
 
 	memoria_socket = socket_create_listener("127.0.0.1", valores_generales_memoria->puertoMemoria);
-
+	
 	if(memoria_socket < 0){
-		printf("Error al crear server");
+		log_info(logger, "Error al crear server");
 		return -1;
 	}
-	printf("¡¡¡Servidor de Memoria Iniciado!!!\n");
+	log_info(logger,"¡¡¡Servidor de Memoria Iniciado!!!\n");
 
 	pthread_t conexion_con_kernel, conexion_con_cpu;
 	uint32_t socket_cpu, socket_kernel;
@@ -88,6 +90,7 @@ void *handshake(uint32_t socket){
 	offset += sizeof(uint32_t);
 	memcpy(buffer+offset,&valores_generales_memoria->pagPorTabla,sizeof(uint32_t));
 	
+	usleep(valores_generales_memoria->retardoMemoria * 1000);
 	send(socket, buffer, tamanio, 0);
 
 	free(buffer);
@@ -112,13 +115,13 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	mkdir(path, 0775);
 
 	archivoswap = open(nombreArchivo,O_CREAT | O_RDWR, S_IRWXU);
-	printf("\nArchivo swap del proceso Creado: %s \n", nombreArchivo);
+	log_info(logger, "\nArchivo swap del proceso Creado: %s \n", nombreArchivo);
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
 	memset(nroProceso, 0, strlen(nroProceso));
 
 	if(archivoswap == -1){
-		printf("Error al crear el archivo swap del proceso %n \n", unPcb->id);
+		log_info(logger,"Error al crear el archivo swap del proceso %n \n", unPcb->id);
 		exit(1);
 	}
 
@@ -146,18 +149,21 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	addr = mmap(NULL,fd_size.st_size, PROT_WRITE | PROT_READ, MAP_SHARED, archivoswap, 0);
 	
 	if(addr == MAP_FAILED){
-		perror("Error mapping\n");
+		log_error(logger, "Error mapping\n");
 	}
 
 	close(archivoswap);
 
-	printf("\nRecibi un proceso: nroDeProceso= %d", unPcb->id);
-	printf("\nAsignando tabla de pagina: id= %d\n",idTabla);
+	log_info(logger, "\nRecibi un proceso: nroDeProceso= %d", unPcb->id);
+	log_info(logger,"\nAsignando tabla de pagina: id= %d\n",idTabla);
 	uint32_t tamanio= sizeof(uint32_t)*2;
 	void *stream= malloc(tamanio);
 	uint32_t cod_op= TABLADEPAGINA;
 	memcpy(stream, &cod_op,sizeof(uint32_t));
 	memcpy(stream+sizeof(uint32_t),&idTabla,sizeof(uint32_t));
+
+	usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 	send(socket,stream,tamanio,NULL);
 	free(stream);
 }
@@ -230,9 +236,12 @@ void* devolver_id_tabla_segundo_nivel(uint32_t socket){
 	
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&id_tabla_segundo_nivel,sizeof(uint32_t));
+
+	usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 	send(socket,stream,sizeof(uint32_t),NULL);
 
-	printf("\nId %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
+	log_info(logger,"\nId %d tabla de segundo nivel enviada con exito.\n", id_tabla_segundo_nivel);
 
 	free(stream);
 }
@@ -274,7 +283,7 @@ void* devolver_marco(uint32_t socket){
 	fd = open(nombreArchivo, O_RDWR, S_IRWXU);
 
 	if(fd == -1){
-		perror("Error al abrir el archivo");
+		log_error(logger,"Error al abrir el archivo");
 	}
 
 	fstat(fd, &sb);
@@ -282,7 +291,7 @@ void* devolver_marco(uint32_t socket){
 	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_PRIVATE , fd, 0);
 
 	if(addr == MAP_FAILED){
-		printf("Error al mapear el archivo.");
+		log_error(logger,"Error al mapear el archivo.");
 	}
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
@@ -293,9 +302,12 @@ void* devolver_marco(uint32_t socket){
 
 		void *stream= malloc(sizeof(uint32_t));
 		memcpy(stream,&marco,sizeof(uint32_t));
+
+		usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 		send(socket,stream,sizeof(uint32_t),NULL);
 
-		printf("\nMarco %d enviado al MMU.\n", marco);
+		log_info(logger,"\nMarco %d enviado al MMU.\n", marco);
 
 		free(stream);
 
@@ -305,7 +317,7 @@ void* devolver_marco(uint32_t socket){
 		int utilizarClock = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK");
 		int utilizarClockM = strcmp(valores_generales_memoria->algoReemplazo, "CLOCK-M");
 
-		printf("\nLa pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
+		log_info(logger,"\nLa pagina %d no se encuentra cargada en memoria\n", pagina->id_pagina);
 
 		// Recorrer las tablas de paginas.
 		size_t tamanioTabla = sizeof(&tabla1->tablas_asociadas);
@@ -324,6 +336,7 @@ void* devolver_marco(uint32_t socket){
 
 		if(utilizarClock == 0){
 			//Algoritmo Clock.
+			log_info(logger, "Utilizando algoritmo clock\n");
 			t_queue *cola= tabla1->paginas_en_memoria;
 			int size = queue_size(cola);
 			t_list *lista = tabla1->paginas_en_memoria->elements;
@@ -362,14 +375,17 @@ void* devolver_marco(uint32_t socket){
 				pagina->marco = pagina_a_reemplazar->marco;
 				pagina->bit_presencia = 1;
 				list_replace(lista, tabla1->index , pagina);
-				printf("\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
+				log_info(logger,"\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
 				tabla1->index++; //avanzo al siguiente
 
 				void *stream= malloc(sizeof(uint32_t));
 				memcpy(stream,&(pagina->marco),sizeof(uint32_t));
+
+				usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 				send(socket,stream,sizeof(uint32_t),NULL);
 
-				printf("\nMarco %d enviado al MMU.\n", pagina->marco);
+				log_info(logger,"\nMarco %d enviado al MMU.\n", pagina->marco);
 
 				free(stream);
 
@@ -394,6 +410,7 @@ void* devolver_marco(uint32_t socket){
 
 		if(utilizarClockM == 0){
 			//Algoritmo ClockM.
+			log_info(logger, "Utilizando algoritmo clock modificado\n");
 			t_queue *cola = tabla1->paginas_en_memoria;
 			int size = queue_size(cola);
 			t_list *lista = tabla1->paginas_en_memoria->elements;
@@ -433,14 +450,17 @@ void* devolver_marco(uint32_t socket){
 				pagina->marco = pagina_a_reemplazar->marco;
 				pagina->bit_presencia = 1;
 				list_replace(lista, tabla1->index , pagina);
-				printf("\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
+				log_info(logger,"\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
 				tabla1->index++; 
 
 				void *stream= malloc(sizeof(uint32_t));
 				memcpy(stream,&(pagina->marco),sizeof(uint32_t));
+
+				usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 				send(socket,stream,sizeof(uint32_t),NULL);
 
-				printf("\nMarco %d enviado al MMU.\n", pagina->marco);
+				log_info(logger,"\nMarco %d enviado al MMU.\n", pagina->marco);
 
 				free(stream);
 			
@@ -480,14 +500,17 @@ void* devolver_marco(uint32_t socket){
 				pagina->marco = pagina_a_reemplazar->marco;
 				pagina->bit_presencia = 1;
 				list_replace(lista, tabla1->index , pagina);
-				printf("\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
+				log_info(logger,"\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
 				tabla1->index++; 
 				
 				void *stream= malloc(sizeof(uint32_t));
 				memcpy(stream,&(pagina->marco),sizeof(uint32_t));
+
+				usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 				send(socket,stream,sizeof(uint32_t),NULL);
 
-				printf("\nMarco %d enviado al MMU.\n", pagina->marco);
+				log_info(logger,"\nMarco %d enviado al MMU.\n", pagina->marco);
 
 				free(stream);
 
@@ -543,13 +566,16 @@ void* devolver_marco(uint32_t socket){
 
 					queue_push(tabla1->paginas_en_memoria, pagina);
 
-					printf("Marco %d asignado a la pagina %d", w, pagina->id_pagina);
+					log_info(logger,"Marco %d asignado a la pagina %d", w, pagina->id_pagina);
 
 					void *stream= malloc(sizeof(uint32_t));
 					memcpy(stream,&(pagina->marco),sizeof(uint32_t));
+
+					usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 					send(socket,stream,sizeof(uint32_t),NULL);
 
-					printf("\nMarco %d enviado al MMU.\n", pagina->marco);
+					log_info(logger,"\nMarco %d enviado al MMU.\n", pagina->marco);
 
 					free(stream);
 
@@ -565,7 +591,7 @@ void* devolver_marco(uint32_t socket){
 
 void *liberarProcesoDeMemoria(uint32_t socket){
 	unPcb = recibir_pcb(socket);
-	printf("\nProceso %d para liberar en memoria\n", unPcb->id);
+	log_info(logger,"\nProceso %d para liberar en memoria\n", unPcb->id);
 	int *fd;
 	uint8_t *addr;
 	int i, j, k;
@@ -587,7 +613,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	fd = open(nombreArchivo, O_RDWR, S_IRWXU);
 
 	if(fd == -1){
-		perror("Error al abrir el archivo.");
+		log_error(logger,"Error al abrir el archivo.");
 	}
 	struct stat sb;
 
@@ -596,7 +622,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_PRIVATE, fd, 0);
 
 	if(addr == MAP_FAILED){
-		perror("Error mapping\n");
+		log_error(logger,"Error mapping\n");
 		exit(1);
 	}
 
@@ -641,7 +667,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 			bitarray_clean_bit(bitmap_memoria, pagina->marco);
 			pagina->bit_presencia = 0;
 
-			printf("\nSe ha liberado el marco %d de memoria.", pagina->marco);
+			log_info(logger,"\nSe ha liberado el marco %d de memoria.", pagina->marco);
 
 			}
 		}
@@ -656,13 +682,13 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	send(socket,stream,tamanio,NULL);
 	free(stream);
 	close(fd);
-	printf("\nSe ha liberado el espacio del proceso %d de memoria", unPcb->id);
+	log_info(logger,"\nSe ha liberado el espacio del proceso %d de memoria", unPcb->id);
 }
 
 void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	//Ver si recibir pcb o tabla de paginas.
     unPcb = recibir_pcb(socket);
-	printf("\nProceso %d para liberar en memoria y eliminar swap\n", unPcb->id);
+	log_info(logger,"\nProceso %d para liberar en memoria y eliminar swap\n", unPcb->id);
 	uint8_t *fd;
 	uint8_t *addr;
 	int i, j, k;
@@ -723,7 +749,7 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 		}
 	}
 
-	printf("\nSe ha eliminado el proceso %d de memoria.\n", unPcb->id);
+	log_info(logger,"\nSe ha eliminado el proceso %d de memoria.\n", unPcb->id);
 
 	uint32_t result = 1;
 	uint32_t tamanio= sizeof(uint32_t)*2;
@@ -745,13 +771,16 @@ void *devolver_valor_memoria(uint32_t socket){
 	memcpy(&valor_memoria,memoria_principal+(uint8_t)direccion_fisica,sizeof(uint32_t));
 	//valor_memoria = *(memoria_principal+direccion_fisica); //ver si funca con los *()
 
-	printf("El valor de memoria de la direccion %d es: %d\n", direccion_fisica, valor_memoria);
+	log_info(logger,"El valor de memoria de la direccion %d es: %d\n", direccion_fisica, valor_memoria);
 
-	printf("Valor de memoria %d enviado a Cpu.\n", valor_memoria);	
+	log_info(logger,"Valor de memoria %d enviado a Cpu.\n", valor_memoria);	
 
 
 	void *stream= malloc(sizeof(uint32_t));
 	memcpy(stream,&valor_memoria,sizeof(uint32_t));
+
+	usleep(valores_generales_memoria->retardoMemoria * 1000);
+
 	send(socket,stream,sizeof(uint32_t),NULL);
 	free(stream);
 	
@@ -768,7 +797,7 @@ void escribir_en_memoria(uint32_t socket){
 	recv(socket, &entrada_tabla_2do_nivel, sizeof(uint32_t), MSG_WAITALL);
 	
 	memcpy(memoria_principal+(uint8_t)direccion_fisica, &valor_a_escribir,sizeof(uint32_t));
-	printf("\nValor escrito: %d", *(memoria_principal+(uint8_t)direccion_fisica));
+	log_info(logger,"\nValor escrito: %d", *(memoria_principal+(uint8_t)direccion_fisica));
 	//actualiza la tabla de paginas
 
 	t_tabla_primer_nivel *t1= list_get(tablas_primer_nivel_list,id_tabla_1er_nivel);
@@ -777,6 +806,7 @@ void escribir_en_memoria(uint32_t socket){
 	(t2->paginas+entrada_tabla_2do_nivel)->bit_modificado = 1;
 
 	resultadoOp = 1;
+	usleep(valores_generales_memoria->retardoMemoria * 1000);
 	send(socket,&resultadoOp,sizeof(uint32_t),NULL);
 }
 
