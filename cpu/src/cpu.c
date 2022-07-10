@@ -160,7 +160,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			send(socket_memoria, buffer, tamanio, 0);
 			recv(socket_memoria, &resultadoOk, sizeof(uint32_t), MSG_WAITALL);
 			if(resultadoOk)
-				log_info(logger, "Se ha escrito %d en la direccion %d",contenidoAEscribir,direccionFisica);
+				log_info(logger, "Se ha escrito el valor %d en la direccion %d",contenidoAEscribir,direccionFisica);
 			else 	
 				log_info(logger, "Error en la operación WRITE");
 
@@ -172,7 +172,7 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			uint32_t tablaDePaginas= unPcb->tablaDePaginas;
 			uint32_t direccionFisicaDestino= mmu(direccionLogicaDestino,tablaDePaginas);
 			uint32_t direccionFisicaOrigen= mmu(direccionLogicaOrigen,tablaDePaginas);
-
+			//LEE Origen
 			uint32_t contenidoLeido;
 			uint32_t cod_op= READ, tamanio= sizeof(uint32_t)*2;
 			void* buffer= malloc(tamanio);
@@ -181,9 +181,13 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			send(socket_memoria, buffer, tamanio, 0);
 			free(buffer);
 			recv(socket_memoria, &contenidoLeido, sizeof(uint32_t), MSG_WAITALL);
-
+			//ESCRIBE en Destino
+			uint32_t numero_pagina= floor(direccionLogicaDestino / memoria_config->tam_pagina);
+			uint32_t entrada_tabla_1er_nivel = floor(numero_pagina / memoria_config->entradas_por_tabla);
+			uint32_t entrada_tabla_2do_nivel = numero_pagina % memoria_config->entradas_por_tabla;
+			uint32_t resultadoOk;
 			cod_op= WRITE;
-			tamanio= sizeof(uint32_t)*3;
+			tamanio= sizeof(uint32_t)*6;
 			buffer= malloc(tamanio);
 			uint32_t offset =0;
 
@@ -192,8 +196,19 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 			memcpy(buffer+offset,&direccionFisicaDestino, sizeof(uint32_t));
 			offset += sizeof(uint32_t);
 			memcpy(buffer+offset,&contenidoLeido, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&tablaDePaginas, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&entrada_tabla_1er_nivel, sizeof(uint32_t));
+			offset += sizeof(uint32_t);
+			memcpy(buffer+offset,&entrada_tabla_2do_nivel, sizeof(uint32_t));
 			send(socket_memoria, buffer, tamanio, 0);
 			free(buffer);
+			recv(socket_memoria, &resultadoOk, sizeof(uint32_t), MSG_WAITALL);
+			if(resultadoOk)
+				log_info(logger, "Se ha copiado el valor %d leido en la direccion %d en la direccion %d",contenidoLeido,direccionFisicaOrigen,direccionFisicaDestino);
+			else 	
+				log_info(logger, "Error en la operación COPY");
 
 		} else if(strcmp(nombreInstruccion, "EXIT") == 0) {
 			gettimeofday(&finalBlock, NULL); //es necesario computar el tiempo en exit?
@@ -210,7 +225,6 @@ ciclo_de_instruccion(uint32_t accepted_fd){
 	}
 
 } 
-
 
 uint32_t check_interrupt(){
 	if(interrupcion ==1){

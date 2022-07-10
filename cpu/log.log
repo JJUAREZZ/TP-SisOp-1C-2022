@@ -11158,3 +11158,46 @@ EXIT
 [INFO] 18:47:08:324 Servidor Dispatcher/(11814:11835): id: 0
 [INFO] 18:47:08:324 Servidor Dispatcher/(11814:11835): EXIT
 [INFO] 18:47:08:324 Servidor Dispatcher/(11814:11835): Proceso 0 enviado a exit.
+[INFO] 00:53:13:457 Servidor Dispatcher/(7061:7061): ¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...
+
+[INFO] 00:53:13:468 Servidor Dispatcher/(7061:7061): ¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...
+
+[INFO] 00:53:13:468 Servidor Dispatcher/(7061:7062): Valores de config de Memoria recibidos con exito
+[INFO] 00:53:27:347 Servidor Dispatcher/(7061:7061): Creando un hilo para atender una conexion en el socket 20
+[INFO] 00:53:27:353 Servidor Dispatcher/(7061:7061): Creando un hilo para atender una interrupcion en el socket 21
+[INFO] 00:55:35:233 Servidor Dispatcher/(7061:7155): Recibi un proceso:
+[INFO] 00:55:35:233 Servidor Dispatcher/(7061:7155): id: 0
+[INFO] 00:55:35:233 Servidor Dispatcher/(7061:7155): NO_OP
+[INFO] 00:55:35:233 Servidor Dispatcher/(7061:7155): Esperando 1000 milisegundos
+[INFO] 00:55:36:233 Servidor Dispatcher/(7061:7155): NO_OP
+[INFO] 00:55:36:233 Servidor Dispatcher/(7061:7155): Esperando 1000 milisegundos
+[INFO] 00:55:37:234 Servidor Dispatcher/(7061:7155): WRITE
+[INFO] 00:55:37:234 Servidor Dispatcher/(7061:7155): Id de tabla segundo nivel recibido: 0
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Marco recibido: 0
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Direccion Fisica obtenida: 5
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Se ha escrito el valor 251 en la direccion 5
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): READ
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Id de tabla segundo nivel recibido: 0
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Marco recibido: 0
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Direccion Fisica obtenida: 5
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): Valor leido de memoria 251
+[INFO] 00:55:37:239 Servidor Dispatcher/(7061:7155): WRITE
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Id de tabla segundo nivel recibido: 0
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Marco recibido: 0
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Direccion Fisica obtenida: 8
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Se ha escrito el valor 737 en la direccion 8
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): COPY
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Id de tabla segundo nivel recibido: 0
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Marco recibido: 0
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Direccion Fisica obtenida: 5
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Id de tabla segundo nivel recibido: 0
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Marco recibido: 0
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Direccion Fisica obtenida: 8
+[INFO] 00:55:37:240 Servidor Dispatcher/(7061:7155): Se ha copiado el valor 737 leido en la direccion 8 en la direccion 5
+[INFO] 00:55:37:241 Servidor Dispatcher/(7061:7155): I/O
+[INFO] 00:55:37:241 Servidor Dispatcher/(7061:7155): El tiempo de ejecucion fue : 2001
+[INFO] 00:55:37:241 Servidor Dispatcher/(7061:7155): Proceso 0 enviado a bloqueado.
+[INFO] 00:55:49:245 Servidor Dispatcher/(7061:7155): Recibi un proceso:
+[INFO] 00:55:49:246 Servidor Dispatcher/(7061:7155): id: 0
+[INFO] 00:55:49:246 Servidor Dispatcher/(7061:7155): EXIT
+[INFO] 00:55:49:246 Servidor Dispatcher/(7061:7155): Proceso 0 enviado a exit.
