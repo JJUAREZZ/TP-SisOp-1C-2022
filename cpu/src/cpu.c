@@ -20,8 +20,8 @@ void reemplazo_fifo(uint32_t ,uint32_t );
 void reemplazo_lru(uint32_t ,uint32_t );
 void limpiarTlb();
 
-int main() {
-
+int main(int argc, char** argv) {
+	path_cpu_config = (char*) argv[1];
     load_configuration_cpu();
 	pthread_create(&conexion_con_memoria, NULL, conectarse_con_memoria, NULL);
 	pthread_detach(conexion_con_memoria);

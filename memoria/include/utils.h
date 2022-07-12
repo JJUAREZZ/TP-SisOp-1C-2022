@@ -47,9 +47,11 @@ typedef struct{
 
 gralMemoria *valores_generales_memoria;
 
+char *path_memoria_config;
+
 void load_configuration(){
 
-	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/memoria/cfg/memoria.config");
+	t_config* config = config_create(path_memoria_config);
 
 
 	if(config == NULL){

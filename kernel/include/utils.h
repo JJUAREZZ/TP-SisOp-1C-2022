@@ -57,6 +57,7 @@ config_conex* config_valores_cpu_dispatch;
 config_conex* config_valores_cpu_interrupt;
 //falta puerto escucha.
 
+char* path_kernel_config;
 
 void paquete_pcb(pcb *proceso, int conexion);
 void load_configuration();

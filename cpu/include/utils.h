@@ -64,12 +64,13 @@ valores_config_cpu *cpu_config;
 valores_config_memoria *memoria_config;
 entrada_tlb *tlb;
 
+char* path_cpu_config;
 
 
 void load_configuration_cpu(){
     sem_init(&semInterrupt,0,0);
 
-	t_config* config = config_create("/home/utnso/workspace/tp-2022-1c-Messirve/cpu/cfg/cpu.config");
+	t_config* config = config_create(path_cpu_config);
 
 	if(config == NULL){
 		perror("Archivo de configuracion no encontrado");

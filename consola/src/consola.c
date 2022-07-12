@@ -2,8 +2,9 @@
 
 int main(int argc, char** argv) {
 
-	int tamanio_proceso = atoi(argv[1]);
-	char* path_instrucciones = (char*) argv[2];
+	path_consola_config = (char*) argv[1];
+	int tamanio_proceso = atoi(argv[2]);
+	char* path_instrucciones = (char*) argv[3];
 	int conexion;
 
 	printf("\nTamanio en bytes recibido: %d \n", tamanio_proceso);

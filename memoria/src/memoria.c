@@ -41,8 +41,8 @@ uint32_t *archivoswap;
 t_list *tablas_primer_nivel_list;
 t_list *tablas_segundo_nivel_list;
 
-int main()
-{
+int main(int argc, char** argv) {
+	path_memoria_config = (char*) argv[1];
     load_configuration();
 	logger = log_create("log.log", "Servidor Memoria", 1, LOG_LEVEL_INFO);
 	crear_memoria_principal();
