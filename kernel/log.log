@@ -20637,3 +20637,7 @@
 [INFO] 19:07:29:078 Servidor/(10217:10218): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
 
 [INFO] 19:07:32:972 Servidor/(10217:10218): Creando un hilo para atender una conexión en el socket 8
+[INFO] 00:37:17:363 Servidor/(4391:4394): Conectado con Memoria!
+[INFO] 00:37:17:363 Servidor/(4391:4392): ¡¡¡Servidor de Kernel Creado!!! Esperando Conexiones ...
+
+[INFO] 00:37:35:375 Servidor/(4391:4392): Creando un hilo para atender una conexión en el socket 21
