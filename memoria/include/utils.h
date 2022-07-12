@@ -22,7 +22,7 @@ typedef struct{
 } gralMemoria;
 
 t_bitarray *bitmap_memoria;
-uint8_t *memoria_principal;
+void *memoria_principal;
 void *puntero_a_bits;
 
 typedef struct{

@@ -373,15 +373,6 @@ void* devolver_marco(uint32_t socket){
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
 					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
 					
-					/*printf("\nMemory contents before:\n%s \n", memoria_principal);
-					//Copio la pagina reemplazada en el swap.
-					usleep(valores_generales_memoria->retardoSwap * 1000);
-					memcpy(addr + comienzo_pagina_reemplazo, memoria_principal+comienzo_marco,sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-
-					//Copio en la memoria la pagina nueva.
-					usleep(valores_generales_memoria->retardoSwap * 1000);
-					memcpy(memoria_principal+comienzo_marco, addr + inicio_pagina_nueva, sizeof(uint8_t) * valores_generales_memoria->tamPagina);												
-					/printf("\nMemory contents After:\n%s \n", memoria_principal);*/
 				}
 						
 				pagina->marco = pagina_a_reemplazar->marco;
@@ -459,14 +450,6 @@ void* devolver_marco(uint32_t socket){
 					lseek(fd, inicio_pagina_nueva, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
 					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
-
-					/*//Copio la pagina reemplazada en el swap.
-					usleep(valores_generales_memoria->retardoSwap * 1000);
-					memcpy(addr + comienzo_pagina_reemplazo, memoria_principal+comienzo_marco,sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-
-					//Copio en la memoria la pagina nueva.
-					usleep(valores_generales_memoria->retardoSwap * 1000);
-					memcpy(memoria_principal+comienzo_marco, addr + inicio_pagina_nueva, sizeof(uint8_t) * valores_generales_memoria->tamPagina);*/	
 				}
 		
 				pagina->marco = pagina_a_reemplazar->marco;
@@ -516,15 +499,7 @@ void* devolver_marco(uint32_t socket){
 					//Copio en la memoria la pagina nueva.
 					lseek(fd, inicio_pagina_nueva, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
-					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
-
-					/*//Copio la pagina reemplazada en el swap.
-					usleep(valores_generales_memoria->retardoSwap * 1000);
-					memcpy(addr + comienzo_pagina_reemplazo, memoria_principal+comienzo_marco,sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-
-					//Copio en la memoria la pagina nueva.
-					usleep(valores_generales_memoria->retardoSwap * 1000);
-					memcpy(memoria_principal+comienzo_marco, addr + inicio_pagina_nueva, sizeof(uint8_t) * valores_generales_memoria->tamPagina);*/											
+					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);									
 				
 				}
 		
@@ -592,13 +567,7 @@ void* devolver_marco(uint32_t socket){
 					lseek(fd, comienzo_pagina, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
 					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
-					
-					//NOTE: ESTE MEMCPY FUNCIONA.
-					/*printf("\nMemory contents before:\n%s \n", memoria_principal);
-					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
-					memcpy(memoria_principal+comienzo_marco, addr + comienzo_pagina, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-					printf("\nMemory contents after:\n%s \n", memoria_principal);*/
-
+				
 					pagina->bit_presencia = 1;
 					pagina->bit_uso = 1;
 
@@ -698,16 +667,11 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 				lseek(fd, inicioPagina, SEEK_SET);
 				usleep(valores_generales_memoria->retardoSwap * 1000);
 				write(fd, memoria_principal+comienzoDelMarco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
-
-				/*//printf("\nFile contents before:\n%s \n", addr);
-				usleep(valores_generales_memoria->retardoSwap * 1000);
-				memcpy(addr + IncioPagina, memoria_principal+comienzoDelMarco, sizeof(uint8_t) * valores_generales_memoria->tamPagina);
-				//printf("\nFile contents After:\n%s \n", addr);*/
 				}
 
 			//Saco la pagina del marco y dejo el marco en 0. /
 			for(k = comienzoDelMarco; k < finDelMarco; k++){
-					*(memoria_principal+k) = 0;	
+				memset(memoria_principal+k, 0, sizeof(uint8_t));
 			}
 			bitarray_clean_bit(bitmap_memoria, pagina->marco);
 			pagina->bit_presencia = 0;
@@ -780,11 +744,9 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
 				uint8_t IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
-				uint8_t finDeLaPagina = IncioPagina + (uint8_t )valores_generales_memoria->tamPagina;
 		
-				//Saco la pagina del marco y dejo el marco en 0.
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					*(memoria_principal+k) = 0;	
+					memset(memoria_principal+k, 0, sizeof(uint8_t));
 				}
 
 				list_clean(primerNivel->paginas_en_memoria->elements);
@@ -810,12 +772,11 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 void *devolver_valor_memoria(uint32_t socket){
 
 	uint32_t direccion_fisica;
-	uint8_t valor_memoria;
+	uint32_t valor_memoria;
 
 	recv(socket, &direccion_fisica, sizeof(uint32_t), MSG_WAITALL);
 
-	//memcpy(&valor_memoria,memoria_principal+(uint8_t)direccion_fisica,sizeof(uint32_t));
-	valor_memoria = *(memoria_principal+(uint8_t)direccion_fisica); //ver si funca con los *()
+	memcpy(&valor_memoria,memoria_principal+direccion_fisica,sizeof(uint32_t));
 
 	log_info(logger,"El valor de memoria de la direccion %d es: %d\n", direccion_fisica, valor_memoria);
 
@@ -843,9 +804,10 @@ void escribir_en_memoria(uint32_t socket){
 	recv(socket, &id_tabla_2do_nivel, sizeof(uint32_t), MSG_WAITALL);
 	recv(socket, &entrada_tabla_2do_nivel, sizeof(uint32_t), MSG_WAITALL);
 	
-	memcpy(memoria_principal+direccion_fisica, &valor_a_escribir,sizeof(uint8_t));
-	uint8_t valorEscrito = *(memoria_principal+direccion_fisica);
-	log_info(logger,"\nValor escrito: %d", *(memoria_principal+direccion_fisica));
+	memcpy(memoria_principal+direccion_fisica, &valor_a_escribir,sizeof(uint32_t));
+	uint32_t valorEscrito;
+	memcpy(&valorEscrito, memoria_principal+direccion_fisica, sizeof(uint32_t));
+	log_info(logger,"\nValor escrito: %d", valorEscrito);
 
 	//actualiza la tabla de paginas
 
