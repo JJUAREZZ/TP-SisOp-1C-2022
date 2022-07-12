@@ -10,7 +10,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/cpu/cpu",
-            "args": [],
+            "args": ["${workspaceFolder}/cpu/cfg/cpu.config"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

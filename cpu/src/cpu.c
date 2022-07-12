@@ -350,7 +350,7 @@ void agregar_a_tlb(uint32_t numero_pagina, uint32_t marco){
 		reemplazar_pagina(entrada,numero_pagina);
 	else{
 		entrada= entrada_vacia();
-		if(entrada>0){
+		if(entrada>=0){
 			struct timeval t;
 			gettimeofday(&t, NULL);
 			double tiempo  = t.tv_sec - tiempo_inicial_cpu;
@@ -369,7 +369,7 @@ void agregar_a_tlb(uint32_t numero_pagina, uint32_t marco){
 int buscar_por_marco(uint32_t marco){
 	int entrada= -1;
 	for(int i=0; i< cpu_config->entradas_tlb;i++){
-		if(tlb[i].marco == marco){
+		if(tlb[i].marco == marco && !tlb[i].vacio){
 			entrada=i;
 			break;
 		}
