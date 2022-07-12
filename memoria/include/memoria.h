@@ -40,8 +40,12 @@ void crear_memoria_principal(){
         bitarray_clean_bit(bitmap_memoria, i);
     }
 
+    memset(memoria_principal, 0, sizeof(memoria_principal));
+
     log_info(logger, "Memoria Principal creada.");
 }
+
+//WRITE 0257 024
 
 
 
