@@ -8,4 +8,4 @@ Ejemplos para ejecutar los módulos:
 
 ./kernel "./cfg/kernel.config"
 
-./consola "./cfg/consola.config" 500 "./cfg/inciones.txt"
+./consola "./cfg/consola.config" 500 "./cfg/instrucciones.txt"
