@@ -34,7 +34,7 @@ typedef struct{
 
 typedef struct{
     uint32_t id_pagina;
-    uint8_t  marco;
+    uint32_t  marco;
     uint32_t bit_presencia; 
     uint32_t bit_uso;
     uint32_t bit_modificado;

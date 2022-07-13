@@ -104,7 +104,7 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 
 	char* path = valores_generales_memoria->pathSwap;
 	char nombreArchivo [50];
-	uint8_t *addr;
+	uint32_t *addr;
 	//Creo el archivo swap.
 	char* nroProceso [2];
 	sprintf(nroProceso, "%d", unPcb->id);
@@ -134,12 +134,12 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 
 	int cantidad_de_bytes = cantidad_paginas_necesarias * valores_generales_memoria->tamPagina;
 
-	size_t tamanioArchivo = sizeof(uint8_t) * cantidad_de_bytes;
+	size_t tamanioArchivo = cantidad_de_bytes;
 
-	uint8_t nCero = 0;
+	uint32_t nCero = 0;
 
 	for(int i = 0; i<cantidad_de_bytes; i++){
-		write(archivoswap, "0", sizeof(uint8_t));
+		write(archivoswap, "0", 1);
 	}
 
 	struct stat fd_size;
@@ -268,7 +268,7 @@ void* devolver_marco(uint32_t socket){
 	pagina = tabla->paginas+entrada_segundo_nivel;
 
 	int *fd;
-	uint8_t *addr;
+	uint32_t *addr;
 
 	struct stat sb;
 	
@@ -347,7 +347,7 @@ void* devolver_marco(uint32_t socket){
 			if(pagina_a_reemplazar->bit_uso == 0){ //encontre a la victima
 
 				//La busco en la tabla de paginas y le pongo el bit de presencia en 0.
-				uint8_t primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
+				uint32_t primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
 				int id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
 				t_tabla_segundo_nivel *tabla2 = list_get(tablas_segundo_nivel_list, id_tabla2);
 				int entrada2 = pagina_a_reemplazar->id_pagina - (primer_entrada * valores_generales_memoria->pagPorTabla);
@@ -357,21 +357,21 @@ void* devolver_marco(uint32_t socket){
 				if(pagina_a_reemplazar->bit_modificado == 1){
 
 				//Swapearla. 
-					uint8_t comienzo_marco = pagina_a_reemplazar->marco * valores_generales_memoria->tamPagina;
+					uint32_t comienzo_marco = pagina_a_reemplazar->marco * valores_generales_memoria->tamPagina;
 
-					uint8_t comienzo_pagina_reemplazo = (uint8_t)pagina_a_reemplazar->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
-					uint8_t inicio_pagina_nueva = (uint8_t)pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+					uint32_t comienzo_pagina_reemplazo = pagina_a_reemplazar->id_pagina * valores_generales_memoria->tamPagina;
+					uint32_t inicio_pagina_nueva =pagina->id_pagina * valores_generales_memoria->tamPagina;
 					//Saco la pagina del marco y la mando al swap correspondiente.
 					
 					//copio la pagina reemplazada en el swap.
 					lseek(fd, comienzo_pagina_reemplazo, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);
-					write(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+					write(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);
 
 					//Copio en la memoria la pagina nueva.
 					lseek(fd, inicio_pagina_nueva, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
-					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+					read(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);
 					
 				}
 						
@@ -426,8 +426,8 @@ void* devolver_marco(uint32_t socket){
 			if(pagina_a_reemplazar->bit_uso ==0 && pagina_a_reemplazar->bit_modificado ==0){
 
 				//La busco en la tabla de paginas y le pongo el bit de presencia en 0.
-				uint8_t primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
-				uint8_t id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
+				uint32_t primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
+				uint32_t id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
 				t_tabla_segundo_nivel *tabla2 = list_get(tablas_segundo_nivel_list, id_tabla2);
 				t_paginas_en_tabla *pagina_r_tabla = tabla2->paginas+id_tabla2;
 				pagina_r_tabla->bit_presencia = 0;
@@ -435,21 +435,21 @@ void* devolver_marco(uint32_t socket){
 				if(pagina_a_reemplazar->bit_modificado == 1){
 
 					//Saco la pagina del marco y la mando al swap correspondiente.
-					uint8_t comienzo_marco = pagina_a_reemplazar->marco * valores_generales_memoria->tamPagina;
+					uint32_t comienzo_marco = pagina_a_reemplazar->marco * valores_generales_memoria->tamPagina;
 
-					uint8_t comienzo_pagina_reemplazo = (uint8_t)pagina_a_reemplazar->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
-					uint8_t inicio_pagina_nueva = (uint8_t)pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+					uint32_t comienzo_pagina_reemplazo = pagina_a_reemplazar->id_pagina * valores_generales_memoria->tamPagina;
+					uint32_t inicio_pagina_nueva = pagina->id_pagina * valores_generales_memoria->tamPagina;
 					//Saco la pagina del marco y la mando al swap correspondiente.
 
 					//copio la pagina reemplazada en el swap.
 					lseek(fd, comienzo_pagina_reemplazo, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);
-					write(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+					write(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);
 
 					//Copio en la memoria la pagina nueva.
 					lseek(fd, inicio_pagina_nueva, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
-					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+					read(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);
 				}
 		
 				pagina->marco = pagina_a_reemplazar->marco;
@@ -479,27 +479,27 @@ void* devolver_marco(uint32_t socket){
 				
 				//La busco en la tabla de paginas y le pongo el bit de presencia en 0.
 				int primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
-				uint8_t id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
+				uint32_t id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
 				t_tabla_segundo_nivel *tabla2 = list_get(tablas_segundo_nivel_list, id_tabla2);
 				t_paginas_en_tabla *pagina_r_tabla = tabla2->paginas+id_tabla2;
 				pagina_r_tabla->bit_presencia = 0;
 
 				if(pagina_a_reemplazar->bit_modificado == 1){
-					uint8_t comienzo_marco = pagina_a_reemplazar->marco * valores_generales_memoria->tamPagina;
+					uint32_t comienzo_marco = pagina_a_reemplazar->marco * valores_generales_memoria->tamPagina;
 
-					uint8_t comienzo_pagina_reemplazo = (uint8_t)pagina_a_reemplazar->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
-					uint8_t inicio_pagina_nueva = (uint8_t)pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+					uint32_t comienzo_pagina_reemplazo = pagina_a_reemplazar->id_pagina * valores_generales_memoria->tamPagina;
+					uint32_t inicio_pagina_nueva = pagina->id_pagina * valores_generales_memoria->tamPagina;
 					//Saco la pagina del marco y la mando al swap correspondiente.
 
 					//copio la pagina reemplazada en el swap.
 					lseek(fd, comienzo_pagina_reemplazo, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);
-					write(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+					write(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);
 
 					//Copio en la memoria la pagina nueva.
 					lseek(fd, inicio_pagina_nueva, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
-					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);									
+					read(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);									
 				
 				}
 		
@@ -556,17 +556,17 @@ void* devolver_marco(uint32_t socket){
 				if(marco_ocupado == false){
 					//Si el marco esta libre se lo asigno a la pagina y hago el swap.
 					bitarray_set_bit(bitmap_memoria, w);
-					msync(bitmap_memoria->bitarray, sizeof(uint8_t) * tamanioBitmap, MS_SYNC);
+					msync(bitmap_memoria->bitarray, tamanioBitmap, MS_SYNC);
 
 					pagina->marco = w;
 
-					uint8_t comienzo_marco = pagina->marco * valores_generales_memoria->tamPagina;
-					uint8_t comienzo_pagina = (uint8_t)pagina->id_pagina * (uint8_t)valores_generales_memoria->tamPagina;
+					uint32_t comienzo_marco = pagina->marco * valores_generales_memoria->tamPagina;
+					uint32_t comienzo_pagina = pagina->id_pagina * valores_generales_memoria->tamPagina;
 
 					//Hago el swap.
 					lseek(fd, comienzo_pagina, SEEK_SET);
 					usleep(valores_generales_memoria->retardoSwap * 1000);//multiplicarlo x 1000
-					read(fd, memoria_principal+comienzo_marco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+					read(fd, memoria_principal+comienzo_marco, valores_generales_memoria->tamPagina);
 				
 					pagina->bit_presencia = 1;
 					pagina->bit_uso = 1;
@@ -600,7 +600,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	unPcb = recibir_pcb(socket);
 	log_info(logger,"\nProceso %d para liberar en memoria\n", unPcb->id);
 	int *fd;
-	uint8_t *addr;
+	uint32_t *addr;
 	int i, j, k;
 
 	//Archivo swap de este proceso especifico.
@@ -652,11 +652,11 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 			t_paginas_en_tabla *pagina = segundoNivel->paginas+j;
 
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
-			uint8_t comienzoDelMarco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
-			uint8_t finDelMarco = comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
+			uint32_t comienzoDelMarco = pagina->marco * valores_generales_memoria->tamPagina;
+			uint32_t finDelMarco = comienzoDelMarco + valores_generales_memoria->tamPagina;
 
 			//Saco la pagina del marco y la mando al swap correspondiente.
-			uint8_t inicioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+			uint32_t inicioPagina = pagina->id_pagina * valores_generales_memoria->tamPagina;
 
 			if(pagina->bit_presencia == 1 ){
 				if(pagina->bit_modificado == 1){
@@ -666,12 +666,12 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 				//copio la pagina reemplazada en el swap.
 				lseek(fd, inicioPagina, SEEK_SET);
 				usleep(valores_generales_memoria->retardoSwap * 1000);
-				write(fd, memoria_principal+comienzoDelMarco, sizeof(uint8_t)*valores_generales_memoria->tamPagina);
+				write(fd, memoria_principal+comienzoDelMarco, valores_generales_memoria->tamPagina);
 				}
 
 			//Saco la pagina del marco y dejo el marco en 0. /
 			for(k = comienzoDelMarco; k < finDelMarco; k++){
-				memset(memoria_principal+k, 0, sizeof(uint8_t));
+				memset(memoria_principal+k, 0, 1);
 			}
 			bitarray_clean_bit(bitmap_memoria, pagina->marco);
 			pagina->bit_presencia = 0;
@@ -699,8 +699,8 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	//Ver si recibir pcb o tabla de paginas.
     unPcb = recibir_pcb(socket);
 	log_info(logger,"\nProceso %d para liberar en memoria y eliminar swap\n", unPcb->id);
-	uint8_t *fd;
-	uint8_t *addr;
+	uint32_t *fd;
+	uint32_t *addr;
 	int i, j, k;
 
 	//Archivo swap de este proceso especifico.
@@ -739,14 +739,14 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 			//Bit de presencia en uno => desalojo esa pagina del marco en el que esta.
 			if(pagina->bit_presencia == 1){
 
-				uint8_t comienzoDelMarco = pagina->marco * (uint8_t)valores_generales_memoria->tamPagina;
-				uint8_t finDelMarco = comienzoDelMarco + (uint8_t)valores_generales_memoria->tamPagina;
+				uint32_t comienzoDelMarco = pagina->marco * valores_generales_memoria->tamPagina;
+				uint32_t finDelMarco = comienzoDelMarco + valores_generales_memoria->tamPagina;
 
 				//Saco la pagina del marco y la mando al swap correspondiente.
-				uint8_t IncioPagina = pagina->id_pagina * (uint8_t )valores_generales_memoria->tamPagina;
+				uint32_t IncioPagina = pagina->id_pagina * valores_generales_memoria->tamPagina;
 		
 				for(k = comienzoDelMarco; k < finDelMarco; k++){
-					memset(memoria_principal+k, 0, sizeof(uint8_t));
+					memset(memoria_principal+k, 0, 1);
 				}
 
 				list_clean(primerNivel->paginas_en_memoria->elements);
