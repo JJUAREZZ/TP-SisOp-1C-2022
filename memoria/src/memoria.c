@@ -372,6 +372,10 @@ void* devolver_marco(uint32_t socket){
 				log_info(logger,"\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
 				tabla1->index++; //avanzo al siguiente
 
+				if(tabla1->index == size){
+					tabla1->index=0;
+				}
+
 				void *stream= malloc(sizeof(uint32_t));
 				memcpy(stream,&(pagina->marco),sizeof(uint32_t));
 
@@ -450,6 +454,11 @@ void* devolver_marco(uint32_t socket){
 				log_info(logger,"\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
 				tabla1->index++; 
 
+
+				if(tabla1->index == size){
+					tabla1->index=0;
+				}
+
 				void *stream= malloc(sizeof(uint32_t));
 				memcpy(stream,&(pagina->marco),sizeof(uint32_t));
 
@@ -502,6 +511,10 @@ void* devolver_marco(uint32_t socket){
 				list_replace(lista, tabla1->index , pagina);
 				log_info(logger,"\nPagina %d reemplazada por la pagina %d en el marco %d.\n", pagina_a_reemplazar->id_pagina, pagina->id_pagina, pagina_a_reemplazar->marco);
 				tabla1->index++; 
+
+				if(tabla1->index == size){
+					tabla1->index=0;
+				}
 				
 				void *stream= malloc(sizeof(uint32_t));
 				memcpy(stream,&(pagina->marco),sizeof(uint32_t));
