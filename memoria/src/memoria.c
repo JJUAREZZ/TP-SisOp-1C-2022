@@ -1,6 +1,7 @@
 #include "../include/memoria.h"
 #include "../include/utils.h"
 #include "../../shared/include/serializacion.h"
+#include "../../shared/include/estructuras.h"
 #include <commons/collections/queue.h>
 #include <commons/collections/list.h>
 #include <commons/log.h>
@@ -53,7 +54,7 @@ int main(int argc, char** argv) {
 	socklen_t addrlen = sizeof client_info;
 	log_info(logger, "Creando socket y escuchando \n");
 
-	memoria_socket = socket_create_listener("127.0.0.1", valores_generales_memoria->puertoMemoria);
+	memoria_socket = socket_create_listener(valores_generales_memoria->ipMemoria, valores_generales_memoria->puertoMemoria);
 	
 	if(memoria_socket < 0){
 		log_info(logger, "Error al crear server");
@@ -165,6 +166,7 @@ void *retornar_id_tabla_de_pagina(uint32_t socket)
 	usleep(valores_generales_memoria->retardoMemoria * 1000);
 
 	send(socket,stream,tamanio,NULL);
+	liberarPcb(unPcb);
 	free(stream);
 }
 
@@ -268,9 +270,6 @@ void* devolver_marco(uint32_t socket){
 	pagina = tabla->paginas+entrada_segundo_nivel;
 
 	int *fd;
-	uint32_t *addr;
-
-	struct stat sb;
 	
 	char* path = valores_generales_memoria->pathSwap;
 	char nombreArchivo [50];
@@ -284,14 +283,6 @@ void* devolver_marco(uint32_t socket){
 
 	if(fd == -1){
 		log_error(logger,"Error al abrir el archivo");
-	}
-
-	fstat(fd, &sb);
-
-	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_PRIVATE , fd, 0);
-
-	if(addr == MAP_FAILED){
-		log_error(logger,"Error al mapear el archivo.");
 	}
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
@@ -427,9 +418,10 @@ void* devolver_marco(uint32_t socket){
 
 				//La busco en la tabla de paginas y le pongo el bit de presencia en 0.
 				uint32_t primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
-				uint32_t id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
+				int id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
 				t_tabla_segundo_nivel *tabla2 = list_get(tablas_segundo_nivel_list, id_tabla2);
-				t_paginas_en_tabla *pagina_r_tabla = tabla2->paginas+id_tabla2;
+				int entrada2 = pagina_a_reemplazar->id_pagina - (primer_entrada * valores_generales_memoria->pagPorTabla);
+				t_paginas_en_tabla *pagina_r_tabla = tabla2->paginas+entrada2;
 				pagina_r_tabla->bit_presencia = 0;
 
 				if(pagina_a_reemplazar->bit_modificado == 1){
@@ -601,7 +593,6 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	unPcb = recibir_pcb(socket);
 	log_info(logger,"\nProceso %d para liberar en memoria\n", unPcb->id);
 	int *fd;
-	uint32_t *addr;
 	int i, j, k;
 
 	//Archivo swap de este proceso especifico.
@@ -622,16 +613,6 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 
 	if(fd == -1){
 		log_error(logger,"Error al abrir el archivo.");
-	}
-	struct stat sb;
-
-	fstat(fd, &sb);
-
-	addr = mmap(NULL,sb.st_size, PROT_READ | PROT_WRITE , MAP_PRIVATE, fd, 0);
-
-	if(addr == MAP_FAILED){
-		log_error(logger,"Error mapping\n");
-		exit(1);
 	}
 
 	memset(nombreArchivo, 0, strlen(nombreArchivo));
@@ -689,6 +670,7 @@ void *liberarProcesoDeMemoria(uint32_t socket){
 	memcpy(stream,&cod_op,sizeof(uint32_t));
 	memcpy(stream+ sizeof(uint32_t),&result,sizeof(uint32_t));
 	send(socket,stream,tamanio,NULL);
+	liberarPcb(unPcb);
 	free(stream);
 	close(fd);
 
@@ -701,7 +683,6 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
     unPcb = recibir_pcb(socket);
 	log_info(logger,"\nProceso %d para liberar en memoria y eliminar swap\n", unPcb->id);
 	uint32_t *fd;
-	uint32_t *addr;
 	int i, j, k;
 
 	//Archivo swap de este proceso especifico.
@@ -756,7 +737,13 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 
 			}
 		}
+		free(segundoNivel->paginas);
+		free(segundoNivel);
 	}
+
+	queue_destroy(primerNivel->paginas_en_memoria);
+	free(primerNivel->tablas_asociadas);
+	free(primerNivel);
 	log_info(logger,"\nSe ha eliminado el proceso %d de memoria.\n", unPcb->id);
 
 	uint32_t result = 1;
@@ -766,6 +753,7 @@ void *liberarProcesoDeMemoriaYDeleteSwap(uint32_t socket){
 	memcpy(stream,&cod_op,sizeof(uint32_t));
 	memcpy(stream+sizeof(uint32_t),&result,sizeof(uint32_t));
 	send(socket,stream,tamanio,NULL);
+	liberarPcb(unPcb);
 	free(stream);
 
 }

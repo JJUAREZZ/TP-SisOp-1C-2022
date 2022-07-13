@@ -10,5 +10,6 @@ void liberarPcb(pcb* pcbALiberar)
         free(instruccion);
     }
     list_iterate(pcbALiberar->instr,liberarListaDeInstrucciones);
+    list_destroy(pcbALiberar->instr);
     free(pcbALiberar);
 }

@@ -209,6 +209,7 @@ pcb * recibir_pcb(int socket)
 	memcpy(&pcb_proceso->cpu_anterior,buffer+desplazamiento,sizeof(float));
 	desplazamiento += sizeof(float);
 
+	free(buffer);
 	return pcb_proceso;
 }
 

@@ -10,7 +10,7 @@
 t_log *logger;
 
 typedef struct{
-    int puertoMemoria;
+    char* puertoMemoria;
     int tamMemoria;
     int tamPagina;
     int pagPorTabla;
@@ -19,6 +19,7 @@ typedef struct{
     int marcPorProceso;
     int retardoSwap;
     char* pathSwap; 
+    char* ipMemoria;
 } gralMemoria;
 
 t_bitarray *bitmap_memoria;
@@ -51,7 +52,7 @@ char *path_memoria_config;
 
 void load_configuration(){
 
-	t_config* config = config_create(path_memoria_config);
+	t_config *config = config_create(path_memoria_config);
 
 
 	if(config == NULL){
@@ -68,7 +69,9 @@ void load_configuration(){
     valores_generales_memoria->marcPorProceso = config_get_int_value(config, "MARCOS_POR_PROCESO");
     valores_generales_memoria->retardoSwap = config_get_int_value(config, "RETARDO_SWAP");
     valores_generales_memoria->pathSwap = config_get_string_value(config, "PATH_SWAP");
+    valores_generales_memoria->ipMemoria = "127.0.0.1";
 
+    config_destroy(config);
 }
 
 #endif /* SRC_MEMORIA_H_ */
