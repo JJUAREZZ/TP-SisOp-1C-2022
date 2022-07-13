@@ -87,7 +87,7 @@ void load_configuration_cpu(){
     cpu_config->puerto_escucha_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT");
     cpu_config->ip_cpu = "127.0.0.1";
 
-    config_destroy(config);
+    //config_destroy(config);
 
     tlb = malloc(sizeof(entrada_tlb)* cpu_config->entradas_tlb);
     //esto se ve feo, pero es para indicar que las entradas estan vacias
