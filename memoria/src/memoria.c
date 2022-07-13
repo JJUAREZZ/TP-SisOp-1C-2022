@@ -481,7 +481,8 @@ void* devolver_marco(uint32_t socket){
 				int primer_entrada = pagina_a_reemplazar->id_pagina / valores_generales_memoria->pagPorTabla;
 				uint32_t id_tabla2 = *(tabla1->tablas_asociadas+primer_entrada);
 				t_tabla_segundo_nivel *tabla2 = list_get(tablas_segundo_nivel_list, id_tabla2);
-				t_paginas_en_tabla *pagina_r_tabla = tabla2->paginas+id_tabla2;
+				uint32_t entrada2= pagina_a_reemplazar->id_pagina - (primer_entrada*valores_generales_memoria->pagPorTabla);
+				t_paginas_en_tabla *pagina_r_tabla = tabla2->paginas+entrada2;
 				pagina_r_tabla->bit_presencia = 0;
 
 				if(pagina_a_reemplazar->bit_modificado == 1){
