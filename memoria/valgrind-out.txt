@@ -1,0 +1,86 @@
+==16961== Memcheck, a memory error detector
+==16961== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==16961== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==16961== Command: ./memoria ./cfg/memoria.config
+==16961== Parent PID: 13348
+==16961== 
+--16961-- 
+--16961-- Valgrind options:
+--16961--    --leak-check=full
+--16961--    --show-leak-kinds=all
+--16961--    --track-origins=yes
+--16961--    --verbose
+--16961--    --log-file=valgrind-out.txt
+--16961-- Contents of /proc/version:
+--16961--   Linux version 4.4.0-116-generic (buildd@lgw01-amd64-023) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.9) ) #140-Ubuntu SMP Mon Feb 12 21:22:43 UTC 2018
+--16961-- 
+--16961-- Arch and hwcaps: X86, LittleEndian, x86-mmxext-sse1-sse2-sse3-lzcnt
+--16961-- Page sizes: currently 4096, max supported 4096
+--16961-- Valgrind library directory: /usr/lib/valgrind
+--16961-- Reading syms from /lib/i386-linux-gnu/ld-2.23.so
+--16961--   Considering /lib/i386-linux-gnu/ld-2.23.so ..
+--16961--   .. CRC mismatch (computed fe524f15 wanted dd32455a)
+--16961--   Considering /usr/lib/debug/lib/i386-linux-gnu/ld-2.23.so ..
+--16961--   .. CRC is valid
+--16961-- Reading syms from /home/utnso/workspace/tp-2022-1c-Messirve/memoria/memoria
+--16961-- Reading syms from /usr/lib/valgrind/memcheck-x86-linux
+--16961--   Considering /usr/lib/valgrind/memcheck-x86-linux ..
+--16961--   .. CRC mismatch (computed 6036da3f wanted 652e483f)
+--16961--    object doesn't have a symbol table
+--16961--    object doesn't have a dynamic symbol table
+--16961-- Scheduler: using generic scheduler lock implementation.
+--16961-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==16961== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-16961-by-utnso-on-???
+==16961== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-16961-by-utnso-on-???
+==16961== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-16961-by-utnso-on-???
+==16961== 
+==16961== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==16961== don't want to do, unless you know exactly what you're doing,
+==16961== or are doing some strange experiment):
+==16961==   /usr/lib/valgrind/../../bin/vgdb --pid=16961 ...command...
+==16961== 
+==16961== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==16961==   /path/to/gdb ./memoria
+==16961== and then give GDB the following command
+==16961==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=16961
+==16961== --pid is optional if only one valgrind process is running
+==16961== 
+--16961-- REDIR: 0x4019030 (ld-linux.so.2:strlen) redirected to 0x380490f2 (???)
+--16961-- REDIR: 0x4018df0 (ld-linux.so.2:index) redirected to 0x380490cd (???)
+--16961-- Reading syms from /usr/lib/valgrind/vgpreload_core-x86-linux.so
+--16961--   Considering /usr/lib/valgrind/vgpreload_core-x86-linux.so ..
+--16961--   .. CRC mismatch (computed 5b95c0c4 wanted 39e79efa)
+--16961--    object doesn't have a symbol table
+--16961-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so
+--16961--   Considering /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so ..
+--16961--   .. CRC mismatch (computed 4d5a1526 wanted 33571d5b)
+--16961--    object doesn't have a symbol table
+==16961== WARNING: new redirection conflicts with existing -- ignoring it
+--16961--     old: 0x04019030 (strlen              ) R-> (0000.0) 0x380490f2 ???
+--16961--     new: 0x04019030 (strlen              ) R-> (2007.0) 0x0402f410 strlen
+--16961-- Reading syms from /usr/lib/libcommons.so
+--16961-- Reading syms from /lib/i386-linux-gnu/libpthread-2.23.so
+--16961--   Considering /usr/lib/debug/.build-id/ee/56ef18e0cff372bd8c78c1f8084acd600d98a2.debug ..
+--16961--   .. build-id is valid
+--16961-- Reading syms from /lib/i386-linux-gnu/libc-2.23.so
+--16961--   Considering /lib/i386-linux-gnu/libc-2.23.so ..
+--16961--   .. CRC mismatch (computed ec440dd2 wanted cfe469e8)
+--16961--   Considering /usr/lib/debug/lib/i386-linux-gnu/libc-2.23.so ..
+--16961--   .. CRC is valid
+--16961-- REDIR: 0x40f0590 (libc.so.6:strncasecmp) redirected to 0x4026560 (_vgnU_ifunc_wrapper)
+--16961-- REDIR: 0x40f7220 (libc.so.6:memrchr) redirected to 0x4026560 (_vgnU_ifunc_wrapper)
+--16961-- REDIR: 0x4109c00 (libc.so.6:wcslen) redirected to 0x4026560 (_vgnU_ifunc_wrapper)
+==16961== 
+==16961== Process terminating with default action of signal 2 (SIGINT)
+==16961==    at 0x4060CD0: __pthread_initialize_minimal (nptl-init.c:433)
+==16961==    by 0x406039B: ??? (in /lib/i386-linux-gnu/libpthread-2.23.so)
+--16961-- REDIR: 0x40ea530 (libc.so.6:free) redirected to 0x402d2f0 (free)
+==16961== 
+==16961== HEAP SUMMARY:
+==16961==     in use at exit: 0 bytes in 0 blocks
+==16961==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==16961== 
+==16961== All heap blocks were freed -- no leaks are possible
+==16961== 
+==16961== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==16961== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

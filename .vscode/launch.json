@@ -68,7 +68,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/memoria/memoria",
-            "args": [],
+            "args": ["${workspaceFolder}/memoria/cfg/memoria_integral_1.config"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
