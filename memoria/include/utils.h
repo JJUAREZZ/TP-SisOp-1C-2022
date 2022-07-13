@@ -71,7 +71,7 @@ void load_configuration(){
     valores_generales_memoria->pathSwap = config_get_string_value(config, "PATH_SWAP");
     valores_generales_memoria->ipMemoria = "127.0.0.1";
 
-    config_destroy(config);
+    //config_destroy(config);
 }
 
 #endif /* SRC_MEMORIA_H_ */
