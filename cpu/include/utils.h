@@ -85,9 +85,9 @@ void load_configuration_cpu(){
     cpu_config->reemplazo_tlb = malloc(string_length(reemplazo));
     memcpy(cpu_config->reemplazo_tlb, reemplazo, string_length(reemplazo)+1);
     cpu_config->retar_noop = config_get_int_value(config, "RETARDO_NOOP");
-    ip_memoria = config_get_string_value(config, "IP_MEMORIA");
-    cpu_config->ip_memoria = malloc(string_length(ip_memoria));
-    memcpy(cpu_config->ip_memoria, ip_memoria, string_length(ip_memoria)+1);
+   // ip_memoria = config_get_string_value(config, "IP_MEMORIA");
+    cpu_config->ip_memoria =  config_get_string_value(config, "IP_MEMORIA");
+    //memcpy(cpu_config->ip_memoria, ip_memoria, string_length(ip_memoria)+1);
     puerto_mem = config_get_string_value(config, "PUERTO_MEMORIA");
     cpu_config->puerto_memoria = malloc(string_length(puerto_mem));
     memcpy(cpu_config->puerto_memoria, puerto_mem, string_length(puerto_mem)+1);
@@ -99,7 +99,7 @@ void load_configuration_cpu(){
     memcpy(cpu_config->puerto_escucha_interrupt, puerto_int, string_length(puerto_int)+1);
     cpu_config->ip_cpu = "127.0.0.1";
 
-    config_destroy(config);
+    //config_destroy(config);
 
     tlb = malloc(sizeof(entrada_tlb)* cpu_config->entradas_tlb);
     //esto se ve feo, pero es para indicar que las entradas estan vacias
