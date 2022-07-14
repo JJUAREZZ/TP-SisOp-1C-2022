@@ -76,18 +76,30 @@ void load_configuration_cpu(){
 		perror("Archivo de configuracion no encontrado");
 	}
 
+    char *reemplazo, *ip_memoria, *puerto_mem, *puerto_int, *puerto_disp; 
+
     cpu_config=malloc(sizeof(valores_config_cpu));
 	//Lleno los struct con los valores de IP y PUERTO de cada uno que necesitamos.
     cpu_config->entradas_tlb = config_get_int_value(config, "ENTRADAS_TLB");
-    cpu_config->reemplazo_tlb =config_get_string_value(config, "REEMPLAZO_TLB");
+    reemplazo =config_get_string_value(config, "REEMPLAZO_TLB");
+    cpu_config->reemplazo_tlb = malloc(string_length(reemplazo));
+    memcpy(cpu_config->reemplazo_tlb, reemplazo, string_length(reemplazo)+1);
     cpu_config->retar_noop = config_get_int_value(config, "RETARDO_NOOP");
-    cpu_config->ip_memoria = config_get_string_value(config, "IP_MEMORIA");
-    cpu_config->puerto_memoria = config_get_string_value(config, "PUERTO_MEMORIA");
-    cpu_config->puerto_escucha_dispatch  = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH");
-    cpu_config->puerto_escucha_interrupt = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT");
+    ip_memoria = config_get_string_value(config, "IP_MEMORIA");
+    cpu_config->ip_memoria = malloc(string_length(ip_memoria));
+    memcpy(cpu_config->ip_memoria, ip_memoria, string_length(ip_memoria)+1);
+    puerto_mem = config_get_string_value(config, "PUERTO_MEMORIA");
+    cpu_config->puerto_memoria = malloc(string_length(puerto_mem));
+    memcpy(cpu_config->puerto_memoria, puerto_mem, string_length(puerto_mem)+1);
+    puerto_disp = config_get_string_value(config, "PUERTO_ESCUCHA_DISPATCH");
+    cpu_config->puerto_escucha_dispatch = malloc(string_length(puerto_disp));
+    memcpy(cpu_config->puerto_escucha_dispatch, puerto_disp, string_length(puerto_disp)+1);
+    puerto_int = config_get_string_value(config, "PUERTO_ESCUCHA_INTERRUPT");
+    cpu_config->puerto_escucha_interrupt = malloc(string_length(puerto_int));
+    memcpy(cpu_config->puerto_escucha_interrupt, puerto_int, string_length(puerto_int)+1);
     cpu_config->ip_cpu = "127.0.0.1";
 
-    //config_destroy(config);
+    config_destroy(config);
 
     tlb = malloc(sizeof(entrada_tlb)* cpu_config->entradas_tlb);
     //esto se ve feo, pero es para indicar que las entradas estan vacias

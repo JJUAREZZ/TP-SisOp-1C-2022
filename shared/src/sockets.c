@@ -48,7 +48,7 @@ int socket_connect_to_server(char* ip, char* port)
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	getaddrinfo(ip, port, &hints, &server_info);
+	getaddrinfo(NULL, port, &hints, &server_info);
 	int server_socket = socket(server_info->ai_family, server_info->ai_socktype, server_info->ai_protocol);
 
 	int result = connect(server_socket, server_info->ai_addr, server_info->ai_addrlen);
