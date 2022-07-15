@@ -18,7 +18,7 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <fcntl.h>
-
+t_log *logger;
 uint32_t kernel_socket;
 uint32_t socket_dispatch;
 uint32_t socket_interrupt;
