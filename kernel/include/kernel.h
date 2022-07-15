@@ -11,7 +11,6 @@
 #include <commons/collections/queue.h>
 #include <semaphore.h>
 
-t_log *logger;
 void* planificadorACortoPlazo();
 void *conectarse_con_consola();
 void conectarse_con_cpu();
