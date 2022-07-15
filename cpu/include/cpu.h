@@ -43,31 +43,54 @@ void *conectar_dispatcher()
 		log_info(logger, "Error al crear server interrupt");
 		return;
 	}
-
 	log_info(logger, "¡¡¡Servidor dispatcher creado!!! Esperando Conexiones ...\n");
 	log_info(logger, "¡¡¡Servidor interrupt creado!!! Esperando Conexiones ...\n");
 
-	for (;;) {
+	int accepted_fd_dispatch;
+	int accepted_fd_interrupt;
+
+	accepted_fd_dispatch = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen);
+	socket_dispatch= accepted_fd_dispatch;
+	pthread_t atenderNuevoPcb;
+	pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
+	log_info(logger,"Creando un hilo para atender una conexion en el socket %d", accepted_fd_interrupt);
+
+	accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen);
+	socket_interrupt= accepted_fd_interrupt;
+	pthread_t atenderNuevaInterrupcion;
+	pthread_create(&atenderNuevaInterrupcion,NULL,atenderInterrupcion,accepted_fd_interrupt);
+	log_info(logger,"Creando un hilo para atender una interrupcion en el socket %d", accepted_fd_interrupt);
+		
+	
+
+	pthread_join(atenderNuevoPcb,NULL);
+	pthread_join(atenderNuevaInterrupcion,NULL);
+
+/*	for (;;) {
 		int accepted_fd_dispatch;
 		int accepted_fd_interrupt;
 		if ((accepted_fd_dispatch = accept(cpu_dispatcher_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
 			socket_dispatch= accepted_fd_dispatch;
 			pthread_t atenderNuevoPcb;
 			pthread_create(&atenderNuevoPcb,NULL,atenderPcb,accepted_fd_dispatch);
-			pthread_join(&atenderNuevoPcb, NULL); //?????
-
+			pthread_detach(atenderNuevoPcb);
 
 			log_info(logger,"Creando un hilo para atender una conexion en el socket %d", accepted_fd_dispatch);
-
 			
 		}
+
+		else
+			log_info(logger,"conexion fallida");
 		if ((accepted_fd_interrupt = accept(cpu_interrupt_socket,(struct sockaddr *) &client_info, &addrlen)) != -1){
 			socket_interrupt= accepted_fd_interrupt;
 			pthread_t atenderNuevaInterrupcion;
 			pthread_create(&atenderNuevaInterrupcion,NULL,atenderInterrupcion,accepted_fd_interrupt);
+			printf("se conecto");
 			log_info(logger,"Creando un hilo para atender una interrupcion en el socket %d", accepted_fd_interrupt);
 		}
+
 	}
+*/
 }
 
 void *conectarse_con_memoria()
@@ -81,24 +104,21 @@ void *conectarse_con_memoria()
 	socket_memoria= conexion;
 	uint32_t cod_op= HANDSHAKE_CPU;
 	send(socket_memoria, &cod_op, sizeof(uint32_t), 0);
-
-	while(1){
-		uint32_t cod_op;
-		recv(socket_memoria, &cod_op, sizeof(uint32_t), MSG_WAITALL);
-		if(cod_op>0)
+	recv(socket_memoria, &cod_op, sizeof(uint32_t), MSG_WAITALL);
+	if(cod_op>0)
+	{
+		switch (cod_op)
 		{
-			switch (cod_op)
-			{
-				case HANDSHAKE_CPU:
-				recv(socket_memoria, &memoria_config->tam_pagina, sizeof(uint32_t), MSG_WAITALL);
-				recv(socket_memoria, &memoria_config->entradas_por_tabla, sizeof(uint32_t), MSG_WAITALL);
-				log_info(logger, "Valores de config de Memoria recibidos con exito");
-				return;
-				break;
-				
-				default:
-					;
-			}
+			case HANDSHAKE_CPU:
+			recv(socket_memoria, &memoria_config->tam_pagina, sizeof(uint32_t), MSG_WAITALL);
+			recv(socket_memoria, &memoria_config->entradas_por_tabla, sizeof(uint32_t), MSG_WAITALL);
+			printf("Valores de config de Memoria recibidos con exito");
+			//log_info(logger, "Valores de config de Memoria recibidos con exito");
+			return;
+			break;
+			
+			default:
+				;
 		}
 	}	
 }
