@@ -112,7 +112,8 @@ void *conectarse_con_memoria()
 			case HANDSHAKE_CPU:
 			recv(socket_memoria, &memoria_config->tam_pagina, sizeof(uint32_t), MSG_WAITALL);
 			recv(socket_memoria, &memoria_config->entradas_por_tabla, sizeof(uint32_t), MSG_WAITALL);
-			log_info(logger, "Valores de config de Memoria recibidos con exito");
+			printf("Valores de config de Memoria recibidos con exito");
+			//log_info(logger, "Valores de config de Memoria recibidos con exito");
 			return;
 			break;
 			
