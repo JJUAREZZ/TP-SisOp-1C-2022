@@ -23,8 +23,7 @@ void limpiarTlb();
 int main(int argc, char** argv) {
 	path_cpu_config = (char*) argv[1];
     load_configuration_cpu();
-	pthread_create(&conexion_con_memoria, NULL, conectarse_con_memoria, NULL);
-	pthread_detach(conexion_con_memoria);
+	conectarse_con_memoria();
     conectar_dispatcher();
 
     return 0;    
