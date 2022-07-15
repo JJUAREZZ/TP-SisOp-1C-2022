@@ -12,13 +12,13 @@ void *planificadorACortoPlazo(){
 
 		if(utilizarFifo == 0){
 				//Ejecutar FIFO.
-				printf("\nPlanificador FIFO.\n");
+			log_info(logger,"Planificador FIFO.");
 				planificadorFifo();
 		}
 
 		if(utilizarSrt == 0){
 				//Ejecuta SRT.
-				printf ("\nPlanificador SRT.\n");
+				log_info(logger,"Planificador SRT.");
 				planificadorSrt();
 		}   
 	
@@ -46,7 +46,7 @@ while(1){
 		queue_push(estadoExec,proceso);
 		pthread_mutex_unlock(&COLAEXEC);
 		paquete_pcb(proceso, socket_dispatch);
-		printf("\nProceso %d enviado a CPU\n", proceso->id);
+		log_info(logger,"Proceso %d enviado a CPU", proceso->id);
 	}
 	else if(queue_size(estadoReady) >0){
 		//obtiene el elemento con menor estimacion
@@ -56,13 +56,13 @@ while(1){
 		uint32_t interrupt= DESALOJARPROCESO;
 		interrupcion=1;
 		send(socket_interrupt, &interrupt, sizeof(uint32_t), 0);
-		printf("\nInterrupcion enviada a CPU\n");
+		log_info(logger,"Interrupcion enviada a CPU");
 		sem_wait(&semProcesoInterrumpido); //blocked y pcbdesalojado le dan signal 
 		interrupcion=0;
 		if(pcbDesalojado == NULL){
 			paquete_pcb(proceso, socket_dispatch);
-			printf("\nNo hay procesos en CPU");
-			printf("\nProceso %d enviado a CPU\n", proceso->id);
+			log_info(logger,"No hay procesos en CPU");
+			log_info(logger,"Proceso %d enviado a CPU", proceso->id);
 			queue_pop(estadoReady);
 			pthread_mutex_lock(&COLAEXEC);
 			queue_push(estadoExec, proceso);
@@ -75,7 +75,7 @@ while(1){
 			pthread_mutex_lock(&COLAEXEC);
 			liberarPcb(queue_pop(estadoExec));//elimina el pcb viejo
 			paquete_pcb(pcbDesalojado, socket_dispatch);
-			printf("\nProceso desalojado %d devuelto a CPU\n", pcbDesalojado->id);
+			log_info(logger,"Proceso desalojado %d devuelto a CPU", pcbDesalojado->id);
 			queue_push(estadoExec, pcbDesalojado);
 			pthread_mutex_unlock(&COLAEXEC);
 			pcbDesalojado =NULL;
@@ -90,7 +90,7 @@ while(1){
 			queue_push(estadoExec,proceso);
 			pthread_mutex_unlock(&COLAEXEC);
 			queue_push(estadoReady,pcbDesalojado);
-			printf("\nProceso %d enviado a CPU\n", proceso->id);
+			log_info(logger,"Proceso %d enviado a CPU", proceso->id);
 			pthread_mutex_lock(&PROCDESALOJADO);
 			pcbDesalojado= NULL;
 			pthread_mutex_unlock(&PROCDESALOJADO);
@@ -110,7 +110,7 @@ void planificadorFifo(){
 				pcb* elemEjecutar = queue_pop(estadoReady);
 				queue_push(estadoExec,elemEjecutar);
 				paquete_pcb(elemEjecutar, socket_dispatch);
-				printf("Proceso %d enviado a CPU\n",elemEjecutar->id );
+				log_info(logger,"Proceso %d enviado a CPU",elemEjecutar->id );
 			}
 			
 		}
@@ -149,7 +149,7 @@ void *bloquearProcesos(){
 			procesoIO->programCounter += 1;
 			queue_pop(estadoBlock);
 			queue_push(estadoReady, procesoIO);
-			printf("\nProceso %d bloqueado enviado devuelta a ready\n", procesoIO->id);
+			log_info(logger,"Proceso %d bloqueado enviado devuelta a ready", procesoIO->id);
 			sem_post(&semSrt);
 			sem_post(&semProcesosEnReady);
 			continue;
@@ -171,7 +171,7 @@ void *bloquearProcesos(){
 			eliminar_paquete(paquete);
 			sem_wait(&sem_proceso_suspendido);
 			
-			printf("\nProceso %d bloqueado enviado a suspendido.\n", procesoIO->id);
+			log_info(logger,"Proceso %d bloqueado enviado a suspendido.", procesoIO->id);
 			usleep(tiempoRestanteBloqueo*1000);
 
 			pcb *procesoASuspReady = queue_pop(estadoBlockSusp);
@@ -180,7 +180,7 @@ void *bloquearProcesos(){
 			queue_push(estadoReadySusp, procesoASuspReady);
 			pthread_mutex_unlock(&COLASUSPREADY);
 			sem_post(&semProcesosEnSuspReady);
-			printf("\nProceso %d enviado a suspended ready.\n",procesoIO->id);
+			log_info(logger,"Proceso %d enviado a suspended ready.",procesoIO->id);
 			continue;
 		}	
 	}
@@ -204,7 +204,7 @@ void *enviarProcesosDeSuspendedReadyAReady(){
 			pthread_mutex_unlock(&COLASUSPREADY); 
 
 			
-			printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
+			log_info(logger,"Proceso %d agregado con exito a la cola Ready",procesoAReady->id);
 			queue_push(estadoReady, procesoAReady);
 			sem_post(&semProcesosEnReady);
 			sem_post(&semSrt);
@@ -236,9 +236,9 @@ t_proceso* recibir_proceso(uint32_t accepted_fd){
 		{
 		case PAQUETE:
 			proceso = recibir_paquete(accepted_fd);
-			printf("Me llego el siguiente proceso:\n");
-			printf("Tamanio del Proceso en bytes: %d", proceso->tamanio);
-			printf("\nInstrucciones : \n");
+			log_info(logger,"Me llego el siguiente proceso:");
+			log_info(logger,"Tamanio del Proceso en bytes: %d", proceso->tamanio);
+			log_info(logger,"Instrucciones : ");
 			void mostrarInstrucciones(instr_t* element)
 			{
 				printf("%s ",element->id);
@@ -270,7 +270,7 @@ pcb *crearPcb(t_proceso *proceso)
 	pcbDelProceso->estimacion_rafaga_anterior = 0;
 	pcbDelProceso->cpu_anterior = 0;
 	free(proceso);
-	printf("\nPCB del proceso creado");
+	log_info(logger,"PCB del proceso creado");
 	return pcbDelProceso;
 }
 
@@ -321,8 +321,8 @@ void planificadorALargoPlazo()
 					return EXIT_FAILURE;
 				}
 				procesoAReady->tablaDePaginas = tablaDePaginas;
-				printf("\nProceso %d agregado con exito a la cola Ready",procesoAReady->id);
-				printf("\nTabla de Pagina asignada: %d \n", procesoAReady->tablaDePaginas);
+				log_info(logger,"Proceso %d agregado con exito a la cola Ready",procesoAReady->id);
+				log_info(logger,"Tabla de Pagina asignada: %d ", procesoAReady->tablaDePaginas);
 
 				queue_push(estadoReady, procesoAReady);
 				sem_post(&semProcesosEnReady);
