@@ -18,7 +18,6 @@ void conectarse_con_memoria();
 void recalcularEstimacion(pcb* );
 
 void kernel_server_init(){
-	logger = log_create("log.log", "Servidor", 1, LOG_LEVEL_DEBUG);
 	sem_init(&semProcesosEnReady,0,0);
 	sem_init(&semProcesosEnRunning,0,1);
 	sem_init(&semProcesosEnBlock,0,0);
