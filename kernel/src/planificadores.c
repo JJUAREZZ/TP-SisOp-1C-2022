@@ -91,7 +91,9 @@ while(1){
 			pthread_mutex_unlock(&COLAEXEC);
 			queue_push(estadoReady,pcbDesalojado);
 			printf("\nProceso %d enviado a CPU\n", proceso->id);
+			pthread_mutex_lock(&PROCDESALOJADO);
 			pcbDesalojado= NULL;
+			pthread_mutex_unlock(&PROCDESALOJADO);
 		}
 	}
 	pthread_mutex_unlock(&COLAREADY);
