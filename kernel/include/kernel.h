@@ -75,7 +75,7 @@ void *conectarse_con_consola()
 {
 	struct sockaddr_in client_info;
 	socklen_t addrlen = sizeof client_info;
-	printf("Creando socket y escuchando \n");
+	log_info(logger, "Creando socket y escuchando \n");
 
 	kernel_socket = socket_create_listener(config_valores_kernel->ip, config_valores_kernel->puerto);
 
@@ -129,7 +129,7 @@ void conectarse_con_cpu()
 					pthread_mutex_unlock(&COLAEXEC);
 					pthread_mutex_lock(&COLAEXIT);
 					queue_push(estadoExit,procesoAExit);
-					printf("\nProceso %d finalizado\n", procesoAExit->id);
+					log_info(logger,"\nProceso %d finalizado\n", procesoAExit->id);
 					pthread_mutex_unlock(&COLAEXIT);
 					sem_post(&semProcesosEnExit);
 					break;
@@ -141,9 +141,9 @@ void conectarse_con_cpu()
 					pthread_mutex_lock(&COLAEXEC);
 					liberarPcb(queue_pop(estadoExec));
 					pthread_mutex_unlock(&COLAEXEC);
-					printf("\nProceso %d recibido para bloquear\n", procesoABlocked->id);
+					log_info(logger,"\nProceso %d recibido para bloquear\n", procesoABlocked->id);
 					recalcularEstimacion(procesoABlocked);
-					printf("Proceso %d enviado a bloqueado\n", procesoABlocked->id);
+					log_info(logger,"Proceso %d enviado a bloqueado\n", procesoABlocked->id);
 					sem_post(&semProcesosEnBlock);
 					sem_post(&semProcesosEnRunning);
 					if (interrupcion ==1)
@@ -155,11 +155,11 @@ void conectarse_con_cpu()
 					pthread_mutex_lock(&PROCDESALOJADO);
 					pcbDesalojado = recibir_pcb(socket_dispatch);
 					pthread_mutex_unlock(&PROCDESALOJADO);
-					printf("\nProceso %d desalojado recibido\n",pcbDesalojado->id);
+					log_info(logger, "\nProceso %d desalojado recibido\n",pcbDesalojado->id);
 					sem_post(&semProcesoInterrumpido);
 					break;
 				case CPUVACIA :
-					printf("\nLa cpu esta vacia\n");
+					log_info(logger,"\nLa cpu esta vacia\n");
 					sem_post(&semProcesoInterrumpido);
 					break;
 				default:
