@@ -9,3 +9,7 @@ Ejemplos para ejecutar los módulos:
 ./kernel "./cfg/kernel.config"
 
 ./consola "./cfg/consola.config" 500 "./cfg/instrucciones.txt"
+
+## Encunciado del tp: 
+
+https://docs.google.com/document/d/17WP76Vsi6ZrYlpYT8xOPXzLf42rQgtyKsOdVkyL5Jj0/edit#
