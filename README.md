@@ -10,6 +10,6 @@ Ejemplos para ejecutar los módulos:
 
 ./consola "./cfg/consola.config" 500 "./cfg/instrucciones.txt"
 
-## Encunciado del tp: 
+## Encunciado del TP: 
 
 https://docs.google.com/document/d/17WP76Vsi6ZrYlpYT8xOPXzLf42rQgtyKsOdVkyL5Jj0/edit#
